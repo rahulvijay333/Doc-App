@@ -1,6 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SharedPrefsAuthServiceImpl  {
+class SharedPrefsAuthServiceImpl {
   SharedPreferences? _sharedPrefs;
 
   Future<SharedPreferences> getSharedPrefs() async {
@@ -13,12 +13,10 @@ class SharedPrefsAuthServiceImpl  {
     return sharedPrefs.getBool('loggedIn') ?? false;
   }
 
-   Future<String?> getName() async {
+  Future<String?> getName() async {
     final sharedPrefs = await getSharedPrefs();
     return sharedPrefs.getString('name');
   }
-
-
 
   Future<String?> getRole() async {
     final sharedPrefs = await getSharedPrefs();
@@ -30,7 +28,7 @@ class SharedPrefsAuthServiceImpl  {
     return sharedPrefs.getString('token');
   }
 
-   Future<String?> getId() async {
+  Future<String?> getId() async {
     final sharedPrefs = await getSharedPrefs();
     return sharedPrefs.getString('id');
   }
@@ -49,17 +47,14 @@ class SharedPrefsAuthServiceImpl  {
     final sharedPrefs = await getSharedPrefs();
     await sharedPrefs.setString('token', token);
   }
+
   Future<void> saveId(String id) async {
     final sharedPrefs = await getSharedPrefs();
     await sharedPrefs.setString('id', id);
   }
 
-   Future<void> saveName(String name) async {
+  Future<void> saveName(String name) async {
     final sharedPrefs = await getSharedPrefs();
     await sharedPrefs.setString('name', name);
   }
-
-
-
-
 }

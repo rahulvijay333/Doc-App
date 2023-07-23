@@ -38,7 +38,7 @@ class DbFunctionClass {
 
       await dbbox.put(response.user!.id!, user);
       log('saved to database');
-    
+
       return user;
     } else if (response is PatientResponse) {
       final user = UserDb(

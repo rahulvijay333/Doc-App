@@ -88,11 +88,26 @@ class ScreenProfile extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  profile_button(size: size, optionName: 'Edit Profile', icon: Icons.edit,),
-                  profile_button(size: size, optionName: 'Change Password', icon: Icons.password,),
-                  profile_button(size: size, optionName: 'Payment details', icon: Icons.payment_outlined,),
-                  profile_button(size: size, optionName: 'Log Out', icon: Icons.logout,),
-                 
+                  profile_button(
+                    size: size,
+                    optionName: 'Edit Profile',
+                    icon: Icons.edit,
+                  ),
+                  profile_button(
+                    size: size,
+                    optionName: 'Change Password',
+                    icon: Icons.password,
+                  ),
+                  profile_button(
+                    size: size,
+                    optionName: 'Payment details',
+                    icon: Icons.payment_outlined,
+                  ),
+                  profile_button(
+                    size: size,
+                    optionName: 'Log Out',
+                    icon: Icons.logout,
+                  ),
                 ],
               ),
             )
@@ -107,7 +122,8 @@ class profile_button extends StatelessWidget {
   const profile_button({
     super.key,
     required this.size,
-    required this.optionName, required this.icon,
+    required this.optionName,
+    required this.icon,
   });
 
   final String optionName;
@@ -127,7 +143,7 @@ class profile_button extends StatelessWidget {
           TextButton.icon(
               onPressed: () {},
               icon: Icon(
-               icon,
+                icon,
                 color: Colors.grey,
               ),
               label: Text(

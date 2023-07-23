@@ -11,7 +11,8 @@ class _IndicatorContainerBoxPainter extends BoxPainter {
   @override
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
     final Rect rect = Offset(offset.dx, offset.dy + 35.0) &
-        Size(configuration.size!.width/20,20.0); // Adjust height and padding as needed
+        Size(configuration.size!.width / 20,
+            20.0); // Adjust height and padding as needed
     final Paint paint = Paint()
       ..color = Colors.blue; // Replace with your desired color
 

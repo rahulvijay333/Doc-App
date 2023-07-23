@@ -51,3 +51,44 @@ final loginButtonStyle = ButtonStyle(
     const Size(double.maxFinite, 50),
   ),
 );
+
+final AppointmentButtonStyle = ButtonStyle(
+    shape: MaterialStateProperty.all<OutlinedBorder>(
+      RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+    ),
+    minimumSize: MaterialStateProperty.all<Size>(
+      const Size(10, 20),
+    ),
+    maximumSize: MaterialStateProperty.all<Size>(
+      const Size(10, 20),
+    ));
+
+InputDecoration commonInputDecoration({
+  String? label,
+  String? hint,
+  Color focusedBorderColor = Colors.blue,
+}) {
+  return InputDecoration(
+    labelText: label,
+    hintText: hint,
+    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(10),
+      borderSide: BorderSide(
+        color: focusedBorderColor, // Set the focused border color
+      ),
+    ),
+    filled: true,
+    fillColor: Colors.white,
+    enabled: true,
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(10),
+      borderSide: BorderSide(color: Colors.transparent),
+    ),
+    labelStyle: TextStyle(
+      color: Colors.black, // Set the label text color
+    ),
+  );
+}

@@ -15,5 +15,3 @@ class CreateUserFailed extends CreateUserState {
 
   CreateUserFailed({required this.errorMessage});
 }
-
-

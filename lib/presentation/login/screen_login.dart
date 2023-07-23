@@ -24,7 +24,8 @@ class _ScreenLoginState extends State<ScreenLogin> {
 
   final TextEditingController passwordController = TextEditingController();
 
-  final ValueNotifier<String> selectedUserType = ValueNotifier<String>('patient');
+  final ValueNotifier<String> selectedUserType =
+      ValueNotifier<String>('patient');
 
   String get selectedUserTypeValue => selectedUserType.value;
 
@@ -104,7 +105,6 @@ class _ScreenLoginState extends State<ScreenLogin> {
                         children: [
                           customRadio('patient'),
                           customRadio('doctor'),
-                          
                         ],
                       ),
                     ),
@@ -223,8 +223,6 @@ class _ScreenLoginState extends State<ScreenLogin> {
           onChanged: (String? value) {
             setState(() {
               selectedUserType.value = value!;
-
-              
             });
           },
         ),

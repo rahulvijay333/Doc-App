@@ -28,7 +28,8 @@ class UserDb {
       required this.email,
       required this.verifyToken,
       required this.role,
-      required this.token, required this.id});
+      required this.token,
+      required this.id});
 }
 
 class UserDatabaseBox {

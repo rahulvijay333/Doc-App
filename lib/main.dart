@@ -1,9 +1,11 @@
 import 'package:appoint_medic/application/Auth/authentication_bloc.dart';
+import 'package:appoint_medic/application/Search/search_bloc.dart';
 import 'package:appoint_medic/application/login/login_bloc.dart';
 import 'package:appoint_medic/domain/db/db_functions.dart';
 import 'package:appoint_medic/domain/db/db_model.dart';
 import 'package:appoint_medic/infrastructure/auth/auth_service_impl.dart';
 import 'package:appoint_medic/infrastructure/login/loginServiceImpl.dart';
+import 'package:appoint_medic/infrastructure/search_screen/search_service.dart';
 import 'package:appoint_medic/presentation/doctor/doc_main_screen.dart';
 import 'package:appoint_medic/presentation/patient/main_page.dart';
 import 'package:appoint_medic/presentation/splash/ScreenSplash.dart';
@@ -34,6 +36,7 @@ class MyApp extends StatelessWidget {
     final LoginServiceImpl loginservice = LoginServiceImpl();
     final SharedPrefsAuthServiceImpl sharedpref = SharedPrefsAuthServiceImpl();
     final AuthenticationBloc auth = AuthenticationBloc(sharedpref, db);
+    final SearchService searchService = SearchService();
 
     return MultiBlocProvider(
         providers: [
@@ -42,13 +45,17 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => AuthenticationBloc(sharedpref, db),
-          )
+          ),
+          BlocProvider(
+            create: (context) => SearchBloc(searchService),
+          ),
         ],
-        child:  MaterialApp(
-          debugShowCheckedModeBanner: false,
-          home: ScreenMainPage(userName: 'userName')
+        child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            // home: ScreenMainPage(userName: 'userName')
+            home: ScreenSplash()
 
-          // home: DoctorScreenMain('b'),
-        ));
+            // home: DoctorScreenMain('b'),
+            ));
   }
 }

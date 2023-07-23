@@ -6,13 +6,13 @@ import 'package:appoint_medic/presentation/doctor/messages/doct_message_screen.d
 import 'package:appoint_medic/presentation/doctor/profile/Screen_doc_profile.dart';
 import 'package:flutter/material.dart';
 
-
 class DoctorScreenMain extends StatelessWidget {
   const DoctorScreenMain({
-    super.key, required this.name, 
+    super.key,
+    required this.name,
   });
 
-    final String name;
+  final String name;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,9 @@ class DoctorScreenMain extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     final _pages = [
-      ScreenDoctHome(name: name,),
+      ScreenDoctHome(
+        name: name,
+      ),
       ScreenAllAppointments(),
       ScreenAvailableTime(),
       ScreemDoctMessage(),
@@ -100,23 +102,6 @@ class DoctorScreenMain extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //  Positioned(
 //                   bottom: 20,

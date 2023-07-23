@@ -9,15 +9,18 @@ import 'package:flutter/material.dart';
 
 class ScreenMainPage extends StatelessWidget {
   ScreenMainPage({
-    super.key, required this.userName,
+    super.key,
+    required this.userName,
   });
-final String userName;
-  ValueNotifier  pagesNotifier = ValueNotifier(0);
+  final String userName;
+  ValueNotifier pagesNotifier = ValueNotifier(0);
 
   @override
   Widget build(BuildContext context) {
     final pages = [
-      ScreenHome(name: userName,),
+      ScreenHome(
+        name: userName,
+      ),
       const ScreenAppointments(),
       const ScreenMessages(),
       const ScreenProfile()
@@ -32,7 +35,7 @@ final String userName;
             return Stack(
               alignment: Alignment.bottomCenter,
               children: [
-                pages[3],
+                pages[pageIndex],
                 Positioned(
                   bottom: 20,
                   child: Container(

@@ -30,24 +30,25 @@ class _ScreenSplashState extends State<ScreenSplash> {
         } else if (state is Autheticated) {
           if (state.role == 'doctor') {
             Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => DoctorScreenMain(name: state.name,))
-            );
+                context,
+                MaterialPageRoute(
+                    builder: (context) => DoctorScreenMain(
+                          name: state.name,
+                        )));
           } else if (state.role == 'patient') {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                  builder: (context) => ScreenMainPage(userName: state.name,
-                       
+                  builder: (context) => ScreenMainPage(
+                        userName: state.name,
                       )),
             );
           } else if (state.role == 'admin') {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                  builder: (context) => ScreenAdminHomePage(name: state.name,
-                      
+                  builder: (context) => ScreenAdminHomePage(
+                        name: state.name,
                       )),
             );
           }
@@ -68,10 +69,11 @@ class _ScreenSplashState extends State<ScreenSplash> {
           decoration: BoxDecoration(
             color: Color.fromRGBO(0, 145, 255, 10),
           ),
-          child: Column(mainAxisAlignment: MainAxisAlignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Center(child: FadeInContainer()),
-              Center(child: CircularProgressIndicator(color:  Colors.white,strokeWidth: 2,))
+           
             ],
           ),
         ),

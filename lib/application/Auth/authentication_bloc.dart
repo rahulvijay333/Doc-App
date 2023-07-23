@@ -1,4 +1,3 @@
-
 import 'package:appoint_medic/domain/db/db_functions.dart';
 import 'package:appoint_medic/infrastructure/auth/auth_service_impl.dart';
 import 'package:bloc/bloc.dart';
@@ -28,7 +27,7 @@ class AuthenticationBloc
         String? userName = await sharedprefs.getName();
         // log(getToken.toString());
 
-        emit(Autheticated(getRole!, getToken!,userName!));
+        emit(Autheticated(getRole!, getToken!, userName!));
       }
     });
 

@@ -21,7 +21,7 @@ class ScreenRegister extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
- 
+
     final CreateServiceImpl createApiObject = CreateServiceImpl();
 
     return BlocProvider(

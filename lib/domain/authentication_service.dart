@@ -1,4 +1,3 @@
-
 abstract class AuthenticationService {
   Future<void> saveRole(String role);
   Future<void> saveToken(String token);
@@ -6,6 +5,4 @@ abstract class AuthenticationService {
   bool getLoggedInState();
   String? getRole();
   String? getToken();
-
- 
 }

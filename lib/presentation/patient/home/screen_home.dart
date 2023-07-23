@@ -1,7 +1,10 @@
+import 'package:appoint_medic/application/Search/search_bloc.dart';
+import 'package:appoint_medic/presentation/patient/search/screen_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ScreenHome extends StatelessWidget {
+class ScreenHome extends StatefulWidget {
   const ScreenHome({
     super.key,
     required this.name,
@@ -10,19 +13,37 @@ class ScreenHome extends StatelessWidget {
   final String name;
 
   @override
+  State<ScreenHome> createState() => _ScreenHomeState();
+}
+
+class _ScreenHomeState extends State<ScreenHome> {
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+     BlocProvider.of<SearchBloc>(context).add(ShowAllDoctorList());
+  }
+  
+
+
+  @override
   Widget build(BuildContext context) {
+
+     
     final size = MediaQuery.of(context).size;
 
-    return Stack(
-      alignment: Alignment.topCenter,
+    return Column(
       children: [
+        //-------------------------------------------------1st section
         Container(
-          height: size.height * 0.50,
+          height: size.height * 0.31,
           width: double.maxFinite,
           color: Colors.blue,
           child: Column(
             children: [
-              SizedBox(
+              Container(
                 height: size.height * 0.15,
                 // color: Colors.green,
                 child: Padding(
@@ -62,7 +83,7 @@ class ScreenHome extends StatelessWidget {
                                 height: 8,
                               ),
                               Text(
-                                name,
+                                widget.name,
                                 style: const TextStyle(
                                     fontSize: 22,
                                     color: Colors.white,
@@ -92,29 +113,60 @@ class ScreenHome extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
-                height: size.height * 0.15,
-                //  color: Colors.redAccent,
 
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Center(
-                    child: Container(
-                      height: 60,
-                      decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(8)),
-                      child: const Row(
-                        children: [
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Icon(Icons.search),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text('Search doctors ..')
-                        ],
+              //---------------------------------------------search doctors
+              GestureDetector(
+                onTap: () {
+                  //----------------------------search page navigation
+
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                    return ScreenSearch();
+                  },));
+
+                  // Navigator.of(context).push(
+                  //   PageRouteBuilder(
+                  //     pageBuilder: (context, animation, secondaryAnimation) {
+                  //       // Build the new route/screen here
+                  //       return ScreenSearch();
+                  //     },
+                  //     transitionsBuilder:
+                  //         (context, animation, secondaryAnimation, child) {
+                  //       // Define your custom transition animation here
+                  //       return SlideTransition(
+                  //         position: Tween<Offset>(
+                  //           begin: const Offset(1.0, 0.0),
+                  //           end: Offset.zero,
+                  //         ).animate(animation),
+                  //         child: child,
+                  //       );
+                  //     },
+                  //   ),
+                  // );
+                },
+                child: Container(
+                  height: size.height * 0.15,
+                  // color: Colors.redAccent,
+
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Center(
+                      child: Container(
+                        height: 60,
+                        decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(8)),
+                        child: const Row(
+                          children: [
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Icon(Icons.search),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text('Search doctors ..')
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -123,16 +175,11 @@ class ScreenHome extends StatelessWidget {
             ],
           ),
         ),
-        Align(
-          alignment: Alignment.bottomCenter,
+        //------------------------------------------2nd section
+        Expanded(
           child: Container(
             width: size.width,
             height: size.height * 0.65,
-            decoration: BoxDecoration(
-                color: Colors.blue.shade100,
-                borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(60),
-                    topRight: Radius.circular(60))),
             child: Padding(
               padding: EdgeInsets.only(
                   left: size.width * 0.07,
@@ -159,7 +206,7 @@ class ScreenHome extends StatelessWidget {
                             borderRadius: BorderRadius.circular(12),
                             child: Container(
                                 height: 110,
-                                color: Colors.white,
+                                color: Colors.blue.withOpacity(0.1),
                                 child: Column(
                                   children: [
                                     const Padding(

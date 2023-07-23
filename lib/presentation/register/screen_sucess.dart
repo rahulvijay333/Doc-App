@@ -69,10 +69,15 @@ class ScreenCreateAccountSuccess extends StatelessWidget {
                     //   ),
                     // )
 
-                    TextButton(onPressed: () {
-                          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => ScreenLogin(),), (route) => false);
-                      
-                    }, child: Text('Back to login'))
+                    TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                builder: (context) => ScreenLogin(),
+                              ),
+                              (route) => false);
+                        },
+                        child: Text('Back to login'))
                   ],
                 ),
               ),

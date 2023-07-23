@@ -87,7 +87,9 @@ class ScreenAppointments extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               Expanded(
                 child: TabBarView(children: [
                   ListView.separated(
@@ -100,20 +102,22 @@ class ScreenAppointments extends StatelessWidget {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-
                                   ListTile(
                                     leading: CircleAvatar(
                                       radius: 30,
                                     ),
                                     title: Text('Dr. Doctor Name'),
                                     subtitle: Text('speciality'),
-                                    trailing: IconButton(onPressed: () {
-                                      //----------------------------------------message option
-                                    }, icon: Icon(Icons.message)),
+                                    trailing: IconButton(
+                                        onPressed: () {
+                                          //----------------------------------------message option
+                                        },
+                                        icon: Icon(Icons.message)),
                                   ),
                                   Container(
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Text('Date: 24/5/23 '),
                                         Text('Time : 4.00pm')

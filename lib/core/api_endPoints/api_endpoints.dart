@@ -5,6 +5,7 @@ class ApiEndPoints {
   static const patientLogin = '$baseUrl/auth/patient/login';
   static const patientRegister = '$baseUrl/auth/patient/register';
   static const patientLogOut = '$baseUrl/auth/patient/logout';
+  static const patientGetAllDoctors = '$baseUrl/patient/doctors/all';
 
   //-----------------doctor
   static const doctorLogin = '$baseUrl/auth/doctor/login';

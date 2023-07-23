@@ -15,10 +15,10 @@ class ScreenMessages extends StatelessWidget {
         height: double.maxFinite,
         decoration: backgroundDecoration,
         child: Padding(
-          padding: const EdgeInsets.only(left: 15,right: 15),
+          padding: const EdgeInsets.only(left: 15, right: 15),
           child: Column(
             children: [
-               SizedBox(
+              SizedBox(
                 height: size.height * 0.02,
               ),
               const Text(
@@ -28,26 +28,30 @@ class ScreenMessages extends StatelessWidget {
                     color: Colors.white,
                     fontWeight: FontWeight.bold),
               ),
-               SizedBox(
+              SizedBox(
                 height: size.height * 0.05,
               ),
               //----------------------------------------------------------search messages
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   ClipRRect(
-                    borderRadius: BorderRadius.horizontal(left: Radius.circular(20)),
+                    borderRadius:
+                        BorderRadius.horizontal(left: Radius.circular(20)),
                     child: Container(
                       color: Colors.white.withOpacity(0.5),
                       //height: 40,
                       height: size.height * 0.06,
-                      width: size.width *0.7,
-                              
+                      width: size.width * 0.7,
+
                       child: Padding(
-                        padding: const EdgeInsets.only(left:8.0),
-                        child: Row( 
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Row(
                           children: [
                             Icon(Icons.search),
-                            SizedBox(width: 10,),
+                            SizedBox(
+                              width: 10,
+                            ),
                             Text('Search Messages..')
                           ],
                         ),
@@ -57,16 +61,22 @@ class ScreenMessages extends StatelessWidget {
 
                   //---------------------------------------------new message icon
                   ClipRRect(
-                    borderRadius: BorderRadius.horizontal(right:Radius.circular(20)),
+                    borderRadius:
+                        BorderRadius.horizontal(right: Radius.circular(20)),
                     child: Container(
-                         height: size.height * 0.06,
-                      width: size.width *0.2,
+                      height: size.height * 0.06,
+                      width: size.width * 0.2,
                       color: Colors.blue,
-                      child: IconButton(onPressed: () {
-                      
-                  
-                      //----------------------------message function
-                    }, icon: Icon(Icons.add_comment,size: 30,color: Colors.white,)),),
+                      child: IconButton(
+                          onPressed: () {
+                            //----------------------------message function
+                          },
+                          icon: Icon(
+                            Icons.add_comment,
+                            size: 30,
+                            color: Colors.white,
+                          )),
+                    ),
                   )
                 ],
               ),
@@ -74,27 +84,27 @@ class ScreenMessages extends StatelessWidget {
                 height: 10,
               ),
               //-------------------------------list of messages
-                Expanded(
-                  child: ListView.separated(
-                        itemBuilder: (context, index) {
-                          return ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Container(
-                                height: size.height * 0.10,
-                                color: Colors.white.withOpacity(0.5),
-                                child: MessageTile(senderName: 'Dr. alex Emanuel', message: 'hello', time: '4:00pm')
-                                
-                                ),
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          return SizedBox(
-                            height: 10,
-                          );
-                        },
-                        itemCount: 10),
-                ),
-            
+              Expanded(
+                child: ListView.separated(
+                    itemBuilder: (context, index) {
+                      return ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Container(
+                            height: size.height * 0.10,
+                            color: Colors.white.withOpacity(0.5),
+                            child: MessageTile(
+                                senderName: 'Dr. alex Emanuel',
+                                message: 'hello',
+                                time: '4:00pm')),
+                      );
+                    },
+                    separatorBuilder: (context, index) {
+                      return SizedBox(
+                        height: 10,
+                      );
+                    },
+                    itemCount: 10),
+              ),
             ],
           ),
         ));

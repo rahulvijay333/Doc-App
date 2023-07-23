@@ -27,27 +27,30 @@ class ScreenDoctorHome extends StatelessWidget {
                   BlocBuilder<LoginBloc, LoginState>(
                     builder: (context, state) {
                       if (state is LogoutLoading) {
-                        WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                        WidgetsBinding.instance
+                            .addPostFrameCallback((timeStamp) {
                           ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text('Logging out...')));
                         });
                       } else if (state is LogoutSucess) {
                         ScaffoldMessenger.of(context).hideCurrentSnackBar();
                         WidgetsBinding.instance!.addPostFrameCallback((_) {
-                          Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          Navigator.of(context)
+                              .pushReplacement(MaterialPageRoute(
                             builder: (context) {
                               return ScreenLogin();
                             },
                           ));
                         });
                       }
-    
+
                       return ElevatedButton(
                           onPressed: () {
                             BlocProvider.of<LoginBloc>(context)
                                 .add(LogOutButtonClicked('doctor'));
-    
-                            Navigator.of(context).pushReplacement(MaterialPageRoute(
+
+                            Navigator.of(context)
+                                .pushReplacement(MaterialPageRoute(
                               builder: (ctx) {
                                 return ScreenLogin();
                               },
