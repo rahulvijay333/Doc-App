@@ -1,4 +1,5 @@
 import 'package:appoint_medic/application/login/login_bloc.dart';
+import 'package:appoint_medic/application/profile/profile_details_bloc.dart';
 import 'package:appoint_medic/core/color_constants.dart';
 import 'package:appoint_medic/presentation/login/screen_login.dart';
 import 'package:flutter/material.dart';
@@ -16,13 +17,13 @@ class ScreenProfile extends StatelessWidget {
       height: double.maxFinite,
       decoration: backgroundDecoration,
       child: Padding(
-        padding: EdgeInsets.only(left: 15, right: 15),
+        padding: const EdgeInsets.only(left: 15, right: 15),
         child: Column(
           children: [
             SizedBox(
               height: size.height * 0.02,
             ),
-            Text(
+            const Text(
               'Profile',
               style: TextStyle(
                   fontSize: 25,
@@ -44,7 +45,7 @@ class ScreenProfile extends StatelessWidget {
                       width: size.width * 0.8 * 0.40,
                       // color: Colors.red,
                       height: size.height * 0.30,
-                      child: Center(
+                      child: const Center(
                           child: CircleAvatar(
                         backgroundImage: AssetImage('assets/patient.png'),
                         radius: 60,
@@ -54,23 +55,42 @@ class ScreenProfile extends StatelessWidget {
                       width: size.width * 0.8 * 0.60,
                       // color: Colors.yellow,
                       height: size.height * 0.30,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Name Here',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          Text(
-                            'Phone',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          Text(
-                            'Email id',
-                            style: TextStyle(fontSize: 20),
-                          )
-                        ],
+                      child:
+                          BlocBuilder<ProfileDetailsBloc, ProfileDetailsState>(
+                        builder: (context, state) {
+                          if (state is ProfileLoading) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          } else if (state is ProfileSucess) {
+                            return Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  state.userProfile.user!.fullName!,
+                                  style: const TextStyle(fontSize: 20),
+                                ),
+                                Text(
+                                  state.userProfile.user!.phone!,
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                                Text(
+                                  state.userProfile.user!.email!,
+                                  style: TextStyle(fontSize: 20),
+                                )
+                              ],
+                            );
+                          } else if (state is ProfileFailed) {
+                            return Center(
+                              child: Text('Error , Retry'),
+                            );
+                          }
+
+                          return Center(
+                            child: Text('Error , Retry'),
+                          );
+                        },
                       ),
                     )
                   ],
@@ -85,7 +105,7 @@ class ScreenProfile extends StatelessWidget {
               height: size.height * 0.40,
               width: size.width * 0.8,
 
-              child: Column(
+              child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   profile_button(
@@ -103,11 +123,29 @@ class ScreenProfile extends StatelessWidget {
                     optionName: 'Payment details',
                     icon: Icons.payment_outlined,
                   ),
-                  profile_button(
-                    size: size,
-                    optionName: 'Log Out',
-                    icon: Icons.logout,
-                  ),
+                  BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
+                    if (state is LogoutLoading) {
+                      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Logging out...')));
+                      });
+                    } else if (state is LogoutSucess) {
+                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                      WidgetsBinding.instance!.addPostFrameCallback((_) {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) {
+                            return ScreenLogin();
+                          },
+                        ));
+                      });
+                    }
+
+                    return TextButton.icon(onPressed: () {
+
+                      BlocProvider.of<LoginBloc>(context).add(LogOutButtonClicked('patient'));
+                      
+                    }, icon: Icon(Icons.logout), label: Text('Log out'));
+                  })
                 ],
               ),
             )
@@ -148,7 +186,7 @@ class profile_button extends StatelessWidget {
               ),
               label: Text(
                 optionName,
-                style: TextStyle(color: Colors.black),
+                style: const TextStyle(color: Colors.black),
               ))
         ],
       ),

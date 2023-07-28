@@ -10,3 +10,11 @@ class SearchByName extends SearchEvent {
 
   SearchByName(this.name);
 }
+
+class SearchByFilter extends SearchEvent {
+  final String? name;
+  final String? gender;
+  final String? speciality;
+
+  SearchByFilter({this.name, this.gender, this.speciality});
+}

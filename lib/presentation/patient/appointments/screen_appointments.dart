@@ -20,7 +20,7 @@ class ScreenAppointments extends StatelessWidget {
       child: Container(
         width: double.maxFinite,
         height: double.maxFinite,
-        decoration: backgroundDecoration,
+        // decoration: backgroundDecoration,
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(

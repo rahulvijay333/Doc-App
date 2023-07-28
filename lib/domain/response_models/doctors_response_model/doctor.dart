@@ -33,7 +33,7 @@ class Doctor {
   Speciality? speciality;
   List<String>? services;
   List<AvailableSlot>? availableSlots;
- 
+
   String? qualification;
 
   Doctor({
@@ -56,7 +56,6 @@ class Doctor {
     this.speciality,
     this.services,
     this.availableSlots,
-   
     this.qualification,
   });
 
@@ -65,15 +64,15 @@ class Doctor {
   // }
 
   factory Doctor.fromJson(Map<String, dynamic> json) {
-  try {
-    return _$DoctorFromJson(json);
-  } catch (e, stackTrace) {
-    // Log the error and stack trace for debugging purposes.
-    print('Error parsing Doctor: $e\n$stackTrace');
-    // Return a default Doctor object or handle the error accordingly.
-    return Doctor(); // Or return null, throw an exception, etc.
+    try {
+      return _$DoctorFromJson(json);
+    } catch (e, stackTrace) {
+      // Log the error and stack trace for debugging purposes.
+      print('Error parsing Doctor: $e\n$stackTrace');
+      // Return a default Doctor object or handle the error accordingly.
+      return Doctor(); // Or return null, throw an exception, etc.
+    }
   }
-}
 
   Map<String, dynamic> toJson() => _$DoctorToJson(this);
 }

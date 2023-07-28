@@ -1,4 +1,4 @@
-const baseUrl = 'http://192.168.1.100:4000/api';
+const baseUrl = 'http://192.168.1.101:4000/api';
 
 class ApiEndPoints {
   //-----------------patient
@@ -6,6 +6,8 @@ class ApiEndPoints {
   static const patientRegister = '$baseUrl/auth/patient/register';
   static const patientLogOut = '$baseUrl/auth/patient/logout';
   static const patientGetAllDoctors = '$baseUrl/patient/doctors/all';
+  static const getAllSpecialities = '$baseUrl/doctor/specialities';
+  static const getProfileDetails = '$baseUrl/patient/profile/details/';
 
   //-----------------doctor
   static const doctorLogin = '$baseUrl/auth/doctor/login';

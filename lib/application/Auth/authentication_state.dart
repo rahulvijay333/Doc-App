@@ -10,8 +10,9 @@ class Autheticated extends AuthenticationState {
   final String role;
   final String token;
   final String name;
+  final String id;
 
-  Autheticated(this.role, this.token, this.name);
+  Autheticated(this.role, this.token, this.name, this.id);
 }
 
 class AuthenticationLoading extends AuthenticationState {}

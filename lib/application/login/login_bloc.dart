@@ -39,6 +39,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         if (error.isEmpty) {
           String? role = response?.user!.role;
           String? token = response?.user!.token;
+          String? id = response?.user!.id;
 
           String? userName = '';
           if (response is AdminResponse) {
@@ -46,26 +47,27 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           } else {
             userName = response?.user!.name;
           }
-
+          log(id!);
           prefs.saveRole(role!);
           prefs.saveLoggedInState(true);
           prefs.saveToken(token!);
           prefs.saveName(userName!);
+          prefs.saveId(id!);
 
           //---------------------------------------------------saving details to hive
           // final UserDb user = await dbFunction.saveToDatabaseFunction(response);
 
-          emit(LoginSucess(role: role, name: userName));
+          emit(LoginSucess(role: role, name: userName, id: id));
         } else {
           emit(LoginFailed(error));
 
-          if (emit.isDone) {
-            emit(LoginIntial());
-          }
+          await Future.delayed(Duration(seconds: 2));
+
+          emit(LoginIntial());
         }
       } catch (e) {
         log(e.toString());
-        log('Error happened in login bloc ');
+        log(' login catch :::::Error happened in login bloc ');
       }
     });
 
@@ -80,6 +82,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         await prefs.saveLoggedInState(false);
         await prefs.saveRole('');
         await prefs.saveToken('');
+        await prefs.saveId('');
 
         await dbFunction.clearDb();
 

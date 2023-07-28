@@ -1,22 +1,29 @@
 import 'dart:developer';
 
+import 'package:appoint_medic/application/Search/search_bloc.dart';
+import 'package:appoint_medic/application/profile/profile_details_bloc.dart';
 import 'package:appoint_medic/domain/db/db_model.dart';
 import 'package:appoint_medic/presentation/patient/appointments/screen_appointments.dart';
 import 'package:appoint_medic/presentation/patient/home/screen_home.dart';
 import 'package:appoint_medic/presentation/patient/messages/screen_message.dart';
 import 'package:appoint_medic/presentation/patient/profile/screen_profile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ScreenMainPage extends StatelessWidget {
   ScreenMainPage({
     super.key,
     required this.userName,
+    required this.id,
   });
   final String userName;
-  ValueNotifier pagesNotifier = ValueNotifier(0);
+  final String id;
+ final  ValueNotifier pagesNotifier = ValueNotifier(0);
 
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<ProfileDetailsBloc>(context).add(GetProfileDetails(id));
+
     final pages = [
       ScreenHome(
         name: userName,

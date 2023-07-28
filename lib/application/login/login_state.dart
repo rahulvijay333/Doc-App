@@ -9,10 +9,12 @@ class LoginLoading extends LoginState {}
 class LoginSucess extends LoginState {
   final String? role;
   final String? name;
+  final String? id;
 
-  LoginSucess({
+  LoginSucess( {
     required this.role,
     this.name,
+    this.id,
   });
 }
 

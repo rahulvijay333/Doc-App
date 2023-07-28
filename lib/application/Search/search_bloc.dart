@@ -19,10 +19,52 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
       if (error.isEmpty) {
         emit(SearchSucess(apiResponse!.doctors!));
-        log('api call sucess');
+        log('api call show all sucess');
       } else {
         emit(SearchFailure(error));
-        log('api call failed');
+        log('api call failed bloc');
+      }
+    });
+
+    on<SearchByFilter>((event, emit) async {
+      emit(SearchFilterLoading());
+
+      log('bloc ${event.gender} , ${event.name}, , ${event.speciality}');
+
+      final (error, response) = await searchService.searchByFilter(
+          name: event.name, gender: event.gender, speciality: event.speciality);
+
+      log(response.toString());
+
+      if (error.isEmpty) {
+        emit(SearchFilterSuccess(response!.doctors!));
+        // log('api call  filtersucess');
+      } else {
+        emit(SearchFilterFailure(error));
+
+        log(error);
+        log('api call filter failed bloc');
+      }
+    });
+
+    on<SearchByName>((event, emit) async {
+      emit(SearchNameLoading());
+
+      log('bloc, ${event.name},}');
+
+      final (error, response) =
+          await searchService.searchByFilter(name: event.name);
+
+      log(response.toString());
+
+      if (error.isEmpty) {
+        emit(SearchNameSucess(response!.doctors!));
+        // log('api call  filtersucess');
+      } else {
+        emit(SearchNameFailure(error));
+
+        log(error);
+        log('api call filter failed bloc');
       }
     });
   }

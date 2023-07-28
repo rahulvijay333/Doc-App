@@ -25,9 +25,11 @@ class AuthenticationBloc
         String? getRole = await sharedprefs.getRole();
         String? getToken = await sharedprefs.getToken();
         String? userName = await sharedprefs.getName();
+        String? userid = await sharedprefs.getId();
+
         // log(getToken.toString());
 
-        emit(Autheticated(getRole!, getToken!, userName!));
+        emit(Autheticated(getRole!, getToken!, userName!, userid!));
       }
     });
 

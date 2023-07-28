@@ -41,6 +41,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
               MaterialPageRoute(
                   builder: (context) => ScreenMainPage(
                         userName: state.name,
+                        id: state.id,
                       )),
             );
           } else if (state.role == 'admin') {
@@ -73,7 +74,6 @@ class _ScreenSplashState extends State<ScreenSplash> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Center(child: FadeInContainer()),
-           
             ],
           ),
         ),

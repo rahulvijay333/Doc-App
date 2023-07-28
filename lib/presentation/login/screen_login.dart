@@ -5,7 +5,6 @@ import 'package:appoint_medic/core/color_constants.dart';
 import 'package:appoint_medic/core/text_constants.dart';
 import 'package:appoint_medic/presentation/admin/home/screen_admin_home.dart';
 import 'package:appoint_medic/presentation/doctor/doc_main_screen.dart';
-import 'package:appoint_medic/presentation/doctor/home/screen_doct_home.dart';
 import 'package:appoint_medic/presentation/login/screen_login_admin.dart';
 import 'package:appoint_medic/presentation/patient/main_page.dart';
 import 'package:appoint_medic/presentation/register/screen_register.dart';
@@ -28,6 +27,26 @@ class _ScreenLoginState extends State<ScreenLogin> {
       ValueNotifier<String>('patient');
 
   String get selectedUserTypeValue => selectedUserType.value;
+
+
+   Widget customRadio(String label) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Radio<String>(
+          activeColor: Colors.blue,
+          value: label,
+          groupValue: selectedUserType.value,
+          onChanged: (String? value) {
+            setState(() {
+              selectedUserType.value = value!;
+            });
+          },
+        ),
+        Text('$label'),
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -121,11 +140,14 @@ class _ScreenLoginState extends State<ScreenLogin> {
                         } else if (state is LoginSucess) {
                           if (state.role == 'patient') {
                             WidgetsBinding.instance.addPostFrameCallback((_) {
+
+                              unfocus();
                               Navigator.of(context)
                                   .pushReplacement(MaterialPageRoute(
                                 builder: (context) {
                                   return ScreenMainPage(
                                     userName: state.name!,
+                                    id: state.id!,
                                   );
                                 },
                               ));
@@ -143,6 +165,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
                             });
                           } else if (state.role == 'admin') {
                             WidgetsBinding.instance.addPostFrameCallback((_) {
+
                               Navigator.of(context)
                                   .pushReplacement(MaterialPageRoute(
                                 builder: (context) {
@@ -160,7 +183,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                 SnackBar(content: Text(state.error)));
                           });
                         }
-                        final usertype = selectedUserType.value;
+                       // final usertype = selectedUserType.value;
 
                         return ElevatedButton(
                             style: loginButtonStyle,
@@ -212,22 +235,9 @@ class _ScreenLoginState extends State<ScreenLogin> {
     );
   }
 
-  Widget customRadio(String label) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Radio<String>(
-          activeColor: Colors.blue,
-          value: label,
-          groupValue: selectedUserType.value,
-          onChanged: (String? value) {
-            setState(() {
-              selectedUserType.value = value!;
-            });
-          },
-        ),
-        Text('$label'),
-      ],
-    );
+  void unfocus() {
+    FocusManager.instance.primaryFocus?.unfocus();
   }
+
+ 
 }
