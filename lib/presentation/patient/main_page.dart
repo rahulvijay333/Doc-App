@@ -18,19 +18,19 @@ class ScreenMainPage extends StatelessWidget {
   });
   final String userName;
   final String id;
- final  ValueNotifier pagesNotifier = ValueNotifier(0);
+  final ValueNotifier pagesNotifier = ValueNotifier(0);
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<ProfileDetailsBloc>(context).add(GetProfileDetails(id));
-
     final pages = [
       ScreenHome(
         name: userName,
       ),
       const ScreenAppointments(),
       const ScreenMessages(),
-      const ScreenProfile()
+      ScreenProfile(
+        id: id,
+      )
     ];
 
     final size = MediaQuery.of(context).size;
@@ -42,6 +42,7 @@ class ScreenMainPage extends StatelessWidget {
             return Stack(
               alignment: Alignment.bottomCenter,
               children: [
+                //--------------------------------------------------custom pages
                 pages[pageIndex],
                 Positioned(
                   bottom: 20,

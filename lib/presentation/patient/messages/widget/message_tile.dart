@@ -14,6 +14,7 @@ class MessageTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+    
       padding: EdgeInsets.all(8),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,7 +36,7 @@ class MessageTile extends StatelessWidget {
                 Text(
                   senderName,
                   style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w500,
                     fontSize: 20,
                   ),
                 ),

@@ -13,21 +13,24 @@ class ScreenMessages extends StatelessWidget {
     return Container(
         width: double.maxFinite,
         height: double.maxFinite,
-        decoration: backgroundDecoration,
+        // decoration: backgroundDecoration,
         child: Padding(
           padding: const EdgeInsets.only(left: 15, right: 15),
           child: Column(
             children: [
               SizedBox(
-                height: size.height * 0.02,
-              ),
-              const Text(
+                height: size.height * 0.07,
+                child: const Center(
+                  child: Text(
                 'Messages',
                 style: TextStyle(
                     fontSize: 25,
-                    color: Colors.white,
+                    color: Colors.blue,
                     fontWeight: FontWeight.bold),
               ),
+                ),
+              ),
+              
               SizedBox(
                 height: size.height * 0.05,
               ),
@@ -37,15 +40,15 @@ class ScreenMessages extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius:
-                        BorderRadius.horizontal(left: Radius.circular(20)),
+                        BorderRadius.circular(10),
                     child: Container(
-                      color: Colors.white.withOpacity(0.5),
+                      color: Colors.grey[200],
                       //height: 40,
                       height: size.height * 0.06,
-                      width: size.width * 0.7,
+                      width: size.width * 0.75,
 
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 8.0),
+                      child: const Padding(
+                        padding: EdgeInsets.only(left: 8.0),
                         child: Row(
                           children: [
                             Icon(Icons.search),
@@ -62,16 +65,16 @@ class ScreenMessages extends StatelessWidget {
                   //---------------------------------------------new message icon
                   ClipRRect(
                     borderRadius:
-                        BorderRadius.horizontal(right: Radius.circular(20)),
+                        BorderRadius.circular(10),
                     child: Container(
                       height: size.height * 0.06,
-                      width: size.width * 0.2,
+                      width: size.width * 0.15,
                       color: Colors.blue,
                       child: IconButton(
                           onPressed: () {
                             //----------------------------message function
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.add_comment,
                             size: 30,
                             color: Colors.white,
@@ -80,18 +83,18 @@ class ScreenMessages extends StatelessWidget {
                   )
                 ],
               ),
-              SizedBox(
-                height: 10,
+              const SizedBox(
+                height: 20,
               ),
               //-------------------------------list of messages
               Expanded(
                 child: ListView.separated(
                     itemBuilder: (context, index) {
                       return ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(10),
                         child: Container(
                             height: size.height * 0.10,
-                            color: Colors.white.withOpacity(0.5),
+                            color: Colors.blue[50]?.withOpacity(0.5),
                             child: MessageTile(
                                 senderName: 'Dr. alex Emanuel',
                                 message: 'hello',
@@ -99,7 +102,7 @@ class ScreenMessages extends StatelessWidget {
                       );
                     },
                     separatorBuilder: (context, index) {
-                      return SizedBox(
+                      return const SizedBox(
                         height: 10,
                       );
                     },

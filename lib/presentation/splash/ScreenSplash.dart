@@ -1,4 +1,7 @@
 import 'package:appoint_medic/application/Auth/authentication_bloc.dart';
+import 'package:appoint_medic/application/Search/search_bloc.dart';
+import 'package:appoint_medic/application/profile/profile_details_bloc.dart';
+import 'package:appoint_medic/application/speciality/speciality_bloc.dart';
 import 'package:appoint_medic/core/color_constants.dart';
 import 'package:appoint_medic/presentation/admin/home/screen_admin_home.dart';
 import 'package:appoint_medic/presentation/doctor/doc_main_screen.dart';
@@ -36,6 +39,15 @@ class _ScreenSplashState extends State<ScreenSplash> {
                           name: state.name,
                         )));
           } else if (state.role == 'patient') {
+            //-----------------------------------------------------------------gettting profile details  event
+            BlocProvider.of<ProfileDetailsBloc>(context)
+                .add(GetProfileDetails(state.id));
+                //------------------------------------------calling catagories event
+            BlocProvider.of<SpecialityBloc>(context)
+                .add(DisplaySpecialityHome());
+                //----------------------------------------------
+                  BlocProvider.of<SearchBloc>(context)
+                                .add(ShowAllDoctorList());
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(

@@ -2,6 +2,7 @@ import 'package:appoint_medic/application/Auth/authentication_bloc.dart';
 import 'package:appoint_medic/application/Search/search_bloc.dart';
 import 'package:appoint_medic/application/login/login_bloc.dart';
 import 'package:appoint_medic/application/profile/profile_details_bloc.dart';
+import 'package:appoint_medic/application/searchByCatergory/search_by_category_bloc.dart';
 import 'package:appoint_medic/application/speciality/speciality_bloc.dart';
 import 'package:appoint_medic/domain/db/db_functions.dart';
 import 'package:appoint_medic/domain/db/db_model.dart';
@@ -36,13 +37,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ProfileService profileService = ProfileService();
+
+    final ProfileDetailsBloc profileBloc = ProfileDetailsBloc(profileService);
     final DbFunctionClass db = DbFunctionClass();
     final LoginServiceImpl loginservice = LoginServiceImpl();
     final SharedPrefsAuthServiceImpl sharedpref = SharedPrefsAuthServiceImpl();
-    final AuthenticationBloc auth = AuthenticationBloc(sharedpref, db);
+    final AuthenticationBloc auth =
+        AuthenticationBloc(sharedpref, db, profileBloc);
     final SearchService searchService = SearchService();
     final SpecialityService specialityService = SpecialityService();
-    final ProfileService profileService = ProfileService();
 
     return MultiBlocProvider(
         providers: [
@@ -50,7 +54,8 @@ class MyApp extends StatelessWidget {
             create: (context) => LoginBloc(loginservice, auth, sharedpref, db),
           ),
           BlocProvider(
-            create: (context) => AuthenticationBloc(sharedpref, db),
+            create: (context) =>
+                AuthenticationBloc(sharedpref, db, profileBloc),
           ),
           BlocProvider(
             create: (context) => SearchBloc(searchService),
@@ -61,7 +66,12 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) => ProfileDetailsBloc(profileService),
             child: Container(),
-          )
+          ),
+           BlocProvider(
+            create: (context) => SearchByCategoryBloc(searchService),
+            child: Container(),
+          ),
+
         ],
         child: MaterialApp(
             debugShowCheckedModeBanner: false,

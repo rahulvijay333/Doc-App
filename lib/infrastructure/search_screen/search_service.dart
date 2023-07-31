@@ -14,16 +14,9 @@ class SearchService {
       final Response response =
           await dio.get(ApiEndPoints.patientGetAllDoctors);
 
-      // log('Response Status Code: ${response.statusCode}');
-      // log('Response Headers: ${response.headers}');
-      // // log('Response Data: ${response.data}');
-
-      final value = DoctorsResponseModel.fromJson(response.data);
-      log(value.toString());
-
       //log(response);
       if (response.statusCode == 200) {
-        log('api call sucess');
+        log('api call sucess searchservice');
         return ('', DoctorsResponseModel.fromJson(response.data));
       } else {
         return ('Error happend in ApiCall ', null);
@@ -56,13 +49,6 @@ class SearchService {
             'gender': gender,
             'specialities': speciality
           });
-
-      log('Response Status Code: ${response.statusCode}');
-      log('Response Headers: ${response.headers}');
-      // // log('Response Data: ${response.data}');
-
-      // final value = DoctorsResponseModel.fromJson(response.data);
-      // log(value.toString());
 
       //log(response);
       if (response.statusCode == 200) {

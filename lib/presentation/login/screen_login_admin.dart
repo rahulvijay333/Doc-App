@@ -67,10 +67,7 @@ class ScreenAdminLogin extends StatelessWidget {
                       height: 10,
                     ),
 
-                    const Text(
-                      'Did you forget password ?',
-                      style: TextStyle(color: Colors.blue, fontSize: 12),
-                    ),
+                 
                     const SizedBox(
                       height: 10,
                     ),

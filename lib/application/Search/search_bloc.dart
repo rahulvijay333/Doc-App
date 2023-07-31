@@ -27,7 +27,11 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     });
 
     on<SearchByFilter>((event, emit) async {
+
+      
       emit(SearchFilterLoading());
+
+
 
       log('bloc ${event.gender} , ${event.name}, , ${event.speciality}');
 

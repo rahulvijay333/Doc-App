@@ -24,9 +24,6 @@ class _ScreenHomeState extends State<ScreenHome> {
   @override
   void initState() {
     super.initState();
-    // BlocProvider.of<SearchBloc>(context).add(ShowAllDoctorList());
-    BlocProvider.of<SpecialityBloc>(context).add(DisplaySpecialityHome());
-    
   }
 
   @override
@@ -47,69 +44,100 @@ class _ScreenHomeState extends State<ScreenHome> {
                 //  color: Colors.green,
                 child: Padding(
                   padding: const EdgeInsets.all(15.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      //welcome
-                      SizedBox(
-                          //color: Colors.amber,
-                          width: size.width * 0.20,
-                          height: size.height * 0.15 * 0.80,
-                          child: const CircleAvatar(
-                            backgroundImage: AssetImage('assets/patient.png'),
-                          )),
-
-                      //---------------------------------------name and welcome
-
-                      Container(
-                        width: size.width * 0.60,
-                        height: size.height * 0.15 * 0.80,
-                        //  color: Colors.red,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                'Welcome',
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w300),
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              Text(
-                                widget.name,
-                                style: const TextStyle(
-                                    fontSize: 22,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              )
-                            ],
+                  child: BlocBuilder<ProfileDetailsBloc, ProfileDetailsState>(
+                    builder: (context, state) {
+                      if (state is ProfileLoading) {
+                        return const Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
                           ),
-                        ),
-                      ),
+                        );
+                      } else if (state is ProfileSucess) {
+                        return Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            //welcome
+                            SizedBox(
+                                //color: Colors.amber,
+                                width: size.width * 0.20,
+                                height: size.height * 0.15 * 0.80,
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.transparent,
+                                  child: ClipOval(
+                                    child: Image.network(
+                                      state.userProfile.user!.profilePicture!
+                                          .secureUrl!,
+                                      loadingBuilder:
+                                          (context, child, loadingProgress) {
+                                        if (loadingProgress == null) {
+                                          return child;
+                                        }
 
-                      const Spacer(),
-                      //------------------------------------------reminder icon
-                      SizedBox(
-                        height: size.height * 0.15 * 0.50,
-                        width: size.width * 0.10,
-                        child: CircleAvatar(
-                          radius: 21,
-                          backgroundColor: Colors.white.withOpacity(0.5),
-                          child: CircleAvatar(
-                            radius: 19,
-                            child: IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.notifications)),
-                          ),
-                        ),
-                      )
-                    ],
+                                        return const Center(
+                                          child: CircularProgressIndicator(
+                                            color: Colors.white,
+                                            strokeWidth: 2,
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                )),
+
+                            //---------------------------------------name and welcome
+
+                            Container(
+                              width: size.width * 0.60,
+                              height: size.height * 0.15 * 0.80,
+                                // color: Colors.red,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Text(
+                                      'Welcome',
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w300),
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    Text(
+                                      state.userProfile.user!.fullName!,
+                                      style: const TextStyle(
+                                          fontSize: 22,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+
+                            const Spacer(),
+                            //------------------------------------------reminder icon
+                            SizedBox(
+                              height: size.height * 0.15 * 0.40,
+                              width: size.width * 0.10,
+                              child: CircleAvatar(
+                                radius: 21,
+                                backgroundColor: Colors.white.withOpacity(0.2),
+                                child: const CircleAvatar(
+                                  radius: 18,
+                                  child: Icon(Icons.notifications),
+                                ),
+                              ),
+                            )
+                          ],
+                        );
+                      }
+
+                      return const SizedBox();
+                    },
                   ),
                 ),
               ),
@@ -118,53 +146,51 @@ class _ScreenHomeState extends State<ScreenHome> {
               GestureDetector(
                 onTap: () {
                   //----------------------------search page navigation
+                  BlocProvider.of<SearchBloc>(context).add(ShowAllDoctorList());
 
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) {
-                      return ScreenSearch();
-                    },
-                  ));
-
-                  // Navigator.of(context).push(
-                  //   PageRouteBuilder(
-                  //     pageBuilder: (context, animation, secondaryAnimation) {
-                  //       // Build the new route/screen here
-                  //       return ScreenSearch();
-                  //     },
-                  //     transitionsBuilder:
-                  //         (context, animation, secondaryAnimation, child) {
-                  //       // Define your custom transition animation here
-                  //       return SlideTransition(
-                  //         position: Tween<Offset>(
-                  //           begin: const Offset(1.0, 0.0),
-                  //           end: Offset.zero,
-                  //         ).animate(animation),
-                  //         child: child,
-                  //       );
-                  //     },
-                  //   ),
-                  // );
+                  Navigator.of(context).push(
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) {
+                        // Build the new route/screen here
+                        return ScreenSearch();
+                      },
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                        // Define your custom transition animation here
+                        return SlideTransition(
+                          position: Tween<Offset>(
+                            begin: const Offset(1.0, 0.0),
+                            end: Offset.zero,
+                          ).animate(animation),
+                          child: child,
+                        );
+                      },
+                    ),
+                  );
                 },
-                child: Container(
-                  height: size.height * 0.09,
-                  // /  color: Colors.redAccent,
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(8)),
-                      child: const Row(
-                        children: [
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Icon(Icons.search),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text('Search doctors ..')
-                        ],
+                child: Padding(
+                  padding:  EdgeInsets.only(left: size.width * 0.01, right: size.width * 0.01,),
+                  child: Container(
+                    height: size.height * 0.09,
+                    // /  color: Colors.redAccent,
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(8)),
+                        child: const Row(
+                          children: [
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Icon(Icons.search),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text('Search doctors ..')
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -178,7 +204,8 @@ class _ScreenHomeState extends State<ScreenHome> {
         // ),
 //---------------------------------------------------------------specility
         Padding(
-          padding: const EdgeInsets.only(left: 15.0, right: 15, top: 20),
+          padding: EdgeInsets.only(
+              left: size.width * 0.05, right: size.width * 0.05, top: 20),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Container(
@@ -186,28 +213,19 @@ class _ScreenHomeState extends State<ScreenHome> {
               width: size.width,
               color: Colors.blue[100],
               child: Padding(
-                padding: const EdgeInsets.only(left: 8, right: 8, top: 5),
+                padding: const EdgeInsets.only(left: 5, right: 8, top: 5),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(
                       height: 5,
                     ),
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Choose from Specialities',
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.blue),
-                        ),
-                        Text(
-                          'See all',
-                          style: TextStyle(color: Colors.black),
-                        )
-                      ],
+                    const Text(
+                      'Specialities',
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.blue),
                     ),
                     Expanded(
                       child: BlocBuilder<SpecialityBloc, SpecialityState>(
@@ -265,7 +283,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                             );
                           }
 
-                          return Center(
+                          return const Center(
                             child: Text('Connectivity error'),
                           );
                         },

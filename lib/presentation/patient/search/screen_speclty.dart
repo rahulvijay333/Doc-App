@@ -1,5 +1,7 @@
 import 'package:appoint_medic/application/Search/search_bloc.dart';
+import 'package:appoint_medic/application/searchByCatergory/search_by_category_bloc.dart';
 import 'package:appoint_medic/domain/response_models/get_specialities_response/speciality.dart';
+import 'package:appoint_medic/presentation/patient/booking/screen_booking.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,9 +12,8 @@ class ScreenSpeciality extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<SearchBloc>(context)
-        .add(SearchByFilter(speciality: speciality.id));
-    //log('Screen building ');
+    BlocProvider.of<SearchByCategoryBloc>(context)
+        .add(SearchDoctorBySpeciality(speciality.id!));
     final size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -46,7 +47,7 @@ class ScreenSpeciality extends StatelessWidget {
                       Expanded(
                           child: Text(
                         speciality.name!,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 20,
                             color: Colors.white,
                             fontWeight: FontWeight.bold),
@@ -55,49 +56,22 @@ class ScreenSpeciality extends StatelessWidget {
                   ),
                 ),
 
-                // Padding(
-                //   padding: const EdgeInsets.only(
-                //       left: 15, bottom: 15, top: 20, right: 15),
-                //   child: ClipRRect(
-                //     borderRadius: BorderRadius.circular(10),
-                //     child: Container(
-                //       color: Colors.grey.withOpacity(0.1),
-                //       child: TextFormField(
-                //         cursorColor: Colors.grey,
-                //         decoration: const InputDecoration(
-                //             suffixIcon: Icon(
-                //               Icons.filter_alt,
-                //               color: Colors.grey,
-                //             ),
-                //             prefixIcon: Icon(
-                //               Icons.search,
-                //               color: Colors.grey,
-                //             ),
-                //             hintText: 'Search by name',
-                //             border: InputBorder.none,
-                //             hintStyle: TextStyle(
-                //               color: Colors.grey,
-                //               fontSize: 15,
-                //             )),
-                //       ),
-                //     ),
-                //   ),
-                // ),
                 //---------------------------------------doctors list
                 Expanded(
-                  child: BlocBuilder<SearchBloc, SearchState>(
+                  child:
+                      BlocBuilder<SearchByCategoryBloc, SearchByCategoryState>(
                     builder: (context, state) {
-                      if (state is SearchFilterLoading) {
+                      if (state is SearchByCategoryloading) {
                         return const Center(
                           child: CircularProgressIndicator(),
                         );
-                      } else if (state is SearchFilterSuccess) {
+                      } else if (state is SearchByCategorySucess) {
                         return ListView.separated(
                             physics: const BouncingScrollPhysics(),
                             itemBuilder: (context, index) {
                               return Padding(
                                 padding:
-                                    const EdgeInsets.only(left: 15, right: 15),
+                                    const EdgeInsets.only(left: 15, right: 15,top: 15),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
                                   child: Container(
@@ -113,23 +87,11 @@ class ScreenSpeciality extends StatelessWidget {
                                         Container(
                                           width: 100,
                                           height: 110,
-
-                                          //color: Colors.red,
-                                          // child: CircleAvatar(
-                                          //   backgroundImage: NetworkImage(state
-                                          //       .doctorList[index]
-                                          //       .profilePicture!
-                                          //       .secureUrl!),
-                                          // ),
                                           decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(10),
                                               image: const DecorationImage(
                                                   fit: BoxFit.cover,
-                                                  // image: NetworkImage(state
-                                                  //     .doctorList[index]
-                                                  //     .profilePicture!
-                                                  //     .secureUrl!)
                                                   image: AssetImage(
                                                       'assets/doctor_sample.png'))),
                                         ),
@@ -147,7 +109,7 @@ class ScreenSpeciality extends StatelessWidget {
                                                 MainAxisAlignment.center,
                                             children: [
                                               Text(
-                                                'Dr. ${state.searchFilterResults[index].fullName}',
+                                                'Dr. ${state.searchCatResults[index].fullName}',
                                                 style: const TextStyle(
                                                     fontSize: 20,
                                                     fontWeight:
@@ -156,34 +118,25 @@ class ScreenSpeciality extends StatelessWidget {
                                               const SizedBox(
                                                 height: 5,
                                               ),
-                                              const Row(
-                                                children: [
-                                                  //Image(image: NetworkImage(''))
-                                                  Icon(
-                                                    Icons.medical_information,
-                                                    size: 15,
-                                                  ),
-                                                  Text('Specialiy')
-                                                ],
-                                              ),
+                                              Text(state.searchCatResults[index].speciality!.name!),
                                               const SizedBox(
-                                                height: 5,
+                                                height: 10,
                                               ),
 
                                               // const SizedBox(
                                               //   height: 0,
                                               // ),
                                               //-------------------------------------------location & rating
-                                              Row(
+                                              const Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
-                                                  const Row(
+                                                  Row(
                                                     children: [
                                                       Icon(
                                                         Icons.location_on,
-                                                        size: 15,
+                                                        size: 15,color: Colors.green,
                                                       ),
                                                       Text(
                                                         'Calicut,Kerala',
@@ -193,22 +146,15 @@ class ScreenSpeciality extends StatelessWidget {
                                                       )
                                                     ],
                                                   ),
-                                                  // RatingBarIndicator(
-                                                  //   rating: 4,
-                                                  //   itemSize: 18,
-                                                  //   itemBuilder:
-                                                  //       (context, index) {
-                                                  //     return const Icon(
-                                                  //         Icons.star,
-                                                  //         color: Colors.orange);
-                                                  //   },
-                                                  // ),
                                                 ],
                                               ),
                                               // const Text(' ₹ 500 Rs'),
                                               ElevatedButton(
                                                 onPressed: () {
                                                   //-----------------------------------------booking
+                                                  Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                                                    return ScreenBooking(doctor: state.searchCatResults[index]);
+                                                  },));
                                                 },
                                                 child: const Text('Book'),
                                                 style: ButtonStyle(
@@ -232,25 +178,15 @@ class ScreenSpeciality extends StatelessWidget {
                                 height: 5,
                               );
                             },
-                            itemCount: state.searchFilterResults.length);
-                      } else if (state is SearchFilterFailure) {
+                            itemCount: state.searchCatResults.length);
+                      } else if (state is SearchByCategoryFailure) {
                         return Center(
-                          child: Text(state.errorFilterMessage),
+                          child: Text(state.errorMessage),
                         );
                       }
 
-                      return Center(
-                        child: Column(
-                          children: [
-                            const Text('No doctors available'),
-                            TextButton(
-                                onPressed: () {
-                                  // BlocProvider.of<SearchBloc>(context)
-                                  //     .add(ShowAllDoctorList());
-                                },
-                                child: const Text('Retry'))
-                          ],
-                        ),
+                      return const Center(
+                        child: Text('No doctors available'),
                       );
                     },
                   ),

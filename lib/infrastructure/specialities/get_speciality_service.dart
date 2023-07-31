@@ -14,13 +14,6 @@ class SpecialityService {
         ApiEndPoints.getAllSpecialities,
       );
 
-      log('Response Status Code: ${response.statusCode}');
-      log('Response Headers: ${response.headers}');
-      // // log('Response Data: ${response.data}');
-
-      // final value = DoctorsResponseModel.fromJson(response.data);
-      // log(value.toString());
-
       //log(response);
       if (response.statusCode == 200) {
         log('api categopries call sucess');

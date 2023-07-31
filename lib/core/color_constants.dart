@@ -10,7 +10,7 @@ final backgroundDecoration = BoxDecoration(
     ]));
 
 final textfieldInputDecorationPassword = InputDecoration(
-    hintText: 'Password',
+    hintText: 'Enter Your Password',
     border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
@@ -19,15 +19,19 @@ final textfieldInputDecorationPassword = InputDecoration(
       ),
     ),
     filled: true,
-    fillColor: Colors.white,
+    fillColor: Colors.grey.withOpacity(0.1),
     enabled: true,
     enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
         borderSide: const BorderSide(color: Colors.transparent)));
 
 final textfieldInputDecorationEmail = InputDecoration(
-    hintText: 'Email',
-    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+  
+    hintText: 'Enter Your Email',
+    border: OutlineInputBorder(
+      
+      
+      borderRadius: BorderRadius.circular(10)),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
       borderSide: const BorderSide(
@@ -35,7 +39,7 @@ final textfieldInputDecorationEmail = InputDecoration(
       ),
     ),
     filled: true,
-    fillColor: Colors.white,
+   fillColor: Colors.grey.withOpacity(0.1),
     enabled: true,
     enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),

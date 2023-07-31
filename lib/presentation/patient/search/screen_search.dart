@@ -15,7 +15,7 @@ class ScreenSearch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<SearchBloc>(context).add(ShowAllDoctorList());
+    
     //log('Screen building ');
     final size = MediaQuery.of(context).size;
     return SafeArea(
@@ -59,7 +59,6 @@ class ScreenSearch extends StatelessWidget {
                     ],
                   ),
                 ),
-
                 Padding(
                   padding: const EdgeInsets.only(
                       left: 15, bottom: 15, top: 20, right: 15),
@@ -69,27 +68,21 @@ class ScreenSearch extends StatelessWidget {
                       color: Colors.grey.withOpacity(0.1),
                       child: TextFormField(
                         onChanged: (value) {
-                          log(value);
-                          log('  controller :   ${searchController.text}');
+                         
                           if (value.isNotEmpty) {
                             BlocProvider.of<SearchBloc>(context)
                                 .add(SearchByName(value));
                             checkSearchField.value = true;
-                            checkSearchField.notifyListeners();
                           } else {
                             BlocProvider.of<SearchBloc>(context)
                                 .add(ShowAllDoctorList());
                             checkSearchField.value = false;
-                            checkSearchField.notifyListeners();
                           }
                         },
                         controller: searchController,
                         cursorColor: Colors.grey,
-                        decoration: const InputDecoration(
-                            suffixIcon: Icon(
-                              Icons.filter_alt,
-                              color: Colors.grey,
-                            ),
+                        decoration:  InputDecoration(
+                         
                             prefixIcon: Icon(
                               Icons.search,
                               color: Colors.grey,
@@ -104,9 +97,6 @@ class ScreenSearch extends StatelessWidget {
                     ),
                   ),
                 ),
-
-               
-
                 Expanded(
                   child: ValueListenableBuilder(
                     valueListenable: checkSearchField,
@@ -119,7 +109,6 @@ class ScreenSearch extends StatelessWidget {
                     },
                   ),
                 )
-             
               ],
             ),
           ),
@@ -128,7 +117,7 @@ class ScreenSearch extends StatelessWidget {
     );
   }
 
-  // Method to close the keyboard by unfocusing the current focus node.
+  // Method to close the keyboard
   void unfocus() {
     FocusManager.instance.primaryFocus?.unfocus();
   }

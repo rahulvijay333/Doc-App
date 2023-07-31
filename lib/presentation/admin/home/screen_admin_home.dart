@@ -30,7 +30,7 @@ class ScreenAdminHomePage extends StatelessWidget {
                       const SnackBar(content: Text('Logging out...')));
                 });
               } else if (state is LogoutSucess) {
-                //ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                
                 WidgetsBinding.instance!.addPostFrameCallback((_) {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
                     builder: (context) {
@@ -38,6 +38,7 @@ class ScreenAdminHomePage extends StatelessWidget {
                     },
                   ));
                 });
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
               }
 
               return IconButton(

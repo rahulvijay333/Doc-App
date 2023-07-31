@@ -16,59 +16,53 @@ class ScreenAppointments extends StatelessWidget {
     log((size.width * 0.02).toString());
 
     return DefaultTabController(
-      length: 5,
+      length: 3,
       child: Container(
         width: double.maxFinite,
         height: double.maxFinite,
         // decoration: backgroundDecoration,
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            children: [
-              const Text(
-                'All Appointments',
-                style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
+        child: Column(
+          children: [
+            SizedBox(
+              height: size.height * 0.07,
+              child: const Center(
+                child: Text(
+                  'Appointments',
+                  style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
-              const SizedBox(
-                height: 15,
-              ),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 15, right: 15),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
                 child: Container(
-                  color: Colors.white.withOpacity(0.5),
+                  color: Colors.blue.withOpacity(0.1),
                   //height: 40,
-                  height: size.height * 0.05,
+                  height: size.height * 0.06,
 
                   child: Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: TabBar(
                         labelStyle: TextStyle(
-                          fontSize: size.width * 0.02,
+                          fontSize: size.width * 0.03,
                         ),
                         labelColor: Colors.white,
                         unselectedLabelColor: Colors.black,
                         indicator: BoxDecoration(
-                          color: Colors.blue,
-                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.blue.withOpacity(0.8),
+                          borderRadius: BorderRadius.circular(10),
                         ),
                         tabs: const [
                           Tab(
                             child: Text(
-                              'Today',
-                            ),
-                          ),
-                          Tab(
-                            child: Text(
                               'Upcoming',
-                            ),
-                          ),
-                          Tab(
-                            //text: 'today',
-                            child: Text(
-                              'Pending',
                             ),
                           ),
                           Tab(
@@ -87,61 +81,106 @@ class ScreenAppointments extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 10,
-              ),
-              Expanded(
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 15.0, right: 15),
                 child: TabBarView(children: [
                   ListView.separated(
                       itemBuilder: (context, index) {
                         return ClipRRect(
                           borderRadius: BorderRadius.circular(20),
                           child: Container(
-                              height: size.height * 0.12,
-                              color: Colors.white.withOpacity(0.5),
+                              height: size.height * 0.125,
+                              color: Colors.blue.withOpacity(0.1),
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                //mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  ListTile(
-                                    leading: CircleAvatar(
-                                      radius: 30,
-                                    ),
-                                    title: Text('Dr. Doctor Name'),
-                                    subtitle: Text('speciality'),
-                                    trailing: IconButton(
-                                        onPressed: () {
-                                          //----------------------------------------message option
-                                        },
-                                        icon: Icon(Icons.message)),
-                                  ),
-                                  Container(
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 8.0, right: 15, top: 10),
                                     child: Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text('Date: 24/5/23 '),
-                                        Text('Time : 4.00pm')
+                                        Container(
+                                          // color: Colors.red,
+                                          width: size.width * 0.4,
+                                          child: const Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'Dr.Name',
+                                                style: TextStyle(
+                                                    fontSize: 20,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                              Text('Speciality')
+                                            ],
+                                          ),
+                                        ),
+                                        Container(
+                                          child: const CircleAvatar(
+                                            radius: 25,
+                                            backgroundImage: AssetImage('assets/doctor_sample.png'),
+                                          ),
+                                        )
                                       ],
                                     ),
+                                  ),
+                                  // ListTile(
+                                  //   leading: const CircleAvatar(
+                                  //     radius: 30,
+                                  //   ),
+                                  //   title: const Text('Dr. Doctor Name'),
+                                  //   subtitle: const Text('speciality'),
+                                  //   trailing: IconButton(
+                                  //       onPressed: () {
+                                  //         //----------------------------------------message option
+                                  //       },
+                                  //       icon: const Icon(Icons.message)),
+                                  // ),
+                                  // Container(
+                                  //   child: const Row(
+                                  //     mainAxisAlignment:
+                                  //         MainAxisAlignment.center,
+                                  //     children: [
+                                  //       Text('Date: 24/5/23 '),
+                                  //       Text('Time : 4.00pm')
+                                  //     ],
+                                  //   ),
+                                  // )
+                                  const Divider(),
+                                  const Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Text('24/02/2023'),
+                                      Text('Time'),
+                                      Text('Confirmed')
+                                    ],
                                   )
                                 ],
                               )),
                         );
                       },
                       separatorBuilder: (context, index) {
-                        return SizedBox(
+                        return const SizedBox(
                           height: 10,
                         );
                       },
                       itemCount: 10),
-                  Text('upcming'),
-                  Text('pending'),
-                  Text('Cancelled'),
-                  Text('Cancelled'),
+                  const Text('completed'),
+                  const Text('Cancelled'),
                 ]),
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
       ),
     );
