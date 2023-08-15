@@ -67,7 +67,6 @@ class ScreenAdminLogin extends StatelessWidget {
                       height: 10,
                     ),
 
-                 
                     const SizedBox(
                       height: 10,
                     ),

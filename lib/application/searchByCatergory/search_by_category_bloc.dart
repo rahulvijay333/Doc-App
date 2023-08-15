@@ -15,23 +15,14 @@ class SearchByCategoryBloc
   SearchByCategoryBloc(this.searchService) : super(SearchByCategoryInitial()) {
     on<SearchDoctorBySpeciality>((event, emit) async {
       emit(SearchByCategoryloading());
-      log('new catergoty bloc');
-
-//log('bloc ${event.gender} , ${event.name}, , ${event.speciality}');
 
       final (error, response) = await searchService.searchByFilter(
           name: '', gender: '', speciality: event.specialityID);
 
-      // log(response.toString());
-
       if (error.isEmpty) {
         emit(SearchByCategorySucess(response!.doctors!));
-        // log('api call  filtersucess');
       } else {
         emit(SearchByCategoryFailure(error));
-
-        // log(error);
-        // log('api call filter failed bloc');
       }
     });
   }

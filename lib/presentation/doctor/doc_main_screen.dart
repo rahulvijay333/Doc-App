@@ -1,3 +1,4 @@
+import 'package:appoint_medic/application/navbar/navbar_bloc.dart';
 import 'package:appoint_medic/domain/db/db_model.dart';
 import 'package:appoint_medic/presentation/doctor/all_appointments/all_appointments.dart';
 import 'package:appoint_medic/presentation/doctor/avaliable_times/screen_avalibale_time.dart';
@@ -5,18 +6,20 @@ import 'package:appoint_medic/presentation/doctor/home/screen_doct_Home.dart';
 import 'package:appoint_medic/presentation/doctor/messages/doct_message_screen.dart';
 import 'package:appoint_medic/presentation/doctor/profile/Screen_doc_profile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DoctorScreenMain extends StatelessWidget {
   const DoctorScreenMain({
     super.key,
     required this.name,
+    required this.token,
   });
 
   final String name;
+  final String token;
 
   @override
   Widget build(BuildContext context) {
-    ValueNotifier<int> doctPagesNotifier = ValueNotifier(0);
     final size = MediaQuery.of(context).size;
 
     final _pages = [
@@ -24,129 +27,86 @@ class DoctorScreenMain extends StatelessWidget {
         name: name,
       ),
       ScreenAllAppointments(),
-      ScreenAvailableTime(),
+      ScreenAvailableTime(
+        token: token,
+      ),
       ScreemDoctMessage(),
       ScreenDocProfile()
     ];
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: const Color.fromRGBO(217, 217, 217, 1),
-        body: ValueListenableBuilder(
-          valueListenable: doctPagesNotifier,
-          builder: (context, pageIndex, child) {
-            return Stack(
-              alignment: Alignment.bottomCenter,
-              children: [
-                _pages[pageIndex],
-                Positioned(
-                  bottom: 20,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(10)),
-                    height: 50,
-                    width: size.width * 0.8,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        IconButton(
-                            onPressed: () {
-                              doctPagesNotifier.value = 0;
-                            },
-                            icon: const Icon(
-                              Icons.home,
-                              color: Colors.white,
-                            )),
-                        IconButton(
-                            onPressed: () {
-                              doctPagesNotifier.value = 1;
-                            },
-                            icon: const Icon(
-                              Icons.edit_calendar_outlined,
-                              color: Colors.white,
-                            )),
-                        IconButton(
-                            onPressed: () {
-                              doctPagesNotifier.value = 2;
-                            },
-                            icon: const Icon(
-                              Icons.access_time,
-                              color: Colors.white,
-                            )),
-                        IconButton(
-                            onPressed: () {
-                              doctPagesNotifier.value = 3;
-                            },
-                            icon: const Icon(
-                              Icons.message,
-                              color: Colors.white,
-                            )),
-                        IconButton(
-                            onPressed: () {
-                              doctPagesNotifier.value = 4;
-                            },
-                            icon: const Icon(
-                              Icons.person_2_rounded,
-                              color: Colors.white,
-                            ))
-                      ],
-                    ),
+          backgroundColor: const Color.fromRGBO(217, 217, 217, 1),
+          body: Stack(
+            alignment: Alignment.bottomCenter,
+            children: [
+              BlocBuilder<NavbarBloc, NavbarState>(
+                builder: (context, state) {
+                  return _pages[state.pageIndex];
+                },
+              ),
+              Positioned(
+                bottom: 20,
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.circular(10)),
+                  height: 50,
+                  width: size.width * 0.8,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      IconButton(
+                          onPressed: () {
+                            BlocProvider.of<NavbarBloc>(context)
+                                .add(PageChangeEvent(page: 0));
+                          },
+                          icon: const Icon(
+                            Icons.home,
+                            color: Colors.white,
+                          )),
+                      IconButton(
+                          onPressed: () {
+                            BlocProvider.of<NavbarBloc>(context)
+                                .add(PageChangeEvent(page: 1));
+                          },
+                          icon: const Icon(
+                            Icons.edit_calendar_outlined,
+                            color: Colors.white,
+                          )),
+                      IconButton(
+                          onPressed: () {
+                            BlocProvider.of<NavbarBloc>(context)
+                                .add(PageChangeEvent(page: 2));
+                          },
+                          icon: const Icon(
+                            Icons.access_time,
+                            color: Colors.white,
+                          )),
+                      IconButton(
+                          onPressed: () {
+                            BlocProvider.of<NavbarBloc>(context)
+                                .add(PageChangeEvent(page: 3));
+                          },
+                          icon: const Icon(
+                            Icons.message,
+                            color: Colors.white,
+                          )),
+                      IconButton(
+                          onPressed: () {
+                            BlocProvider.of<NavbarBloc>(context)
+                                .add(PageChangeEvent(page: 4));
+                          },
+                          icon: const Icon(
+                            Icons.person_2_rounded,
+                            color: Colors.white,
+                          ))
+                    ],
                   ),
-                )
-              ],
-            );
-          },
-        ),
-      ),
+                ),
+              )
+            ],
+          )),
     );
   }
 }
-
-//  Positioned(
-//                   bottom: 20,
-//                   child: Container(
-//                     decoration: BoxDecoration(
-//                         color: Colors.blue,
-//                         borderRadius: BorderRadius.circular(10)),
-//                     height: 50,
-//                     width: size.width * 0.8,
-//                     child: Row(
-//                       mainAxisAlignment: MainAxisAlignment.spaceAround,
-//                       children: [
-//                         IconButton(
-//                             onPressed: () {
-//                               doctPagesNotifier.value = 0;
-//                             },
-//                             icon: const Icon(
-//                               Icons.home,
-//                               color: Colors.white,
-//                             )),
-//                         IconButton(
-//                             onPressed: () {
-//                               doctPagesNotifier.value = 1;
-//                             },
-//                             icon: const Icon(
-//                               Icons.edit_calendar_outlined,
-//                               color: Colors.white,
-//                             )),
-//                         IconButton(
-//                             onPressed: () {
-//                               doctPagesNotifier.value = 2;
-//                             },
-//                             icon: const Icon(
-//                               Icons.message,
-//                               color: Colors.white,
-//                             )),
-//                         IconButton(
-//                             onPressed: () {
-//                               doctPagesNotifier.value = 3;
-//                             },
-//                             icon: const Icon(
-//                               Icons.person_2_rounded,
-//                               color: Colors.white,
-//                             ))
-//                       ],
-//                     ),
-//                   ),
-//                 )

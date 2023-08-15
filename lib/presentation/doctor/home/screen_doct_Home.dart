@@ -17,6 +17,8 @@ class ScreenDoctHome extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     log((size.height * 0.05).toString());
 
+    log('testing doctor name $name');
+
     return Container(
       width: size.width,
       height: size.height,

@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:appoint_medic/application/Search/search_bloc.dart';
 import 'package:appoint_medic/core/api_endPoints/api_endpoints.dart';
 import 'package:appoint_medic/domain/response_models/doctors_response_model/doctors_response_model.dart';
 import 'package:dio/dio.dart';

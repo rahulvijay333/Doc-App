@@ -30,7 +30,6 @@ class ScreenAdminHomePage extends StatelessWidget {
                       const SnackBar(content: Text('Logging out...')));
                 });
               } else if (state is LogoutSucess) {
-                
                 WidgetsBinding.instance!.addPostFrameCallback((_) {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
                     builder: (context) {

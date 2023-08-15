@@ -127,34 +127,13 @@ class ScreenAppointments extends StatelessWidget {
                                         Container(
                                           child: const CircleAvatar(
                                             radius: 25,
-                                            backgroundImage: AssetImage('assets/doctor_sample.png'),
+                                            backgroundImage: AssetImage(
+                                                'assets/doctor_sample.png'),
                                           ),
                                         )
                                       ],
                                     ),
                                   ),
-                                  // ListTile(
-                                  //   leading: const CircleAvatar(
-                                  //     radius: 30,
-                                  //   ),
-                                  //   title: const Text('Dr. Doctor Name'),
-                                  //   subtitle: const Text('speciality'),
-                                  //   trailing: IconButton(
-                                  //       onPressed: () {
-                                  //         //----------------------------------------message option
-                                  //       },
-                                  //       icon: const Icon(Icons.message)),
-                                  // ),
-                                  // Container(
-                                  //   child: const Row(
-                                  //     mainAxisAlignment:
-                                  //         MainAxisAlignment.center,
-                                  //     children: [
-                                  //       Text('Date: 24/5/23 '),
-                                  //       Text('Time : 4.00pm')
-                                  //     ],
-                                  //   ),
-                                  // )
                                   const Divider(),
                                   const Row(
                                     mainAxisAlignment:

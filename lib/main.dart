@@ -1,18 +1,25 @@
+import 'package:appoint_medic/application/AlertSlotTime/add_slot_alert_box_bloc.dart';
 import 'package:appoint_medic/application/Auth/authentication_bloc.dart';
+import 'package:appoint_medic/application/Onboarding/on_boarding_bloc.dart';
 import 'package:appoint_medic/application/Search/search_bloc.dart';
 import 'package:appoint_medic/application/login/login_bloc.dart';
+import 'package:appoint_medic/application/navbar/navbar_bloc.dart';
 import 'package:appoint_medic/application/profile/profile_details_bloc.dart';
 import 'package:appoint_medic/application/searchByCatergory/search_by_category_bloc.dart';
+import 'package:appoint_medic/application/slot/appointment_slot_bloc.dart';
+import 'package:appoint_medic/application/slot_operations/slot_operations_bloc.dart';
 import 'package:appoint_medic/application/speciality/speciality_bloc.dart';
 import 'package:appoint_medic/domain/db/db_functions.dart';
 import 'package:appoint_medic/domain/db/db_model.dart';
+import 'package:appoint_medic/infrastructure/appointment_slots/slot_service.dart';
 import 'package:appoint_medic/infrastructure/auth/auth_service_impl.dart';
 import 'package:appoint_medic/infrastructure/login/loginServiceImpl.dart';
 import 'package:appoint_medic/infrastructure/profile/profile_service.dart';
+import 'package:appoint_medic/infrastructure/register/register_impl.dart';
 import 'package:appoint_medic/infrastructure/search_screen/search_service.dart';
 import 'package:appoint_medic/infrastructure/specialities/get_speciality_service.dart';
-import 'package:appoint_medic/presentation/doctor/doc_main_screen.dart';
-import 'package:appoint_medic/presentation/patient/main_page.dart';
+import 'package:appoint_medic/presentation/onBoarding/patient/screen_onB_patient.dart';
+
 import 'package:appoint_medic/presentation/splash/ScreenSplash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,6 +54,9 @@ class MyApp extends StatelessWidget {
         AuthenticationBloc(sharedpref, db, profileBloc);
     final SearchService searchService = SearchService();
     final SpecialityService specialityService = SpecialityService();
+    final CreateServiceImpl onboarding = CreateServiceImpl();
+    final AppointmentSlotService slotService = AppointmentSlotService();
+    final AppointmentSlotBloc slotAuth = AppointmentSlotBloc(slotService);
 
     return MultiBlocProvider(
         providers: [
@@ -65,20 +75,35 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => ProfileDetailsBloc(profileService),
-            child: Container(),
           ),
-           BlocProvider(
+          BlocProvider(
             create: (context) => SearchByCategoryBloc(searchService),
-            child: Container(),
           ),
-
+          BlocProvider(
+            create: (context) => OnBoardingBloc(onboarding),
+          ),
+          BlocProvider(
+            create: (context) => AppointmentSlotBloc(slotService),
+          ),
+          BlocProvider(
+            create: (context) => AddSlotAlertBoxBloc(),
+          ),
+          BlocProvider(
+            create: (context) => NavbarBloc(),
+          ),
+          BlocProvider(
+            create: (context) => SlotOperationsBloc(slotService, slotAuth),
+          ),
         ],
         child: MaterialApp(
             debugShowCheckedModeBanner: false,
             // home: ScreenMainPage(userName: 'userName')
             home: ScreenSplash()
 
-            // home: DoctorScreenMain('b'),
+            // home: ScreenOnBoardingPatient(
+            //   token: '',
+            // )
+
             ));
   }
 }

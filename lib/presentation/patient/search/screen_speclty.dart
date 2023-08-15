@@ -70,8 +70,8 @@ class ScreenSpeciality extends StatelessWidget {
                             physics: const BouncingScrollPhysics(),
                             itemBuilder: (context, index) {
                               return Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 15, right: 15,top: 15),
+                                padding: const EdgeInsets.only(
+                                    left: 15, right: 15, top: 15),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
                                   child: Container(
@@ -84,16 +84,43 @@ class ScreenSpeciality extends StatelessWidget {
                                         const SizedBox(
                                           width: 10,
                                         ),
-                                        Container(
-                                          width: 100,
-                                          height: 110,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              image: const DecorationImage(
-                                                  fit: BoxFit.cover,
-                                                  image: AssetImage(
-                                                      'assets/doctor_sample.png'))),
+                                        ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          child: Container(
+                                            width: 100,
+                                            height: 110,
+                                            color: Colors.grey,
+                                            child: Image.network(
+                                              state.searchCatResults[index].profilePicture?.secureUrl ?? '',
+                                              fit: BoxFit.cover,
+                                              loadingBuilder: (context, child,
+                                                  loadingProgress) {
+                                                if (loadingProgress == null)
+                                                  return child;
+
+                                                return const Center(
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    strokeWidth: 1,
+                                                  ),
+                                                );
+                                              },
+                                              errorBuilder:
+                                                  (context, error, stackTrace) {
+
+                                                      if (state.searchCatResults[index].gender ==
+                                        'female') {
+                                      return Image.asset(
+                                          'assets/female_doctor.png',fit: BoxFit.cover,);
+                                    } else {
+                                      return Image.asset(
+                                          'assets/doctor_male.png',fit: BoxFit.cover,);
+                                    }
+                                                
+                                              },
+                                            ),
+                                          ),
                                         ),
                                         const SizedBox(
                                           width: 25,
@@ -109,7 +136,7 @@ class ScreenSpeciality extends StatelessWidget {
                                                 MainAxisAlignment.center,
                                             children: [
                                               Text(
-                                                'Dr. ${state.searchCatResults[index].fullName}',
+                                                'Dr. ${state.searchCatResults[index].fullName}',maxLines: 1,
                                                 style: const TextStyle(
                                                     fontSize: 20,
                                                     fontWeight:
@@ -118,7 +145,8 @@ class ScreenSpeciality extends StatelessWidget {
                                               const SizedBox(
                                                 height: 5,
                                               ),
-                                              Text(state.searchCatResults[index].speciality!.name!),
+                                              Text(state.searchCatResults[index]
+                                                  .speciality!.name!),
                                               const SizedBox(
                                                 height: 10,
                                               ),
@@ -136,7 +164,8 @@ class ScreenSpeciality extends StatelessWidget {
                                                     children: [
                                                       Icon(
                                                         Icons.location_on,
-                                                        size: 15,color: Colors.green,
+                                                        size: 15,
+                                                        color: Colors.green,
                                                       ),
                                                       Text(
                                                         'Calicut,Kerala',
@@ -152,9 +181,15 @@ class ScreenSpeciality extends StatelessWidget {
                                               ElevatedButton(
                                                 onPressed: () {
                                                   //-----------------------------------------booking
-                                                  Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                                                    return ScreenBooking(doctor: state.searchCatResults[index]);
-                                                  },));
+                                                  Navigator.of(context)
+                                                      .push(MaterialPageRoute(
+                                                    builder: (context) {
+                                                      return ScreenBooking(
+                                                          doctor: state
+                                                                  .searchCatResults[
+                                                              index]);
+                                                    },
+                                                  ));
                                                 },
                                                 child: const Text('Book'),
                                                 style: ButtonStyle(

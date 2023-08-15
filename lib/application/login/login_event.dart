@@ -16,3 +16,5 @@ class LogOutButtonClicked extends LoginEvent {
 
   LogOutButtonClicked(this.role);
 }
+
+class ClearLoginStateEvent extends LoginEvent {}

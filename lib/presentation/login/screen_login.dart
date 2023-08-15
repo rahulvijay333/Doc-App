@@ -1,16 +1,15 @@
-import 'dart:developer';
-
 import 'package:appoint_medic/application/login/login_bloc.dart';
 import 'package:appoint_medic/application/profile/profile_details_bloc.dart';
 import 'package:appoint_medic/application/speciality/speciality_bloc.dart';
 import 'package:appoint_medic/core/color_constants.dart';
-import 'package:appoint_medic/core/text_constants.dart';
 import 'package:appoint_medic/presentation/admin/home/screen_admin_home.dart';
+import 'package:appoint_medic/presentation/doctor/AdminNotVerified/screen_admin_not_verified.dart';
 import 'package:appoint_medic/presentation/doctor/doc_main_screen.dart';
 import 'package:appoint_medic/presentation/login/screen_login_admin.dart';
+import 'package:appoint_medic/presentation/onBoarding/doctor/screen_onb_doctor.dart';
+import 'package:appoint_medic/presentation/onBoarding/patient/screen_onB_patient.dart';
 import 'package:appoint_medic/presentation/patient/main_page.dart';
 import 'package:appoint_medic/presentation/register/screen_register.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -252,6 +251,49 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                             return const Center(
                                                 child:
                                                     CircularProgressIndicator());
+                                          } else if (state
+                                              is LoginOnBordingPatient) {
+                                            WidgetsBinding.instance
+                                                .addPostFrameCallback((_) {
+                                              unfocus();
+                                              Navigator.of(context)
+                                                  .pushReplacement(
+                                                      MaterialPageRoute(
+                                                builder: (context) {
+                                                  return ScreenOnBoardingPatient(
+                                                    token: state.token,
+                                                  );
+                                                },
+                                              ));
+                                            });
+                                          } else if (state
+                                              is LoginOnBordingDoctor) {
+                                            WidgetsBinding.instance
+                                                .addPostFrameCallback((_) {
+                                              unfocus();
+                                              Navigator.of(context)
+                                                  .pushReplacement(
+                                                      MaterialPageRoute(
+                                                builder: (context) {
+                                                  return ScreenOnBoardingDoctor(
+                                                    token: state.token,
+                                                  );
+                                                },
+                                              ));
+                                            });
+                                          } else if (state
+                                              is LoginAdminVerificationSate) {
+                                            WidgetsBinding.instance
+                                                .addPostFrameCallback((_) {
+                                              unfocus();
+                                              Navigator.of(context)
+                                                  .pushReplacement(
+                                                      MaterialPageRoute(
+                                                builder: (context) {
+                                                  return ScreenAdminNotVerified();
+                                                },
+                                              ));
+                                            });
                                           } else if (state is LoginSucess) {
                                             if (state.role == 'patient') {
                                               //-----------------------------------------------------------------gettting profile details  event
@@ -288,6 +330,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                                   builder: (context) {
                                                     return DoctorScreenMain(
                                                       name: state.name!,
+                                                      token: state.token!,
                                                     );
                                                   },
                                                 ));
@@ -315,6 +358,9 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                                       content:
                                                           Text(state.error)));
                                             });
+
+                                            ScaffoldMessenger.of(context)
+                                                .hideCurrentSnackBar();
                                           }
 
                                           return ElevatedButton(

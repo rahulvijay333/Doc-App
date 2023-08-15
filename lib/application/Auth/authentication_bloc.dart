@@ -14,7 +14,8 @@ class AuthenticationBloc
 
   AuthenticationBloc(
     this.sharedprefs,
-    this.db, this.profilebloc,
+    this.db,
+    this.profilebloc,
   ) : super(Unauthenticated()) {
     on<AppStartAuth>((event, emit) async {
       emit(AuthenticationLoading());
@@ -33,7 +34,6 @@ class AuthenticationBloc
 
         emit(Autheticated(getRole!, getToken!, userName!, userid!));
         profilebloc.add(GetProfileDetails(userid));
-        
       }
     });
 

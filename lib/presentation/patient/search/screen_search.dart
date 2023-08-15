@@ -15,7 +15,6 @@ class ScreenSearch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     //log('Screen building ');
     final size = MediaQuery.of(context).size;
     return SafeArea(
@@ -68,7 +67,6 @@ class ScreenSearch extends StatelessWidget {
                       color: Colors.grey.withOpacity(0.1),
                       child: TextFormField(
                         onChanged: (value) {
-                         
                           if (value.isNotEmpty) {
                             BlocProvider.of<SearchBloc>(context)
                                 .add(SearchByName(value));
@@ -81,8 +79,7 @@ class ScreenSearch extends StatelessWidget {
                         },
                         controller: searchController,
                         cursorColor: Colors.grey,
-                        decoration:  InputDecoration(
-                         
+                        decoration: InputDecoration(
                             prefixIcon: Icon(
                               Icons.search,
                               color: Colors.grey,

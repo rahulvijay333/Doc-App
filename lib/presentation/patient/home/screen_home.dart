@@ -11,10 +11,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ScreenHome extends StatefulWidget {
   const ScreenHome({
     super.key,
-    required this.name,
+    required this.name, required this.id,
   });
 
   final String name;
+  final String id;
 
   @override
   State<ScreenHome> createState() => _ScreenHomeState();
@@ -49,7 +50,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                       if (state is ProfileLoading) {
                         return const Center(
                           child: CircularProgressIndicator(
-                            color: Colors.white,
+                            color: Colors.white,strokeWidth: 1,
                           ),
                         );
                       } else if (state is ProfileSucess) {
@@ -62,34 +63,22 @@ class _ScreenHomeState extends State<ScreenHome> {
                                 width: size.width * 0.20,
                                 height: size.height * 0.15 * 0.80,
                                 child: CircleAvatar(
-                                  backgroundColor: Colors.transparent,
-                                  child: ClipOval(
-                                    child: Image.network(
-                                      state.userProfile.user!.profilePicture!
-                                          .secureUrl!,
-                                      loadingBuilder:
-                                          (context, child, loadingProgress) {
-                                        if (loadingProgress == null) {
-                                          return child;
-                                        }
-
-                                        return const Center(
-                                          child: CircularProgressIndicator(
-                                            color: Colors.white,
-                                            strokeWidth: 2,
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                )),
+                                 
+                                    backgroundColor: Colors.transparent,
+                                    backgroundImage: state.userProfile.user!
+                                                .profilePicture?.secureUrl !=
+                                            null
+                                        ? NetworkImage(state.userProfile.user!
+                                            .profilePicture!.secureUrl!)
+                                        : const AssetImage('assets/patient.png')
+                                            as ImageProvider)),
 
                             //---------------------------------------name and welcome
 
                             Container(
                               width: size.width * 0.60,
                               height: size.height * 0.15 * 0.80,
-                                // color: Colors.red,
+                              // color: Colors.red,
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Column(
@@ -134,6 +123,21 @@ class _ScreenHomeState extends State<ScreenHome> {
                             )
                           ],
                         );
+                      } else if (state is ProfileFailed) {
+                        return Center(
+                          child: Column(mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text('Reload',style: TextStyle(color: Colors.white),),
+                              IconButton(
+                                  onPressed: () {
+                                    //-----------------------------------reload
+                                    context.read<ProfileDetailsBloc>().add(GetProfileDetails(widget.id));
+
+                                  },
+                                  icon: const Icon(Icons.refresh,color: Colors.white,))
+                            ],
+                          ),
+                        );
                       }
 
                       return const SizedBox();
@@ -169,7 +173,10 @@ class _ScreenHomeState extends State<ScreenHome> {
                   );
                 },
                 child: Padding(
-                  padding:  EdgeInsets.only(left: size.width * 0.01, right: size.width * 0.01,),
+                  padding: EdgeInsets.only(
+                    left: size.width * 0.01,
+                    right: size.width * 0.01,
+                  ),
                   child: Container(
                     height: size.height * 0.09,
                     // /  color: Colors.redAccent,
@@ -232,7 +239,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                         builder: (context, state) {
                           if (state is SpecialityLoading) {
                             return const Center(
-                              child: CircularProgressIndicator(),
+                              child: CircularProgressIndicator(strokeWidth: 1,),
                             );
                           } else if (state is SpecialitySucess) {
                             return Padding(
@@ -279,7 +286,10 @@ class _ScreenHomeState extends State<ScreenHome> {
                             );
                           } else if (state is SpecialityFailure) {
                             return Center(
-                              child: Text(state.errorMessage),
+                              child: IconButton(onPressed: () {
+                                //----------------------------------------------------reload speciality
+                                context.read<SpecialityBloc>().add(DisplaySpecialityHome());
+                              }, icon: Icon(Icons.refresh,color: Colors.blue,)),
                             );
                           }
 

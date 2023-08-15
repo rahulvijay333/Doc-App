@@ -4,6 +4,8 @@ import 'package:appoint_medic/application/Auth/authentication_bloc.dart';
 import 'package:appoint_medic/domain/db/db_functions.dart';
 import 'package:appoint_medic/domain/db/db_model.dart';
 import 'package:appoint_medic/domain/response_models/admin/admin_response/admin_response.dart';
+import 'package:appoint_medic/domain/response_models/doctor_response/doctor_response.dart';
+import 'package:appoint_medic/domain/response_models/patient/patient_response/patient_response.dart';
 
 import 'package:appoint_medic/infrastructure/auth/auth_service_impl.dart';
 import 'package:appoint_medic/infrastructure/login/loginServiceImpl.dart';
@@ -40,6 +42,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           String? role = response?.user!.role;
           String? token = response?.user!.token;
           String? id = response?.user!.id;
+          log('token : - $token ');
 
           String? userName = '';
           if (response is AdminResponse) {
@@ -47,17 +50,41 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           } else {
             userName = response?.user!.name;
           }
-          log(id!);
-          prefs.saveRole(role!);
-          prefs.saveLoggedInState(true);
-          prefs.saveToken(token!);
-          prefs.saveName(userName!);
-          prefs.saveId(id!);
 
-          //---------------------------------------------------saving details to hive
-          // final UserDb user = await dbFunction.saveToDatabaseFunction(response);
+          if (response is DoctorResponse) {
+            //-------------------------------------------------------directing to onborading doctor
+            if (response.user!.fullName == null) {
+              emit(LoginOnBordingDoctor(token: response.user!.token!));
+            } else if (response.user!.isAdminVerified == false) {
+              emit(LoginAdminVerificationSate());
+            } else {
+              log(id!);
+              userName = response.user!.fullName;
+              prefs.saveRole(role!);
+              prefs.saveLoggedInState(true);
+              prefs.saveToken(token!);
+              prefs.saveName(userName!);
+              prefs.saveId(id);
 
-          emit(LoginSucess(role: role, name: userName, id: id));
+              emit(LoginSucess(
+                  role: role, name: userName, id: id, token: token));
+            }
+          } else if (response is PatientResponse) {
+            if (response.user!.fullName == null) {
+              //-------------------------------------------------------directing to onborading patient
+              emit(LoginOnBordingPatient(token: response.user!.token!));
+            } else {
+              log(id!);
+              prefs.saveRole(role!);
+              prefs.saveLoggedInState(true);
+              prefs.saveToken(token!);
+              prefs.saveName(userName!);
+              prefs.saveId(id);
+
+              emit(LoginSucess(
+                  role: role, name: userName, id: id, token: token));
+            }
+          }
         } else {
           emit(LoginFailed(error));
 
@@ -93,6 +120,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         log('logout bloc failed');
         emit(LogOutFailed());
       }
+    });
+
+    on<ClearLoginStateEvent>((event, emit) {
+      emit(LoginIntial());
     });
   }
 }

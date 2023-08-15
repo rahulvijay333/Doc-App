@@ -27,18 +27,10 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     });
 
     on<SearchByFilter>((event, emit) async {
-
-      
       emit(SearchFilterLoading());
-
-
-
-      log('bloc ${event.gender} , ${event.name}, , ${event.speciality}');
 
       final (error, response) = await searchService.searchByFilter(
           name: event.name, gender: event.gender, speciality: event.speciality);
-
-      log(response.toString());
 
       if (error.isEmpty) {
         emit(SearchFilterSuccess(response!.doctors!));
@@ -54,12 +46,8 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     on<SearchByName>((event, emit) async {
       emit(SearchNameLoading());
 
-      log('bloc, ${event.name},}');
-
       final (error, response) =
           await searchService.searchByFilter(name: event.name);
-
-      log(response.toString());
 
       if (error.isEmpty) {
         emit(SearchNameSucess(response!.doctors!));

@@ -22,15 +22,15 @@ class ScreenMessages extends StatelessWidget {
                 height: size.height * 0.07,
                 child: const Center(
                   child: Text(
-                'Messages',
-                style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.blue,
-                    fontWeight: FontWeight.bold),
-              ),
+                    'Messages',
+                    style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
-              
+
               SizedBox(
                 height: size.height * 0.05,
               ),
@@ -39,14 +39,11 @@ class ScreenMessages extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   ClipRRect(
-                    borderRadius:
-                        BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(10),
                     child: Container(
                       color: Colors.grey[200],
-                      //height: 40,
                       height: size.height * 0.06,
                       width: size.width * 0.75,
-
                       child: const Padding(
                         padding: EdgeInsets.only(left: 8.0),
                         child: Row(
@@ -64,8 +61,7 @@ class ScreenMessages extends StatelessWidget {
 
                   //---------------------------------------------new message icon
                   ClipRRect(
-                    borderRadius:
-                        BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(10),
                     child: Container(
                       height: size.height * 0.06,
                       width: size.width * 0.15,

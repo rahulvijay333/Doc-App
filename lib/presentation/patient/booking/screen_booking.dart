@@ -73,19 +73,30 @@ class ScreenBooking extends StatelessWidget {
                           height: size.height * 0.16,
                           width: 150,
 
-                          child: Image.network(
-                            doctor.profilePicture!.secureUrl!,
+                          child:  Image.network(
+                            doctor.profilePicture?.secureUrl ?? '' ,
                             fit: BoxFit.cover,
                             loadingBuilder: (context, child, loadingProgress) {
                               if (loadingProgress == null) return child;
 
-                              return Center(
+                              return const Center(
                                 child: CircularProgressIndicator(),
                               );
                             },
+                          
                             errorBuilder: (context, error, stackTrace) {
-                              return Icon(Icons.error);
-                            },
+                              if (doctor.gender == 'female') {
+                                return Image.asset(
+                                  'assets/female_doctor.png',
+                                  fit: BoxFit.cover,
+                                );
+                              } else {
+                                return Image.asset(
+                                  'assets/doctor_male.png',
+                                  fit: BoxFit.cover,
+                                );
+                              }
+                            }
                           ),
                           // color: Colors.green,
                           // decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),

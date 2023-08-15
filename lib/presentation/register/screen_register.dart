@@ -279,18 +279,19 @@ class _ScreenRegisterState extends State<ScreenRegister> {
                                   //         const ScreenCreateAccountSuccess(),
                                   //   ));
                                   // });
-                      
+
                                   Future.delayed(Duration.zero, () {
-                                    final navigatorContext =
-                                        Navigator.of(context, rootNavigator: true)
-                                            .context;
+                                    final navigatorContext = Navigator.of(
+                                            context,
+                                            rootNavigator: true)
+                                        .context;
                                     Navigator.of(navigatorContext)
                                         .pushReplacement(MaterialPageRoute(
                                       builder: (ctx) =>
                                           const ScreenCreateAccountSuccess(),
                                     ));
                                   });
-                      
+
                                   // Future.delayed(Duration(seconds: 3)).then((value) {
                                   //   final navigatorContext =
                                   //       Navigator.of(context, rootNavigator: true)
@@ -300,7 +301,7 @@ class _ScreenRegisterState extends State<ScreenRegister> {
                                   //           builder: (ctx) =>
                                   //               const ScreenCreateAccountSuccess()));
                                   // });
-                      
+
                                   print('sucess in state ');
                                 }
                                 //-------------------------------------------------------create accound failed
@@ -315,7 +316,7 @@ class _ScreenRegisterState extends State<ScreenRegister> {
                                   BlocProvider.of<CreateUserBloc>(context)
                                       .add(InitialiCreateBloc());
                                 }
-                      
+
                                 return ElevatedButton(
                                     style: ButtonStyle(
                                       shape: MaterialStateProperty.all<
@@ -332,31 +333,35 @@ class _ScreenRegisterState extends State<ScreenRegister> {
                                     ),
                                     //-----------------------------------------------------------------click create button
                                     onPressed: () {
-                      
-                                      if(_formKey.currentState!.validate()){
+                                      if (_formKey.currentState!.validate()) {
+                                        if (nameError.isEmpty &&
+                                            emailError.isEmpty &&
+                                            passwordError.isEmpty) {
+                                          final name =
+                                              _nameController.text.trim();
+                                          final email =
+                                              _emailController.text.trim();
+                                          final password =
+                                              _passwordController.text.trim();
+                                          final user = CreateUserModel(
+                                              name: name,
+                                              email: email,
+                                              password: password);
+                                          String userType = '';
 
+                                          if (isDoctorNotifier.value == true) {
+                                            userType = 'doctor';
+                                          } else {
+                                            userType = 'patient';
+                                          }
 
-
+                                          BlocProvider.of<CreateUserBloc>(
+                                                  context)
+                                              .add(CreateButtonClicked(
+                                                  newUser: user,
+                                                  userType: userType));
+                                        }
                                       }
-                                      // final name = _nameController.text.trim();
-                                      // final email = _emailController.text.trim();
-                                      // final password =
-                                      //     _passwordController.text.trim();
-                                      // final user = CreateUserModel(
-                                      //     name: name,
-                                      //     email: email,
-                                      //     password: password);
-                                      // String userType = '';
-                      
-                                      // if (isDoctorNotifier.value == true) {
-                                      //   userType = 'doctor';
-                                      // } else {
-                                      //   userType = 'patient';
-                                      // }
-                      
-                                      // BlocProvider.of<CreateUserBloc>(context)
-                                      //     .add(CreateButtonClicked(
-                                      //         newUser: user, userType: userType));
                                     },
                                     child: const Text(
                                       'Create',

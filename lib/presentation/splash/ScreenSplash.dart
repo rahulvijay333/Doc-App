@@ -36,18 +36,18 @@ class _ScreenSplashState extends State<ScreenSplash> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => DoctorScreenMain(
+                          token: state.token,
                           name: state.name,
                         )));
           } else if (state.role == 'patient') {
             //-----------------------------------------------------------------gettting profile details  event
             BlocProvider.of<ProfileDetailsBloc>(context)
                 .add(GetProfileDetails(state.id));
-                //------------------------------------------calling catagories event
+            //------------------------------------------calling catagories event
             BlocProvider.of<SpecialityBloc>(context)
                 .add(DisplaySpecialityHome());
-                //----------------------------------------------
-                  BlocProvider.of<SearchBloc>(context)
-                                .add(ShowAllDoctorList());
+            //----------------------------------------------
+            BlocProvider.of<SearchBloc>(context).add(ShowAllDoctorList());
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(

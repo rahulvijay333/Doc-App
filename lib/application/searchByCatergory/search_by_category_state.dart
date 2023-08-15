@@ -8,7 +8,7 @@ class SearchByCategoryInitial extends SearchByCategoryState {}
 class SearchByCategoryloading extends SearchByCategoryState {}
 
 class SearchByCategorySucess extends SearchByCategoryState {
-    final List<Doctor> searchCatResults;
+  final List<Doctor> searchCatResults;
 
   SearchByCategorySucess(this.searchCatResults);
 }

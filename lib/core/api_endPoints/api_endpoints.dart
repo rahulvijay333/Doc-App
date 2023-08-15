@@ -1,4 +1,4 @@
-const baseUrl = 'http://192.168.1.101:4000/api';
+const baseUrl = 'http://100.26.104.81:4000/api';
 
 class ApiEndPoints {
   //-----------------patient
@@ -8,11 +8,16 @@ class ApiEndPoints {
   static const patientGetAllDoctors = '$baseUrl/patient/doctors/all';
   static const getAllSpecialities = '$baseUrl/doctor/specialities';
   static const getProfileDetails = '$baseUrl/patient/profile/details/';
+  static const onboardingPatient = '$baseUrl/patient/profile/update';
 
   //-----------------doctor
   static const doctorLogin = '$baseUrl/auth/doctor/login';
   static const doctorLogout = '$baseUrl/auth/doctor/logout';
   static const doctorNewUser = '$baseUrl/auth/doctor/register';
+  static const onboardingDoctor = '$baseUrl/doctor/profile/update';
+  static const getDoctorSlots = '$baseUrl/doctor/slotsByDate';
+  static const addDoctorSlots = '$baseUrl/doctor/slots';
+  static const deleteSlot = '$baseUrl/doctor/';
 
   //-----------------------admin
   static const adminLogin = '$baseUrl/auth/admin/login';

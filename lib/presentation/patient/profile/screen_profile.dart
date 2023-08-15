@@ -44,7 +44,7 @@ class ScreenProfile extends StatelessWidget {
               child: BlocBuilder<ProfileDetailsBloc, ProfileDetailsState>(
                 builder: (context, state) {
                   if (state is ProfileLoading) {
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   } else if (state is ProfileSucess) {
@@ -67,11 +67,7 @@ class ScreenProfile extends StatelessWidget {
                                     child: Center(
                                         child: CircleAvatar(
                                       backgroundColor: Colors.white,
-                                      // backgroundImage: NetworkImage(state
-                                      //     .userProfile
-                                      //     .user!
-                                      //     .profilePicture!
-                                      //     .secureUrl!),
+                                      radius: 80,
                                       child: ClipOval(
                                         child: Image.network(
                                           state.userProfile.user!
@@ -79,9 +75,24 @@ class ScreenProfile extends StatelessWidget {
                                           fit: BoxFit.cover,
                                           width: 160,
                                           height: 160,
+                                          errorBuilder:
+                                              (context, error, stackTrace) {
+                                            return Image.asset(
+                                                'assets/patient.png');
+                                          },
+                                          loadingBuilder: (context, child,
+                                              loadingProgress) {
+                                            if (loadingProgress == null) {
+                                              return child;
+                                            }
+
+                                            return const Center(
+                                              child:
+                                                  CircularProgressIndicator(strokeWidth: 1,),
+                                            );
+                                          },
                                         ),
                                       ),
-                                      radius: 80,
                                     )),
                                   ),
                                   const SizedBox(
@@ -121,12 +132,12 @@ class ScreenProfile extends StatelessWidget {
                                         },
                                       ));
                                     },
-                                    leading: Icon(
+                                    leading: const Icon(
                                       Icons.person,
                                       color: Colors.blue,
                                     ),
-                                    title: Text('Personal Details'),
-                                    trailing: Icon(
+                                    title: const Text('Personal Details'),
+                                    trailing: const Icon(
                                       Icons.arrow_forward_ios,
                                       size: 18,
                                     ),
@@ -195,10 +206,11 @@ class ScreenProfile extends StatelessWidget {
                                       .addPostFrameCallback((timeStamp) {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                         const SnackBar(
-                                            content: Text('Logging out...')));
+                                          behavior: SnackBarBehavior.floating,
+                                          margin: EdgeInsets.only(left: 45,right: 45,bottom: 80),
+                                            content: Center(child: Text('Logging out...'))));
                                   });
                                 } else if (state is LogoutSucess) {
-                                
                                   WidgetsBinding.instance
                                       .addPostFrameCallback((_) {
                                     Navigator.of(context)
@@ -209,8 +221,23 @@ class ScreenProfile extends StatelessWidget {
                                     ));
                                   });
 
-                                    ScaffoldMessenger.of(context)
+                                  ScaffoldMessenger.of(context)
                                       .hideCurrentSnackBar();
+                                } else if(state is LogOutFailed) {
+  WidgetsBinding.instance
+                                      .addPostFrameCallback((timeStamp) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        const SnackBar(
+                                          behavior: SnackBarBehavior.floating,
+                                          margin: EdgeInsets.only(left: 45,right: 45,bottom: 80),
+                                            content: Center(child: Text('Logout failed..'))));
+
+                                            context.read<LoginBloc>().add(ClearLoginStateEvent());
+
+
+                                  });
+                                  
+
                                 }
 
                                 return ClipRRect(
@@ -223,11 +250,11 @@ class ScreenProfile extends StatelessWidget {
                                         BlocProvider.of<LoginBloc>(context).add(
                                             LogOutButtonClicked('patient'));
                                       },
-                                      leading: Icon(
+                                      leading: const Icon(
                                         Icons.logout,
                                         color: Colors.blue,
                                       ),
-                                      title: Text('Log Out'),
+                                      title: const Text('Log Out'),
                                     ),
                                   ),
                                 );
@@ -239,17 +266,17 @@ class ScreenProfile extends StatelessWidget {
                     );
                   } else if (state is ProfileFailed) {
                     return Column(children: [
-                      Text('Error connecting to server'),
+                      const Text('Error connecting to server'),
                       TextButton.icon(
                           onPressed: () {
                             //---------------------------------------refresh
                           },
-                          icon: Icon(Icons.refresh),
-                          label: Text('Refresh'))
+                          icon: const Icon(Icons.refresh),
+                          label: const Text('Refresh'))
                     ]);
                   }
 
-                  return SizedBox();
+                  return const SizedBox();
                 },
               ),
             ),

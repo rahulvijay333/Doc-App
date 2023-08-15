@@ -44,15 +44,52 @@ class SearchByNameWidget extends StatelessWidget {
                             const SizedBox(
                               width: 10,
                             ),
-                            Container(
-                              width: 100,
-                              height: 110,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  image: const DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: AssetImage(
-                                          'assets/doctor_sample.png'))),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Container(
+                                width: 100,
+                                height: 110,
+                                color: Colors.grey,
+
+                                //color: Colors.red,
+                                // child: CircleAvatar(
+                                //   backgroundImage: NetworkImage(state
+                                //       .doctorList[index]
+                                //       .profilePicture!
+                                //       .secureUrl!),
+                                // ),
+                                // decoration: BoxDecoration(
+                                //     borderRadius: BorderRadius.circular(10),
+                                //     image: DecorationImage(
+                                //         fit: BoxFit.cover,
+                                //         image: NetworkImage(state
+                                //             .doctorList[index]
+                                //             .profilePicture!
+                                //             .secureUrl!)
+                                //         // image: AssetImage(
+                                //         //     'assets/doctor_sample.png')
+
+                                //         )),
+
+                                child: Image.network(
+                                  state.searchNameResults[index].profilePicture!
+                                      .secureUrl!,
+                                  fit: BoxFit.cover,
+                                  loadingBuilder:
+                                      (context, child, loadingProgress) {
+                                    if (loadingProgress == null) return child;
+
+                                    return Center(
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 1,
+                                      ),
+                                    );
+                                  },
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Center(child: Icon(Icons.person));
+                                  },
+                                ),
+                              ),
                             ),
                             const SizedBox(
                               width: 25,
@@ -74,14 +111,15 @@ class SearchByNameWidget extends StatelessWidget {
                                   const SizedBox(
                                     height: 5,
                                   ),
-                                  const Row(
+                                  Row(
                                     children: [
                                       //Image(image: NetworkImage(''))
                                       Icon(
                                         Icons.medical_information,
                                         size: 15,
                                       ),
-                                      Text('Specialiy')
+                                      Text(state.searchNameResults[index]
+                                          .speciality!.name!)
                                     ],
                                   ),
                                   const SizedBox(

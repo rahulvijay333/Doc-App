@@ -7,12 +7,9 @@ class ScreenViewPersonalDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-    body: 
-    Column(
-      children: [
-        Container()
-      ],
-    ),
+      body: Column(
+        children: [Container()],
+      ),
     );
   }
 }

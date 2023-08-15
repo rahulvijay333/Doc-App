@@ -43,27 +43,58 @@ class AllDoctorWidget extends StatelessWidget {
                             const SizedBox(
                               width: 10,
                             ),
-                            Container(
-                              width: 100,
-                              height: 110,
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Container(
+                                width: 100,
+                                height: 110,
+                                color: Colors.grey,
 
-                              //color: Colors.red,
-                              // child: CircleAvatar(
-                              //   backgroundImage: NetworkImage(state
-                              //       .doctorList[index]
-                              //       .profilePicture!
-                              //       .secureUrl!),
-                              // ),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  image: const DecorationImage(
-                                      fit: BoxFit.cover,
-                                      // image: NetworkImage(state
-                                      //     .doctorList[index]
-                                      //     .profilePicture!
-                                      //     .secureUrl!)
-                                      image: AssetImage(
-                                          'assets/doctor_sample.png'))),
+                                //color: Colors.red,
+                                // child: CircleAvatar(
+                                //   backgroundImage: NetworkImage(state
+                                //       .doctorList[index]
+                                //       .profilePicture!
+                                //       .secureUrl!),
+                                // ),
+                                // decoration: BoxDecoration(
+                                //     borderRadius: BorderRadius.circular(10),
+                                //     image: DecorationImage(
+                                //         fit: BoxFit.cover,
+                                //         image: NetworkImage(state
+                                //             .doctorList[index]
+                                //             .profilePicture!
+                                //             .secureUrl!)
+                                //         // image: AssetImage(
+                                //         //     'assets/doctor_sample.png')
+
+                                //         )),
+
+                                child: Image.network(
+                                  state.doctorList[index].profilePicture?.secureUrl ?? "",
+                                  fit: BoxFit.cover,
+                                  loadingBuilder:
+                                      (context, child, loadingProgress) {
+                                    if (loadingProgress == null) return child;
+
+                                    return const Center(
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 1,
+                                      ),
+                                    );
+                                  },
+                                  errorBuilder: (context, error, stackTrace) {
+                                    if (state.doctorList[index].gender ==
+                                        'female') {
+                                      return Image.asset(
+                                          'assets/female_doctor.png',fit: BoxFit.cover,);
+                                    } else {
+                                      return Image.asset(
+                                          'assets/doctor_male.png',fit: BoxFit.cover,);
+                                    }
+                                  },
+                                ),
+                              ),
                             ),
                             const SizedBox(
                               width: 25,
@@ -78,6 +109,7 @@ class AllDoctorWidget extends StatelessWidget {
                                 children: [
                                   Text(
                                     'Dr. ${state.doctorList[index].fullName}',
+                                    maxLines: 1,
                                     style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
@@ -85,14 +117,15 @@ class AllDoctorWidget extends StatelessWidget {
                                   const SizedBox(
                                     height: 5,
                                   ),
-                                  const Row(
+                                  Row(
                                     children: [
                                       //Image(image: NetworkImage(''))
-                                      Icon(
+                                      const Icon(
                                         Icons.medical_information,
                                         size: 15,
                                       ),
-                                      Text('Specialiy')
+                                      Text(state
+                                          .doctorList[index].speciality!.name!)
                                     ],
                                   ),
                                   const SizedBox(
@@ -166,8 +199,8 @@ class AllDoctorWidget extends StatelessWidget {
           );
         }
 
-        return Center(
-          child: const Text('No doctors available'),
+        return const Center(
+          child: Text('No doctors available'),
         );
       },
     );
