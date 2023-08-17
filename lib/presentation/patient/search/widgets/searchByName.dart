@@ -1,6 +1,7 @@
 import 'package:appoint_medic/application/Search/search_bloc.dart';
 import 'package:appoint_medic/domain/response_models/doctors_response_model/doctor.dart';
 import 'package:appoint_medic/presentation/patient/booking/screen_booking.dart';
+import 'package:appoint_medic/presentation/patient/booking/view_doctor_profile.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -28,10 +29,10 @@ class SearchByNameWidget extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: GestureDetector(
-                      //--------------------------------------------------------------navigation to booking page
+                      //--------------------------------------------------------------navigation to view doctor profile page
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => ScreenBooking(
+                          builder: (context) => ScreenViewDoctorProfileBook(
                               doctor: state.searchNameResults[index]),
                         ));
                       },
@@ -47,49 +48,42 @@ class SearchByNameWidget extends StatelessWidget {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(10),
                               child: Container(
-                                width: 100,
-                                height: 110,
-                                color: Colors.grey,
+                                  width: 100,
+                                  height: 110,
+                                  color: Colors.grey.withOpacity(0.3),
+                                  child: state.searchNameResults[index]
+                                              .profilePicture !=
+                                          null
+                                      ? Image.network(
+                                          state.searchNameResults[index]
+                                              .profilePicture!.secureUrl!,
+                                          fit: BoxFit.cover,
+                                          loadingBuilder: (context, child,
+                                              loadingProgress) {
+                                            if (loadingProgress == null) {
+                                              return child;
+                                            }
 
-                                //color: Colors.red,
-                                // child: CircleAvatar(
-                                //   backgroundImage: NetworkImage(state
-                                //       .doctorList[index]
-                                //       .profilePicture!
-                                //       .secureUrl!),
-                                // ),
-                                // decoration: BoxDecoration(
-                                //     borderRadius: BorderRadius.circular(10),
-                                //     image: DecorationImage(
-                                //         fit: BoxFit.cover,
-                                //         image: NetworkImage(state
-                                //             .doctorList[index]
-                                //             .profilePicture!
-                                //             .secureUrl!)
-                                //         // image: AssetImage(
-                                //         //     'assets/doctor_sample.png')
-
-                                //         )),
-
-                                child: Image.network(
-                                  state.searchNameResults[index].profilePicture!
-                                      .secureUrl!,
-                                  fit: BoxFit.cover,
-                                  loadingBuilder:
-                                      (context, child, loadingProgress) {
-                                    if (loadingProgress == null) return child;
-
-                                    return Center(
-                                      child: CircularProgressIndicator(
-                                        strokeWidth: 1,
-                                      ),
-                                    );
-                                  },
-                                  errorBuilder: (context, error, stackTrace) {
-                                    return Center(child: Icon(Icons.person));
-                                  },
-                                ),
-                              ),
+                                            return const Center(
+                                              child: CircularProgressIndicator(
+                                                strokeWidth: 1,
+                                              ),
+                                            );
+                                          },
+                                          errorBuilder:
+                                              (context, error, stackTrace) {
+                                            return const Center(
+                                                child: Icon(Icons.person));
+                                          },
+                                        )
+                                      : state.searchNameResults[index].gender ==
+                                              'female'
+                                          ? Image.asset(
+                                              'assets/female_doctor.png')
+                                          : Image.asset(
+                                              'assets/doctor_male.png')
+                                  //---------------------------------------------
+                                  ),
                             ),
                             const SizedBox(
                               width: 25,
@@ -104,6 +98,7 @@ class SearchByNameWidget extends StatelessWidget {
                                 children: [
                                   Text(
                                     'Dr. ${state.searchNameResults[index].fullName}',
+                                    maxLines: 1,
                                     style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
@@ -114,7 +109,7 @@ class SearchByNameWidget extends StatelessWidget {
                                   Row(
                                     children: [
                                       //Image(image: NetworkImage(''))
-                                      Icon(
+                                      const Icon(
                                         Icons.medical_information,
                                         size: 15,
                                       ),

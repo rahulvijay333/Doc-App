@@ -42,7 +42,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           String? role = response?.user!.role;
           String? token = response?.user!.token;
           String? id = response?.user!.id;
-          log('token : - $token ');
+          //log('token : - $token ');
 
           String? userName = '';
           if (response is AdminResponse) {
@@ -54,6 +54,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           if (response is DoctorResponse) {
             //-------------------------------------------------------directing to onborading doctor
             if (response.user!.fullName == null) {
+              log('this doctor fullname is empty');
               emit(LoginOnBordingDoctor(token: response.user!.token!));
             } else if (response.user!.isAdminVerified == false) {
               emit(LoginAdminVerificationSate());

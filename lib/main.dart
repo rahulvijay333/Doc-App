@@ -2,6 +2,7 @@ import 'package:appoint_medic/application/AlertSlotTime/add_slot_alert_box_bloc.
 import 'package:appoint_medic/application/Auth/authentication_bloc.dart';
 import 'package:appoint_medic/application/Onboarding/on_boarding_bloc.dart';
 import 'package:appoint_medic/application/Search/search_bloc.dart';
+import 'package:appoint_medic/application/booking/patientSelectSlot/bloc/patient_slot_select_bloc.dart';
 import 'package:appoint_medic/application/login/login_bloc.dart';
 import 'package:appoint_medic/application/navbar/navbar_bloc.dart';
 import 'package:appoint_medic/application/profile/profile_details_bloc.dart';
@@ -13,6 +14,7 @@ import 'package:appoint_medic/domain/db/db_functions.dart';
 import 'package:appoint_medic/domain/db/db_model.dart';
 import 'package:appoint_medic/infrastructure/appointment_slots/slot_service.dart';
 import 'package:appoint_medic/infrastructure/auth/auth_service_impl.dart';
+import 'package:appoint_medic/infrastructure/booking/booking_service.dart';
 import 'package:appoint_medic/infrastructure/login/loginServiceImpl.dart';
 import 'package:appoint_medic/infrastructure/profile/profile_service.dart';
 import 'package:appoint_medic/infrastructure/register/register_impl.dart';
@@ -57,7 +59,7 @@ class MyApp extends StatelessWidget {
     final CreateServiceImpl onboarding = CreateServiceImpl();
     final AppointmentSlotService slotService = AppointmentSlotService();
     final AppointmentSlotBloc slotAuth = AppointmentSlotBloc(slotService);
-
+    final BookingService bookingService = BookingService();
     return MultiBlocProvider(
         providers: [
           BlocProvider(
@@ -93,6 +95,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => SlotOperationsBloc(slotService, slotAuth),
+          ),
+          BlocProvider(
+            create: (context) => PatientSlotSelectBloc(bookingService),
           ),
         ],
         child: MaterialApp(

@@ -1,5 +1,6 @@
 import 'package:appoint_medic/application/Search/search_bloc.dart';
 import 'package:appoint_medic/presentation/patient/booking/screen_booking.dart';
+import 'package:appoint_medic/presentation/patient/booking/view_doctor_profile.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -28,10 +29,17 @@ class AllDoctorWidget extends StatelessWidget {
                     //-------------------------------------------------------------------navigation to appointment
                     child: GestureDetector(
                       onTap: () {
+                        // Navigator.of(context).push(MaterialPageRoute(
+                        //   builder: (ctx) => ScreenBooking(
+                        //     doctor: state.doctorList[index],
+                        //   ),
+                        // ));
                         Navigator.of(context).push(MaterialPageRoute(
-                          builder: (ctx) => ScreenBooking(
-                            doctor: state.doctorList[index],
-                          ),
+                          builder: (context) {
+                            return ScreenViewDoctorProfileBook(
+                              doctor: state.doctorList[index],
+                            );
+                          },
                         ));
                       },
                       child: Container(
@@ -46,55 +54,50 @@ class AllDoctorWidget extends StatelessWidget {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(10),
                               child: Container(
-                                width: 100,
-                                height: 110,
-                                color: Colors.grey,
+                                  width: 100,
+                                  height: 110,
+                                  color: Colors.grey,
+                                  child: state.doctorList[index]
+                                              .profilePicture !=
+                                          null
+                                      ? Image.network(
+                                          state.doctorList[index]
+                                              .profilePicture!.secureUrl!,
+                                          fit: BoxFit.cover,
+                                          loadingBuilder: (context, child,
+                                              loadingProgress) {
+                                            if (loadingProgress == null)
+                                              return child;
 
-                                //color: Colors.red,
-                                // child: CircleAvatar(
-                                //   backgroundImage: NetworkImage(state
-                                //       .doctorList[index]
-                                //       .profilePicture!
-                                //       .secureUrl!),
-                                // ),
-                                // decoration: BoxDecoration(
-                                //     borderRadius: BorderRadius.circular(10),
-                                //     image: DecorationImage(
-                                //         fit: BoxFit.cover,
-                                //         image: NetworkImage(state
-                                //             .doctorList[index]
-                                //             .profilePicture!
-                                //             .secureUrl!)
-                                //         // image: AssetImage(
-                                //         //     'assets/doctor_sample.png')
-
-                                //         )),
-
-                                child: Image.network(
-                                  state.doctorList[index].profilePicture?.secureUrl ?? "",
-                                  fit: BoxFit.cover,
-                                  loadingBuilder:
-                                      (context, child, loadingProgress) {
-                                    if (loadingProgress == null) return child;
-
-                                    return const Center(
-                                      child: CircularProgressIndicator(
-                                        strokeWidth: 1,
-                                      ),
-                                    );
-                                  },
-                                  errorBuilder: (context, error, stackTrace) {
-                                    if (state.doctorList[index].gender ==
-                                        'female') {
-                                      return Image.asset(
-                                          'assets/female_doctor.png',fit: BoxFit.cover,);
-                                    } else {
-                                      return Image.asset(
-                                          'assets/doctor_male.png',fit: BoxFit.cover,);
-                                    }
-                                  },
-                                ),
-                              ),
+                                            return const Center(
+                                              child: CircularProgressIndicator(
+                                                strokeWidth: 1,
+                                              ),
+                                            );
+                                          },
+                                          errorBuilder:
+                                              (context, error, stackTrace) {
+                                            if (state
+                                                    .doctorList[index].gender ==
+                                                'female') {
+                                              return Image.asset(
+                                                'assets/female_doctor.png',
+                                                fit: BoxFit.cover,
+                                              );
+                                            } else {
+                                              return Image.asset(
+                                                'assets/doctor_male.png',
+                                                fit: BoxFit.cover,
+                                              );
+                                            }
+                                          },
+                                        )
+                                      : state.doctorList[index].gender ==
+                                              'female'
+                                          ? Image.asset(
+                                              'appoint_medic/assets/female_doctor.png',fit: BoxFit.cover,)
+                                          : Image.asset(
+                                              "assets/doctor_male.png",fit: BoxFit.cover,)),
                             ),
                             const SizedBox(
                               width: 25,
@@ -169,6 +172,12 @@ class AllDoctorWidget extends StatelessWidget {
                                   ElevatedButton(
                                     onPressed: () {
                                       //-----------------------------------------booking
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(
+                                        builder: (ctx) => ScreenBooking(
+                                          doctor: state.doctorList[index],
+                                        ),
+                                      ));
                                     },
                                     child: const Text('Book'),
                                     style: ButtonStyle(

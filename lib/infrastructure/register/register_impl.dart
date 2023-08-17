@@ -92,7 +92,7 @@ class CreateServiceImpl implements CreateAccountService {
           options: Options(
             headers: {
               'Authorization': 'Bearer $token',
-              // 'Content-Type': 'multipart/form-data'
+              
             },
           ));
 
@@ -113,7 +113,7 @@ class CreateServiceImpl implements CreateAccountService {
     } catch (error) {
       if (error is DioException) {
         if (error.error is SocketException) {
-          // Handle socket error here
+      
           log('Socket error occurred: ${error.error}');
 
           return ('Error connecting to end point', null);
