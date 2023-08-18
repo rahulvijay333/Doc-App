@@ -1,7 +1,12 @@
+
+
+import 'dart:developer';
+
 import 'package:appoint_medic/application/booking/patientSelectSlot/bloc/patient_slot_select_bloc.dart';
 import 'package:appoint_medic/domain/response_models/doctors_response_model/doctor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 class ScreenBooking extends StatefulWidget {
   const ScreenBooking({super.key, required this.doctor});
@@ -26,6 +31,11 @@ class _ScreenBookingState extends State<ScreenBooking> {
       setState(() {
         selectedDate = picked;
         //log('${selectedDate.toLocal()}'.split(' ')[0]);
+
+        
+        String formattedDate = DateFormat('dd MMM,y').format(selectedDate);
+
+        log(formattedDate.toString());
 
         context.read<PatientSlotSelectBloc>().add(DisplayAvailableSlots(
               doctorID: widget.doctor.id!,
@@ -200,7 +210,10 @@ class _ScreenBookingState extends State<ScreenBooking> {
                         children: [
                           const Icon(Icons.calendar_month,size: 22,),
                           Text(
-                            '${selectedDate.toLocal()}'.split(' ')[0],
+
+
+                              DateFormat('dd MMM ,y').format(selectedDate),
+                            // '${selectedDate.toLocal()}'.split(' ')[0],
                             style: const TextStyle(fontSize: 18),
                           ),
                         ],

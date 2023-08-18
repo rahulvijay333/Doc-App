@@ -1,4 +1,3 @@
-import 'package:appoint_medic/application/Search/search_bloc.dart';
 import 'package:appoint_medic/application/searchByCatergory/search_by_category_bloc.dart';
 import 'package:appoint_medic/domain/response_models/get_specialities_response/speciality.dart';
 import 'package:appoint_medic/presentation/patient/booking/screen_booking.dart';

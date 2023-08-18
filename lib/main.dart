@@ -20,7 +20,6 @@ import 'package:appoint_medic/infrastructure/profile/profile_service.dart';
 import 'package:appoint_medic/infrastructure/register/register_impl.dart';
 import 'package:appoint_medic/infrastructure/search_screen/search_service.dart';
 import 'package:appoint_medic/infrastructure/specialities/get_speciality_service.dart';
-import 'package:appoint_medic/presentation/onBoarding/patient/screen_onB_patient.dart';
 
 import 'package:appoint_medic/presentation/splash/ScreenSplash.dart';
 import 'package:flutter/material.dart';
