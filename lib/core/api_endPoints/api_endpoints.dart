@@ -9,9 +9,13 @@ class ApiEndPoints {
   static const getAllSpecialities = '$baseUrl/doctor/specialities';
   static const getProfileDetails = '$baseUrl/patient/profile/details/';
   static const onboardingPatient = '$baseUrl/patient/profile/update';
-   //booking slot
+  //booking slot
   static const getDoctorAvailableSlotsByIdPatientSide =
       '$baseUrl/patient/doctorprofile/details';
+  static const bookingInitiate = '$baseUrl/appointment/initiate';
+  static const completeBooking = '$baseUrl/appointment/create';
+  //fetch appointments list
+  static const getAppointmentList = '$baseUrl/patient/appointments/';
 
   //-----------------doctor
   static const doctorLogin = '$baseUrl/auth/doctor/login';

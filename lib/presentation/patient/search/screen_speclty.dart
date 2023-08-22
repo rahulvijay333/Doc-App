@@ -76,15 +76,20 @@ class ScreenSpeciality extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(10),
                                   child: InkWell(
                                     onTap: () {
-                                      Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                                        return ScreenViewDoctorProfileBook(doctor: state.searchCatResults[index]);
-                                      },));
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(
+                                        builder: (context) {
+                                          return ScreenViewDoctorProfileBook(
+                                              doctor: state
+                                                  .searchCatResults[index]);
+                                        },
+                                      ));
                                     },
                                     child: Container(
                                       width: double.maxFinite,
                                       height: 120,
-                                      color:
-                                          const Color.fromARGB(50, 217, 217, 217),
+                                      color: const Color.fromARGB(
+                                          50, 217, 217, 217),
                                       child: Row(
                                         children: [
                                           const SizedBox(
@@ -108,7 +113,7 @@ class ScreenSpeciality extends StatelessWidget {
                                                     loadingProgress) {
                                                   if (loadingProgress == null)
                                                     return child;
-                                  
+
                                                   return const Center(
                                                     child:
                                                         CircularProgressIndicator(
@@ -116,10 +121,11 @@ class ScreenSpeciality extends StatelessWidget {
                                                     ),
                                                   );
                                                 },
-                                                errorBuilder:
-                                                    (context, error, stackTrace) {
+                                                errorBuilder: (context, error,
+                                                    stackTrace) {
                                                   if (state
-                                                          .searchCatResults[index]
+                                                          .searchCatResults[
+                                                              index]
                                                           .gender ==
                                                       'female') {
                                                     return Image.asset(
@@ -160,12 +166,14 @@ class ScreenSpeciality extends StatelessWidget {
                                                 const SizedBox(
                                                   height: 5,
                                                 ),
-                                                Text(state.searchCatResults[index]
-                                                    .speciality!.name!),
+                                                Text(state
+                                                    .searchCatResults[index]
+                                                    .speciality!
+                                                    .name!),
                                                 const SizedBox(
                                                   height: 10,
                                                 ),
-                                  
+
                                                 // const SizedBox(
                                                 //   height: 0,
                                                 // ),

@@ -30,28 +30,30 @@ class ScreenAdminNotVerified extends StatelessWidget {
                 child: Container(
               child: Center(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  
-                  children: [
-                  Text('Admin has not verified your account yet'),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  TextButton.icon(
-                      onPressed: () {
-                        //-----------------------------------------back to login page
-    
-                        context.read<LoginBloc>().add(ClearLoginStateEvent());
-    
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) {
-                            return ScreenLogin();
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Admin has not verified your account yet'),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      TextButton.icon(
+                          onPressed: () {
+                            //-----------------------------------------back to login page
+
+                            context
+                                .read<LoginBloc>()
+                                .add(ClearLoginStateEvent());
+
+                            Navigator.of(context)
+                                .pushReplacement(MaterialPageRoute(
+                              builder: (context) {
+                                return ScreenLogin();
+                              },
+                            ));
                           },
-                        ));
-                      },
-                      icon: Icon(Icons.logout),
-                      label: Text('Back to login'))
-                ]),
+                          icon: Icon(Icons.logout),
+                          label: Text('Back to login'))
+                    ]),
               ),
             ))
           ],

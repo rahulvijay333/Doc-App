@@ -1,3 +1,4 @@
+import 'package:appoint_medic/application/HomeScreen_today_appointments/bloc/home_today_appointments_bloc.dart';
 import 'package:appoint_medic/application/login/login_bloc.dart';
 import 'package:appoint_medic/application/profile/profile_details_bloc.dart';
 import 'package:appoint_medic/application/speciality/speciality_bloc.dart';
@@ -306,7 +307,13 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                               BlocProvider.of<SpecialityBloc>(
                                                       context)
                                                   .add(DisplaySpecialityHome());
-                                              //----------------------------------------------
+                                              //----------------------------------------------calling today appoints
+                                              context
+                                                  .read<
+                                                      HomeTodayAppointmentsBloc>()
+                                                  .add(
+                                                      GetTodayAppointmentPatientCall());
+                                              //------------------------------------------
                                               WidgetsBinding.instance
                                                   .addPostFrameCallback((_) {
                                                 unfocus();

@@ -87,8 +87,9 @@ class ScreenProfile extends StatelessWidget {
                                             }
 
                                             return const Center(
-                                              child:
-                                                  CircularProgressIndicator(strokeWidth: 1,),
+                                              child: CircularProgressIndicator(
+                                                strokeWidth: 1,
+                                              ),
                                             );
                                           },
                                         ),
@@ -206,9 +207,14 @@ class ScreenProfile extends StatelessWidget {
                                       .addPostFrameCallback((timeStamp) {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                         const SnackBar(
-                                          behavior: SnackBarBehavior.floating,
-                                          margin: EdgeInsets.only(left: 45,right: 45,bottom: 80),
-                                            content: Center(child: Text('Logging out...'))));
+                                            behavior: SnackBarBehavior.floating,
+                                            margin: EdgeInsets.only(
+                                                left: 45,
+                                                right: 45,
+                                                bottom: 80),
+                                            content: Center(
+                                                child:
+                                                    Text('Logging out...'))));
                                   });
                                 } else if (state is LogoutSucess) {
                                   WidgetsBinding.instance
@@ -223,21 +229,24 @@ class ScreenProfile extends StatelessWidget {
 
                                   ScaffoldMessenger.of(context)
                                       .hideCurrentSnackBar();
-                                } else if(state is LogOutFailed) {
-  WidgetsBinding.instance
+                                } else if (state is LogOutFailed) {
+                                  WidgetsBinding.instance
                                       .addPostFrameCallback((timeStamp) {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                         const SnackBar(
-                                          behavior: SnackBarBehavior.floating,
-                                          margin: EdgeInsets.only(left: 45,right: 45,bottom: 80),
-                                            content: Center(child: Text('Logout failed..'))));
+                                            behavior: SnackBarBehavior.floating,
+                                            margin: EdgeInsets.only(
+                                                left: 45,
+                                                right: 45,
+                                                bottom: 80),
+                                            content: Center(
+                                                child:
+                                                    Text('Logout failed..'))));
 
-                                            context.read<LoginBloc>().add(ClearLoginStateEvent());
-
-
+                                    context
+                                        .read<LoginBloc>()
+                                        .add(ClearLoginStateEvent());
                                   });
-                                  
-
                                 }
 
                                 return ClipRRect(

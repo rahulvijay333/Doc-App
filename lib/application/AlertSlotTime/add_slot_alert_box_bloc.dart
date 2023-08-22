@@ -18,9 +18,7 @@ class AddSlotAlertBoxBloc
           AddSlotAlertBoxState(state.selectedStartTime, event.selectedEndTime));
     });
     on<ClearAlertBoxTime>((event, emit) {
-      emit(
-          AddSlotAlertBoxState(null, null));
+      emit(AddSlotAlertBoxState(null, null));
     });
-
   }
 }

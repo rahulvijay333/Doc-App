@@ -406,7 +406,7 @@ class _ScreenOnBoardingPatientState extends State<ScreenOnBoardingPatient> {
                                 houseName: _houseNameController.text,
                                 city: _cityController.text,
                                 state: _stateController.text,
-                                profilePic: imageFile == null 
+                                profilePic: imageFile == null
                                     ? null
                                     : File(imageFile!.path));
 

@@ -95,9 +95,13 @@ class AllDoctorWidget extends StatelessWidget {
                                       : state.doctorList[index].gender ==
                                               'female'
                                           ? Image.asset(
-                                              'appoint_medic/assets/female_doctor.png',fit: BoxFit.cover,)
+                                              'appoint_medic/assets/female_doctor.png',
+                                              fit: BoxFit.cover,
+                                            )
                                           : Image.asset(
-                                              "assets/doctor_male.png",fit: BoxFit.cover,)),
+                                              "assets/doctor_male.png",
+                                              fit: BoxFit.cover,
+                                            )),
                             ),
                             const SizedBox(
                               width: 25,

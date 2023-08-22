@@ -22,7 +22,7 @@ class _ScreenAvailableTimeState extends State<ScreenAvailableTime> {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: selectedDate,
-      firstDate: DateTime.now(),
+      firstDate: DateTime(2020),
       lastDate: DateTime(2101),
     );
 

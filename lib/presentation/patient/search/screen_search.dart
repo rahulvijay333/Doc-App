@@ -79,7 +79,7 @@ class ScreenSearch extends StatelessWidget {
                         },
                         controller: searchController,
                         cursorColor: Colors.grey,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             prefixIcon: Icon(
                               Icons.search,
                               color: Colors.grey,
@@ -99,9 +99,9 @@ class ScreenSearch extends StatelessWidget {
                     valueListenable: checkSearchField,
                     builder: (context, valuepresent, child) {
                       if (valuepresent == false) {
-                        return AllDoctorWidget();
+                        return const AllDoctorWidget();
                       } else {
-                        return SearchByNameWidget();
+                        return const SearchByNameWidget();
                       }
                     },
                   ),

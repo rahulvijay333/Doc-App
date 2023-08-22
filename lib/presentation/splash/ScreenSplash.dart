@@ -1,4 +1,5 @@
 import 'package:appoint_medic/application/Auth/authentication_bloc.dart';
+import 'package:appoint_medic/application/HomeScreen_today_appointments/bloc/home_today_appointments_bloc.dart';
 import 'package:appoint_medic/application/Search/search_bloc.dart';
 import 'package:appoint_medic/application/profile/profile_details_bloc.dart';
 import 'package:appoint_medic/application/speciality/speciality_bloc.dart';
@@ -47,6 +48,11 @@ class _ScreenSplashState extends State<ScreenSplash> {
             BlocProvider.of<SpecialityBloc>(context)
                 .add(DisplaySpecialityHome());
             //----------------------------------------------
+            //---------------------------calling today appointments list
+            context
+                .read<HomeTodayAppointmentsBloc>()
+                .add(GetTodayAppointmentPatientCall());
+            //-------------------------------------------
             BlocProvider.of<SearchBloc>(context).add(ShowAllDoctorList());
             Navigator.pushReplacement(
               context,

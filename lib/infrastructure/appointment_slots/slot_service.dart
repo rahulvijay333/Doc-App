@@ -109,8 +109,8 @@ class AppointmentSlotService {
         } else if (e.response?.statusCode == 404) {
           return (e.response!.statusMessage!);
         }
-      } 
-      return ('Some error excpt');//return ('Some error excpt');
+      }
+      return ('Some error excpt'); //return ('Some error excpt');
     }
   }
 }

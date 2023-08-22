@@ -24,7 +24,8 @@ class ScreenMainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final pages = [
       ScreenHome(
-        name: userName, id: id,
+        name: userName,
+        id: id,
       ),
       const ScreenAppointments(),
       const ScreenMessages(),

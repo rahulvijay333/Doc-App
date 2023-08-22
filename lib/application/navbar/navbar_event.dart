@@ -1,9 +1,9 @@
 part of 'navbar_bloc.dart';
 
- class NavbarEvent {}
+class NavbarEvent {}
 
- class PageChangeEvent extends NavbarEvent{
+class PageChangeEvent extends NavbarEvent {
   final int page;
 
-  PageChangeEvent( {required this.page});
- }
+  PageChangeEvent({required this.page});
+}

@@ -6,6 +6,7 @@ import 'package:appoint_medic/domain/db/db_model.dart';
 import 'package:appoint_medic/domain/response_models/admin/admin_response/admin_response.dart';
 import 'package:appoint_medic/domain/response_models/doctor_response/doctor_response.dart';
 import 'package:appoint_medic/domain/response_models/patient/patient_response/patient_response.dart';
+import 'package:appoint_medic/domain/token_storage/secure_storage.dart';
 
 import 'package:appoint_medic/infrastructure/auth/auth_service_impl.dart';
 import 'package:appoint_medic/infrastructure/login/loginServiceImpl.dart';
@@ -22,12 +23,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthenticationBloc auth;
   final SharedPrefsAuthServiceImpl prefs;
   final DbFunctionClass dbFunction;
+  final SecureStorageService secureStorageService;
 
   LoginBloc(
     this.loginService,
     this.auth,
     this.prefs,
     this.dbFunction,
+    this.secureStorageService,
   ) : super(LoginIntial()) {
     on<LoginButtonClicked>((event, emit) async {
       emit(LoginLoading());
@@ -66,6 +69,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
               prefs.saveToken(token!);
               prefs.saveName(userName!);
               prefs.saveId(id);
+              secureStorageService.storeToken(token);
 
               emit(LoginSucess(
                   role: role, name: userName, id: id, token: token));
@@ -81,6 +85,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
               prefs.saveToken(token!);
               prefs.saveName(userName!);
               prefs.saveId(id);
+              await secureStorageService.storeToken(token);
 
               emit(LoginSucess(
                   role: role, name: userName, id: id, token: token));
@@ -113,6 +118,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         await prefs.saveId('');
 
         await dbFunction.clearDb();
+        await secureStorageService.deleteToken();
 
         emit(LogoutSucess());
         //----------------------------------updating authbloc

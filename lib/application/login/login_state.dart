@@ -18,9 +18,7 @@ class LoginOnBordingDoctor extends LoginState {
   LoginOnBordingDoctor({required this.token});
 }
 
-class LoginAdminVerificationSate extends LoginState {
-  
-}
+class LoginAdminVerificationSate extends LoginState {}
 
 class LoginSucess extends LoginState {
   final String? role;
@@ -28,12 +26,11 @@ class LoginSucess extends LoginState {
   final String? id;
   final String? token;
 
-  LoginSucess(
-    {
+  LoginSucess({
     required this.role,
     this.name,
     this.id,
-     this.token,
+    this.token,
   });
 }
 

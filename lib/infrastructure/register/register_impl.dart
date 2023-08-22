@@ -92,7 +92,6 @@ class CreateServiceImpl implements CreateAccountService {
           options: Options(
             headers: {
               'Authorization': 'Bearer $token',
-              
             },
           ));
 
@@ -113,7 +112,6 @@ class CreateServiceImpl implements CreateAccountService {
     } catch (error) {
       if (error is DioException) {
         if (error.error is SocketException) {
-      
           log('Socket error occurred: ${error.error}');
 
           return ('Error connecting to end point', null);
@@ -137,14 +135,12 @@ class CreateServiceImpl implements CreateAccountService {
     required DoctorProfileFormData doctorForm,
   }) async {
     try {
-    
-
       log(ApiEndPoints.onboardingDoctor.toString());
 
       final Response response = await Dio().put(ApiEndPoints.onboardingDoctor,
           data: jsonEncode({
-             "username": doctorForm.username,
-             "gender": doctorForm.gender,
+            "username": doctorForm.username,
+            "gender": doctorForm.gender,
             "speciality": doctorForm.speciality,
             "phone": doctorForm.phone,
             "houseName": doctorForm.houseName,

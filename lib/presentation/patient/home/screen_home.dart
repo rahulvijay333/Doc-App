@@ -1,7 +1,9 @@
+import 'package:appoint_medic/application/HomeScreen_today_appointments/bloc/home_today_appointments_bloc.dart';
 import 'package:appoint_medic/application/Search/search_bloc.dart';
 import 'package:appoint_medic/application/profile/profile_details_bloc.dart';
 import 'package:appoint_medic/application/speciality/speciality_bloc.dart';
 import 'package:appoint_medic/domain/response_models/get_specialities_response/speciality.dart';
+import 'package:appoint_medic/presentation/patient/home/widgets/home_appointments_tile.dart';
 import 'package:appoint_medic/presentation/patient/search/screen_search.dart';
 import 'package:appoint_medic/presentation/patient/search/screen_speclty.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +13,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ScreenHome extends StatefulWidget {
   const ScreenHome({
     super.key,
-    required this.name, required this.id,
+    required this.name,
+    required this.id,
   });
 
   final String name;
@@ -50,7 +53,8 @@ class _ScreenHomeState extends State<ScreenHome> {
                       if (state is ProfileLoading) {
                         return const Center(
                           child: CircularProgressIndicator(
-                            color: Colors.white,strokeWidth: 1,
+                            color: Colors.white,
+                            strokeWidth: 1,
                           ),
                         );
                       } else if (state is ProfileSucess) {
@@ -63,7 +67,6 @@ class _ScreenHomeState extends State<ScreenHome> {
                                 width: size.width * 0.20,
                                 height: size.height * 0.15 * 0.80,
                                 child: CircleAvatar(
-                                 
                                     backgroundColor: Colors.transparent,
                                     backgroundImage: state.userProfile.user!
                                                 .profilePicture?.secureUrl !=
@@ -125,16 +128,24 @@ class _ScreenHomeState extends State<ScreenHome> {
                         );
                       } else if (state is ProfileFailed) {
                         return Center(
-                          child: Column(mainAxisAlignment: MainAxisAlignment.center,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Text('Reload',style: TextStyle(color: Colors.white),),
+                              const Text(
+                                'Reload',
+                                style: TextStyle(color: Colors.white),
+                              ),
                               IconButton(
                                   onPressed: () {
                                     //-----------------------------------reload
-                                    context.read<ProfileDetailsBloc>().add(GetProfileDetails(widget.id));
-
+                                    context
+                                        .read<ProfileDetailsBloc>()
+                                        .add(GetProfileDetails(widget.id));
                                   },
-                                  icon: const Icon(Icons.refresh,color: Colors.white,))
+                                  icon: const Icon(
+                                    Icons.refresh,
+                                    color: Colors.white,
+                                  ))
                             ],
                           ),
                         );
@@ -239,7 +250,9 @@ class _ScreenHomeState extends State<ScreenHome> {
                         builder: (context, state) {
                           if (state is SpecialityLoading) {
                             return const Center(
-                              child: CircularProgressIndicator(strokeWidth: 1,),
+                              child: CircularProgressIndicator(
+                                strokeWidth: 1,
+                              ),
                             );
                           } else if (state is SpecialitySucess) {
                             return Padding(
@@ -286,10 +299,17 @@ class _ScreenHomeState extends State<ScreenHome> {
                             );
                           } else if (state is SpecialityFailure) {
                             return Center(
-                              child: IconButton(onPressed: () {
-                                //----------------------------------------------------reload speciality
-                                context.read<SpecialityBloc>().add(DisplaySpecialityHome());
-                              }, icon: Icon(Icons.refresh,color: Colors.blue,)),
+                              child: IconButton(
+                                  onPressed: () {
+                                    //----------------------------------------------------reload speciality
+                                    context
+                                        .read<SpecialityBloc>()
+                                        .add(DisplaySpecialityHome());
+                                  },
+                                  icon: const Icon(
+                                    Icons.refresh,
+                                    color: Colors.blue,
+                                  )),
                             );
                           }
 
@@ -320,7 +340,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'My Appointments',
+                    'Today Appointments',
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
@@ -330,54 +350,74 @@ class _ScreenHomeState extends State<ScreenHome> {
                     height: 15,
                   ),
                   Expanded(
-                    child: ListView.separated(
-                        physics: const BouncingScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          return ClipRRect(
-                            borderRadius: BorderRadius.circular(12),
-                            child: Container(
-                                height: 110,
-                                color: Colors.blue.withOpacity(0.1),
-                                child: Column(
-                                  children: [
-                                    const Padding(
-                                      padding: EdgeInsets.only(
-                                          left: 10.0, right: 10, top: 10),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text('Date : 24/8/2023'),
-                                          Text('Time: 4:00pm')
-                                        ],
-                                      ),
-                                    ),
-                                    ListTile(
-                                      leading: const CircleAvatar(
-                                        radius: 35,
-                                        backgroundImage:
-                                            AssetImage('assets/doctor.png'),
-                                      ),
-                                      title: const Text('Doctor Name'),
-                                      subtitle:
-                                          const Text('Department / speciality'),
-                                      trailing: IconButton(
-                                          onPressed: () {},
-                                          icon: const Icon(
-                                            Icons.message,
-                                            color: Colors.blue,
-                                          )),
-                                    )
-                                  ],
-                                )),
+                    child: BlocBuilder<HomeTodayAppointmentsBloc,
+                        HomeTodayAppointmentsState>(
+                      builder: (context, state) {
+                        if (state is HomeTodayAppointsLoading) {
+                          return const Center(
+                            child: CircularProgressIndicator(
+                              strokeWidth: 1,
+                            ),
                           );
-                        },
-                        separatorBuilder: (context, index) {
-                          return const SizedBox(
-                            height: 10,
+                        }
+
+                        if (state is HomeTodayAppointsSuccess) {
+                          if (state.appointmentList.isEmpty) {
+                            return const Center(
+                              child: Text('No Appointments Today'),
+                            );
+                          }
+
+                          return ListView.separated(
+                              physics: const BouncingScrollPhysics(),
+                              itemBuilder: (context, index) {
+                                return HomeAppointmentsTile(
+                                    size: size,
+                                    date: state
+                                        .appointmentList[index].selectedDate!
+                                        ,
+                                    doctorname: state.appointmentList[index]
+                                        .doctor!.fullName!,
+                                    startTime:
+                                        state.appointmentList[index].startTime!,
+                                    endTime:
+                                        state.appointmentList[index].endTime!,
+                                    speciality: state.appointmentList[index]
+                                        .speciality!.name!,
+                                    doctImageUrl: state.appointmentList[index]
+                                        .doctor!.profilePicture!.secureUrl!,
+                                    bookingStatus: state.appointmentList[index]
+                                        .isApprovedByDoctor
+                                        .toString());
+                              },
+                              separatorBuilder: (context, index) {
+                                return const SizedBox(
+                                  height: 10,
+                                );
+                              },
+                              itemCount: state.appointmentList.length);
+                        } else if (state is HomeTodayAppointsFailure) {
+                          return Column(
+                            children: [
+                              const Text('Refresh'),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              IconButton(
+                                  onPressed: () {
+                                    //------------------------------------------refresh function
+                                    context
+                                        .read<HomeTodayAppointmentsBloc>()
+                                        .add(GetTodayAppointmentPatientCall());
+                                  },
+                                  icon: const Icon(Icons.refresh))
+                            ],
                           );
-                        },
-                        itemCount: 10),
+                        }else {
+                          return Center(child: Text('Nothings to display'),);
+                        }
+                      },
+                    ),
                   )
                 ],
               ),
