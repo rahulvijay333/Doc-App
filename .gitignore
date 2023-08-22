@@ -44,4 +44,5 @@ app.*.map.json
 /android/app/release
 
 #razorpay key
-appoint_medic/lib/infrastructure/key_razor/razor_pay_key.dart
+/lib/infrastructure/key_razor/razor_pay_key.dart
+/lib/infrastructure/key_razor
