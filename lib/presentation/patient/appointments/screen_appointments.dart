@@ -10,7 +10,6 @@ import 'package:intl/intl.dart';
 class ScreenAppointments extends StatelessWidget {
   const ScreenAppointments({super.key});
 
-  
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
@@ -58,10 +57,11 @@ class ScreenAppointments extends StatelessWidget {
                         unselectedLabelColor: Colors.black,
                         indicator: BoxDecoration(
                           color: Colors.blue.withOpacity(0.8),
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(8),
                         ),
                         tabs: const [
                           Tab(
+                            iconMargin: EdgeInsets.only(),
                             child: Text(
                               'Today',
                             ),
@@ -108,4 +108,3 @@ class ScreenAppointments extends StatelessWidget {
     );
   }
 }
-

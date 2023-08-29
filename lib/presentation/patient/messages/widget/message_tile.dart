@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class MessageTile extends StatelessWidget {
   final String senderName;
   final String message;
-  final String time;
+  final DateTime time;
+  final String Image;
 
   MessageTile({
     required this.senderName,
     required this.message,
     required this.time,
+    required this.Image,
   });
 
   @override
   Widget build(BuildContext context) {
+    DateTime dateTime = DateTime.parse(time.toString());
+
+    String formattedTime = DateFormat('h:mm a').format(dateTime.toLocal());
+
     return Container(
+      color: Colors.white.withOpacity(0.4),
       padding: EdgeInsets.all(8),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -21,7 +29,7 @@ class MessageTile extends StatelessWidget {
           CircleAvatar(
             radius: 30,
             // You can customize the avatar image here
-            backgroundImage: AssetImage('assets/doctor.png'),
+            backgroundImage: NetworkImage(Image),
             //backgroundColor: Colors.blue, // Customize the avatar's background color
           ),
           SizedBox(
@@ -44,6 +52,8 @@ class MessageTile extends StatelessWidget {
                         4), // Adjust the spacing between the sender name and message
                 Text(
                   message,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: 14,
                     color: Colors.grey,
@@ -58,7 +68,7 @@ class MessageTile extends StatelessWidget {
           Container(
             child: Center(
               child: Text(
-                time,
+                formattedTime,
                 style: TextStyle(
                   fontSize: 12,
                   color: Colors.grey,

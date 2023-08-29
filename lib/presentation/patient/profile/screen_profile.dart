@@ -1,4 +1,5 @@
 import 'package:appoint_medic/application/login/login_bloc.dart';
+import 'package:appoint_medic/application/navbar/navbar_bloc.dart';
 import 'package:appoint_medic/application/profile/profile_details_bloc.dart';
 import 'package:appoint_medic/core/color_constants.dart';
 import 'package:appoint_medic/presentation/login/screen_login.dart';

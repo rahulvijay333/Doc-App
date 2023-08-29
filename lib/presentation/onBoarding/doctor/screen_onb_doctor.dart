@@ -486,41 +486,43 @@ class _ScreenOnBoardingDoctorState extends State<ScreenOnBoardingDoctor> {
                     onPressed: () {
                       // Perform actions on form submission
 
-                      // if (imageFile == null) {
-                      //   setState(() {
-                      //     profileErrorColor = Colors.red;
-                      //   });
-                      // } else {
-                      //   setState(() {
-                      //     profileErrorColor = Colors.transparent;
-                      //   });
-                      // }
-                      // if (_selectedFilePath.isEmpty) {
-                      //   setState(() {
-                      //     certificateUploadError = Colors.red;
-                      //   });
-                      // } else {
-                      //   setState(() {
-                      //     certificateUploadError = Colors.transparent;
-                      //   });
-                      // }
+                      if (imageFile == null) {
+                        setState(() {
+                          profileErrorColor = Colors.red;
+                        });
+                      } else {
+                        setState(() {
+                          profileErrorColor = Colors.transparent;
+                        });
+                      }
+                      if (_selectedFilePath.isEmpty) {
+                        setState(() {
+                          certificateUploadError = Colors.red;
+                        });
+                      } else {
+                        setState(() {
+                          certificateUploadError = Colors.transparent;
+                        });
+                      }
 
                       //------------------------------------------------------------qualify values needs to modyfy
 
                       if (_formkey.currentState!.validate()) {
                         final doctor = DoctorProfileFormData(
-                          username: _fullNameController.text,
-                          gender: _genderController.text,
-                          speciality: _categorycode.text,
-                          phone: _phoneController.text,
-                          houseName: _houseNameController.text,
-                          city: _cityController.text,
-                          state: _stateController.text,
-                          services: _serviceController.text,
-                          qualification: _qualificationController.text,
-                        );
-                        // log('VAlue are present');
+                            username: _fullNameController.text,
+                            gender: _genderController.text,
+                            speciality: _categorycode.text,
+                            phone: _phoneController.text,
+                            houseName: _houseNameController.text,
+                            city: _cityController.text,
+                            state: _stateController.text,
+                            services: _serviceController.text,
+                            qualification: _qualificationController.text,
+                            certificate: File(_selectedFilePath),
+                            profilePic: imageFile);
+                        log('VAlue are present');
                         // log(_addServices(_serviceController.text).toString());
+                        log(doctor.toString());
 
                         context.read<OnBoardingBloc>().add(OnBoardDoctorEvent(
                             token: widget.token, doctorform: doctor));

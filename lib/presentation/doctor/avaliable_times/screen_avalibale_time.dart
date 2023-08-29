@@ -17,6 +17,8 @@ class ScreenAvailableTime extends StatefulWidget {
 
 class _ScreenAvailableTimeState extends State<ScreenAvailableTime> {
   DateTime selectedDate = DateTime.now();
+  String selectedDateFormatted =
+      DateFormat('dd MMM yyyy').format(DateTime.now());
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -29,6 +31,8 @@ class _ScreenAvailableTimeState extends State<ScreenAvailableTime> {
     if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
+
+        selectedDateFormatted = DateFormat('dd MMM yyyy').format(picked);
 
         BlocProvider.of<AppointmentSlotBloc>(context).add(GetSlotsListEvent(
             date: '${selectedDate.toLocal()}'.split(' ')[0],
@@ -122,7 +126,9 @@ class _ScreenAvailableTimeState extends State<ScreenAvailableTime> {
                           children: [
                             const Icon(Icons.calendar_month),
                             Text(
-                              '${selectedDate.toLocal()}'.split(' ')[0],
+                              // '${selectedDate.toLocal()}'.split(' ')[0],
+                              selectedDateFormatted,
+
                               style: const TextStyle(fontSize: 20),
                             ),
                           ],

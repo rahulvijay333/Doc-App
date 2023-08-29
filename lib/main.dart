@@ -8,6 +8,11 @@ import 'package:appoint_medic/application/Payment/payment_bloc.dart';
 import 'package:appoint_medic/application/Search/search_bloc.dart';
 import 'package:appoint_medic/application/booking/patientSelectSlot/bloc/patient_slot_select_bloc.dart';
 import 'package:appoint_medic/application/booking/patientTrackBooking/bloc/booking_tracker_bloc.dart';
+import 'package:appoint_medic/application/chat/see_messages/bloc/see_messages_bloc.dart';
+import 'package:appoint_medic/application/chat/view_chats/bloc/view_all_chats_bloc.dart';
+import 'package:appoint_medic/application/doctor%20profile/appointments_section/bloc/home_appointment_today_bloc.dart';
+import 'package:appoint_medic/application/doctor%20profile/bloc/doctor_profile_bloc.dart';
+import 'package:appoint_medic/application/doctor%20profile/edit_profile/bloc/doctor_profile_edit_bloc.dart';
 import 'package:appoint_medic/application/login/login_bloc.dart';
 import 'package:appoint_medic/application/navbar/navbar_bloc.dart';
 import 'package:appoint_medic/application/profile/profile_details_bloc.dart';
@@ -15,6 +20,7 @@ import 'package:appoint_medic/application/searchByCatergory/search_by_category_b
 import 'package:appoint_medic/application/slot/appointment_slot_bloc.dart';
 import 'package:appoint_medic/application/slot_operations/slot_operations_bloc.dart';
 import 'package:appoint_medic/application/speciality/speciality_bloc.dart';
+import 'package:appoint_medic/application/view_appointments_doctor/bloc/view_appointments_doct_side_bloc.dart';
 import 'package:appoint_medic/application/view_appointments_screen/bloc/view_appointments_patient_side_bloc.dart';
 import 'package:appoint_medic/domain/db/db_functions.dart';
 import 'package:appoint_medic/domain/db/db_model.dart';
@@ -22,14 +28,18 @@ import 'package:appoint_medic/domain/token_storage/secure_storage.dart';
 import 'package:appoint_medic/infrastructure/appointment_slots/slot_service.dart';
 import 'package:appoint_medic/infrastructure/auth/auth_service_impl.dart';
 import 'package:appoint_medic/infrastructure/booking/booking_service.dart';
+import 'package:appoint_medic/infrastructure/chats/chat_service.dart';
+import 'package:appoint_medic/infrastructure/doctor%20profile/doctor_profile_service.dart';
 import 'package:appoint_medic/infrastructure/login/loginServiceImpl.dart';
 import 'package:appoint_medic/infrastructure/payment_razorpay/payment_service.dart';
 import 'package:appoint_medic/infrastructure/profile/profile_service.dart';
 import 'package:appoint_medic/infrastructure/register/register_impl.dart';
 import 'package:appoint_medic/infrastructure/search_screen/search_service.dart';
 import 'package:appoint_medic/infrastructure/specialities/get_speciality_service.dart';
+import 'package:appoint_medic/infrastructure/view_appointments_doctor_service/appointments_fetch_service.dart';
 import 'package:appoint_medic/infrastructure/view_appointments_patient_side/view_appointments_pat_service.dart';
 import 'package:appoint_medic/presentation/patient/booking/sucess_booking_4.dart';
+import 'package:appoint_medic/presentation/patient/messages/screen_view_message.dart';
 
 import 'package:appoint_medic/presentation/splash/ScreenSplash.dart';
 import 'package:flutter/material.dart';
@@ -77,6 +87,10 @@ class MyApp extends StatelessWidget {
     final BookingService bookingService = BookingService();
     final ViewAppointmentsPatientSideService patientViewAppService =
         ViewAppointmentsPatientSideService();
+    final ViewAppointmentsDoctSideService appointmentsDoctSideService =
+        ViewAppointmentsDoctSideService();
+    final ChatService chatService = ChatService();
+    final DoctorProfileService doctProfService = DoctorProfileService();
 
     return MultiBlocProvider(
         providers: [
@@ -131,14 +145,30 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) =>
                 HomeTodayAppointmentsBloc(patientViewAppService),
-          )
+          ),
+          BlocProvider(
+            create: (context) => ViewAllChatsBloc(chatService),
+          ),
+          BlocProvider(
+            create: (context) => SeeMessagesBloc(chatService),
+          ),
+          BlocProvider(
+            create: (context) =>
+                ViewAppointmentsDoctSideBloc(appointmentsDoctSideService),
+          ),
+          BlocProvider(
+            create: (context) => DoctorProfileBloc(doctProfService),
+          ),
+          BlocProvider(
+            create: (context) => HomeAppointmentTodayBloc(appointmentsDoctSideService),
+          
+          ),
+          BlocProvider(create: (context) => DoctorProfileEditBloc(onboarding),)
         ],
         child:
             MaterialApp(debugShowCheckedModeBanner: false, home: ScreenSplash()
 
-                // home: ScreenOnBoardingPatient(
-                //   token: '',
-                // )
+                // home: ScreenViewMesgPatient()
 
                 ));
   }

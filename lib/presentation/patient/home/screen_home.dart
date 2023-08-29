@@ -43,6 +43,7 @@ class _ScreenHomeState extends State<ScreenHome> {
           color: Colors.blue,
           child: Column(
             children: [
+              //---------------------------profile details
               Container(
                 height: size.height * 0.14,
                 //  color: Colors.green,
@@ -51,13 +52,16 @@ class _ScreenHomeState extends State<ScreenHome> {
                   child: BlocBuilder<ProfileDetailsBloc, ProfileDetailsState>(
                     builder: (context, state) {
                       if (state is ProfileLoading) {
+                        //-------------------------------loading
                         return const Center(
                           child: CircularProgressIndicator(
                             color: Colors.white,
                             strokeWidth: 1,
                           ),
                         );
-                      } else if (state is ProfileSucess) {
+                      }
+                      //-------------------------------------------sucess
+                      else if (state is ProfileSucess) {
                         return Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -195,7 +199,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                       padding: const EdgeInsets.all(15.0),
                       child: Container(
                         decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.1),
+                            color: Colors.white,
                             borderRadius: BorderRadius.circular(8)),
                         child: const Row(
                           children: [
@@ -261,6 +265,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                               child: ListView.separated(
                                   physics: const BouncingScrollPhysics(),
                                   scrollDirection: Axis.horizontal,
+                                  shrinkWrap: true,
                                   itemBuilder: (context, index) {
                                     return Column(
                                       // mainAxisAlignment:
@@ -374,8 +379,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                                 return HomeAppointmentsTile(
                                     size: size,
                                     date: state
-                                        .appointmentList[index].selectedDate!
-                                        ,
+                                        .appointmentList[index].selectedDate!,
                                     doctorname: state.appointmentList[index]
                                         .doctor!.fullName!,
                                     startTime:
@@ -413,8 +417,10 @@ class _ScreenHomeState extends State<ScreenHome> {
                                   icon: const Icon(Icons.refresh))
                             ],
                           );
-                        }else {
-                          return Center(child: Text('Nothings to display'),);
+                        } else {
+                          return Center(
+                            child: Text('Nothings to display'),
+                          );
                         }
                       },
                     ),

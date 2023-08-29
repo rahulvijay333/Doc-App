@@ -1,12 +1,11 @@
 import 'package:appoint_medic/application/HomeScreen_today_appointments/bloc/home_today_appointments_bloc.dart';
 import 'package:appoint_medic/application/login/login_bloc.dart';
+import 'package:appoint_medic/application/navbar/navbar_bloc.dart';
 import 'package:appoint_medic/application/profile/profile_details_bloc.dart';
 import 'package:appoint_medic/application/speciality/speciality_bloc.dart';
 import 'package:appoint_medic/core/color_constants.dart';
-import 'package:appoint_medic/presentation/admin/home/screen_admin_home.dart';
 import 'package:appoint_medic/presentation/doctor/AdminNotVerified/screen_admin_not_verified.dart';
 import 'package:appoint_medic/presentation/doctor/doc_main_screen.dart';
-import 'package:appoint_medic/presentation/login/screen_login_admin.dart';
 import 'package:appoint_medic/presentation/onBoarding/doctor/screen_onb_doctor.dart';
 import 'package:appoint_medic/presentation/onBoarding/patient/screen_onB_patient.dart';
 import 'package:appoint_medic/presentation/patient/main_page.dart';
@@ -15,7 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ScreenLogin extends StatefulWidget {
-  ScreenLogin({super.key});
+  const ScreenLogin({super.key});
 
   @override
   State<ScreenLogin> createState() => _ScreenLoginState();
@@ -49,7 +48,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
             });
           },
         ),
-        Text('$label'),
+        Text(label),
       ],
     );
   }
@@ -88,7 +87,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
                     flex: 12,
                     child: Container(
                       child: ListView(
-                        physics: BouncingScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         children: [
                           //---------------------------------------image + text
                           Container(
@@ -248,7 +247,9 @@ class _ScreenLoginState extends State<ScreenLogin> {
 
                                       BlocBuilder<LoginBloc, LoginState>(
                                         builder: (context, state) {
+                                          //-------------loading
                                           if (state is LoginLoading) {
+                                            unfocus();
                                             return const Center(
                                                 child:
                                                     CircularProgressIndicator());
@@ -267,7 +268,9 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                                 },
                                               ));
                                             });
-                                          } else if (state
+                                          }
+                                          //------------------------------------------------Onboradind doctor
+                                          else if (state
                                               is LoginOnBordingDoctor) {
                                             WidgetsBinding.instance
                                                 .addPostFrameCallback((_) {
@@ -297,6 +300,8 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                             });
                                           } else if (state is LoginSucess) {
                                             if (state.role == 'patient') {
+                                              context.read<NavbarBloc>().add(
+                                                  PageChangeEvent(page: 0));
                                               //-----------------------------------------------------------------gettting profile details  event
                                               BlocProvider.of<
                                                           ProfileDetailsBloc>(
@@ -331,6 +336,8 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                             } else if (state.role == 'doctor') {
                                               WidgetsBinding.instance
                                                   .addPostFrameCallback((_) {
+                                                context.read<NavbarBloc>().add(
+                                                    PageChangeEvent(page: 0));
                                                 Navigator.of(context)
                                                     .pushReplacement(
                                                         MaterialPageRoute(
@@ -338,19 +345,6 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                                     return DoctorScreenMain(
                                                       name: state.name!,
                                                       token: state.token!,
-                                                    );
-                                                  },
-                                                ));
-                                              });
-                                            } else if (state.role == 'admin') {
-                                              WidgetsBinding.instance
-                                                  .addPostFrameCallback((_) {
-                                                Navigator.of(context)
-                                                    .pushReplacement(
-                                                        MaterialPageRoute(
-                                                  builder: (context) {
-                                                    return ScreenAdminHomePage(
-                                                      name: state.name!,
                                                     );
                                                   },
                                                 ));
@@ -425,16 +419,6 @@ class _ScreenLoginState extends State<ScreenLogin> {
                     ));
                   },
                   child: const Text('SignUp')),
-              const Text('|'),
-              TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) {
-                        return ScreenAdminLogin();
-                      },
-                    ));
-                  },
-                  child: const Text('Admin'))
             ],
           ),
         ),

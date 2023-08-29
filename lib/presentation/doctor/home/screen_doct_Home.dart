@@ -1,8 +1,13 @@
 import 'dart:developer';
 
+import 'package:appoint_medic/application/doctor%20profile/appointments_section/bloc/home_appointment_today_bloc.dart';
+import 'package:appoint_medic/application/doctor%20profile/bloc/doctor_profile_bloc.dart';
 import 'package:appoint_medic/domain/db/db_model.dart';
+import 'package:appoint_medic/presentation/doctor/home/widget/appmtns_tile.dart';
 import 'package:appoint_medic/presentation/doctor/home/widget/icon_text.dart';
+import 'package:appoint_medic/presentation/doctor/home/widget/profile_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ScreenDoctHome extends StatelessWidget {
   const ScreenDoctHome({
@@ -14,6 +19,9 @@ class ScreenDoctHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+       context
+                                            .read<HomeAppointmentTodayBloc>()
+                                            .add(ViewTodaysAppointments());
     final size = MediaQuery.of(context).size;
     log((size.height * 0.05).toString());
 
@@ -22,162 +30,175 @@ class ScreenDoctHome extends StatelessWidget {
     return Container(
       width: size.width,
       height: size.height,
-      child: Stack(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              //--------------------------------blue container
-              Container(
-                width: size.width,
-                height: size.height * 0.35,
-                decoration: const BoxDecoration(
-                    borderRadius:
-                        BorderRadius.only(bottomLeft: Radius.circular(30)),
-                    color: Color.fromRGBO(0, 150, 255, 10)),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          left: 8, top: 25, right: 8, bottom: 8),
-                      //------------------------------------------------------name details
-                      child: Container(
-                        // color: Colors.red,
-                        width: size.width,
-                        height: size.height * 0.3 * 0.50,
-                        child: Row(
-                          children: [
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            const CircleAvatar(
-                              radius: 60,
-                              backgroundImage: AssetImage('assets/doctor.png'),
-                            ),
-                            const SizedBox(
-                              width: 15,
-                            ),
-                            Container(
-                                height: size.height * 0.3 * 0.40,
-                                width: size.width * 0.6,
-                                //  color: Colors.green,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text('Welcome,',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18,
-                                        )),
-                                    SizedBox(
-                                        height:
-                                            size.height * 0.3 * 0.40 * 0.05),
-                                    Text('Dr.$name',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold)),
-                                    SizedBox(
-                                        height:
-                                            size.height * 0.3 * 0.40 * 0.02),
-                                    const Text('MBBS, MDS',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 12,
-                                        )),
-                                  ],
-                                ))
-                          ],
-                        ),
-                      ),
+          //--------------------------------blue container
+          Container(
+            width: size.width,
+            height: size.height * 0.18,
+            decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(30),
+                    bottomRight: Radius.circular(30)),
+                // color: Colors.amber,
+                color: Color.fromRGBO(0, 150, 255, 10)),
+            child: BlocBuilder<DoctorProfileBloc, DoctorProfileState>(
+              builder: (context, state) {
+                if (state is DoctorProfileLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      strokeWidth: 1,
                     ),
-                    //------------------------------------------icon section
-                    Padding(
-                      padding: const EdgeInsets.all(0.0),
-                      child: Container(
-                        // color: Colors.green,
-                        height: size.height * 0.3 * 0.5,
-                        width: size.width,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  );
+                }
+
+                if (state is DoctorProfileSuccess) {
+                  return Padding(
+                    padding: const EdgeInsets.only(
+                        left: 8, top: 10, right: 8, bottom: 8),
+                    //------------------------------------------------------name details
+                    child: ProfileTileCustom(size: size, name: name, doctorDetails: state.doctDetails,),
+                  );
+                }
+                if (state is DoctorPrifleFailure) {
+                  return const Center(
+                    child: Text('Offline'),
+                  );
+                }
+
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Offline',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      IconButton(
+                          onPressed: () {
+                            //------------------------------refresh
+
+                            context
+                                .read<DoctorProfileBloc>()
+                                .add(GetDoctorProfileCall());
+                          },
+                          icon: const Icon(
+                            Icons.refresh_outlined,
+                            color: Colors.white,
+                          ))
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+          //----------------------------------------------container 2 - appointments
+
+          Container(
+              width: size.width,
+              height: size.height * 0.68,
+              decoration: const BoxDecoration(
+                color: Color.fromRGBO(217, 217, 217, 1),
+                // color: Colors.red,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const Text(
+                      'Appointments',
+                      style: TextStyle(fontSize: 22),
+                    ),
+                    SizedBox(height: size.height*0.01,),
+                    Expanded(
+                      child: BlocBuilder<HomeAppointmentTodayBloc,
+                          HomeAppointmentTodayState>(
+                        builder: (context, state) {
+                          if (state is TodayAppointmentLoading) {
+                            return const Center(
+                              child: CircularProgressIndicator(
+                                strokeWidth: 1,
+                              ),
+                            );
+                          } else if (state is TodayAppointmentSuccess) {
+                            if (state.appointmentList.isEmpty) {
+                              return const Center(
+                                child: Text('No Appointment'),
+                              );
+                            }
+
+                            return ListView.separated(
+                              physics: BouncingScrollPhysics(),
+                                itemBuilder: (context, index) {
+                          
+                                  return ApointTodayTileWidget(
+                                      size: size,
+                                      patientName: state.appointmentList[index]
+                                          .patient!.fullName!,
+                                      imgUrl: state.appointmentList[index]
+                                          .patient!.profilePicture?.secureUrl,
+                                      date: state
+                                          .appointmentList[index].selectedDate!,
+                                      startTime: state
+                                          .appointmentList[index].startTime!,
+                                      endTime:
+                                          state.appointmentList[index].endTime!,
+                                      patientID: state
+                                          .appointmentList[index].patientId!);
+                                },
+                                separatorBuilder: (context, index) {
+                                  return const SizedBox(
+                                    height: 10,
+                                  );
+                                },
+                                itemCount: state.appointmentList.length);
+                          } else if (state is TodayAppointmentFailed) {
+                            return Center(
+                              child: Column(mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text('Error occured'),
+                                  TextButton(
+                                      onPressed: () {
+                                        //-------------------------------------resfresh
+                                        context
+                                            .read<HomeAppointmentTodayBloc>()
+                                            .add(ViewTodaysAppointments());
+                                      },
+                                      child: Icon(Icons.refresh))
+                                ],
+                              ),
+                            );
+                          }
+
+                          return Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                CircleAvatarWithWidgets(),
-                                const Text(
-                                  'Total Patients',
-                                  style: TextStyle(color: Colors.white),
-                                )
+                                Text('Error occured'),
+                                TextButton(
+                                    onPressed: () {
+                                      //-------------------------------------resfresh
+                                      context
+                                          .read<HomeAppointmentTodayBloc>()
+                                          .add(ViewTodaysAppointments());
+                                    },
+                                    child: Icon(Icons.refresh))
                               ],
                             ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                CircleAvatarWithWidgets(),
-                                const Text(
-                                  'Total Patients',
-                                  style: TextStyle(color: Colors.white),
-                                )
-                              ],
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                CircleAvatarWithWidgets(),
-                                const Text(
-                                  'Total Patients',
-                                  style: TextStyle(color: Colors.white),
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
+                          );
+
+                          return Center(child: Text('data loading'));
+                        },
                       ),
                     )
                   ],
                 ),
-              ),
-              //----------------------------------------------container 2
-              Expanded(
-                child: Container(
-                  width: size.width,
-                  // height: size.height * 0.05,
-                  decoration: const BoxDecoration(
-                      color: Color.fromRGBO(0, 150, 255, 10)),
-                ),
-              ),
-            ],
-          ),
-          Positioned(
-            top: size.height * 0.35,
-            bottom: 0,
-            left: 0,
-            child: Container(
-                width: size.width,
-                height: size.height * 0.30,
-                decoration: const BoxDecoration(
-                  borderRadius:
-                      BorderRadius.only(topRight: Radius.circular(30)),
-                  color: Color.fromRGBO(217, 217, 217, 1),
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.only(left: 15),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        'Appointments',
-                        style: TextStyle(fontSize: 22),
-                      )
-                    ],
-                  ),
-                )),
-          )
+              ))
         ],
       ),
     );

@@ -32,11 +32,6 @@ class _ScreenBookingState extends State<ScreenBooking> {
     if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
-        //log('${selectedDate.toLocal()}'.split(' ')[0]);
-
-        String formattedDate = DateFormat('dd MMM,y').format(selectedDate);
-
-        log(formattedDate.toString());
 
         context.read<PatientSlotSelectBloc>().add(DisplayAvailableSlots(
               doctorID: widget.doctor.id!,
@@ -71,9 +66,8 @@ class _ScreenBookingState extends State<ScreenBooking> {
             //---------------------<<<<<<<<<---------------------------------
 
             ScaffoldMessenger.of(context).clearSnackBars();
-            Navigator.of(context)
-                .pop(); // Replace with your desired navigation logic
-            return true; // Prevent screen from being popped
+            Navigator.of(context).pop();
+            return true;
           },
           child: SingleChildScrollView(
             child: Column(
@@ -158,19 +152,7 @@ class _ScreenBookingState extends State<ScreenBooking> {
                                   widget.doctor.speciality!.name!,
                                 ),
                                 const SizedBox(
-                                  height: 50,
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.chat_rounded,
-                                        size: 18,
-                                      ),
-                                      SizedBox(
-                                        width: 15,
-                                      ),
-                                      Icon(Icons.videocam)
-                                    ],
-                                  ),
+                                  height: 35,
                                 ),
                                 Row(
                                   mainAxisAlignment:

@@ -64,7 +64,7 @@ class _ScreenConfirmBookingState extends State<ScreenConfirmBooking> {
           bookingdetails: details,
           patientDetails: profileDetails!,
           doctor: widget.doc));
-          context.read<PaymentBloc>().add(PaymentButtonStopLoading());
+      context.read<PaymentBloc>().add(PaymentButtonStopLoading());
 
       Navigator.of(context).push(MaterialPageRoute(
         builder: (context) {

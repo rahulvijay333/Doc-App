@@ -42,7 +42,6 @@ class BookingService {
       {required BookingDetails bookingDetails}) async {
     final SecureStorageService getToken = getIt<SecureStorageService>();
     final String? token = await getToken.retrieveToken();
-    log(bookingDetails.date);
 
     try {
       final response = await Dio().post(ApiEndPoints.bookingInitiate,
@@ -62,7 +61,6 @@ class BookingService {
       // log(response.data.toString());
 
       if (response.statusCode == 200) {
-        //log(BookingInitizationResponse.fromJson(response.data).order!.id!);
         return ('', BookingInitizationResponse.fromJson(response.data));
       } else {
         return ('Error happened in booking initiation Api call', null);
@@ -81,25 +79,25 @@ class BookingService {
     }
   }
 
-  //------------------------------------fina booking appointment api call after payment sucess
+  //------------------------------------final booking appointment api call after payment sucess
 
   Future<(String, AppointmentBookedResponse?)> createAppointment(
       {required BookingDetails bookingDetails}) async {
     final SecureStorageService getToken = getIt<SecureStorageService>();
     final String? token = await getToken.retrieveToken();
     try {
-      log(bookingDetails.date);
-      // log(jsonEncode({
-      //       "doctorId": bookingDetails.doctorID,
-      //       "dateId": bookingDetails.dateID,
-      //       "slotId": bookingDetails.slotID,
-      //       "startTime": bookingDetails.startTime,
-      //       "endTime": bookingDetails.endTime,
-      //       "fees": bookingDetails.fees,
-      //       "paymentId": bookingDetails.paymentid,
-      //       "orderId": bookingDetails.orderID,
-      //       "selectedDate": bookingDetails.date
-      //     }));
+      // log(bookingDetails.date);
+      log(jsonEncode({
+        "doctorId": bookingDetails.doctorID,
+        "dateId": bookingDetails.dateID,
+        "slotId": bookingDetails.slotID,
+        "startTime": bookingDetails.startTime,
+        "endTime": bookingDetails.endTime,
+        "fees": bookingDetails.fees,
+        "paymentId": bookingDetails.paymentid,
+        "orderId": bookingDetails.orderID,
+        "selectedDate": bookingDetails.date
+      }));
       final response = await Dio().post(ApiEndPoints.completeBooking,
           data: jsonEncode({
             "doctorId": bookingDetails.doctorID,

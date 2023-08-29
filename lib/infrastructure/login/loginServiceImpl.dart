@@ -21,9 +21,7 @@ class LoginServiceImpl implements LoginService {
 
     dynamic responseData;
     try {
-      if (logintype == 'admin') {
-        apiEndPoint = ApiEndPoints.adminLogin;
-      } else if (logintype == 'patient') {
+      if (logintype == 'patient') {
         apiEndPoint = ApiEndPoints.patientLogin;
       } else if (logintype == 'doctor') {
         apiEndPoint = ApiEndPoints.doctorLogin;
@@ -92,9 +90,7 @@ class LoginServiceImpl implements LoginService {
     log('loggedout service api call reached');
 
     try {
-      if (role == 'admin') {
-        apiEndPoint = ApiEndPoints.adminLogout;
-      } else if (role == 'patient') {
+      if (role == 'patient') {
         apiEndPoint = ApiEndPoints.patientLogOut;
       } else if (role == 'doctor') {
         apiEndPoint = ApiEndPoints.doctorLogout;

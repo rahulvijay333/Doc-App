@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'appointment.dart';
 
 part 'get_all_appointment_response.g.dart';
+
 //-------------------------------------------------------doctor side
 @JsonSerializable()
 class GetAllAppointmentResponse {

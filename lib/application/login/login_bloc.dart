@@ -48,15 +48,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           //log('token : - $token ');
 
           String? userName = '';
-          if (response is AdminResponse) {
-            userName = response.user!.role;
-          } else {
-            userName = response?.user!.name;
-          }
 
           if (response is DoctorResponse) {
             //-------------------------------------------------------directing to onborading doctor
-            if (response.user!.fullName == null) {
+            if (response.user!.fullName == null ||
+                response.user!.fullName!.isEmpty) {
               log('this doctor fullname is empty');
               emit(LoginOnBordingDoctor(token: response.user!.token!));
             } else if (response.user!.isAdminVerified == false) {
@@ -83,7 +79,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
               prefs.saveRole(role!);
               prefs.saveLoggedInState(true);
               prefs.saveToken(token!);
-              prefs.saveName(userName!);
+              prefs.saveName(userName);
               prefs.saveId(id);
               await secureStorageService.storeToken(token);
 

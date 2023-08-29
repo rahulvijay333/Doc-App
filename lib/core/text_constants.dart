@@ -6,3 +6,5 @@ const textVerificationMessage =
 
 const textVerificationMessage2 =
     "An email verification link has been sent to your email address. ";
+
+const appName = 'DocCure';

@@ -382,15 +382,15 @@ class _ScreenOnBoardingPatientState extends State<ScreenOnBoardingPatient> {
                         onPressed: () {
                           // Perform actions on form submission
 
-                          // if (imageFile == null) {
-                          //   setState(() {
-                          //     profileErrorColor = Colors.red;
-                          //   });
-                          // } else {
-                          //   setState(() {
-                          //     profileErrorColor = Colors.transparent;
-                          //   });
-                          // }
+                          if (imageFile == null) {
+                            setState(() {
+                              profileErrorColor = Colors.red;
+                            });
+                          } else {
+                            setState(() {
+                              profileErrorColor = Colors.transparent;
+                            });
+                          }
 
                           if (_formkey.currentState!.validate()) {
                             log('VAlue are present');

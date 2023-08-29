@@ -1,10 +1,11 @@
 import 'package:appoint_medic/application/Auth/authentication_bloc.dart';
 import 'package:appoint_medic/application/HomeScreen_today_appointments/bloc/home_today_appointments_bloc.dart';
 import 'package:appoint_medic/application/Search/search_bloc.dart';
+import 'package:appoint_medic/application/chat/view_chats/bloc/view_all_chats_bloc.dart';
+import 'package:appoint_medic/application/navbar/navbar_bloc.dart';
 import 'package:appoint_medic/application/profile/profile_details_bloc.dart';
 import 'package:appoint_medic/application/speciality/speciality_bloc.dart';
 import 'package:appoint_medic/core/color_constants.dart';
-import 'package:appoint_medic/presentation/admin/home/screen_admin_home.dart';
 import 'package:appoint_medic/presentation/doctor/doc_main_screen.dart';
 import 'package:appoint_medic/presentation/doctor/home/screen_doct_home.dart';
 import 'package:appoint_medic/presentation/login/screen_login.dart';
@@ -33,6 +34,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
           // Handle loading state if necessary
         } else if (state is Autheticated) {
           if (state.role == 'doctor') {
+            context.read<NavbarBloc>().add(PageChangeEvent(page: 0));
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
@@ -41,6 +43,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
                           name: state.name,
                         )));
           } else if (state.role == 'patient') {
+            context.read<NavbarBloc>().add(PageChangeEvent(page: 0));
             //-----------------------------------------------------------------gettting profile details  event
             BlocProvider.of<ProfileDetailsBloc>(context)
                 .add(GetProfileDetails(state.id));
@@ -53,6 +56,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
                 .read<HomeTodayAppointmentsBloc>()
                 .add(GetTodayAppointmentPatientCall());
             //-------------------------------------------
+
             BlocProvider.of<SearchBloc>(context).add(ShowAllDoctorList());
             Navigator.pushReplacement(
               context,
@@ -60,14 +64,6 @@ class _ScreenSplashState extends State<ScreenSplash> {
                   builder: (context) => ScreenMainPage(
                         userName: state.name,
                         id: state.id,
-                      )),
-            );
-          } else if (state.role == 'admin') {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => ScreenAdminHomePage(
-                        name: state.name,
                       )),
             );
           }
