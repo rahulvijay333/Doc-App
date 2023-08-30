@@ -74,7 +74,9 @@ class AppointmentTile extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         formatedDate,
-                        style: TextStyle(fontWeight: FontWeight.w500,fontSize: size.width*0.24*0.13),
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: size.width * 0.24 * 0.13),
                       ),
                     ),
                   )

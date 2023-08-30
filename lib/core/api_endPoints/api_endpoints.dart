@@ -8,8 +8,11 @@ class ApiEndPoints {
   static const patientLogOut = '$baseUrl/auth/patient/logout';
   static const patientGetAllDoctors = '$baseUrl/patient/doctors/all';
   static const getAllSpecialities = '$baseUrl/doctor/specialities';
+  //profile
   static const getProfileDetails = '$baseUrl/patient/profile/details/';
   static const onboardingPatient = '$baseUrl/patient/profile/update';
+  static const patientEditProfile = '$baseUrl/patient/profile/update';
+
   //booking slot
   static const getDoctorAvailableSlotsByIdPatientSide =
       '$baseUrl/patient/doctorprofile/details';
@@ -41,6 +44,4 @@ class ApiEndPoints {
   static const doctGetAllAppoints = '$baseUrl/doctor/appointments';
   static const doctApproveBooking = '$baseUrl/appointment';
   static const doctCancelBooking = '$baseUrl/appointment';
-
- 
 }

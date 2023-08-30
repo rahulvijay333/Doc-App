@@ -239,6 +239,7 @@ class _ScreenOnBoardingDoctorState extends State<ScreenOnBoardingDoctor> {
               onPressed: () {
                 //---------------------------------------------------------------logout funtion
                 context.read<LoginBloc>().add(ClearLoginStateEvent());
+
                 context.read<OnBoardingBloc>().add(ClearOnboardingState());
 
                 Navigator.of(context).pushReplacement(MaterialPageRoute(

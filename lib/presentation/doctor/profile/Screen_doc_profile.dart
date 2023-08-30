@@ -234,7 +234,7 @@ class ScreenDocProfile extends StatelessWidget {
                                   return ClipRRect(
                                     borderRadius: BorderRadius.circular(10),
                                     child: Container(
-                                       color: Colors.white.withOpacity(0.6),
+                                      color: Colors.white.withOpacity(0.6),
                                       child: ListTile(
                                         onTap: () {
                                           //--------------------------------------------------------logout function
@@ -292,7 +292,6 @@ class ScreenDocProfile extends StatelessWidget {
     );
   }
 }
-
 
 // class ScreenDocProfile extends StatelessWidget {
 //   const ScreenDocProfile({super.key});

@@ -2,6 +2,7 @@ import 'package:appoint_medic/application/Auth/authentication_bloc.dart';
 import 'package:appoint_medic/application/HomeScreen_today_appointments/bloc/home_today_appointments_bloc.dart';
 import 'package:appoint_medic/application/Search/search_bloc.dart';
 import 'package:appoint_medic/application/chat/view_chats/bloc/view_all_chats_bloc.dart';
+import 'package:appoint_medic/application/doctor%20profile/bloc/doctor_profile_bloc.dart';
 import 'package:appoint_medic/application/navbar/navbar_bloc.dart';
 import 'package:appoint_medic/application/profile/profile_details_bloc.dart';
 import 'package:appoint_medic/application/speciality/speciality_bloc.dart';
@@ -15,6 +16,8 @@ import 'package:appoint_medic/presentation/splash/logo/logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+late String userType;
 
 class ScreenSplash extends StatefulWidget {
   const ScreenSplash({Key? key});
@@ -34,7 +37,9 @@ class _ScreenSplashState extends State<ScreenSplash> {
           // Handle loading state if necessary
         } else if (state is Autheticated) {
           if (state.role == 'doctor') {
+            userType = 'Doctor';
             context.read<NavbarBloc>().add(PageChangeEvent(page: 0));
+            context.read<DoctorProfileBloc>().add(GetDoctorProfileCall());
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
@@ -43,6 +48,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
                           name: state.name,
                         )));
           } else if (state.role == 'patient') {
+            userType = 'Patient';
             context.read<NavbarBloc>().add(PageChangeEvent(page: 0));
             //-----------------------------------------------------------------gettting profile details  event
             BlocProvider.of<ProfileDetailsBloc>(context)

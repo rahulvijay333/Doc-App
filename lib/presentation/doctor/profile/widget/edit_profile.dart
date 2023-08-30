@@ -49,60 +49,6 @@ class _ScreenEditProfDoctState extends State<ScreenEditProfDoct> {
   }
 
   @override
-  void dispose() {
-    _houseNameController.dispose();
-    _cityController.dispose();
-    _stateController.dispose();
-    _serviceController.dispose();
-    super.dispose();
-  }
-
-  //----------------------select image
-
-  void selectImage(ImageSource source) async {
-    XFile? pickedFile = await ImagePicker().pickImage(source: source);
-
-    if (pickedFile != null) {
-      setState(() {
-        imageFile = File(pickedFile.path);
-      });
-    }
-  }
-
-//-------------------------------------------get photo
-  void showPhotoOptions() {
-    showDialog(
-      context: context,
-      builder: (ctx) {
-        return AlertDialog(
-          title: const Text('Upload Profile Photo'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ListTile(
-                onTap: () {
-                  Navigator.of(context).pop();
-                  selectImage(ImageSource.gallery);
-                },
-                leading: const Icon(Icons.photo),
-                title: const Text('Select from Gallery'),
-              ),
-              ListTile(
-                onTap: () {
-                  Navigator.of(ctx).pop();
-                  selectImage(ImageSource.camera);
-                },
-                leading: const Icon(Icons.camera),
-                title: const Text('Select from Camera'),
-              )
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return SafeArea(
@@ -296,14 +242,18 @@ class _ScreenEditProfDoctState extends State<ScreenEditProfDoct> {
                       //     strokeWidth: 1,
                       //   ),
                       // );
-                      return Row(
+                      return const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text('Updating..'),
                           SizedBox(
-                            height: 20,
-                            width: 20,
-                            child: Center(child: CircularProgressIndicator(strokeWidth: 1,color: Colors.white,)))
+                              height: 20,
+                              width: 20,
+                              child: Center(
+                                  child: CircularProgressIndicator(
+                                strokeWidth: 1,
+                                color: Colors.white,
+                              )))
                         ],
                       );
                     }
@@ -350,6 +300,60 @@ class _ScreenEditProfDoctState extends State<ScreenEditProfDoct> {
           ),
         ),
       ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _houseNameController.dispose();
+    _cityController.dispose();
+    _stateController.dispose();
+    _serviceController.dispose();
+    super.dispose();
+  }
+
+  //----------------------select image
+
+  void selectImage(ImageSource source) async {
+    XFile? pickedFile = await ImagePicker().pickImage(source: source);
+
+    if (pickedFile != null) {
+      setState(() {
+        imageFile = File(pickedFile.path);
+      });
+    }
+  }
+
+//-------------------------------------------get photo
+  void showPhotoOptions() {
+    showDialog(
+      context: context,
+      builder: (ctx) {
+        return AlertDialog(
+          title: const Text('Upload Profile Photo'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                onTap: () {
+                  Navigator.of(context).pop();
+                  selectImage(ImageSource.gallery);
+                },
+                leading: const Icon(Icons.photo),
+                title: const Text('Select from Gallery'),
+              ),
+              ListTile(
+                onTap: () {
+                  Navigator.of(ctx).pop();
+                  selectImage(ImageSource.camera);
+                },
+                leading: const Icon(Icons.camera),
+                title: const Text('Select from Camera'),
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 }

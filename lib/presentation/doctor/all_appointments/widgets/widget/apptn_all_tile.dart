@@ -66,14 +66,16 @@ class AppointmentAllTileCustom extends StatelessWidget {
                     ),
                   ),
                   Container(
-                      // color: Colors.red,
+                    // color: Colors.red,
                     width: size.width * 0.24,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Center(
                         child: Text(
                           formatedDate,
-                          style:  TextStyle(fontWeight: FontWeight.w500,fontSize: size.width*0.24*0.13),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: size.width * 0.24 * 0.13),
                         ),
                       ),
                     ),

@@ -33,7 +33,6 @@ class ScreenAllAppoint extends StatelessWidget {
           return ListView.separated(
               itemBuilder: (context, index) {
                 final stateShort = state.appointmentList[index];
-                //log(stateShort.selectedDate.toString());
 
                 return AppointmentAllTileCustom(
                   patientName: stateShort.patient!.fullName!,

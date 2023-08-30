@@ -18,8 +18,6 @@ class ScreenMesgsPatient extends StatelessWidget {
 
     BlocProvider.of<ViewAllChatsBloc>(context).add(GetAllChatsCall());
 
-    // context.read<ViewAllChatsBloc>().add(ViewAllChatsEvent());
-
     return Container(
         width: double.maxFinite,
         height: double.maxFinite,
@@ -51,7 +49,7 @@ class ScreenMesgsPatient extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Container(
-                      color: Colors.grey[200],
+                      color: Colors.white,
                       height: size.height * 0.06,
                       width: size.width * 0.75,
                       child: const Padding(
@@ -99,6 +97,7 @@ class ScreenMesgsPatient extends StatelessWidget {
                     if (state is ViewAllChatsLoading) {
                       return const Center(
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text('Loading..'),
                             SizedBox(
@@ -123,7 +122,6 @@ class ScreenMesgsPatient extends StatelessWidget {
                               //------------------------------view message
 
                               onTap: () {
-                                log(state.chatsList[index].id!);
                                 context.read<SeeMessagesBloc>().add(
                                     SeeChatsEvent(
                                         chatRoomID:
@@ -144,6 +142,10 @@ class ScreenMesgsPatient extends StatelessWidget {
                                         chatRoomID: state.chatsList[index].id!,
                                         doctname: state.chatsList[index]
                                             .participants![0].doctor!.fullName!,
+                                        patientID: state.chatsList[index]
+                                            .participants![0].patient!.id!,
+                                        doctID: state.chatsList[index]
+                                            .participants![0].doctor!.id!,
                                       );
                                     },
                                   ));
@@ -155,8 +157,8 @@ class ScreenMesgsPatient extends StatelessWidget {
                                     height: size.height * 0.10,
                                     color: Colors.blue[50]?.withOpacity(0.5),
                                     child: MessageTile(
-                                      senderName: state.chatsList[index]
-                                          .participants![0].doctor!.fullName!,
+                                      senderName:
+                                          "Dr.${state.chatsList[index].participants![0].doctor!.fullName!}",
                                       message: state.chatsList[index]
                                               .latestMessage?.content ??
                                           'Send Hi',

@@ -1,6 +1,12 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:appoint_medic/application/chat/see_messages/bloc/see_messages_bloc.dart';
+import 'package:appoint_medic/domain/response_models/new_message/new_chat_response/new_chat_response.dart';
+import 'package:appoint_medic/domain/token_storage/secure_storage.dart';
+import 'package:appoint_medic/main.dart';
+import 'package:appoint_medic/presentation/splash/ScreenSplash.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,11 +17,15 @@ class ScreenViewMesgPatient extends StatefulWidget {
       {super.key,
       required this.doctImage,
       required this.chatRoomID,
-      required this.doctname});
+      required this.doctname,
+      required this.patientID,
+      required this.doctID});
 
   final String doctImage;
   final String chatRoomID;
   final String doctname;
+  final String patientID;
+  final String doctID;
 
   @override
   State<ScreenViewMesgPatient> createState() => _ScreenViewMesgPatientState();
@@ -37,6 +47,9 @@ class _ScreenViewMesgPatientState extends State<ScreenViewMesgPatient> {
             .build());
 
     socket.connect();
+    socket.emit('setup', widget.patientID);
+    socket.emit('join chat', widget.chatRoomID);
+
     setUpSocketListener();
 
     super.initState();
@@ -45,14 +58,18 @@ class _ScreenViewMesgPatientState extends State<ScreenViewMesgPatient> {
   @override
   void dispose() {
     //-----------------------------bloc call to clear all messages
-
+    socket.disconnect();
+    socket.dispose();
     super.dispose();
   }
 
   void setUpSocketListener() {
-    socket.on('message recieved', (data) {
-      log('some message update is going on....');
-      print(data);
+    socket.on('new messages', (data) {
+      log('----------------____>>>>New messages received:  when listening to "new messages event');
+      // Update your UI or trigger a chat refresh
+      context
+          .read<SeeMessagesBloc>()
+          .add(RefreshMessageCall(chatroom: widget.chatRoomID));
     });
   }
 
@@ -93,14 +110,14 @@ class _ScreenViewMesgPatientState extends State<ScreenViewMesgPatient> {
                       CircleAvatar(
                         backgroundColor: Colors.blue.withOpacity(0.5),
                         backgroundImage: NetworkImage(widget.doctImage),
-                        radius: 25,
+                        radius: 20,
                       ),
                       const SizedBox(
                         width: 10,
                       ),
                       Text(
                         'Dr.${widget.doctname}',
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 20,
                             color: Colors.white,
                             fontWeight: FontWeight.w500),
@@ -119,7 +136,11 @@ class _ScreenViewMesgPatientState extends State<ScreenViewMesgPatient> {
                           // color: Colors.amber,
                           child: BlocBuilder<SeeMessagesBloc, SeeMessagesState>(
                             builder: (context, state) {
-                              if (state is MessagesSucess) {
+                              if (state is MessagesLoading) {
+                                return const Center(
+                                  child: Text('Loading..'),
+                                );
+                              } else if (state is MessagesSucess) {
                                 WidgetsBinding.instance
                                     .addPostFrameCallback((_) {
                                   // Scroll to the bottom after the ListView updates
@@ -127,6 +148,7 @@ class _ScreenViewMesgPatientState extends State<ScreenViewMesgPatient> {
                                     _scrollController.position.maxScrollExtent,
                                   );
                                 });
+
                                 return ListView.separated(
                                     keyboardDismissBehavior:
                                         ScrollViewKeyboardDismissBehavior
@@ -146,16 +168,29 @@ class _ScreenViewMesgPatientState extends State<ScreenViewMesgPatient> {
 
                                                 // width: 160,
                                                 decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    color: state
+                                                    borderRadius: state
                                                                 .messagesList[
                                                                     index]
                                                                 .senderModel ==
                                                             'Patient'
-                                                        ? Colors.blue
-                                                        : Colors.grey),
+                                                        ? const BorderRadius.only(
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    0),
+                                                            topLeft: Radius.circular(
+                                                                15),
+                                                            bottomLeft:
+                                                                Radius.circular(
+                                                                    15),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    15))
+                                                        : const BorderRadius.only(
+                                                            topRight: Radius.circular(15),
+                                                            topLeft: Radius.circular(0),
+                                                            bottomLeft: Radius.circular(15),
+                                                            bottomRight: Radius.circular(15)),
+                                                    color: state.messagesList[index].senderModel == 'Patient' ? Colors.blue : Colors.grey),
                                                 child: Padding(
                                                   padding:
                                                       const EdgeInsets.only(
@@ -167,6 +202,7 @@ class _ScreenViewMesgPatientState extends State<ScreenViewMesgPatient> {
                                                     state.messagesList[index]
                                                         .content,
                                                     style: const TextStyle(
+                                                        fontSize: 18,
                                                         color: Colors.white),
                                                   ),
                                                 )),
@@ -180,11 +216,32 @@ class _ScreenViewMesgPatientState extends State<ScreenViewMesgPatient> {
                                       );
                                     },
                                     itemCount: state.messagesList.length);
-                              } else {
-                                return const Center(
-                                  child: Text('Send hi'),
+                              } else if (state is MessagesFailed) {
+                                return Center(
+                                  child: Column(
+                                    children: [
+                                      const Text('Refresh'),
+                                      InkWell(
+                                        onTap: () {
+                                          //--------------------------------------------bloc call
+                                          context.read<SeeMessagesBloc>().add(
+                                              SeeChatsEvent(
+                                                  chatRoomID:
+                                                      widget.chatRoomID));
+                                        },
+                                        child: const SizedBox(
+                                          width: 30,
+                                          height: 30,
+                                          child: CircularProgressIndicator(),
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 );
                               }
+                              return const Center(
+                                child: Text('Send hi'),
+                              );
                             },
                           ),
                         ),
@@ -229,7 +286,8 @@ class _ScreenViewMesgPatientState extends State<ScreenViewMesgPatient> {
                                           SendNewMessage(
                                               message: msgController.text,
                                               role: 'Patient',
-                                              chatRoomID: widget.chatRoomID));
+                                              chatRoomID: widget.chatRoomID,
+                                              socket: socket));
                                     }
                                     msgController.clear();
                                     _scrollController.jumpTo(_scrollController
@@ -244,7 +302,7 @@ class _ScreenViewMesgPatientState extends State<ScreenViewMesgPatient> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     )
                   ],

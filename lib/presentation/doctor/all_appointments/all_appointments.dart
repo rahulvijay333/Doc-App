@@ -55,7 +55,7 @@ class ScreenAllAppointments extends StatelessWidget {
                           Tab(
                             iconMargin: EdgeInsets.only(),
                             child: Text(
-                              'Today',
+                              'Approved',
                             ),
                           ),
                           Tab(

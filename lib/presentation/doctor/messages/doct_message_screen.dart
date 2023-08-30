@@ -16,7 +16,7 @@ class ScreemDoctMessage extends StatelessWidget {
 
     BlocProvider.of<ViewAllChatsBloc>(context).add(GetAllChatsCall());
 
-    // context.read<ViewAllChatsBloc>().add(ViewAllChatsEvent());
+
 
     return Container(
         width: double.maxFinite,
@@ -110,7 +110,7 @@ class ScreemDoctMessage extends StatelessWidget {
                       );
                     } else if (state is ViewAllChatsSuccess) {
                       if (state.chatsList.isEmpty) {
-                        return Center(
+                        return const Center(
                           child: Text('No Chats'),
                         );
                       }
@@ -149,6 +149,10 @@ class ScreemDoctMessage extends StatelessWidget {
                                             .participants![0]
                                             .patient!
                                             .fullName!,
+                                        doctorID: state.chatsList[index]
+                                            .participants![0].doctor!.id!,
+                                        patientID: state.chatsList[index]
+                                            .participants![0].patient!.id!,
                                       );
                                     },
                                   ));
@@ -158,13 +162,13 @@ class ScreemDoctMessage extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10),
                                 child: Container(
                                     height: size.height * 0.10,
-                                    color: Colors.blue[50]?.withOpacity(0.5),
+                                    // color: Colors.blue[50]?.withOpacity(0.5),
                                     child: MessageTile(
                                       senderName: state.chatsList[index]
                                           .participants![0].patient!.fullName!,
                                       message: state.chatsList[index]
                                               .latestMessage?.content ??
-                                          'Send Hi',
+                                          '',
                                       time: state.chatsList[index].updatedAt!,
                                       Image: state
                                           .chatsList[index]
@@ -186,8 +190,8 @@ class ScreemDoctMessage extends StatelessWidget {
                       Center(
                         child: Column(
                           children: [
-                            Text('Error happened'),
-                            SizedBox(
+                            const Text('Error happened'),
+                            const SizedBox(
                               height: 5,
                             ),
                             IconButton(
@@ -198,12 +202,12 @@ class ScreemDoctMessage extends StatelessWidget {
                                       .read<ViewAllChatsBloc>()
                                       .add(ViewAllChatsEvent());
                                 },
-                                icon: Icon(Icons.refresh))
+                                icon: const Icon(Icons.refresh))
                           ],
                         ),
                       );
                     }
-                    return Center(
+                    return const Center(
                       child: Text('No chats'),
                     );
                   },

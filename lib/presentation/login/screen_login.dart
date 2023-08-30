@@ -1,4 +1,5 @@
 import 'package:appoint_medic/application/HomeScreen_today_appointments/bloc/home_today_appointments_bloc.dart';
+import 'package:appoint_medic/application/doctor%20profile/bloc/doctor_profile_bloc.dart';
 import 'package:appoint_medic/application/login/login_bloc.dart';
 import 'package:appoint_medic/application/navbar/navbar_bloc.dart';
 import 'package:appoint_medic/application/profile/profile_details_bloc.dart';
@@ -10,6 +11,7 @@ import 'package:appoint_medic/presentation/onBoarding/doctor/screen_onb_doctor.d
 import 'package:appoint_medic/presentation/onBoarding/patient/screen_onB_patient.dart';
 import 'package:appoint_medic/presentation/patient/main_page.dart';
 import 'package:appoint_medic/presentation/register/screen_register.dart';
+import 'package:appoint_medic/presentation/splash/ScreenSplash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -255,19 +257,19 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                                     CircularProgressIndicator());
                                           } else if (state
                                               is LoginOnBordingPatient) {
-                                            WidgetsBinding.instance
-                                                .addPostFrameCallback((_) {
-                                              unfocus();
-                                              Navigator.of(context)
-                                                  .pushReplacement(
-                                                      MaterialPageRoute(
-                                                builder: (context) {
-                                                  return ScreenOnBoardingPatient(
-                                                    token: state.token,
-                                                  );
-                                                },
-                                              ));
-                                            });
+                                            // WidgetsBinding.instance
+                                            //     .addPostFrameCallback((_) {
+                                            //   unfocus();
+                                            //   Navigator.of(context)
+                                            //       .pushReplacement(
+                                            //           MaterialPageRoute(
+                                            //     builder: (context) {
+                                            //       return ScreenOnBoardingPatient(
+                                            //         token: state.token,
+                                            //       );
+                                            //     },
+                                            //   ));
+                                            // });
                                           }
                                           //------------------------------------------------Onboradind doctor
                                           else if (state
@@ -300,6 +302,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                             });
                                           } else if (state is LoginSucess) {
                                             if (state.role == 'patient') {
+                                              userType = 'Patient';
                                               context.read<NavbarBloc>().add(
                                                   PageChangeEvent(page: 0));
                                               //-----------------------------------------------------------------gettting profile details  event
@@ -334,8 +337,13 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                                 ));
                                               });
                                             } else if (state.role == 'doctor') {
+                                              userType = 'Doctor';
                                               WidgetsBinding.instance
                                                   .addPostFrameCallback((_) {
+                                                context
+                                                    .read<DoctorProfileBloc>()
+                                                    .add(
+                                                        GetDoctorProfileCall());
                                                 context.read<NavbarBloc>().add(
                                                     PageChangeEvent(page: 0));
                                                 Navigator.of(context)

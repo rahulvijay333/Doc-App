@@ -8,8 +8,7 @@ import 'package:appoint_medic/main.dart';
 import 'package:dio/dio.dart';
 
 class DoctorProfileService {
-  Future<(String, DoctorProfileModel?)> getDoctorProfile(
-     ) async {
+  Future<(String, DoctorProfileModel?)> getDoctorProfile() async {
     final SecureStorageService getToken = getIt<SecureStorageService>();
     final String? token = await getToken.retrieveToken();
 

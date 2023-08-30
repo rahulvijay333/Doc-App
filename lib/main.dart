@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:appoint_medic/application/AlertSlotTime/add_slot_alert_box_bloc.dart';
 import 'package:appoint_medic/application/Auth/authentication_bloc.dart';
 import 'package:appoint_medic/application/HomeScreen_today_appointments/bloc/home_today_appointments_bloc.dart';
@@ -15,6 +13,7 @@ import 'package:appoint_medic/application/doctor%20profile/bloc/doctor_profile_b
 import 'package:appoint_medic/application/doctor%20profile/edit_profile/bloc/doctor_profile_edit_bloc.dart';
 import 'package:appoint_medic/application/login/login_bloc.dart';
 import 'package:appoint_medic/application/navbar/navbar_bloc.dart';
+import 'package:appoint_medic/application/profile/edit_profile/bloc/patient_edit_profile_bloc.dart';
 import 'package:appoint_medic/application/profile/profile_details_bloc.dart';
 import 'package:appoint_medic/application/searchByCatergory/search_by_category_bloc.dart';
 import 'package:appoint_medic/application/slot/appointment_slot_bloc.dart';
@@ -38,8 +37,6 @@ import 'package:appoint_medic/infrastructure/search_screen/search_service.dart';
 import 'package:appoint_medic/infrastructure/specialities/get_speciality_service.dart';
 import 'package:appoint_medic/infrastructure/view_appointments_doctor_service/appointments_fetch_service.dart';
 import 'package:appoint_medic/infrastructure/view_appointments_patient_side/view_appointments_pat_service.dart';
-import 'package:appoint_medic/presentation/patient/booking/sucess_booking_4.dart';
-import 'package:appoint_medic/presentation/patient/messages/screen_view_message.dart';
 
 import 'package:appoint_medic/presentation/splash/ScreenSplash.dart';
 import 'package:flutter/material.dart';
@@ -70,7 +67,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final SecureStorageService secureStorageService = SecureStorageService();
     final ProfileService profileService = ProfileService();
 
     final ProfileDetailsBloc profileBloc = ProfileDetailsBloc(profileService);
@@ -160,10 +156,15 @@ class MyApp extends StatelessWidget {
             create: (context) => DoctorProfileBloc(doctProfService),
           ),
           BlocProvider(
-            create: (context) => HomeAppointmentTodayBloc(appointmentsDoctSideService),
-          
+            create: (context) =>
+                HomeAppointmentTodayBloc(appointmentsDoctSideService),
           ),
-          BlocProvider(create: (context) => DoctorProfileEditBloc(onboarding),)
+          BlocProvider(
+            create: (context) => DoctorProfileEditBloc(onboarding),
+          ),
+          BlocProvider(
+            create: (context) => PatientEditProfileBloc(onboarding),
+          )
         ],
         child:
             MaterialApp(debugShowCheckedModeBanner: false, home: ScreenSplash()

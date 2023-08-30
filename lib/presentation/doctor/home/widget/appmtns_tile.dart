@@ -41,7 +41,6 @@ class ApointTodayTileWidget extends StatelessWidget {
                   Text('Date : $formatedDate',
                       style: const TextStyle(
                           fontSize: 15, fontWeight: FontWeight.w500)),
-             
                 ],
               ),
               Row(
@@ -79,22 +78,22 @@ class ApointTodayTileWidget extends StatelessWidget {
                               },
                             ),
                     ),
-                  ), 
+                  ),
                   Container(
                     width: size.width * 0.55,
                     // color: Colors.green,
                     height: size.height * 0.15 * 0.60,
                     child: Column(
-                      
                       children: [
                         Text(
-                          patientName,maxLines: 1,
+                          patientName,
+                          maxLines: 1,
                           style: const TextStyle(fontSize: 22),
                         ),
                         Divider(),
-                              Text('Time : $startTime - $endTime',
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.w500))
+                        Text('Time : $startTime - $endTime',
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.w500))
                       ],
                     ),
                   ),

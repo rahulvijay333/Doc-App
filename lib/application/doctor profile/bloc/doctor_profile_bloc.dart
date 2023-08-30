@@ -14,7 +14,7 @@ class DoctorProfileBloc extends Bloc<DoctorProfileEvent, DoctorProfileState> {
   DoctorProfileBloc(this.doctorProfileService) : super(DoctorProfileInitial()) {
     on<GetDoctorProfileCall>((event, emit) async {
       emit(DoctorProfileLoading());
-    
+
       final (error, response) = await doctorProfileService.getDoctorProfile();
 
       if (error.isEmpty) {

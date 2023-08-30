@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:appoint_medic/core/api_endPoints/api_endpoints.dart';
 import 'package:appoint_medic/domain/models/chat_list/chatmessages_parsing/chat_messags.dart';
 import 'package:appoint_medic/domain/models/chat_list/get_chat_list_resp_model/get_chat_list_resp_model.dart';
+import 'package:appoint_medic/domain/response_models/new_message/new_chat_response/new_chat_response.dart';
 import 'package:appoint_medic/domain/token_storage/secure_storage.dart';
 import 'package:appoint_medic/main.dart';
 import 'package:dio/dio.dart';
@@ -17,14 +18,10 @@ class ChatService {
     final String? token = await getToken.retrieveToken();
 
     try {
-      log('message 2nd  1 call');
-
       final Response response = await Dio().get(ApiEndPoints.getAllChats,
           options: Options(
             headers: {'Authorization': 'Bearer $token'},
           ));
-
-      log('message 2nd  call');
 
       if (response.statusCode == 200) {
         List<GetChatListRespModel> chatList =
@@ -89,7 +86,7 @@ class ChatService {
     }
   }
 
-  Future<String> sendNewMessage(
+  Future<(String,NewChatResponse ?)> sendNewMessage(
       {required String message,
       required String role,
       required String chatRoomID}) async {
@@ -110,21 +107,21 @@ class ChatService {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         log('messega send sucessfull');
-        return ("");
+        return ("",NewChatResponse.fromJson(response.data));
       } else {
-        return ("Return other error code service");
+        return ("Return other error code service",null);
       }
     } catch (e) {
       if (e is DioException) {
         if (e.error is SocketException) {
-          return ('Server connection failed');
+          return ('Server connection failed',null);
         } else if (e.response!.statusCode == 500) {
-          return (e.message.toString());
+          return (e.message.toString(),null);
         } else {
-          return ('Some error excpt');
+          return ('Some error excpt',null);
         }
       } else {
-        return ('Api call Error in Booking service');
+        return ('Api call Error in Booking service',null);
       }
     }
   }

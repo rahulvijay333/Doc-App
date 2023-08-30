@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 class AppointmentListTileWidget extends StatelessWidget {
@@ -24,93 +26,93 @@ class AppointmentListTileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log((size.width * 0.12).toString());
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: Container(
-          height: size.height * 0.125,
+          height: size.height * 0.14,
+          width: size.width,
           color: Colors.blue.withOpacity(0.1),
-          child: Column(
-            //mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 8.0, right: 15, top: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      // color: Colors.red,
-                      width: size.width * 0.4,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Dr. $doctorname',
-                            style: const TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.w500),
-                          ),
-                          Text(speciality ?? '')
-                        ],
-                      ),
-                    ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: Container(
-                        width: 50,
-                        height: 50,
-                        child: Image.network(
-                          doctImageUrl ?? '',
-                          fit: BoxFit.cover,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0, right: 15, top: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                          // color: Colors.red,
+                        width: size.width * 0.7,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Dr. $doctorname',
+                              style: TextStyle(
+                                  fontSize: size.width * 0.7 * 0.07,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            Text(speciality ?? '')
+                          ],
                         ),
                       ),
+                      IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.message_outlined,
+                            color: Colors.blue,
+                          ))
+                    ],
+                  ),
+                ),
+                const Divider(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.calendar_today,
+                          size: 16,
+                        ),
+                        Text(date!),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.timer_outlined,
+                          size: 16,
+                        ),
+                        Text('$startTime - $endTime'),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Icon(
+                          bookingStatus == 'Approved'
+                              ? Icons.verified_user
+                              : Icons.pending_actions,
+                          size: 16,
+                          color: bookingStatus == 'Approved'
+                              ? Colors.green
+                              : Colors.red,
+                        ),
+                        Text(
+                          bookingStatus!,
+                          style: TextStyle(
+                              color: bookingStatus == 'Approved'
+                                  ? Colors.green
+                                  : Colors.red),
+                        ),
+                      ],
                     )
                   ],
-                ),
-              ),
-              const Divider(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.calendar_today,
-                        size: 16,
-                      ),
-                      Text(date!),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.timer_outlined,
-                        size: 16,
-                      ),
-                      Text('$startTime - $endTime'),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Icon(
-                        bookingStatus == 'Approved'
-                            ? Icons.verified_user
-                            : Icons.pending_actions,
-                        size: 16,
-                        color: bookingStatus == 'Approved'
-                            ? Colors.green
-                            : Colors.red,
-                      ),
-                      Text(
-                        bookingStatus!,
-                        style: TextStyle(
-                            color: bookingStatus == 'Approved'
-                                ? Colors.green
-                                : Colors.red),
-                      ),
-                    ],
-                  )
-                ],
-              )
-            ],
+                )
+              ],
+            ),
           )),
     );
   }

@@ -25,8 +25,7 @@ class DoctorProfileEditBloc
     });
 
     on<ClearDoctorEditProcessCall>((event, emit) {
-
-      emit( DoctorProfileEditInitial());
+      emit(DoctorProfileEditInitial());
     });
   }
 }

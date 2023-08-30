@@ -10,12 +10,12 @@ abstract class CreateAccountService {
   Future<(String error, NewUserResponse? response)> createAccount(
       {required CreateUserModel user, required String userType});
 
-  Future<(String error, OnboardingSucessResponseModel? response)>
-      onboardingPatient({
-    required String token,
-    required PatientProfileFormData patientForm,
+//-------------------------------------------patient profile update
+  Future<String> onboardingPatient({
+    required FormData patientForm,
   });
 
+//-------------onboarding doctor
   Future<(String error, OnboardingSucessResponseModel? response)>
       onboardingDoctor({
     required String token,

@@ -45,7 +45,8 @@ class HomeAppointmentsTile extends StatelessWidget {
                 leading: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Image(
-                      image: NetworkImage(doctImageUrl),fit: BoxFit.cover,
+                      image: NetworkImage(doctImageUrl),
+                      fit: BoxFit.cover,
                       width: 50,
                       height: 50,
                       errorBuilder: (context, error, stackTrace) {

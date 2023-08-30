@@ -46,68 +46,23 @@ class ScreenViewDoctorProfileBook extends StatelessWidget {
                 ),
               ),
               Container(
-                  height: size.height * 0.35,
-                  width: size.width,
-                  color: Colors.blue.withOpacity(0.40),
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          //-------------------------------------------------------------------profile image
-                          // color: Colors.amber,
-                          width: size.width * 0.50,
-                          height: size.height * 0.30 * 0.80,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              color: Colors.blue.shade100,
-                              image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: doctor.profilePicture == null
-                                      ? doctor.gender == 'female'
-                                          ? const AssetImage(
-                                              'assets/female_doctor.png')
-                                          : const AssetImage(
-                                              'assets/doctor_male.png')
-                                      : NetworkImage(
-                                              doctor.profilePicture!.secureUrl!)
-                                          as ImageProvider)),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            CircleAvatar(
-                              radius: 30,
-                              backgroundColor: Colors.white.withOpacity(0.5),
-                              child: const Text('+12 yrs'),
-                            ),
-                            CircleAvatar(
-                              radius: 30,
-                              backgroundColor: Colors.white.withOpacity(0.5),
-                              child: const Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text('5'),
-                                  Icon(
-                                    Icons.star,
-                                    color: Color.fromARGB(255, 255, 150, 59),
-                                  )
-                                ],
-                              ),
-                            ),
-                            CircleAvatar(
-                              radius: 30,
-                              backgroundColor: Colors.white.withOpacity(0.5),
-                              child: Text('+150k'),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  )),
+                //-------------------------------------------------------------------profile image
+                // color: Colors.amber,
+                // width: size.width * 0.50,
+                // height: size.height * 0.30 * 0.80,
+                height: size.height * 0.35,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(0),
+                    color: Colors.blue.shade100,
+                    image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: doctor.profilePicture == null
+                            ? doctor.gender == 'female'
+                                ? const AssetImage('assets/female_doctor.png')
+                                : const AssetImage('assets/doctor_male.png')
+                            : NetworkImage(doctor.profilePicture!.secureUrl!)
+                                as ImageProvider)),
+              ),
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Column(

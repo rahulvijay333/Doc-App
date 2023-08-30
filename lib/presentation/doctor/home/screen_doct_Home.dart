@@ -19,13 +19,8 @@ class ScreenDoctHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-       context
-                                            .read<HomeAppointmentTodayBloc>()
-                                            .add(ViewTodaysAppointments());
+    context.read<HomeAppointmentTodayBloc>().add(ViewTodaysAppointments());
     final size = MediaQuery.of(context).size;
-    log((size.height * 0.05).toString());
-
-    log('testing doctor name $name');
 
     return Container(
       width: size.width,
@@ -58,13 +53,37 @@ class ScreenDoctHome extends StatelessWidget {
                     padding: const EdgeInsets.only(
                         left: 8, top: 10, right: 8, bottom: 8),
                     //------------------------------------------------------name details
-                    child: ProfileTileCustom(size: size, name: name, doctorDetails: state.doctDetails,),
+                    child: ProfileTileCustom(
+                      size: size,
+                      name: name,
+                      doctorDetails: state.doctDetails,
+                    ),
                   );
                 }
                 if (state is DoctorPrifleFailure) {
-                  return const Center(
-                    child: Text('Offline'),
-                  );
+                  return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Offline',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      IconButton(
+                          onPressed: () {
+                            //------------------------------refresh
+
+                            context
+                                .read<DoctorProfileBloc>()
+                                .add(GetDoctorProfileCall());
+                          },
+                          icon: const Icon(
+                            Icons.refresh_outlined,
+                            color: Colors.white,
+                          ))
+                    ],
+                  ),
+                );
                 }
 
                 return Center(
@@ -114,7 +133,9 @@ class ScreenDoctHome extends StatelessWidget {
                       'Appointments',
                       style: TextStyle(fontSize: 22),
                     ),
-                    SizedBox(height: size.height*0.01,),
+                    SizedBox(
+                      height: size.height * 0.01,
+                    ),
                     Expanded(
                       child: BlocBuilder<HomeAppointmentTodayBloc,
                           HomeAppointmentTodayState>(
@@ -133,9 +154,8 @@ class ScreenDoctHome extends StatelessWidget {
                             }
 
                             return ListView.separated(
-                              physics: BouncingScrollPhysics(),
+                                physics: BouncingScrollPhysics(),
                                 itemBuilder: (context, index) {
-                          
                                   return ApointTodayTileWidget(
                                       size: size,
                                       patientName: state.appointmentList[index]
@@ -159,7 +179,8 @@ class ScreenDoctHome extends StatelessWidget {
                                 itemCount: state.appointmentList.length);
                           } else if (state is TodayAppointmentFailed) {
                             return Center(
-                              child: Column(mainAxisAlignment: MainAxisAlignment.center,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text('Error occured'),
                                   TextButton(
@@ -192,7 +213,7 @@ class ScreenDoctHome extends StatelessWidget {
                             ),
                           );
 
-                          return Center(child: Text('data loading'));
+                         
                         },
                       ),
                     )

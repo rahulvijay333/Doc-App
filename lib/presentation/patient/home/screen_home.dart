@@ -35,6 +35,7 @@ class _ScreenHomeState extends State<ScreenHome> {
     final size = MediaQuery.of(context).size;
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         //-------------------------------------------------1st section
         Container(
@@ -66,19 +67,23 @@ class _ScreenHomeState extends State<ScreenHome> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             //welcome
-                            SizedBox(
-                                //color: Colors.amber,
+                            Container(
+                                // color: Colors.amber,
                                 width: size.width * 0.20,
-                                height: size.height * 0.15 * 0.80,
-                                child: CircleAvatar(
-                                    backgroundColor: Colors.transparent,
-                                    backgroundImage: state.userProfile.user!
-                                                .profilePicture?.secureUrl !=
-                                            null
-                                        ? NetworkImage(state.userProfile.user!
-                                            .profilePicture!.secureUrl!)
-                                        : const AssetImage('assets/patient.png')
-                                            as ImageProvider)),
+                                height: size.height * 0.15 * 0.60,
+                                child: Center(
+                                  child: CircleAvatar(
+                                      radius: 32,
+                                      backgroundColor: Colors.transparent,
+                                      backgroundImage: state.userProfile.user!
+                                                  .profilePicture?.secureUrl !=
+                                              null
+                                          ? NetworkImage(state.userProfile.user!
+                                              .profilePicture!.secureUrl!)
+                                          : const AssetImage(
+                                                  'assets/patient.png')
+                                              as ImageProvider),
+                                )),
 
                             //---------------------------------------name and welcome
 
@@ -90,7 +95,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  // mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     const Text(
                                       'Welcome',
@@ -105,7 +110,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                                     Text(
                                       state.userProfile.user!.fullName!,
                                       style: const TextStyle(
-                                          fontSize: 22,
+                                          fontSize: 24,
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold),
                                     )
@@ -120,7 +125,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                               height: size.height * 0.15 * 0.40,
                               width: size.width * 0.10,
                               child: CircleAvatar(
-                                radius: 21,
+                                radius: 18,
                                 backgroundColor: Colors.white.withOpacity(0.2),
                                 child: const CircleAvatar(
                                   radius: 18,
@@ -221,110 +226,104 @@ class _ScreenHomeState extends State<ScreenHome> {
             ],
           ),
         ),
-        // const SizedBox(
-        //   height: 15,
-        // ),
+        const SizedBox(
+          height: 15,
+        ),
+        Padding(
+          padding: EdgeInsets.only(
+            left: size.width * 0.05,
+            right: size.width * 0.05,
+          ),
+          child: const Text(
+            'Specialities',
+            style: TextStyle(
+                fontSize: 18, fontWeight: FontWeight.w500, color: Colors.blue),
+          ),
+        ),
 //---------------------------------------------------------------specility
         Padding(
           padding: EdgeInsets.only(
-              left: size.width * 0.05, right: size.width * 0.05, top: 20),
+              left: size.width * 0.05, right: size.width * 0.05, top: 10),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Container(
-              height: size.height * 0.20,
+              height: size.height * 0.15,
               width: size.width,
               color: Colors.blue[100],
               child: Padding(
                 padding: const EdgeInsets.only(left: 5, right: 8, top: 5),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    const Text(
-                      'Specialities',
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.blue),
-                    ),
-                    Expanded(
-                      child: BlocBuilder<SpecialityBloc, SpecialityState>(
-                        builder: (context, state) {
-                          if (state is SpecialityLoading) {
-                            return const Center(
-                              child: CircularProgressIndicator(
-                                strokeWidth: 1,
-                              ),
-                            );
-                          } else if (state is SpecialitySucess) {
-                            return Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 8.0, right: 8.0, top: 25),
-                              child: ListView.separated(
-                                  physics: const BouncingScrollPhysics(),
-                                  scrollDirection: Axis.horizontal,
-                                  shrinkWrap: true,
-                                  itemBuilder: (context, index) {
-                                    return Column(
-                                      // mainAxisAlignment:
-                                      //     MainAxisAlignment.spaceAround,
-                                      children: [
-                                        GestureDetector(
-                                          onTap: () {
-                                            Navigator.of(context)
-                                                .push(MaterialPageRoute(
-                                              builder: (context) {
-                                                return ScreenSpeciality(
-                                                    speciality: state
-                                                        .specialityList[index]);
-                                              },
-                                            ));
-                                          },
-                                          child: CircleAvatar(
-                                            radius: 25,
-                                            backgroundColor: Colors.white,
-                                            child: Image.network(state
-                                                .specialityList[index]
-                                                .specialityImg!
-                                                .secureUrl!),
-                                          ),
-                                        ),
-                                        Text(state.specialityList[index].name!)
-                                      ],
-                                    );
-                                  },
-                                  separatorBuilder: (context, index) {
-                                    return const SizedBox(
-                                      width: 14,
-                                    );
-                                  },
-                                  itemCount: state.specialityList.length),
-                            );
-                          } else if (state is SpecialityFailure) {
-                            return Center(
-                              child: IconButton(
-                                  onPressed: () {
-                                    //----------------------------------------------------reload speciality
-                                    context
-                                        .read<SpecialityBloc>()
-                                        .add(DisplaySpecialityHome());
-                                  },
-                                  icon: const Icon(
-                                    Icons.refresh,
-                                    color: Colors.blue,
-                                  )),
-                            );
-                          }
+                child: BlocBuilder<SpecialityBloc, SpecialityState>(
+                  builder: (context, state) {
+                    if (state is SpecialityLoading) {
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          strokeWidth: 1,
+                        ),
+                      );
+                    } else if (state is SpecialitySucess) {
+                      return Padding(
+                        padding: const EdgeInsets.only(
+                            left: 8.0, right: 8.0, top: 25),
+                        child: ListView.separated(
+                            physics: const BouncingScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) {
+                              return Column(
+                                // mainAxisAlignment:
+                                //     MainAxisAlignment.spaceAround,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(
+                                        builder: (context) {
+                                          return ScreenSpeciality(
+                                              speciality:
+                                                  state.specialityList[index]);
+                                        },
+                                      ));
+                                    },
+                                    child: CircleAvatar(
+                                      radius: 25,
+                                      backgroundColor: Colors.white,
+                                      child: Image.network(state
+                                          .specialityList[index]
+                                          .specialityImg!
+                                          .secureUrl!),
+                                    ),
+                                  ),
+                                  Text(state.specialityList[index].name!)
+                                ],
+                              );
+                            },
+                            separatorBuilder: (context, index) {
+                              return const SizedBox(
+                                width: 14,
+                              );
+                            },
+                            itemCount: state.specialityList.length),
+                      );
+                    } else if (state is SpecialityFailure) {
+                      return Center(
+                        child: IconButton(
+                            onPressed: () {
+                              //----------------------------------------------------reload speciality
+                              context
+                                  .read<SpecialityBloc>()
+                                  .add(DisplaySpecialityHome());
+                            },
+                            icon: const Icon(
+                              Icons.refresh,
+                              color: Colors.blue,
+                            )),
+                      );
+                    }
 
-                          return const Center(
-                            child: Text('Connectivity error'),
-                          );
-                        },
-                      ),
-                    )
-                  ],
+                    return const Center(
+                      child: Text('Connectivity error'),
+                    );
+                  },
                 ),
               ),
             ),

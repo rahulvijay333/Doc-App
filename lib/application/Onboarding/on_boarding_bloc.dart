@@ -12,18 +12,18 @@ part 'on_boarding_state.dart';
 class OnBoardingBloc extends Bloc<OnBoardingEvent, OnBoardingState> {
   final CreateServiceImpl createAccountService;
   OnBoardingBloc(this.createAccountService) : super(OnBoardingInitial()) {
-    on<OnBoardPatientEvent>((event, emit) async {
-      emit(OnBoardingLoading());
+    // on<OnBoardPatientEvent>((event, emit) async {
+    //   emit(OnBoardingLoading());
 
-      final (error, response) = await createAccountService.onboardingPatient(
-          token: event.token, patientForm: event.patientform);
+    //   final (error, response) = await createAccountService.onboardingPatient(
+    //       token: event.token, patientForm: event.patientform);
 
-      if (error.isEmpty) {
-        emit(OnBordingSuccess());
-      } else {
-        emit(OnBordingFailure(error: error));
-      }
-    });
+    //   if (error.isEmpty) {
+    //     emit(OnBordingSuccess());
+    //   } else {
+    //     emit(OnBordingFailure(error: error));
+    //   }
+    // });
 
     on<OnBoardDoctorEvent>((event, emit) async {
       emit(OnBoardingLoading());

@@ -69,12 +69,15 @@ class CreateServiceImpl implements CreateAccountService {
     }
   }
 
+  //oneboarding function changed to profile update
 //------------------------------------------------------------------------patient
   @override
-  Future<(String, OnboardingSucessResponseModel?)> onboardingPatient({
-    required String token,
-    required PatientProfileFormData patientForm,
+  Future<String> onboardingPatient({
+    required FormData patientForm,
   }) async {
+    final SecureStorageService getToken = getIt<SecureStorageService>();
+    final String? token = await getToken.retrieveToken();
+
     try {
       // FormData formData = FormData();
 
@@ -83,14 +86,7 @@ class CreateServiceImpl implements CreateAccountService {
       //     await MultipartFile.fromFile(patientForm.profilePic.path)));
 
       final Response response = await Dio().put(ApiEndPoints.onboardingPatient,
-          data: jsonEncode({
-            "username": patientForm.username,
-            "gender": patientForm.gender,
-            "phone": patientForm.phone,
-            "houseName": patientForm.houseName,
-            "city": patientForm.city,
-            "state": patientForm.state,
-          }),
+          data: patientForm,
           options: Options(
             headers: {
               'Authorization': 'Bearer $token',
@@ -98,35 +94,28 @@ class CreateServiceImpl implements CreateAccountService {
           ));
 
       if (response.statusCode == 200) {
-        try {
-          final responseData =
-              OnboardingSucessResponseModel.fromJson(response.data);
-        } catch (e) {
-          log('Error parsing response of onboarding');
-          return ('Error in parsing', null);
-        }
-        log('Saved success updated');
+        log('Patient profile updated');
 
-        return ('', OnboardingSucessResponseModel.fromJson(response.data));
+        return ('');
       } else {
-        return ("Error", null);
+        return ("Error");
       }
     } catch (error) {
       if (error is DioException) {
         if (error.error is SocketException) {
           log('Socket error occurred: ${error.error}');
 
-          return ('Error connecting to end point', null);
+          return ('Error connecting to end point');
         } else {
           log('Dio error occurred: $error');
-          return (error.toString(), null);
+          return (error.toString());
         }
       }
 
       log(error.toString());
       log('Error is onboarding service implementation call');
 
-      return ('Some error occurred in api call', null);
+      return ('Some error occurred in api call');
     }
   }
 
