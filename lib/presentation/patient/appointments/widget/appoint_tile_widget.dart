@@ -1,6 +1,9 @@
 import 'dart:developer';
 
+import 'package:appoint_medic/application/chat/create_chat/bloc/create_chat_bloc.dart';
+import 'package:appoint_medic/presentation/patient/messages/create_chat/screen_createChat.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppointmentListTileWidget extends StatelessWidget {
   const AppointmentListTileWidget({
@@ -13,6 +16,7 @@ class AppointmentListTileWidget extends StatelessWidget {
     required this.speciality,
     required this.doctImageUrl,
     required this.bookingStatus,
+    required this.doctorID,
   });
 
   final Size size;
@@ -23,6 +27,8 @@ class AppointmentListTileWidget extends StatelessWidget {
       speciality,
       doctImageUrl,
       bookingStatus;
+
+  final String doctorID;
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +48,38 @@ class AppointmentListTileWidget extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                          height: size.height * 0.14 * 0.4,
+                          width: size.width * 0.15,
+                          color: Colors.amber,
+                          child: Image(
+                        image: NetworkImage(doctImageUrl!),
+                        fit: BoxFit.cover,
+                        width: 50,
+                        height: 50,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Image.asset('assets/patient.png');
+                        },
+                        loadingBuilder: (context, child, loadingProgress) {
+                          if (loadingProgress == null) {
+                            return child;
+                          }
+                      
+                          return const Center(
+                            child: CircularProgressIndicator(
+                              strokeWidth: 1,
+                            ),
+                          );
+                        },
+                                          ),
+                          
+                        ),
+                      ),
                       Container(
-                          // color: Colors.red,
-                        width: size.width * 0.7,
+                        // color: Colors.red,
+                        width: size.width * 0.5,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -59,7 +94,16 @@ class AppointmentListTileWidget extends StatelessWidget {
                         ),
                       ),
                       IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            //-----------------------------------------------chat intiate
+                            log(doctorID);
+
+                            BlocProvider.of<CreateChatBloc>(context)
+                                .add(StartChat(userID: doctorID));
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                              return ScreenCreateChat(doctorID: doctorID);
+                            },));
+                          },
                           icon: const Icon(
                             Icons.message_outlined,
                             color: Colors.blue,

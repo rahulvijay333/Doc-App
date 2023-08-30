@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:appoint_medic/application/chat/create_chat_doct/bloc/create_chat_doc_bloc.dart';
 import 'package:appoint_medic/application/chat/see_messages/bloc/see_messages_bloc.dart';
 import 'package:appoint_medic/domain/response_models/new_message/new_chat_response/new_chat_response.dart';
 import 'package:appoint_medic/domain/token_storage/secure_storage.dart';
@@ -91,6 +92,10 @@ class _ScreenViewMesgDoctorState extends State<ScreenViewMesgDoctor> {
           onWillPop: () async {
             context.read<SeeMessagesBloc>().add(ClearMessageEvent());
 
+            FocusManager.instance.primaryFocus?.unfocus();
+
+            context.read<CreateChatDocBloc>().add(ClearStartChat());
+
             return true;
           },
           child: Column(
@@ -107,6 +112,12 @@ class _ScreenViewMesgDoctorState extends State<ScreenViewMesgDoctor> {
                           context
                               .read<SeeMessagesBloc>()
                               .add(ClearMessageEvent());
+                          FocusManager.instance.primaryFocus?.unfocus();
+
+                          context
+                              .read<CreateChatDocBloc>()
+                              .add(ClearStartChat());
+
                           Navigator.of(context).pop();
                         },
                         icon: const Icon(
@@ -147,6 +158,11 @@ class _ScreenViewMesgDoctorState extends State<ScreenViewMesgDoctor> {
                         }
 
                         if (state is MessagesSucess) {
+                          if (state.messagesList.isEmpty) {
+                            return Center(
+                              child: Text('No Conversations'),
+                            );
+                          }
                           WidgetsBinding.instance.addPostFrameCallback((_) {
                             // Scroll to the bottom after the ListView updates
                             _scrollController.jumpTo(
@@ -293,8 +309,6 @@ class _ScreenViewMesgDoctorState extends State<ScreenViewMesgDoctor> {
                                         socket: socket));
                               }
                               msgController.clear();
-                              _scrollController.jumpTo(
-                                  _scrollController.position.maxScrollExtent);
 
                               //
                             },

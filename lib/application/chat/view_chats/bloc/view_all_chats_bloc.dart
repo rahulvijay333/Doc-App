@@ -19,7 +19,11 @@ class ViewAllChatsBloc extends Bloc<ViewAllChatsEvent, ViewAllChatsState> {
       final (error, response) = await _chatService.getAllChats();
 
       if (error.isEmpty) {
-        emit(ViewAllChatsSuccess(chatsList: response!));
+        if (response == null) {
+          emit(ViewAllChatsSuccess(chatsList: []));
+        } else {
+          emit(ViewAllChatsSuccess(chatsList: response));
+        }
       } else {
         log('Error mesage found in bloc');
         emit(ViewAllChatsFailure(error: 'Error found in viewChatsBloc'));

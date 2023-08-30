@@ -6,6 +6,8 @@ import 'package:appoint_medic/application/Payment/payment_bloc.dart';
 import 'package:appoint_medic/application/Search/search_bloc.dart';
 import 'package:appoint_medic/application/booking/patientSelectSlot/bloc/patient_slot_select_bloc.dart';
 import 'package:appoint_medic/application/booking/patientTrackBooking/bloc/booking_tracker_bloc.dart';
+import 'package:appoint_medic/application/chat/create_chat/bloc/create_chat_bloc.dart';
+import 'package:appoint_medic/application/chat/create_chat_doct/bloc/create_chat_doc_bloc.dart';
 import 'package:appoint_medic/application/chat/see_messages/bloc/see_messages_bloc.dart';
 import 'package:appoint_medic/application/chat/view_chats/bloc/view_all_chats_bloc.dart';
 import 'package:appoint_medic/application/doctor%20profile/appointments_section/bloc/home_appointment_today_bloc.dart';
@@ -164,7 +166,11 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => PatientEditProfileBloc(onboarding),
-          )
+          ),
+          BlocProvider(
+            create: (context) => CreateChatBloc(chatService),
+          ),
+          BlocProvider(create: (context) => CreateChatDocBloc(chatService),)
         ],
         child:
             MaterialApp(debugShowCheckedModeBanner: false, home: ScreenSplash()

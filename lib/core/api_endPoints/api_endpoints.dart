@@ -25,6 +25,7 @@ class ApiEndPoints {
   static const getAllChats = '$baseUrl/chat/mychat';
   static const getAllMessages = '$baseUrl/message';
   static const sendNewMessage = '$baseUrl/message';
+  static const createNewChat = '$baseUrl/chat/patient/create';
 
   //-----------------doctor login
   static const doctorLogin = '$baseUrl/auth/doctor/login';
@@ -44,4 +45,8 @@ class ApiEndPoints {
   static const doctGetAllAppoints = '$baseUrl/doctor/appointments';
   static const doctApproveBooking = '$baseUrl/appointment';
   static const doctCancelBooking = '$baseUrl/appointment';
+
+  //chat 
+
+  static const createNewChatByDoc = '$baseUrl/chat/doctor/create';
 }

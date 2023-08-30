@@ -1,4 +1,7 @@
+import 'package:appoint_medic/application/chat/create_chat/bloc/create_chat_bloc.dart';
+import 'package:appoint_medic/presentation/patient/messages/create_chat/screen_createChat.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 class HomeAppointmentsTile extends StatelessWidget {
@@ -12,6 +15,7 @@ class HomeAppointmentsTile extends StatelessWidget {
     required this.speciality,
     required this.doctImageUrl,
     required this.bookingStatus,
+    required this.doctorID,
   });
   final DateTime date;
   final Size size;
@@ -20,7 +24,8 @@ class HomeAppointmentsTile extends StatelessWidget {
       endTime,
       speciality,
       doctImageUrl,
-      bookingStatus;
+      bookingStatus,
+      doctorID;
   @override
   Widget build(BuildContext context) {
     String formatedDate = DateFormat('dd MMM yyyy').format(date);
@@ -64,10 +69,19 @@ class HomeAppointmentsTile extends StatelessWidget {
                         );
                       },
                     )),
-                title: Text(doctorname),
+                title: Text("Dr.$doctorname"),
                 subtitle: Text(speciality),
                 trailing: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      //--------------------------------------------------chat function
+                      BlocProvider.of<CreateChatBloc>(context)
+                          .add(StartChat(userID: doctorID));
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) {
+                          return ScreenCreateChat(doctorID: doctorID);
+                        },
+                      ));
+                    },
                     icon: const Icon(
                       Icons.message,
                       color: Colors.blue,

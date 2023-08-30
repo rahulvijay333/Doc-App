@@ -8,7 +8,6 @@ class MessagesLoading extends SeeMessagesState {}
 
 class MessagesSucess extends SeeMessagesState {
   final List<ChatMessage> messagesList;
- 
 
   MessagesSucess({required this.messagesList});
 }

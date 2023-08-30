@@ -1,6 +1,9 @@
 import 'dart:developer';
 
+import 'package:appoint_medic/application/chat/create_chat_doct/bloc/create_chat_doc_bloc.dart';
+import 'package:appoint_medic/presentation/doctor/messages/create%20_chat/create_chat_doc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 class AppointmentTileCustom extends StatelessWidget {
@@ -14,7 +17,7 @@ class AppointmentTileCustom extends StatelessWidget {
     required this.isDoctorApproved,
     required this.patientImage,
     required this.bookID,
-    required this.isCancelled,
+    required this.isCancelled, required this.patientID,
   });
 
   final String patientName;
@@ -26,6 +29,7 @@ class AppointmentTileCustom extends StatelessWidget {
   final bool isDoctorApproved;
   final bool isCancelled;
   final String bookID;
+  final String patientID;
 
   @override
   Widget build(BuildContext context) {
@@ -120,6 +124,16 @@ class AppointmentTileCustom extends StatelessWidget {
                     ],
                   ),
                 ),
+              ),
+              Center(
+                child: IconButton(onPressed: () {
+                  //------------------------------------------message function
+                 BlocProvider.of<CreateChatDocBloc>(context).add(StartChat(userID: patientID));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                    return ScreenCreateChatDoc();
+                  },));
+              
+                }, icon: Icon(Icons.message_outlined,color: Colors.blue,)),
               )
             ],
           ),

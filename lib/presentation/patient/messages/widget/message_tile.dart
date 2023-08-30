@@ -45,7 +45,7 @@ class MessageTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                   "$senderName",
+                    "$senderName",
                     style: const TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 20,
@@ -66,9 +66,7 @@ class MessageTile extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(
-                width:
-                    8), 
+            const SizedBox(width: 8),
             Container(
               child: Center(
                 child: Text(

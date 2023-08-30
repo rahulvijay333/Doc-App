@@ -16,8 +16,6 @@ class ScreemDoctMessage extends StatelessWidget {
 
     BlocProvider.of<ViewAllChatsBloc>(context).add(GetAllChatsCall());
 
-
-
     return Container(
         width: double.maxFinite,
         height: double.maxFinite,

@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:appoint_medic/core/api_endPoints/api_endpoints.dart';
 import 'package:appoint_medic/domain/models/chat_list/chatmessages_parsing/chat_messags.dart';
+import 'package:appoint_medic/domain/models/chat_list/create_chat_by_patient_response/create_chat_by_patient_response.dart';
 import 'package:appoint_medic/domain/models/chat_list/get_chat_list_resp_model/get_chat_list_resp_model.dart';
 import 'package:appoint_medic/domain/response_models/new_message/new_chat_response/new_chat_response.dart';
 import 'package:appoint_medic/domain/token_storage/secure_storage.dart';
@@ -28,6 +29,89 @@ class ChatService {
             GetChatListRespModel.fromJsonList(response.data);
 
         return ("", chatList);
+      } else {
+        return ("Return other error code service", null);
+      }
+    } catch (e) {
+
+      
+     if (e is DioException) {
+        if (e.error is SocketException) {
+          return ('Server connection failed', null);
+        } else if(e.response!.statusCode == 404){
+          log('No chats found');
+          return ('',null);
+        }
+        
+        else if (e.response!.statusCode == 500) {
+          return (e.message.toString(), null);
+        } else {
+          return ('Some error excpt', null);
+        }
+      } else {
+        return ('Api call Error in Booking service', null);
+      }
+    }
+  }
+
+  Future<(String, CreateChatByPatientResponse?)> createNewChatByDoctor(
+      {required String patientID}) async {
+    final SecureStorageService getToken = getIt<SecureStorageService>();
+    final String? token = await getToken.retrieveToken();
+
+    try {
+      log('creating new  chat');
+
+      final Response response =
+          await Dio().post('${ApiEndPoints.createNewChatByDoc}/$patientID',
+              options: Options(
+                headers: {'Authorization': 'Bearer $token'},
+              ));
+
+      log(response.statusCode.toString());
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        log('creating new  chat sucess');
+
+        return ("", CreateChatByPatientResponse.fromJson(response.data));
+      } else {
+        return ("Return other error code service", null);
+      }
+    } catch (e) {
+      if (e is DioException) {
+        if (e.error is SocketException) {
+          return ('Server connection failed', null);
+        } else if (e.response!.statusCode == 500) {
+          return (e.message.toString(), null);
+        } else {
+          return ('Some error excpt', null);
+        }
+      } else {
+        return ('Api call Error in Booking service', null);
+      }
+    }
+  }
+
+  Future<(String, CreateChatByPatientResponse?)> createNewChatByPatient(
+      {required String doctorID}) async {
+    final SecureStorageService getToken = getIt<SecureStorageService>();
+    final String? token = await getToken.retrieveToken();
+
+    try {
+      log('creating new  chat');
+
+      final Response response =
+          await Dio().post('${ApiEndPoints.createNewChat}/$doctorID',
+              options: Options(
+                headers: {'Authorization': 'Bearer $token'},
+              ));
+
+      log(response.statusCode.toString());
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        log('creating new  chat sucess');
+
+        return ("", CreateChatByPatientResponse.fromJson(response.data));
       } else {
         return ("Return other error code service", null);
       }
@@ -86,7 +170,7 @@ class ChatService {
     }
   }
 
-  Future<(String,NewChatResponse ?)> sendNewMessage(
+  Future<(String, NewChatResponse?)> sendNewMessage(
       {required String message,
       required String role,
       required String chatRoomID}) async {
@@ -107,21 +191,21 @@ class ChatService {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         log('messega send sucessfull');
-        return ("",NewChatResponse.fromJson(response.data));
+        return ("", NewChatResponse.fromJson(response.data));
       } else {
-        return ("Return other error code service",null);
+        return ("Return other error code service", null);
       }
     } catch (e) {
       if (e is DioException) {
         if (e.error is SocketException) {
-          return ('Server connection failed',null);
+          return ('Server connection failed', null);
         } else if (e.response!.statusCode == 500) {
-          return (e.message.toString(),null);
+          return (e.message.toString(), null);
         } else {
-          return ('Some error excpt',null);
+          return ('Some error excpt', null);
         }
       } else {
-        return ('Api call Error in Booking service',null);
+        return ('Api call Error in Booking service', null);
       }
     }
   }

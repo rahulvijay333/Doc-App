@@ -92,6 +92,8 @@ class ScreenTodayAppointmentPatient extends StatelessWidget {
                   speciality: speciality,
                   doctImageUrl: doctImage,
                   bookingStatus: bookingstatus,
+                  doctorID:
+                      state.availableAppoints.appointments![index].doctorId!,
                 );
               },
               separatorBuilder: (context, index) {

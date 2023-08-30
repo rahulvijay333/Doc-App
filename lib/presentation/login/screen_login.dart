@@ -1,4 +1,5 @@
 import 'package:appoint_medic/application/HomeScreen_today_appointments/bloc/home_today_appointments_bloc.dart';
+import 'package:appoint_medic/application/Onboarding/on_boarding_bloc.dart';
 import 'package:appoint_medic/application/doctor%20profile/bloc/doctor_profile_bloc.dart';
 import 'package:appoint_medic/application/login/login_bloc.dart';
 import 'package:appoint_medic/application/navbar/navbar_bloc.dart';
@@ -35,6 +36,11 @@ class _ScreenLoginState extends State<ScreenLogin> {
   final _formkey = GlobalKey<FormState>();
   String emailError = '';
   String passwordError = '';
+  @override
+  void initState() {
+    BlocProvider.of<OnBoardingBloc>(context).add(ClearOnboardingState());
+    super.initState();
+  }
 
   Widget customRadio(String label) {
     return Row(

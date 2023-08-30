@@ -62,28 +62,28 @@ class ScreenDoctHome extends StatelessWidget {
                 }
                 if (state is DoctorPrifleFailure) {
                   return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'Offline',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      IconButton(
-                          onPressed: () {
-                            //------------------------------refresh
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'Offline',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        IconButton(
+                            onPressed: () {
+                              //------------------------------refresh
 
-                            context
-                                .read<DoctorProfileBloc>()
-                                .add(GetDoctorProfileCall());
-                          },
-                          icon: const Icon(
-                            Icons.refresh_outlined,
-                            color: Colors.white,
-                          ))
-                    ],
-                  ),
-                );
+                              context
+                                  .read<DoctorProfileBloc>()
+                                  .add(GetDoctorProfileCall());
+                            },
+                            icon: const Icon(
+                              Icons.refresh_outlined,
+                              color: Colors.white,
+                            ))
+                      ],
+                    ),
+                  );
                 }
 
                 return Center(
@@ -212,8 +212,6 @@ class ScreenDoctHome extends StatelessWidget {
                               ],
                             ),
                           );
-
-                         
                         },
                       ),
                     )

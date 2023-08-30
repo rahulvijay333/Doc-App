@@ -119,7 +119,7 @@ class ScreenMesgsPatient extends StatelessWidget {
                       return ListView.separated(
                           itemBuilder: (context, index) {
                             return InkWell(
-                              //------------------------------view message
+                              //------------------------------view ----------------------sending to view messages screen
 
                               onTap: () {
                                 context.read<SeeMessagesBloc>().add(

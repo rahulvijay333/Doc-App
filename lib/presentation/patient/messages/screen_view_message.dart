@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:appoint_medic/application/chat/create_chat/bloc/create_chat_bloc.dart';
 import 'package:appoint_medic/application/chat/see_messages/bloc/see_messages_bloc.dart';
 import 'package:appoint_medic/domain/response_models/new_message/new_chat_response/new_chat_response.dart';
 import 'package:appoint_medic/domain/token_storage/secure_storage.dart';
@@ -81,7 +82,9 @@ class _ScreenViewMesgPatientState extends State<ScreenViewMesgPatient> {
         // backgroundColor: Colors.blue.shade100,
         body: WillPopScope(
           onWillPop: () async {
+            FocusManager.instance.primaryFocus?.unfocus();
             context.read<SeeMessagesBloc>().add(ClearMessageEvent());
+            context.read<CreateChatBloc>().add(ClearStartChat());
 
             return true;
           },
@@ -100,6 +103,7 @@ class _ScreenViewMesgPatientState extends State<ScreenViewMesgPatient> {
                           context
                               .read<SeeMessagesBloc>()
                               .add(ClearMessageEvent());
+                          FocusManager.instance.primaryFocus?.unfocus();
                           Navigator.of(context).pop();
                         },
                         icon: const Icon(
@@ -138,9 +142,16 @@ class _ScreenViewMesgPatientState extends State<ScreenViewMesgPatient> {
                             builder: (context, state) {
                               if (state is MessagesLoading) {
                                 return const Center(
-                                  child: Text('Loading..'),
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 1,
+                                  ),
                                 );
                               } else if (state is MessagesSucess) {
+                                if (state.messagesList.isEmpty) {
+                                  return Center(
+                                    child: Text('No Conversations'),
+                                  );
+                                }
                                 WidgetsBinding.instance
                                     .addPostFrameCallback((_) {
                                   // Scroll to the bottom after the ListView updates
@@ -290,8 +301,6 @@ class _ScreenViewMesgPatientState extends State<ScreenViewMesgPatient> {
                                               socket: socket));
                                     }
                                     msgController.clear();
-                                    _scrollController.jumpTo(_scrollController
-                                        .position.maxScrollExtent);
                                   },
                                   icon: const Icon(
                                     Icons.send,

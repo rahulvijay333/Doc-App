@@ -20,8 +20,11 @@ class SeeMessagesBloc extends Bloc<SeeMessagesEvent, SeeMessagesState> {
 
       if (error.isEmpty) {
         // log(response.toString());
-
-        emit(MessagesSucess(messagesList: response!));
+        if (response == null) {
+          emit(MessagesSucess(messagesList: []));
+        } else {
+          emit(MessagesSucess(messagesList: response));
+        }
       } else {
         emit(MessagesFailed());
       }

@@ -1,4 +1,7 @@
+import 'package:appoint_medic/application/chat/create_chat_doct/bloc/create_chat_doc_bloc.dart';
+import 'package:appoint_medic/presentation/doctor/messages/create%20_chat/create_chat_doc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 class ApointTodayTileWidget extends StatelessWidget {
@@ -90,9 +93,9 @@ class ApointTodayTileWidget extends StatelessWidget {
                           maxLines: 1,
                           style: const TextStyle(fontSize: 22),
                         ),
-                        Divider(),
+                        const Divider(),
                         Text('Time : $startTime - $endTime',
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 15, fontWeight: FontWeight.w500))
                       ],
                     ),
@@ -100,7 +103,16 @@ class ApointTodayTileWidget extends StatelessWidget {
                   Container(
                     // color: Colors.grey,
                     child: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          //-----------------------------------chat function
+                          BlocProvider.of<CreateChatDocBloc>(context)
+                              .add(StartChat(userID: patientID));
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) {
+                              return const ScreenCreateChatDoc();
+                            },
+                          ));
+                        },
                         icon: const Icon(
                           Icons.chat,
                           color: Colors.blue,

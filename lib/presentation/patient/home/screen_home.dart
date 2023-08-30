@@ -137,26 +137,17 @@ class _ScreenHomeState extends State<ScreenHome> {
                         );
                       } else if (state is ProfileFailed) {
                         return Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                'Reload',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              IconButton(
-                                  onPressed: () {
-                                    //-----------------------------------reload
-                                    context
-                                        .read<ProfileDetailsBloc>()
-                                        .add(GetProfileDetails(widget.id));
-                                  },
-                                  icon: const Icon(
-                                    Icons.refresh,
-                                    color: Colors.white,
-                                  ))
-                            ],
-                          ),
+                          child: IconButton(
+                              onPressed: () {
+                                //-----------------------------------reload
+                                context
+                                    .read<ProfileDetailsBloc>()
+                                    .add(GetProfileDetails(widget.id));
+                              },
+                              icon: const Icon(
+                                Icons.refresh,
+                                color: Colors.white,
+                              )),
                         );
                       }
 
@@ -331,101 +322,106 @@ class _ScreenHomeState extends State<ScreenHome> {
         ),
 
         //------------------------------------------2nd section
-        Expanded(
-          child: Container(
-            width: size.width,
-            height: size.height * 0.65,
-            child: Padding(
-              padding: EdgeInsets.only(
-                  left: size.width * 0.05,
-                  right: size.width * 0.05,
-                  top: size.height * 0.65 * 0.01),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Today Appointments',
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.blue),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Expanded(
-                    child: BlocBuilder<HomeTodayAppointmentsBloc,
-                        HomeTodayAppointmentsState>(
-                      builder: (context, state) {
-                        if (state is HomeTodayAppointsLoading) {
+        Container(
+          // color: Colors.red,
+          width: size.width,
+          height: size.height * 0.45,
+          child: Padding(
+            padding: EdgeInsets.only(
+                left: size.width * 0.05,
+                right: size.width * 0.05,
+                top: size.height * 0.65 * 0.01),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Today Appointments',
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.blue),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                Container(
+                  //  color: Colors.amber,
+                  height: size.height * 0.38,
+                  width: size.width,
+                  child: BlocBuilder<HomeTodayAppointmentsBloc,
+                      HomeTodayAppointmentsState>(
+                    builder: (context, state) {
+                      if (state is HomeTodayAppointsLoading) {
+                        return const Center(
+                          child: CircularProgressIndicator(
+                            strokeWidth: 1,
+                          ),
+                        );
+                      }
+
+                      if (state is HomeTodayAppointsSuccess) {
+                        if (state.appointmentList.isEmpty) {
                           return const Center(
-                            child: CircularProgressIndicator(
-                              strokeWidth: 1,
+                            child: Text('No Appointments Today'),
+                          );
+                        }
+
+                        return ListView.separated(
+                            physics: const BouncingScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return HomeAppointmentsTile(
+                                size: size,
+                                date:
+                                    state.appointmentList[index].selectedDate!,
+                                doctorname: state
+                                    .appointmentList[index].doctor!.fullName!,
+                                startTime:
+                                    state.appointmentList[index].startTime!,
+                                endTime: state.appointmentList[index].endTime!,
+                                speciality: state
+                                    .appointmentList[index].speciality!.name!,
+                                doctImageUrl: state.appointmentList[index]
+                                    .doctor!.profilePicture!.secureUrl!,
+                                bookingStatus: state
+                                    .appointmentList[index].isApprovedByDoctor
+                                    .toString(),
+                                doctorID:
+                                    state.appointmentList[index].doctor!.id!,
+                              );
+                            },
+                            separatorBuilder: (context, index) {
+                              return const SizedBox(
+                                height: 10,
+                              );
+                            },
+                            itemCount: state.appointmentList.length);
+                      } else if (state is HomeTodayAppointsFailure) {
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text('Reload'),
+                            const SizedBox(
+                              height: 5,
                             ),
-                          );
-                        }
-
-                        if (state is HomeTodayAppointsSuccess) {
-                          if (state.appointmentList.isEmpty) {
-                            return const Center(
-                              child: Text('No Appointments Today'),
-                            );
-                          }
-
-                          return ListView.separated(
-                              physics: const BouncingScrollPhysics(),
-                              itemBuilder: (context, index) {
-                                return HomeAppointmentsTile(
-                                    size: size,
-                                    date: state
-                                        .appointmentList[index].selectedDate!,
-                                    doctorname: state.appointmentList[index]
-                                        .doctor!.fullName!,
-                                    startTime:
-                                        state.appointmentList[index].startTime!,
-                                    endTime:
-                                        state.appointmentList[index].endTime!,
-                                    speciality: state.appointmentList[index]
-                                        .speciality!.name!,
-                                    doctImageUrl: state.appointmentList[index]
-                                        .doctor!.profilePicture!.secureUrl!,
-                                    bookingStatus: state.appointmentList[index]
-                                        .isApprovedByDoctor
-                                        .toString());
-                              },
-                              separatorBuilder: (context, index) {
-                                return const SizedBox(
-                                  height: 10,
-                                );
-                              },
-                              itemCount: state.appointmentList.length);
-                        } else if (state is HomeTodayAppointsFailure) {
-                          return Column(
-                            children: [
-                              const Text('Refresh'),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              IconButton(
-                                  onPressed: () {
-                                    //------------------------------------------refresh function
-                                    context
-                                        .read<HomeTodayAppointmentsBloc>()
-                                        .add(GetTodayAppointmentPatientCall());
-                                  },
-                                  icon: const Icon(Icons.refresh))
-                            ],
-                          );
-                        } else {
-                          return Center(
-                            child: Text('Nothings to display'),
-                          );
-                        }
-                      },
-                    ),
-                  )
-                ],
-              ),
+                            IconButton(
+                                onPressed: () {
+                                  //------------------------------------------refresh function
+                                  context
+                                      .read<HomeTodayAppointmentsBloc>()
+                                      .add(GetTodayAppointmentPatientCall());
+                                },
+                                icon: const Icon(Icons.refresh))
+                          ],
+                        );
+                      } else {
+                        return Center(
+                          child: Text('Nothings to display'),
+                        );
+                      }
+                    },
+                  ),
+                )
+              ],
             ),
           ),
         ),

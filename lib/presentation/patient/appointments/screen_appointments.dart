@@ -86,7 +86,8 @@ class ScreenAppointments extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            Expanded(
+            Container(
+              height: size.height * 0.7,
               child: Padding(
                 padding: const EdgeInsets.only(left: 15.0, right: 15),
                 child: TabBarView(children: [
