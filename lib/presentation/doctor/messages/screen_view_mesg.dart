@@ -9,6 +9,7 @@ import 'package:appoint_medic/main.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class ScreenViewMesgDoctor extends StatefulWidget {
@@ -173,58 +174,77 @@ class _ScreenViewMesgDoctorState extends State<ScreenViewMesgDoctor> {
                           return ListView.separated(
                               controller: _scrollController,
                               itemBuilder: (context, index) {
-                                return Row(
-                                  mainAxisAlignment:
-                                      state.messagesList[index].senderModel ==
-                                              'Doctor'
-                                          ? MainAxisAlignment.end
-                                          : MainAxisAlignment.start,
+                                   String formattedDate =
+                                          DateFormat('d MMM, yyyy').format(
+                                              state.messagesList[index].updatedAt);
+                                      String formattedTime = DateFormat(
+                                              'h.mm a')
+                                          .format(
+                                              state.messagesList[index].updatedAt)
+                                          .toLowerCase();
+                                return Column(
+                                     crossAxisAlignment:  state
+                                                        .messagesList[index]
+                                                        .senderModel ==
+                                                    'Doctor'
+                                                ? CrossAxisAlignment.end
+                                                : CrossAxisAlignment.start,
                                   children: [
-                                    Flexible(
-                                      child: Container(
-                                          // width: 160,
-                                          decoration: BoxDecoration(
-                                              borderRadius: state
-                                                          .messagesList[index]
-                                                          .senderModel ==
-                                                      'Doctor'
-                                                  ? const BorderRadius.only(
-                                                      topRight:
-                                                          Radius.circular(0),
-                                                      topLeft:
-                                                          Radius.circular(15),
-                                                      bottomLeft:
-                                                          Radius.circular(15),
-                                                      bottomRight:
-                                                          Radius.circular(15))
-                                                  : const BorderRadius.only(
-                                                      topRight:
-                                                          Radius.circular(15),
-                                                      topLeft:
-                                                          Radius.circular(0),
-                                                      bottomLeft:
-                                                          Radius.circular(15),
-                                                      bottomRight:
-                                                          Radius.circular(15)),
-                                              color: state.messagesList[index]
-                                                          .senderModel ==
-                                                      'Doctor'
-                                                  ? Colors.blue
-                                                  : Colors.grey),
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 10,
-                                                right: 10,
-                                                top: 5,
-                                                bottom: 5),
-                                            child: Text(
-                                              state.messagesList[index].content,
-                                              style: const TextStyle(
-                                                  fontSize: 18,
-                                                  color: Colors.white),
-                                            ),
-                                          )),
+                                    Row(
+                                      mainAxisAlignment:
+                                          state.messagesList[index].senderModel ==
+                                                  'Doctor'
+                                              ? MainAxisAlignment.end
+                                              : MainAxisAlignment.start,
+                                      children: [
+                                        Flexible(
+                                          child: Container(
+                                              // width: 160,
+                                              decoration: BoxDecoration(
+                                                  borderRadius: state
+                                                              .messagesList[index]
+                                                              .senderModel ==
+                                                          'Doctor'
+                                                      ? const BorderRadius.only(
+                                                          topRight:
+                                                              Radius.circular(0),
+                                                          topLeft:
+                                                              Radius.circular(15),
+                                                          bottomLeft:
+                                                              Radius.circular(15),
+                                                          bottomRight:
+                                                              Radius.circular(15))
+                                                      : const BorderRadius.only(
+                                                          topRight:
+                                                              Radius.circular(15),
+                                                          topLeft:
+                                                              Radius.circular(0),
+                                                          bottomLeft:
+                                                              Radius.circular(15),
+                                                          bottomRight:
+                                                              Radius.circular(15)),
+                                                  color: state.messagesList[index]
+                                                              .senderModel ==
+                                                          'Doctor'
+                                                      ? Colors.blue
+                                                      : Colors.grey),
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 10,
+                                                    right: 10,
+                                                    top: 5,
+                                                    bottom: 5),
+                                                child: Text(
+                                                  state.messagesList[index].content,
+                                                  style: const TextStyle(
+                                                      fontSize: 18,
+                                                      color: Colors.white),
+                                                ),
+                                              )),
+                                        ),
+                                      ],
                                     ),
+                                     Text('$formattedTime',style: TextStyle(fontSize: 12),)
                                   ],
                                 );
                               },

@@ -71,10 +71,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
                   role: role, name: userName, id: id, token: token));
             }
           } else if (response is PatientResponse) {
-            if (response.user!.fullName == null) {
-              //-------------------------------------------------------directing to onborading patient
-              emit(LoginOnBordingPatient(token: response.user!.token!));
-            } else {
+           
               log(id!);
               prefs.saveRole(role!);
               prefs.saveLoggedInState(true);
@@ -85,14 +82,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
               emit(LoginSucess(
                   role: role, name: userName, id: id, token: token));
-            }
+            
           }
         } else {
           emit(LoginFailed(error));
 
-          await Future.delayed(Duration(seconds: 2));
+           await Future.delayed(Duration(seconds: 1));
 
-          emit(LoginIntial());
+           emit(LoginIntial());
         }
       } catch (e) {
         log(e.toString());

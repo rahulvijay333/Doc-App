@@ -79,12 +79,6 @@ class CreateServiceImpl implements CreateAccountService {
     final String? token = await getToken.retrieveToken();
 
     try {
-      // FormData formData = FormData();
-
-      // Add profile picture as a file field
-      // formData.files.add(MapEntry('profilePic',
-      //     await MultipartFile.fromFile(patientForm.profilePic.path)));
-
       final Response response = await Dio().put(ApiEndPoints.onboardingPatient,
           data: patientForm,
           options: Options(

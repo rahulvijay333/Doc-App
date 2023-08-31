@@ -53,7 +53,7 @@ class AppointmentListTileWidget extends StatelessWidget {
                         child: Container(
                           height: size.height * 0.14 * 0.4,
                           width: size.width * 0.15,
-                          color: Colors.amber,
+                          // color: Colors.amber,
                           child: Image(
                         image: NetworkImage(doctImageUrl!),
                         fit: BoxFit.cover,

@@ -38,10 +38,10 @@ class ScreenPersonalDetails extends StatelessWidget {
                               // color: Colors.amber,
                               height: size.height * 0.25,
                               width: size.width * 0.50,
-                              child: state.userProfile.user!.profilePicture ==
+                              child: state.userProfile.user?.profilePicture ==
                                       null
                                   ? Image.asset(
-                                      'assets/place_holder_patient.png')
+                                      'assets/patient.png')
                                   : Image.network(
                                       state.userProfile.user!.profilePicture!
                                           .secureUrl!,
@@ -85,11 +85,11 @@ class ScreenPersonalDetails extends StatelessWidget {
                                       fontWeight: FontWeight.bold),
                                 ),
                                 Text(
-                                  'Gender: ${state.userProfile.user?.gender ?? 'NA'} ',
+                                  'Gender: ${state.userProfile.user?.gender ?? 'Not Set'} ',
                                   style: TextStyle(),
                                 ),
                                 Text(
-                                    'Address : ${state.userProfile.user!.address?.houseName} ,${state.userProfile.user!.address?.city} ,${state.userProfile.user!.address?.state}'),
+                                    'Address : ${state.userProfile.user!.address?.houseName ?? "Not Set" } ,${state.userProfile.user!.address?.city ??"" } ,${state.userProfile.user!.address?.state ??"" }'),
                               ],
                             ),
                           ),
@@ -112,7 +112,7 @@ class ScreenPersonalDetails extends StatelessWidget {
                               children: [
                                 //Text('Age : ${doct.gender}'),
                                 Text(
-                                    'Phone : ${state.userProfile.user!.phone}'),
+                                    'Phone : ${state.userProfile.user!.phone ?? "Not set"}'),
                                 Text(
                                     'Email : ${state.userProfile.user!.email}'),
                               ],

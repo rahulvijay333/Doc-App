@@ -1,3 +1,4 @@
+
 import 'package:appoint_medic/application/login/login_bloc.dart';
 import 'package:appoint_medic/application/navbar/navbar_bloc.dart';
 import 'package:appoint_medic/application/profile/profile_details_bloc.dart';
@@ -70,7 +71,10 @@ class ScreenProfile extends StatelessWidget {
                                       backgroundColor: Colors.white,
                                       radius: 80,
                                       child: ClipOval(
-                                        child: Image.network(
+                                        child: state.userProfile.user!
+                                              .profilePicture?.secureUrl != null ?
+                                        
+                                        Image.network(
                                           state.userProfile.user!
                                               .profilePicture!.secureUrl!,
                                           fit: BoxFit.cover,
@@ -93,7 +97,7 @@ class ScreenProfile extends StatelessWidget {
                                               ),
                                             );
                                           },
-                                        ),
+                                        ) : Image.asset('assets/patient.png')
                                       ),
                                     )),
                                   ),
@@ -101,7 +105,7 @@ class ScreenProfile extends StatelessWidget {
                                     height: 10,
                                   ),
                                   Text(
-                                    state.userProfile.user!.fullName!,
+                                    state.userProfile.user!.fullName ??  state.userProfile.user!.name! ,
                                     style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),

@@ -31,6 +31,14 @@ class _ScreenHomeState extends State<ScreenHome> {
   }
 
   @override
+  void didChangeDependencies() {
+    context
+        .read<HomeTodayAppointmentsBloc>()
+        .add(GetTodayAppointmentPatientCall());
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
@@ -108,7 +116,8 @@ class _ScreenHomeState extends State<ScreenHome> {
                                       height: 8,
                                     ),
                                     Text(
-                                      state.userProfile.user!.fullName!,
+                                      state.userProfile.user?.fullName ??
+                                          state.userProfile.user!.name!,
                                       style: const TextStyle(
                                           fontSize: 24,
                                           color: Colors.white,

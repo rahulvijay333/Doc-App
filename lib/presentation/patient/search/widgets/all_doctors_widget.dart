@@ -71,7 +71,7 @@ class AllDoctorWidget extends StatelessWidget {
 
                                             return const Center(
                                               child: CircularProgressIndicator(
-                                                strokeWidth: 1,
+                                                strokeWidth: 1,color: Colors.white,
                                               ),
                                             );
                                           },

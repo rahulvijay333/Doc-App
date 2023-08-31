@@ -69,7 +69,7 @@ class ProfileTileCustom extends StatelessWidget {
                   ],
                 )),
 
-            NotificationBell(notificationCount: 5)
+            NotificationBell(notificationCount: 0)
             // IconButton(onPressed: () {
 
             // }, icon: Icon(Icons.notifications))

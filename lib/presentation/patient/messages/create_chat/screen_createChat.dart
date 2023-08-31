@@ -13,9 +13,7 @@ class ScreenCreateChat extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Create chat'),
-        ),
+       
         body: BlocBuilder<CreateChatBloc, CreateChatState>(
           builder: (context, state) {
             if (state is CheckingChatsLoading) {
