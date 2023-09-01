@@ -8,5 +8,4 @@ class StartChat extends CreateChatEvent {
   StartChat({required this.userID});
 }
 
-
 class ClearStartChat extends CreateChatEvent {}

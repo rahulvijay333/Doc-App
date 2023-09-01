@@ -10,6 +10,7 @@ import 'package:appoint_medic/application/chat/create_chat/bloc/create_chat_bloc
 import 'package:appoint_medic/application/chat/create_chat_doct/bloc/create_chat_doc_bloc.dart';
 import 'package:appoint_medic/application/chat/see_messages/bloc/see_messages_bloc.dart';
 import 'package:appoint_medic/application/chat/view_chats/bloc/view_all_chats_bloc.dart';
+import 'package:appoint_medic/application/create_user/otp_verify/bloc/otp_verify_bloc.dart';
 import 'package:appoint_medic/application/doctor%20profile/appointments_section/bloc/home_appointment_today_bloc.dart';
 import 'package:appoint_medic/application/doctor%20profile/bloc/doctor_profile_bloc.dart';
 import 'package:appoint_medic/application/doctor%20profile/edit_profile/bloc/doctor_profile_edit_bloc.dart';
@@ -39,12 +40,15 @@ import 'package:appoint_medic/infrastructure/search_screen/search_service.dart';
 import 'package:appoint_medic/infrastructure/specialities/get_speciality_service.dart';
 import 'package:appoint_medic/infrastructure/view_appointments_doctor_service/appointments_fetch_service.dart';
 import 'package:appoint_medic/infrastructure/view_appointments_patient_side/view_appointments_pat_service.dart';
+import 'package:appoint_medic/presentation/register/screen_otp_verify.dart';
 
 import 'package:appoint_medic/presentation/splash/ScreenSplash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
+import 'presentation/register/screen_otp_sucess.dart';
 
 final getIt = GetIt.instance;
 void main(List<String> args) async {
@@ -170,12 +174,17 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) => CreateChatBloc(chatService),
           ),
-          BlocProvider(create: (context) => CreateChatDocBloc(chatService),)
+          BlocProvider(
+            create: (context) => CreateChatDocBloc(chatService),
+          ),
+          BlocProvider(
+            create: (context) => OtpVerifyBloc(onboarding), //otp
+          )
         ],
         child:
             MaterialApp(debugShowCheckedModeBanner: false, home: ScreenSplash()
 
-                // home: ScreenViewMesgPatient()
+                //
 
                 ));
   }

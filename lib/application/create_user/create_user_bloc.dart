@@ -17,7 +17,8 @@ class CreateUserBloc extends Bloc<CreateUserEvent, CreateUserState> {
 
       if (error.isEmpty) {
         //------------------------------------------account created sucess
-        emit(CreateUserSuccess());
+        emit(CreateUserSuccess(
+            email: event.newUser.email, userType: event.userType));
       } else {
         emit(CreateUserFailed(errorMessage: error));
 

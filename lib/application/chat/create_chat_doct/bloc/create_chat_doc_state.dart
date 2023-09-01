@@ -5,7 +5,6 @@ sealed class CreateChatDocState {}
 
 final class CreateChatDocInitial extends CreateChatDocState {}
 
-
 class NewChatCreated extends CreateChatDocState {
   final CreateChatByPatientResponse createdchatDetails;
 

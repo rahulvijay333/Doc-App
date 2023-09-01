@@ -92,3 +92,14 @@ InputDecoration commonInputDecoration({
     ),
   );
 }
+
+
+  InputDecoration customOtpBoxdecoration() {
+    return InputDecoration(
+      focusColor: Colors.red,
+      border: OutlineInputBorder(),
+      focusedBorder: OutlineInputBorder(),
+      counterText: '',
+    );
+  }
+

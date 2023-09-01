@@ -39,7 +39,7 @@ class ScreenAllAppointments extends StatelessWidget {
                     color: Colors.white,
                     //height: 40,
                     height: size.height * 0.06,
-        
+
                     child: Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: TabBar(

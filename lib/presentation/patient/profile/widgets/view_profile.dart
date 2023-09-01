@@ -40,8 +40,7 @@ class ScreenPersonalDetails extends StatelessWidget {
                               width: size.width * 0.50,
                               child: state.userProfile.user?.profilePicture ==
                                       null
-                                  ? Image.asset(
-                                      'assets/patient.png')
+                                  ? Image.asset('assets/patient.png')
                                   : Image.network(
                                       state.userProfile.user!.profilePicture!
                                           .secureUrl!,
@@ -89,7 +88,7 @@ class ScreenPersonalDetails extends StatelessWidget {
                                   style: TextStyle(),
                                 ),
                                 Text(
-                                    'Address : ${state.userProfile.user!.address?.houseName ?? "Not Set" } ,${state.userProfile.user!.address?.city ??"" } ,${state.userProfile.user!.address?.state ??"" }'),
+                                    'Address : ${state.userProfile.user!.address?.houseName ?? "Not Set"} ,${state.userProfile.user!.address?.city ?? ""} ,${state.userProfile.user!.address?.state ?? ""}'),
                               ],
                             ),
                           ),

@@ -174,60 +174,54 @@ class _ScreenViewMesgDoctorState extends State<ScreenViewMesgDoctor> {
                           return ListView.separated(
                               controller: _scrollController,
                               itemBuilder: (context, index) {
-                                   String formattedDate =
-                                          DateFormat('d MMM, yyyy').format(
-                                              state.messagesList[index].updatedAt);
-                                      String formattedTime = DateFormat(
-                                              'h.mm a')
-                                          .format(
-                                              state.messagesList[index].updatedAt)
-                                          .toLowerCase();
+                                String formattedDate = DateFormat('d MMM, yyyy')
+                                    .format(
+                                        state.messagesList[index].updatedAt);
+                                String formattedTime = DateFormat('h.mm a')
+                                    .format(state.messagesList[index].updatedAt)
+                                    .toLowerCase();
                                 return Column(
-                                     crossAxisAlignment:  state
-                                                        .messagesList[index]
-                                                        .senderModel ==
-                                                    'Doctor'
-                                                ? CrossAxisAlignment.end
-                                                : CrossAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      state.messagesList[index].senderModel ==
+                                              'Doctor'
+                                          ? CrossAxisAlignment.end
+                                          : CrossAxisAlignment.start,
                                   children: [
                                     Row(
-                                      mainAxisAlignment:
-                                          state.messagesList[index].senderModel ==
-                                                  'Doctor'
-                                              ? MainAxisAlignment.end
-                                              : MainAxisAlignment.start,
+                                      mainAxisAlignment: state
+                                                  .messagesList[index]
+                                                  .senderModel ==
+                                              'Doctor'
+                                          ? MainAxisAlignment.end
+                                          : MainAxisAlignment.start,
                                       children: [
                                         Flexible(
                                           child: Container(
                                               // width: 160,
                                               decoration: BoxDecoration(
                                                   borderRadius: state
-                                                              .messagesList[index]
+                                                              .messagesList[
+                                                                  index]
                                                               .senderModel ==
                                                           'Doctor'
                                                       ? const BorderRadius.only(
                                                           topRight:
-                                                              Radius.circular(0),
-                                                          topLeft:
-                                                              Radius.circular(15),
+                                                              Radius.circular(
+                                                                  0),
+                                                          topLeft: Radius.circular(
+                                                              15),
                                                           bottomLeft:
-                                                              Radius.circular(15),
+                                                              Radius.circular(
+                                                                  15),
                                                           bottomRight:
-                                                              Radius.circular(15))
+                                                              Radius.circular(
+                                                                  15))
                                                       : const BorderRadius.only(
-                                                          topRight:
-                                                              Radius.circular(15),
-                                                          topLeft:
-                                                              Radius.circular(0),
-                                                          bottomLeft:
-                                                              Radius.circular(15),
-                                                          bottomRight:
-                                                              Radius.circular(15)),
-                                                  color: state.messagesList[index]
-                                                              .senderModel ==
-                                                          'Doctor'
-                                                      ? Colors.blue
-                                                      : Colors.grey),
+                                                          topRight: Radius.circular(15),
+                                                          topLeft: Radius.circular(0),
+                                                          bottomLeft: Radius.circular(15),
+                                                          bottomRight: Radius.circular(15)),
+                                                  color: state.messagesList[index].senderModel == 'Doctor' ? Colors.blue : Colors.grey),
                                               child: Padding(
                                                 padding: const EdgeInsets.only(
                                                     left: 10,
@@ -235,7 +229,8 @@ class _ScreenViewMesgDoctorState extends State<ScreenViewMesgDoctor> {
                                                     top: 5,
                                                     bottom: 5),
                                                 child: Text(
-                                                  state.messagesList[index].content,
+                                                  state.messagesList[index]
+                                                      .content,
                                                   style: const TextStyle(
                                                       fontSize: 18,
                                                       color: Colors.white),
@@ -244,7 +239,10 @@ class _ScreenViewMesgDoctorState extends State<ScreenViewMesgDoctor> {
                                         ),
                                       ],
                                     ),
-                                     Text('$formattedTime',style: TextStyle(fontSize: 12),)
+                                    Text(
+                                      '$formattedTime',
+                                      style: TextStyle(fontSize: 12),
+                                    )
                                   ],
                                 );
                               },

@@ -55,7 +55,7 @@ class _ScreenHomeState extends State<ScreenHome> {
               //---------------------------profile details
               Container(
                 height: size.height * 0.14,
-                //  color: Colors.green,
+                  // color: Colors.green,
                 child: Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: BlocBuilder<ProfileDetailsBloc, ProfileDetailsState>(
@@ -76,8 +76,8 @@ class _ScreenHomeState extends State<ScreenHome> {
                           children: [
                             //welcome
                             Container(
-                                // color: Colors.amber,
-                                width: size.width * 0.20,
+                                //  color: Colors.amber,
+                                // width: size.width * 0.20,
                                 height: size.height * 0.15 * 0.60,
                                 child: Center(
                                   child: CircleAvatar(

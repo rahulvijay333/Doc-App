@@ -167,23 +167,23 @@ class _ScreenViewMesgPatientState extends State<ScreenViewMesgPatient> {
                                             .onDrag,
                                     controller: _scrollController,
                                     itemBuilder: (context, index) {
-                                        //--------------------------------------------------format and time
+                                      //--------------------------------------------------format and time
                                       String formattedDate =
-                                          DateFormat('d MMM, yyyy').format(
-                                              state.messagesList[index].updatedAt);
-                                      String formattedTime = DateFormat(
-                                              'h.mm a')
-                                          .format(
-                                              state.messagesList[index].updatedAt)
-                                          .toLowerCase();
+                                          DateFormat('d MMM, yyyy').format(state
+                                              .messagesList[index].updatedAt);
+                                      String formattedTime =
+                                          DateFormat('h.mm a')
+                                              .format(state.messagesList[index]
+                                                  .updatedAt)
+                                              .toLowerCase();
 
                                       return Column(
-                                         crossAxisAlignment:  state
-                                                        .messagesList[index]
-                                                        .senderModel ==
-                                                    'Patient'
-                                                ? CrossAxisAlignment.end
-                                                : CrossAxisAlignment.start,
+                                        crossAxisAlignment: state
+                                                    .messagesList[index]
+                                                    .senderModel ==
+                                                'Patient'
+                                            ? CrossAxisAlignment.end
+                                            : CrossAxisAlignment.start,
                                         children: [
                                           Row(
                                             mainAxisAlignment: state
@@ -207,8 +207,9 @@ class _ScreenViewMesgPatientState extends State<ScreenViewMesgPatient> {
                                                                 topRight:
                                                                     Radius.circular(
                                                                         0),
-                                                                topLeft: Radius.circular(
-                                                                    15),
+                                                                topLeft:
+                                                                    Radius.circular(
+                                                                        15),
                                                                 bottomLeft:
                                                                     Radius.circular(
                                                                         15),
@@ -229,17 +230,22 @@ class _ScreenViewMesgPatientState extends State<ScreenViewMesgPatient> {
                                                               top: 10,
                                                               bottom: 10),
                                                       child: Text(
-                                                        state.messagesList[index]
+                                                        state
+                                                            .messagesList[index]
                                                             .content,
                                                         style: const TextStyle(
                                                             fontSize: 18,
-                                                            color: Colors.white),
+                                                            color:
+                                                                Colors.white),
                                                       ),
                                                     )),
                                               ),
                                             ],
                                           ),
-                                           Text('$formattedTime',style: TextStyle(fontSize: 12),)
+                                          Text(
+                                            '$formattedTime',
+                                            style: TextStyle(fontSize: 12),
+                                          )
                                         ],
                                       );
                                     },

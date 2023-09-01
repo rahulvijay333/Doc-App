@@ -1,4 +1,3 @@
-
 import 'package:appoint_medic/application/login/login_bloc.dart';
 import 'package:appoint_medic/application/navbar/navbar_bloc.dart';
 import 'package:appoint_medic/application/profile/profile_details_bloc.dart';
@@ -71,41 +70,51 @@ class ScreenProfile extends StatelessWidget {
                                       backgroundColor: Colors.white,
                                       radius: 80,
                                       child: ClipOval(
-                                        child: state.userProfile.user!
-                                              .profilePicture?.secureUrl != null ?
-                                        
-                                        Image.network(
-                                          state.userProfile.user!
-                                              .profilePicture!.secureUrl!,
-                                          fit: BoxFit.cover,
-                                          width: 160,
-                                          height: 160,
-                                          errorBuilder:
-                                              (context, error, stackTrace) {
-                                            return Image.asset(
-                                                'assets/patient.png');
-                                          },
-                                          loadingBuilder: (context, child,
-                                              loadingProgress) {
-                                            if (loadingProgress == null) {
-                                              return child;
-                                            }
+                                          child: state
+                                                      .userProfile
+                                                      .user!
+                                                      .profilePicture
+                                                      ?.secureUrl !=
+                                                  null
+                                              ? Image.network(
+                                                  state
+                                                      .userProfile
+                                                      .user!
+                                                      .profilePicture!
+                                                      .secureUrl!,
+                                                  fit: BoxFit.cover,
+                                                  width: 160,
+                                                  height: 160,
+                                                  errorBuilder: (context, error,
+                                                      stackTrace) {
+                                                    return Image.asset(
+                                                        'assets/patient.png');
+                                                  },
+                                                  loadingBuilder: (context,
+                                                      child, loadingProgress) {
+                                                    if (loadingProgress ==
+                                                        null) {
+                                                      return child;
+                                                    }
 
-                                            return const Center(
-                                              child: CircularProgressIndicator(
-                                                strokeWidth: 1,
-                                              ),
-                                            );
-                                          },
-                                        ) : Image.asset('assets/patient.png')
-                                      ),
+                                                    return const Center(
+                                                      child:
+                                                          CircularProgressIndicator(
+                                                        strokeWidth: 1,
+                                                      ),
+                                                    );
+                                                  },
+                                                )
+                                              : Image.asset(
+                                                  'assets/patient.png')),
                                     )),
                                   ),
                                   const SizedBox(
                                     height: 10,
                                   ),
                                   Text(
-                                    state.userProfile.user!.fullName ??  state.userProfile.user!.name! ,
+                                    state.userProfile.user!.fullName ??
+                                        state.userProfile.user!.name!,
                                     style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),

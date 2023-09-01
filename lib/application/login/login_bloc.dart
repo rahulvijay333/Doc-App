@@ -71,25 +71,22 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
                   role: role, name: userName, id: id, token: token));
             }
           } else if (response is PatientResponse) {
-           
-              log(id!);
-              prefs.saveRole(role!);
-              prefs.saveLoggedInState(true);
-              prefs.saveToken(token!);
-              prefs.saveName(userName);
-              prefs.saveId(id);
-              await secureStorageService.storeToken(token);
+            log(id!);
+            prefs.saveRole(role!);
+            prefs.saveLoggedInState(true);
+            prefs.saveToken(token!);
+            prefs.saveName(userName);
+            prefs.saveId(id);
+            await secureStorageService.storeToken(token);
 
-              emit(LoginSucess(
-                  role: role, name: userName, id: id, token: token));
-            
+            emit(LoginSucess(role: role, name: userName, id: id, token: token));
           }
         } else {
           emit(LoginFailed(error));
 
-           await Future.delayed(Duration(seconds: 1));
+          await Future.delayed(Duration(seconds: 1));
 
-           emit(LoginIntial());
+          emit(LoginIntial());
         }
       } catch (e) {
         log(e.toString());

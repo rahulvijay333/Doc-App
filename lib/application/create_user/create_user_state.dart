@@ -8,7 +8,12 @@ class CreateUserInitial extends CreateUserState {}
 
 class CreateUserLoading extends CreateUserState {}
 
-class CreateUserSuccess extends CreateUserState {}
+class CreateUserSuccess extends CreateUserState {
+  final String email;
+  final String userType;
+
+  CreateUserSuccess({required this.email, required this.userType});
+}
 
 class CreateUserFailed extends CreateUserState {
   final String errorMessage;

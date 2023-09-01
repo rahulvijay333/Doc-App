@@ -13,7 +13,6 @@ class ScreenCreateChatDoc extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-       
         body: BlocBuilder<CreateChatDocBloc, CreateChatDocState>(
           builder: (context, state) {
             if (state is CheckingChatsLoading) {

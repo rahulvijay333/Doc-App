@@ -2,10 +2,12 @@ const baseUrl = 'http://100.26.104.81:4000/api';
 // const baseUrl = 'http://192.168.1.100:4000/api';
 
 class ApiEndPoints {
-  //-----------------patient
+  //-----------------patient - login Auth
   static const patientLogin = '$baseUrl/auth/patient/login';
   static const patientRegister = '$baseUrl/auth/patient/register';
   static const patientLogOut = '$baseUrl/auth/patient/logout';
+  static const patientOtpVerify = '$baseUrl/auth/patient/verify';
+
   static const patientGetAllDoctors = '$baseUrl/patient/doctors/all';
   static const getAllSpecialities = '$baseUrl/doctor/specialities';
   //profile
@@ -31,6 +33,7 @@ class ApiEndPoints {
   static const doctorLogin = '$baseUrl/auth/doctor/login';
   static const doctorLogout = '$baseUrl/auth/doctor/logout';
   static const doctorNewUser = '$baseUrl/auth/doctor/register';
+  static const doctorOtpVerify = '$baseUrl/auth/doctor/verify';
 
   //profile
   static const getDoctorProfileDetails = '$baseUrl/doctor/profile';
@@ -46,7 +49,7 @@ class ApiEndPoints {
   static const doctApproveBooking = '$baseUrl/appointment';
   static const doctCancelBooking = '$baseUrl/appointment';
 
-  //chat 
+  //chat
 
   static const createNewChatByDoc = '$baseUrl/chat/doctor/create';
 }

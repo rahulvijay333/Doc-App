@@ -4,7 +4,8 @@ import 'package:appoint_medic/application/create_user/create_user_bloc.dart';
 import 'package:appoint_medic/core/color_constants.dart';
 import 'package:appoint_medic/domain/new_user/new_user.dart';
 import 'package:appoint_medic/infrastructure/register/register_impl.dart';
-import 'package:appoint_medic/presentation/register/screen_sucess.dart';
+import 'package:appoint_medic/presentation/register/screen_otp_verify.dart';
+import 'package:appoint_medic/presentation/splash/ScreenSplash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -287,8 +288,10 @@ class _ScreenRegisterState extends State<ScreenRegister> {
                                         .context;
                                     Navigator.of(navigatorContext)
                                         .pushReplacement(MaterialPageRoute(
-                                      builder: (ctx) =>
-                                          const ScreenCreateAccountSuccess(),
+                                      builder: (ctx) => ScreenOtpVerify(
+                                        emailID: state.email,
+                                        userType: state.userType,
+                                      ),
                                     ));
                                   });
 

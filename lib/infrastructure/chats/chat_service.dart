@@ -33,17 +33,13 @@ class ChatService {
         return ("Return other error code service", null);
       }
     } catch (e) {
-
-      
-     if (e is DioException) {
+      if (e is DioException) {
         if (e.error is SocketException) {
           return ('Server connection failed', null);
-        } else if(e.response!.statusCode == 404){
+        } else if (e.response!.statusCode == 404) {
           log('No chats found');
-          return ('',null);
-        }
-        
-        else if (e.response!.statusCode == 500) {
+          return ('', null);
+        } else if (e.response!.statusCode == 500) {
           return (e.message.toString(), null);
         } else {
           return ('Some error excpt', null);

@@ -340,11 +340,11 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                                       id: state.id!,
                                                     );
                                                   },
-                                                )); 
+                                                ));
                                               });
 
-                                                ScaffoldMessenger.of(context)
-                                                .hideCurrentSnackBar();
+                                              ScaffoldMessenger.of(context)
+                                                  .hideCurrentSnackBar();
                                             } else if (state.role == 'doctor') {
                                               userType = 'Doctor';
                                               WidgetsBinding.instance
@@ -365,10 +365,9 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                                     );
                                                   },
                                                 ));
-                                                 
                                               });
-                                                ScaffoldMessenger.of(context)
-                                                .hideCurrentSnackBar();
+                                              ScaffoldMessenger.of(context)
+                                                  .hideCurrentSnackBar();
                                             }
                                           } else if (state is LoginFailed) {
                                             WidgetsBinding.instance
@@ -380,7 +379,6 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                                           Duration(seconds: 2),
                                                       content:
                                                           Text(state.error)));
-                                                          
                                             });
 
                                             ScaffoldMessenger.of(context)

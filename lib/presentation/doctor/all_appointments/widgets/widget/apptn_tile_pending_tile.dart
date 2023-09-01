@@ -18,7 +18,8 @@ class AppointmentTile extends StatelessWidget {
     required this.isDoctorApproved,
     required this.patientImage,
     required this.bookID,
-    required this.isCancelled, required this.patientID,
+    required this.isCancelled,
+    required this.patientID,
   });
 
   final String patientName;
@@ -163,15 +164,22 @@ class AppointmentTile extends StatelessWidget {
                   ),
                 ),
               ),
-                Center(
-                child: IconButton(onPressed: () {
-                  //------------------------------------------message function
-                 BlocProvider.of<CreateChatDocBloc>(context).add(StartChat(userID: patientID));
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                    return ScreenCreateChatDoc();
-                  },));
-              
-                }, icon: Icon(Icons.message_outlined,color: Colors.blue,)),
+              Center(
+                child: IconButton(
+                    onPressed: () {
+                      //------------------------------------------message function
+                      BlocProvider.of<CreateChatDocBloc>(context)
+                          .add(StartChat(userID: patientID));
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) {
+                          return ScreenCreateChatDoc();
+                        },
+                      ));
+                    },
+                    icon: Icon(
+                      Icons.message_outlined,
+                      color: Colors.blue,
+                    )),
               )
             ],
           ),

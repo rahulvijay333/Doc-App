@@ -61,7 +61,6 @@ class CreateChatBloc extends Bloc<CreateChatEvent, CreateChatState> {
     });
 
     on<ClearStartChat>((event, emit) {
-
       emit(CreateChatInitial());
     });
   }

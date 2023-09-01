@@ -55,26 +55,25 @@ class AppointmentListTileWidget extends StatelessWidget {
                           width: size.width * 0.15,
                           // color: Colors.amber,
                           child: Image(
-                        image: NetworkImage(doctImageUrl!),
-                        fit: BoxFit.cover,
-                        width: 50,
-                        height: 50,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Image.asset('assets/patient.png');
-                        },
-                        loadingBuilder: (context, child, loadingProgress) {
-                          if (loadingProgress == null) {
-                            return child;
-                          }
-                      
-                          return const Center(
-                            child: CircularProgressIndicator(
-                              strokeWidth: 1,
-                            ),
-                          );
-                        },
-                                          ),
-                          
+                            image: NetworkImage(doctImageUrl!),
+                            fit: BoxFit.cover,
+                            width: 50,
+                            height: 50,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Image.asset('assets/patient.png');
+                            },
+                            loadingBuilder: (context, child, loadingProgress) {
+                              if (loadingProgress == null) {
+                                return child;
+                              }
+
+                              return const Center(
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 1,
+                                ),
+                              );
+                            },
+                          ),
                         ),
                       ),
                       Container(
@@ -100,9 +99,11 @@ class AppointmentListTileWidget extends StatelessWidget {
 
                             BlocProvider.of<CreateChatBloc>(context)
                                 .add(StartChat(userID: doctorID));
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                              return ScreenCreateChat(doctorID: doctorID);
-                            },));
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) {
+                                return ScreenCreateChat(doctorID: doctorID);
+                              },
+                            ));
                           },
                           icon: const Icon(
                             Icons.message_outlined,

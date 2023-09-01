@@ -30,8 +30,7 @@ class _ScreenPatientEditState extends State<ScreenPatientEdit> {
 
   @override
   void initState() {
-    _houseNameController.text =
-        widget.userDetails.address?.houseName ?? '';
+    _houseNameController.text = widget.userDetails.address?.houseName ?? '';
     _cityController.text = widget.userDetails.address?.city ?? '';
     _stateController.text = widget.userDetails.address?.state ?? '';
     _username.text = widget.userDetails.fullName ?? '';
@@ -104,7 +103,9 @@ class _ScreenPatientEditState extends State<ScreenPatientEdit> {
                                     child: (imageFile == null)
                                         ? widget.userDetails.profilePicture ==
                                                 null
-                                            ? Image.asset('assets/patient.png',)
+                                            ? Image.asset(
+                                                'assets/patient.png',
+                                              )
                                             : Image.network(
                                                 widget.userDetails
                                                     .profilePicture!.secureUrl!,
