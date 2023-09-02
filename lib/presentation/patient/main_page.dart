@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:appoint_medic/application/Search/search_bloc.dart';
 import 'package:appoint_medic/application/navbar/navbar_bloc.dart';
 import 'package:appoint_medic/application/profile/profile_details_bloc.dart';
+import 'package:appoint_medic/core/color_constants.dart';
 import 'package:appoint_medic/domain/db/db_model.dart';
 import 'package:appoint_medic/presentation/patient/appointments/screen_appointments.dart';
 import 'package:appoint_medic/presentation/patient/home/screen_home.dart';
@@ -50,7 +51,7 @@ class ScreenMainPage extends StatelessWidget {
               bottom: 20,
               child: Container(
                 decoration: BoxDecoration(
-                    color: Colors.blue,
+                    color: appBackGround,
                     borderRadius: BorderRadius.circular(10)),
                 height: 50,
                 width: size.width * 0.8,

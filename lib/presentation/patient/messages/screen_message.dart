@@ -28,12 +28,12 @@ class ScreenMesgsPatient extends StatelessWidget {
             children: [
               SizedBox(
                 height: size.height * 0.07,
-                child: const Center(
+                child: Center(
                   child: Text(
                     'Messages',
                     style: TextStyle(
                         fontSize: 25,
-                        color: Colors.blue,
+                        color: appBackGround,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -43,49 +43,25 @@ class ScreenMesgsPatient extends StatelessWidget {
                 height: size.height * 0.05,
               ),
               //----------------------------------------------------------search messages
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Container(
-                      color: Colors.white,
-                      height: size.height * 0.06,
-                      width: size.width * 0.75,
-                      child: const Padding(
-                        padding: EdgeInsets.only(left: 8.0),
-                        child: Row(
-                          children: [
-                            Icon(Icons.search),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text('Search Messages..')
-                          ],
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Container(
+                  color: Colors.white,
+                  height: size.height * 0.06,
+                  width: size.width ,
+                  child: const Padding(
+                    padding: EdgeInsets.only(left: 8.0),
+                    child: Row(
+                      children: [
+                        Icon(Icons.search),
+                        SizedBox(
+                          width: 10,
                         ),
-                      ),
+                        Text('Search Messages..')
+                      ],
                     ),
                   ),
-
-                  //---------------------------------------------new message icon
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Container(
-                      height: size.height * 0.06,
-                      width: size.width * 0.15,
-                      color: Colors.blue,
-                      child: IconButton(
-                          onPressed: () {
-                            //----------------------------message function
-                          },
-                          icon: const Icon(
-                            Icons.add_comment,
-                            size: 30,
-                            color: Colors.white,
-                          )),
-                    ),
-                  )
-                ],
+                ),
               ),
               const SizedBox(
                 height: 20,

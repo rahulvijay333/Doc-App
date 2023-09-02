@@ -66,7 +66,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
     final size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        // backgroundColor: Colors.blue,
+     
         body: Padding(
             padding: const EdgeInsets.all(0),
             child: Container(
@@ -77,11 +77,11 @@ class _ScreenLoginState extends State<ScreenLogin> {
                   Expanded(
                     child: Container(
                         height: size.height * 0.07,
-                        color: Colors.blue,
+                        color: appBackGround,
                         width: size.width,
                         child: const Center(
                           child: Text(
-                            'DocCure',
+                            'AppointMedic',
                             style: TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.bold,
@@ -100,7 +100,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
                           //---------------------------------------image + text
                           Container(
                             // height: size.height * 0.35,
-                            color: Colors.blue,
+                            color: appBackGround,
                             child: Column(
                               children: [
                                 const SizedBox(
@@ -214,6 +214,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                           controller: passwordController,
                                           decoration:
                                               textfieldInputDecorationPassword),
+                                                 SizedBox(height: 5,),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
@@ -229,6 +230,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                                       : Colors.red),
                                             ),
                                           ),
+                                       
                                           const Text(
                                             'Did you forget password ?',
                                             style: TextStyle(

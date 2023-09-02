@@ -42,6 +42,7 @@ final textfieldInputDecorationEmail = InputDecoration(
         borderSide: const BorderSide(color: Colors.transparent)));
 
 final loginButtonStyle = ButtonStyle(
+  backgroundColor: MaterialStateProperty.all<Color>(appBackGround),
   shape: MaterialStateProperty.all<OutlinedBorder>(
     RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(10.0),
@@ -103,3 +104,5 @@ InputDecoration commonInputDecoration({
     );
   }
 
+
+var appBackGround =  Color.fromRGBO(0, 116, 217, 1);

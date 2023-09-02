@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:appoint_medic/application/chat/create_chat/bloc/create_chat_bloc.dart';
 import 'package:appoint_medic/application/chat/see_messages/bloc/see_messages_bloc.dart';
+import 'package:appoint_medic/core/color_constants.dart';
 import 'package:appoint_medic/domain/response_models/new_message/new_chat_response/new_chat_response.dart';
 import 'package:appoint_medic/domain/token_storage/secure_storage.dart';
 import 'package:appoint_medic/main.dart';
@@ -93,7 +94,7 @@ class _ScreenViewMesgPatientState extends State<ScreenViewMesgPatient> {
             children: [
               //---------------------------------------------appbar
               Container(
-                color: Colors.blue,
+                color: appBackGround,
                 height: size.height * 0.08,
                 child: Center(
                   child: Row(
@@ -297,7 +298,7 @@ class _ScreenViewMesgPatientState extends State<ScreenViewMesgPatient> {
                               decoration: BoxDecoration(
                                   //color: Colors.blue,
                                   borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(color: Colors.blue)),
+                                  border: Border.all(color: appBackGround)),
                               child: Padding(
                                 padding: const EdgeInsets.only(left: 8.0),
                                 child: TextFormField(

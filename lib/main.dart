@@ -24,6 +24,7 @@ import 'package:appoint_medic/application/slot_operations/slot_operations_bloc.d
 import 'package:appoint_medic/application/speciality/speciality_bloc.dart';
 import 'package:appoint_medic/application/view_appointments_doctor/bloc/view_appointments_doct_side_bloc.dart';
 import 'package:appoint_medic/application/view_appointments_screen/bloc/view_appointments_patient_side_bloc.dart';
+import 'package:appoint_medic/core/color_constants.dart';
 import 'package:appoint_medic/domain/db/db_functions.dart';
 import 'package:appoint_medic/domain/db/db_model.dart';
 import 'package:appoint_medic/domain/token_storage/secure_storage.dart';
@@ -182,7 +183,17 @@ class MyApp extends StatelessWidget {
           )
         ],
         child:
-            MaterialApp(debugShowCheckedModeBanner: false, home: ScreenSplash()
+            MaterialApp(debugShowCheckedModeBanner: false, 
+            
+            theme: ThemeData(
+              elevatedButtonTheme: ElevatedButtonThemeData(
+
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(appBackGround),
+                )
+              )
+            ),
+            home: ScreenSplash()
 
                 //
 

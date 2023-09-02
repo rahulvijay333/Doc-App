@@ -33,7 +33,7 @@ class _FadeInContainerState extends State<FadeInContainer> {
         height: 200,
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/app_logo_2.png'),
+            image: AssetImage('assets/app_new_logo.png'),
           ),
         ),
       ),

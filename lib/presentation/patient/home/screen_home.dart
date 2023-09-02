@@ -2,6 +2,7 @@ import 'package:appoint_medic/application/HomeScreen_today_appointments/bloc/hom
 import 'package:appoint_medic/application/Search/search_bloc.dart';
 import 'package:appoint_medic/application/profile/profile_details_bloc.dart';
 import 'package:appoint_medic/application/speciality/speciality_bloc.dart';
+import 'package:appoint_medic/core/color_constants.dart';
 import 'package:appoint_medic/domain/response_models/get_specialities_response/speciality.dart';
 import 'package:appoint_medic/presentation/patient/home/widgets/home_appointments_tile.dart';
 import 'package:appoint_medic/presentation/patient/search/screen_search.dart';
@@ -49,7 +50,7 @@ class _ScreenHomeState extends State<ScreenHome> {
         Container(
           height: size.height * 0.23,
           width: double.maxFinite,
-          color: Colors.blue,
+          color: appBackGround,
           child: Column(
             children: [
               //---------------------------profile details
@@ -234,10 +235,10 @@ class _ScreenHomeState extends State<ScreenHome> {
             left: size.width * 0.05,
             right: size.width * 0.05,
           ),
-          child: const Text(
+          child:  Text(
             'Specialities',
             style: TextStyle(
-                fontSize: 18, fontWeight: FontWeight.w500, color: Colors.blue),
+                fontSize: 18, fontWeight: FontWeight.w500, color:appBackGround),
           ),
         ),
 //---------------------------------------------------------------specility
@@ -249,7 +250,7 @@ class _ScreenHomeState extends State<ScreenHome> {
             child: Container(
               height: size.height * 0.15,
               width: size.width,
-              color: Colors.blue[100],
+              color: appBackGround.withOpacity(0.2),
               child: Padding(
                 padding: const EdgeInsets.only(left: 5, right: 8, top: 5),
                 child: BlocBuilder<SpecialityBloc, SpecialityState>(
@@ -343,12 +344,12 @@ class _ScreenHomeState extends State<ScreenHome> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                 Text(
                   'Today Appointments',
                   style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
-                      color: Colors.blue),
+                      color: appBackGround),
                 ),
                 const SizedBox(
                   height: 15,

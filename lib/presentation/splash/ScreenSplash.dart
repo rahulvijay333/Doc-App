@@ -88,7 +88,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
           height: double.infinity,
           width: double.infinity,
           decoration: BoxDecoration(
-            color: Color.fromRGBO(0, 145, 255, 10),
+            color: Color.fromRGBO(0, 116, 217, 1),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
