@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:appoint_medic/domain/models/chat_list/chatmessages_parsing/chat_messags.dart';
 import 'package:appoint_medic/infrastructure/chats/chat_service.dart';
 import 'package:bloc/bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 
@@ -19,11 +20,28 @@ class SeeMessagesBloc extends Bloc<SeeMessagesEvent, SeeMessagesState> {
           await _chatService.getAllMesssages(chatRoomId: event.chatRoomID);
 
       if (error.isEmpty) {
-        // log(response.toString());
+        
         if (response == null) {
-          emit(MessagesSucess(messagesList: []));
+          emit(MessagesSucess( groupedMessages: {}));
         } else {
-          emit(MessagesSucess(messagesList: response));
+          //------------------------------------------------------------creating a map of date and messages
+          Map<String, List<ChatMessage>> groupedChatMessages = {};
+
+          for (var mesg in response) {
+            String date = DateFormat('dd MMM yyyy').format(mesg.createdAt);
+            if (!groupedChatMessages.containsKey(date)) {
+              groupedChatMessages[date] = [];
+            }
+
+            groupedChatMessages[date]!.add(mesg);
+          }
+          //---------------sorting according to date
+          groupedChatMessages.forEach((date, messages) {
+            messages.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+          });
+
+          emit(MessagesSucess(
+              groupedMessages: groupedChatMessages));
         }
       } else {
         emit(MessagesFailed());
@@ -49,9 +67,29 @@ class SeeMessagesBloc extends Bloc<SeeMessagesEvent, SeeMessagesState> {
           await _chatService.getAllMesssages(chatRoomId: event.chatroom);
 
       if (error.isEmpty) {
-        // log(response.toString());
+       
+        Map<String, List<ChatMessage>> groupedChatMessages = {};
 
-        emit(MessagesSucess(messagesList: response!));
+        if (response != null) {
+          for (var mesg in response) {
+            String date = DateFormat('dd MMM yyyy').format(mesg.createdAt);
+            if (!groupedChatMessages.containsKey(date)) {
+              groupedChatMessages[date] = [];
+            }
+
+            groupedChatMessages[date]!.add(mesg);
+          }
+        
+        } 
+
+          //---------------sorting according to date
+          groupedChatMessages.forEach((date, messages) {
+            messages.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+
+            emit(MessagesSucess(
+                 groupedMessages: groupedChatMessages));
+          });
+        
       } else {
         emit(MessagesFailed());
       }

@@ -66,364 +66,330 @@ class _ScreenLoginState extends State<ScreenLogin> {
     final size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-     
         body: Padding(
             padding: const EdgeInsets.all(0),
-            child: Container(
-              // decoration: backgroundDecoration,
-              child: Column(
-                children: [
-                  //------------------------------------------------item
-                  Expanded(
-                    child: Container(
-                        height: size.height * 0.07,
+            child: Column(
+              children: [
+                //------------------------------------------------item
+                Container( // custom app bar
+                    height: size.height * 0.07,
+                    color: appBackGround,
+                    width: size.width,
+                    child: const Center(
+                      child: Text(
+                        'AppointMedic',
+                        style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                    )),
+                //-----------------------------------------------------app name
+                //------------------------------------item 2
+                Container(
+                  child: Column(
+                    // physics: const BouncingScrollPhysics(),
+                    children: [
+                      //---------------------------------------image + text
+                      Container(
+                        height: size.height * 0.32,
                         color: appBackGround,
-                        width: size.width,
-                        child: const Center(
-                          child: Text(
-                            'AppointMedic',
-                            style: TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                        )),
+                        child: Column(
+                          children: [
+                            // const SizedBox(
+                            //   height: 35,
+                            // ),
+                            //---------------------------------------app text
+                            const Text(
+                              'Your Health, Our Priority: Book with Confidence!',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(
+                              height: 25,
+                            ),
+                            //-----------------------------------------------image
+                            Center(
+                              child: Image.asset(
+                                'assets/logo_login.png',
+                                height: size.height * 0.35 * 0.60,
+                                width: size.width * 0.5,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      //----------------------------------------------------------------------
+                
+                      const SizedBox(
+                        height: 20,
+                      ), //--------------------------------------email field
+                    ],
                   ),
-                  //-----------------------------------------------------app name
-                  //------------------------------------item 2
-                  Expanded(
-                    flex: 12,
-                    child: Container(
-                      child: ListView(
-                        physics: const BouncingScrollPhysics(),
-                        children: [
-                          //---------------------------------------image + text
-                          Container(
-                            // height: size.height * 0.35,
-                            color: appBackGround,
+                ),
+                Expanded(
+                  child: Container(
+                    color: Colors.white,
+                    width: size.width,
+                    // height: size.height * 0.58,
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(left: 20.0, right: 20, top: 10),
+                      child: Form(
+                        key: _formkey,
+                        child: Container(
+                          width: 200,
+                          color: Colors.white,
+                          child: SingleChildScrollView(
                             child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const SizedBox(
-                                  height: 35,
-                                ),
-                                //---------------------------------------app text
                                 const Text(
-                                  'Your Health, Our Priority: Book with Confidence!',
+                                  'Email',
                                   style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
+                                      fontSize: 16, fontWeight: FontWeight.w500),
                                 ),
                                 const SizedBox(
-                                  height: 25,
+                                  height: 5,
                                 ),
-                                //-----------------------------------------------image
-                                Center(
-                                  child: Image.asset(
-                                    'assets/logo_login.png',
-                                    height: 180,
-                                    width: 280,
+                                TextFormField(
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        setState(() {
+                                          emailError = 'Email required';
+                                        });
+                                      } else {
+                                        setState(() {
+                                          emailError = '';
+                                        });
+                                      }
+                                    },
+                                    controller: emailController,
+                                    decoration: textfieldInputDecorationEmail),
+                                SizedBox(
+                                  height: 18,
+                                  child: Text(
+                                    emailError,
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        color: emailError.isEmpty
+                                            ? Colors.white
+                                            : Colors.red),
                                   ),
+                                ),
+                                //----------------------------------------------password field
+                                const Text(
+                                  'Password',
+                                  style: TextStyle(
+                                      fontSize: 16, fontWeight: FontWeight.w500),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                TextFormField(
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        setState(() {
+                                          passwordError = 'Password required';
+                                        });
+                                      } else {
+                                        setState(() {
+                                          passwordError = '';
+                                        });
+                                      }
+                                    },
+                                    obscureText: true,
+                                    controller: passwordController,
+                                    decoration: textfieldInputDecorationPassword),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    SizedBox(
+                                      height: 18,
+                                      child: Text(
+                                        passwordError,
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            color: passwordError.isEmpty
+                                                ? Colors.white
+                                                : Colors.red),
+                                      ),
+                                    ),
+                                    const Text(
+                                      'Did you forget password ?',
+                                      style: TextStyle(
+                                          color: Colors.blue, fontSize: 12),
+                                    ),
+                                  ],
                                 ),
                                 const SizedBox(
                                   height: 10,
-                                )
-                              ],
-                            ),
-                          ),
-                          //----------------------------------------------------------------------
-
-                          const SizedBox(
-                            height: 20,
-                          ), //--------------------------------------email field
-                          Container(
-                            color: Colors.white,
-                            //height: size.height * 0.42,
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 20.0, right: 20, top: 10),
-                              child: Form(
-                                key: _formkey,
-                                child: Container(
-                                  color: Colors.white,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                ),
+                                Center(
+                                  child: Wrap(
                                     children: [
-                                      const Text(
-                                        'Email',
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      TextFormField(
-                                          validator: (value) {
-                                            if (value == null ||
-                                                value.isEmpty) {
-                                              setState(() {
-                                                emailError = 'Email required';
-                                              });
-                                            } else {
-                                              setState(() {
-                                                emailError = '';
-                                              });
-                                            }
-                                          },
-                                          controller: emailController,
-                                          decoration:
-                                              textfieldInputDecorationEmail),
-                                      SizedBox(
-                                        height: 18,
-                                        child: Text(
-                                          emailError,
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              color: emailError.isEmpty
-                                                  ? Colors.white
-                                                  : Colors.red),
-                                        ),
-                                      ),
-                                      //----------------------------------------------password field
-                                      const Text(
-                                        'Password',
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      TextFormField(
-                                          validator: (value) {
-                                            if (value == null ||
-                                                value.isEmpty) {
-                                              setState(() {
-                                                passwordError =
-                                                    'Password required';
-                                              });
-                                            } else {
-                                              setState(() {
-                                                passwordError = '';
-                                              });
-                                            }
-                                          },
-                                          obscureText: true,
-                                          controller: passwordController,
-                                          decoration:
-                                              textfieldInputDecorationPassword),
-                                                 SizedBox(height: 5,),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          SizedBox(
-                                            height: 18,
-                                            child: Text(
-                                              passwordError,
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  color: passwordError.isEmpty
-                                                      ? Colors.white
-                                                      : Colors.red),
-                                            ),
-                                          ),
-                                       
-                                          const Text(
-                                            'Did you forget password ?',
-                                            style: TextStyle(
-                                                color: Colors.blue,
-                                                fontSize: 12),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      Center(
-                                        child: Wrap(
-                                          children: [
-                                            customRadio('patient'),
-                                            customRadio('doctor'),
-                                          ],
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 20,
-                                      ),
-                                      //-----------------------------------------------------login button
-
-                                      BlocBuilder<LoginBloc, LoginState>(
-                                        builder: (context, state) {
-                                          //-------------loading
-                                          if (state is LoginLoading) {
-                                            unfocus();
-                                            return const Center(
-                                                child:
-                                                    CircularProgressIndicator());
-                                          } else if (state
-                                              is LoginOnBordingPatient) {
-                                            // WidgetsBinding.instance
-                                            //     .addPostFrameCallback((_) {
-                                            //   unfocus();
-                                            //   Navigator.of(context)
-                                            //       .pushReplacement(
-                                            //           MaterialPageRoute(
-                                            //     builder: (context) {
-                                            //       return ScreenOnBoardingPatient(
-                                            //         token: state.token,
-                                            //       );
-                                            //     },
-                                            //   ));
-                                            // });
-                                          }
-                                          //------------------------------------------------Onboradind doctor
-                                          else if (state
-                                              is LoginOnBordingDoctor) {
-                                            WidgetsBinding.instance
-                                                .addPostFrameCallback((_) {
-                                              unfocus();
-                                              Navigator.of(context)
-                                                  .pushReplacement(
-                                                      MaterialPageRoute(
-                                                builder: (context) {
-                                                  return ScreenOnBoardingDoctor(
-                                                    token: state.token,
-                                                  );
-                                                },
-                                              ));
-                                            });
-                                          } else if (state
-                                              is LoginAdminVerificationSate) {
-                                            WidgetsBinding.instance
-                                                .addPostFrameCallback((_) {
-                                              unfocus();
-                                              Navigator.of(context)
-                                                  .pushReplacement(
-                                                      MaterialPageRoute(
-                                                builder: (context) {
-                                                  return ScreenAdminNotVerified();
-                                                },
-                                              ));
-                                            });
-                                          } else if (state is LoginSucess) {
-                                            if (state.role == 'patient') {
-                                              userType = 'Patient';
-                                              context.read<NavbarBloc>().add(
-                                                  PageChangeEvent(page: 0));
-                                              //-----------------------------------------------------------------gettting profile details  event
-                                              BlocProvider.of<
-                                                          ProfileDetailsBloc>(
-                                                      context)
-                                                  .add(GetProfileDetails(
-                                                      state.id!));
-                                              //------------------------------------------calling catagories event
-                                              BlocProvider.of<SpecialityBloc>(
-                                                      context)
-                                                  .add(DisplaySpecialityHome());
-                                              //----------------------------------------------calling today appoints
-                                              context
-                                                  .read<
-                                                      HomeTodayAppointmentsBloc>()
-                                                  .add(
-                                                      GetTodayAppointmentPatientCall());
-                                              //------------------------------------------
-                                              WidgetsBinding.instance
-                                                  .addPostFrameCallback((_) {
-                                                unfocus();
-                                                Navigator.of(context)
-                                                    .pushReplacement(
-                                                        MaterialPageRoute(
-                                                  builder: (context) {
-                                                    return ScreenMainPage(
-                                                      userName: state.name!,
-                                                      id: state.id!,
-                                                    );
-                                                  },
-                                                ));
-                                              });
-
-                                              ScaffoldMessenger.of(context)
-                                                  .hideCurrentSnackBar();
-                                            } else if (state.role == 'doctor') {
-                                              userType = 'Doctor';
-                                              WidgetsBinding.instance
-                                                  .addPostFrameCallback((_) {
-                                                context
-                                                    .read<DoctorProfileBloc>()
-                                                    .add(
-                                                        GetDoctorProfileCall());
-                                                context.read<NavbarBloc>().add(
-                                                    PageChangeEvent(page: 0));
-                                                Navigator.of(context)
-                                                    .pushReplacement(
-                                                        MaterialPageRoute(
-                                                  builder: (context) {
-                                                    return DoctorScreenMain(
-                                                      name: state.name!,
-                                                      token: state.token!,
-                                                    );
-                                                  },
-                                                ));
-                                              });
-                                              ScaffoldMessenger.of(context)
-                                                  .hideCurrentSnackBar();
-                                            }
-                                          } else if (state is LoginFailed) {
-                                            WidgetsBinding.instance
-                                                .addPostFrameCallback(
-                                                    (timeStamp) {
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(SnackBar(
-                                                      duration:
-                                                          Duration(seconds: 2),
-                                                      content:
-                                                          Text(state.error)));
-                                            });
-
-                                            ScaffoldMessenger.of(context)
-                                                .hideCurrentSnackBar();
-                                          }
-
-                                          return ElevatedButton(
-                                              style: loginButtonStyle,
-                                              onPressed: () {
-                                                if (_formkey.currentState!
-                                                    .validate()) {
-                                                  if (passwordError.isEmpty &&
-                                                      emailError.isEmpty) {
-                                                    BlocProvider.of<LoginBloc>(
-                                                            context)
-                                                        .add(LoginButtonClicked(
-                                                            emailController.text
-                                                                .trim(),
-                                                            passwordController
-                                                                .text
-                                                                .trim(),
-                                                            selectedUserTypeValue));
-                                                  }
-                                                }
-                                              },
-                                              child: const Text(
-                                                'Login',
-                                                style: TextStyle(fontSize: 18),
-                                              ));
-                                        },
-                                      ),
+                                      customRadio('patient'),
+                                      customRadio('doctor'),
                                     ],
                                   ),
                                 ),
-                              ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                //-----------------------------------------------------login button
+                                          
+                                BlocBuilder<LoginBloc, LoginState>(
+                                  builder: (context, state) {
+                                    //-------------loading
+                                    if (state is LoginLoading) {
+                                      unfocus();
+                                      return const Center(
+                                          child: CircularProgressIndicator());
+                                    } else if (state is LoginOnBordingPatient) {
+                                      // WidgetsBinding.instance
+                                      //     .addPostFrameCallback((_) {
+                                      //   unfocus();
+                                      //   Navigator.of(context)
+                                      //       .pushReplacement(
+                                      //           MaterialPageRoute(
+                                      //     builder: (context) {
+                                      //       return ScreenOnBoardingPatient(
+                                      //         token: state.token,
+                                      //       );
+                                      //     },
+                                      //   ));
+                                      // });
+                                    }
+                                    //------------------------------------------------Onboradind doctor
+                                    else if (state is LoginOnBordingDoctor) {
+                                      WidgetsBinding.instance
+                                          .addPostFrameCallback((_) {
+                                        unfocus();
+                                        Navigator.of(context)
+                                            .pushReplacement(MaterialPageRoute(
+                                          builder: (context) {
+                                            return ScreenOnBoardingDoctor(
+                                              token: state.token,
+                                            );
+                                          },
+                                        ));
+                                      });
+                                    } else if (state
+                                        is LoginAdminVerificationSate) {
+                                      WidgetsBinding.instance
+                                          .addPostFrameCallback((_) {
+                                        unfocus();
+                                        Navigator.of(context)
+                                            .pushReplacement(MaterialPageRoute(
+                                          builder: (context) {
+                                            return ScreenAdminNotVerified();
+                                          },
+                                        ));
+                                      });
+                                    } else if (state is LoginSucess) {
+                                      if (state.role == 'patient') {
+                                        userType = 'Patient';
+                                        context
+                                            .read<NavbarBloc>()
+                                            .add(PageChangeEvent(page: 0));
+                                        //-----------------------------------------------------------------gettting profile details  event
+                                        BlocProvider.of<ProfileDetailsBloc>(context)
+                                            .add(GetProfileDetails(state.id!));
+                                        //------------------------------------------calling catagories event
+                                        BlocProvider.of<SpecialityBloc>(context)
+                                            .add(DisplaySpecialityHome());
+                                        //----------------------------------------------calling today appoints
+                                        context
+                                            .read<HomeTodayAppointmentsBloc>()
+                                            .add(GetTodayAppointmentPatientCall());
+                                        //------------------------------------------
+                                        WidgetsBinding.instance
+                                            .addPostFrameCallback((_) {
+                                          unfocus();
+                                          Navigator.of(context)
+                                              .pushReplacement(MaterialPageRoute(
+                                            builder: (context) {
+                                              return ScreenMainPage(
+                                                userName: state.name!,
+                                                id: state.id!,
+                                              );
+                                            },
+                                          ));
+                                        });
+                                          
+                                        ScaffoldMessenger.of(context)
+                                            .hideCurrentSnackBar();
+                                      } else if (state.role == 'doctor') {
+                                        userType = 'Doctor';
+                                        WidgetsBinding.instance
+                                            .addPostFrameCallback((_) {
+                                          context
+                                              .read<DoctorProfileBloc>()
+                                              .add(GetDoctorProfileCall());
+                                          context
+                                              .read<NavbarBloc>()
+                                              .add(PageChangeEvent(page: 0));
+                                          Navigator.of(context)
+                                              .pushReplacement(MaterialPageRoute(
+                                            builder: (context) {
+                                              return DoctorScreenMain(
+                                                name: state.name!,
+                                                token: state.token!,
+                                              );
+                                            },
+                                          ));
+                                        });
+                                        ScaffoldMessenger.of(context)
+                                            .hideCurrentSnackBar();
+                                      }
+                                    } else if (state is LoginFailed) {
+                                      WidgetsBinding.instance
+                                          .addPostFrameCallback((timeStamp) {
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                                duration: Duration(seconds: 2),
+                                                content: Text(state.error)));
+                                      });
+                                          
+                                      ScaffoldMessenger.of(context)
+                                          .hideCurrentSnackBar();
+                                    }
+                                          
+                                    return ElevatedButton(
+                                        style: loginButtonStyle,
+                                        onPressed: () {
+                                          if (_formkey.currentState!.validate()) {
+                                            if (passwordError.isEmpty &&
+                                                emailError.isEmpty) {
+                                              BlocProvider.of<LoginBloc>(context)
+                                                  .add(LoginButtonClicked(
+                                                      emailController.text.trim(),
+                                                      passwordController.text
+                                                          .trim(),
+                                                      selectedUserTypeValue));
+                                            }
+                                          }
+                                        },
+                                        child: const Text(
+                                          'Login',
+                                          style: TextStyle(fontSize: 18),
+                                        ));
+                                  },
+                                ),
+                              ],
                             ),
-                          )
-                        ],
+                          ),
+                        ),
                       ),
                     ),
-                  )
-                ],
-              ),
+                  ),
+                )
+              ],
             )),
         bottomNavigationBar: Container(
           color: Colors.white,

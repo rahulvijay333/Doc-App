@@ -43,6 +43,7 @@ class ScreenAllAppointments extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: TabBar(
+                          physics: NeverScrollableScrollPhysics(),
                           labelStyle: TextStyle(
                             fontSize: size.width * 0.03,
                           ),
@@ -90,12 +91,14 @@ class ScreenAllAppointments extends StatelessWidget {
                 // color: Colors.amber,
                 child: const Padding(
                   padding: EdgeInsets.only(left: 15.0, right: 15),
-                  child: TabBarView(children: [
-                    ScreenApprovedAppoint(),
-                    ScreenPendingAppoint(),
-                    ScreenCancelledAppoint(),
-                    ScreenAllAppoint()
-                  ]),
+                  child: TabBarView(
+                      physics: NeverScrollableScrollPhysics(),
+                      children: [
+                        ScreenApprovedAppoint(),
+                        ScreenPendingAppoint(),
+                        ScreenCancelledAppoint(),
+                        ScreenAllAppoint()
+                      ]),
                 ),
               )
             ],

@@ -15,7 +15,7 @@ class SearchService {
 
       //log(response);
       if (response.statusCode == 200) {
-        log('api call sucess searchservice');
+       
         return ('', DoctorsResponseModel.fromJson(response.data));
       } else {
         return ('Error happend in ApiCall ', null);
@@ -51,7 +51,7 @@ class SearchService {
 
       //log(response);
       if (response.statusCode == 200) {
-        log('api call sucess');
+       
         return ('', DoctorsResponseModel.fromJson(response.data));
       } else {
         return ('Error happend in ApiCall ', null);

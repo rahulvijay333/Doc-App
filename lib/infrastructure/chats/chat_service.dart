@@ -56,7 +56,7 @@ class ChatService {
     final String? token = await getToken.retrieveToken();
 
     try {
-      log('creating new  chat');
+   
 
       final Response response =
           await Dio().post('${ApiEndPoints.createNewChatByDoc}/$patientID',
@@ -64,10 +64,10 @@ class ChatService {
                 headers: {'Authorization': 'Bearer $token'},
               ));
 
-      log(response.statusCode.toString());
+     
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        log('creating new  chat sucess');
+      
 
         return ("", CreateChatByPatientResponse.fromJson(response.data));
       } else {
@@ -94,19 +94,13 @@ class ChatService {
     final String? token = await getToken.retrieveToken();
 
     try {
-      log('creating new  chat');
-
       final Response response =
           await Dio().post('${ApiEndPoints.createNewChat}/$doctorID',
               options: Options(
                 headers: {'Authorization': 'Bearer $token'},
               ));
 
-      log(response.statusCode.toString());
-
       if (response.statusCode == 200 || response.statusCode == 201) {
-        log('creating new  chat sucess');
-
         return ("", CreateChatByPatientResponse.fromJson(response.data));
       } else {
         return ("Return other error code service", null);
@@ -174,8 +168,6 @@ class ChatService {
     final String? token = await getToken.retrieveToken();
 
     try {
-      log('sending message');
-
       final Response response =
           await Dio().post('${ApiEndPoints.getAllMessages}/$chatRoomID',
               data: jsonEncode({"content": message, "role": role}),
@@ -183,10 +175,7 @@ class ChatService {
                 headers: {'Authorization': 'Bearer $token'},
               ));
 
-      log(response.statusCode.toString());
-
       if (response.statusCode == 200 || response.statusCode == 201) {
-        log('messega send sucessfull');
         return ("", NewChatResponse.fromJson(response.data));
       } else {
         return ("Return other error code service", null);

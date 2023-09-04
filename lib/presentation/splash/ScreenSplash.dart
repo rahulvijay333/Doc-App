@@ -4,6 +4,7 @@ import 'package:appoint_medic/application/Search/search_bloc.dart';
 import 'package:appoint_medic/application/chat/view_chats/bloc/view_all_chats_bloc.dart';
 import 'package:appoint_medic/application/doctor%20profile/bloc/doctor_profile_bloc.dart';
 import 'package:appoint_medic/application/navbar/navbar_bloc.dart';
+import 'package:appoint_medic/application/notifications/notificationStatus_track/bloc/notification_track_bloc.dart';
 import 'package:appoint_medic/application/profile/profile_details_bloc.dart';
 import 'package:appoint_medic/application/speciality/speciality_bloc.dart';
 import 'package:appoint_medic/core/color_constants.dart';
@@ -40,6 +41,11 @@ class _ScreenSplashState extends State<ScreenSplash> {
             userType = 'Doctor';
             context.read<NavbarBloc>().add(PageChangeEvent(page: 0));
             context.read<DoctorProfileBloc>().add(GetDoctorProfileCall());
+            //------------------notifications refresh
+             context
+                .read<NotificationTrackBloc>()
+                .add(CheckNotifications(userType: 'doctor'));
+
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
@@ -62,6 +68,9 @@ class _ScreenSplashState extends State<ScreenSplash> {
                 .read<HomeTodayAppointmentsBloc>()
                 .add(GetTodayAppointmentPatientCall());
             //-------------------------------------------
+            context
+                .read<NotificationTrackBloc>()
+                .add(CheckNotifications(userType: 'patient'));
 
             BlocProvider.of<SearchBloc>(context).add(ShowAllDoctorList());
             Navigator.pushReplacement(

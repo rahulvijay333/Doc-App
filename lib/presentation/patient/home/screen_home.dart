@@ -1,10 +1,15 @@
 import 'package:appoint_medic/application/HomeScreen_today_appointments/bloc/home_today_appointments_bloc.dart';
 import 'package:appoint_medic/application/Search/search_bloc.dart';
+import 'package:appoint_medic/application/notifications/bloc/view_notifications_bloc.dart';
+import 'package:appoint_medic/application/notifications/notificationStatus_track/bloc/notification_track_bloc.dart';
 import 'package:appoint_medic/application/profile/profile_details_bloc.dart';
 import 'package:appoint_medic/application/speciality/speciality_bloc.dart';
 import 'package:appoint_medic/core/color_constants.dart';
 import 'package:appoint_medic/domain/response_models/get_specialities_response/speciality.dart';
+
 import 'package:appoint_medic/presentation/patient/home/widgets/home_appointments_tile.dart';
+import 'package:appoint_medic/presentation/patient/home/widgets/notification_bell.dart';
+import 'package:appoint_medic/presentation/patient/notification/screen_notification.dart';
 import 'package:appoint_medic/presentation/patient/search/screen_search.dart';
 import 'package:appoint_medic/presentation/patient/search/screen_speclty.dart';
 import 'package:flutter/material.dart';
@@ -42,137 +47,156 @@ class _ScreenHomeState extends State<ScreenHome> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    double textScaleFactor = MediaQuery.of(context).textScaleFactor;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         //-------------------------------------------------1st section
         Container(
-          height: size.height * 0.23,
-          width: double.maxFinite,
+          // height: size.height * 0.23,
+        
           color: appBackGround,
           child: Column(
             children: [
               //---------------------------profile details
-              Container(
-                height: size.height * 0.14,
-                  // color: Colors.green,
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: BlocBuilder<ProfileDetailsBloc, ProfileDetailsState>(
-                    builder: (context, state) {
-                      if (state is ProfileLoading) {
-                        //-------------------------------loading
-                        return const Center(
-                          child: CircularProgressIndicator(
-                            color: Colors.white,
-                            strokeWidth: 1,
-                          ),
-                        );
-                      }
-                      //-------------------------------------------sucess
-                      else if (state is ProfileSucess) {
-                        return Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            //welcome
-                            Container(
-                                //  color: Colors.amber,
-                                // width: size.width * 0.20,
-                                height: size.height * 0.15 * 0.60,
-                                child: Center(
-                                  child: CircleAvatar(
-                                      radius: 32,
-                                      backgroundColor: Colors.transparent,
-                                      backgroundImage: state.userProfile.user!
-                                                  .profilePicture?.secureUrl !=
-                                              null
-                                          ? NetworkImage(state.userProfile.user!
-                                              .profilePicture!.secureUrl!)
-                                          : const AssetImage(
-                                                  'assets/patient.png')
-                                              as ImageProvider),
-                                )),
-
-                            //---------------------------------------name and welcome
-
-                            Container(
-                              width: size.width * 0.60,
-                              height: size.height * 0.15 * 0.80,
-                              // color: Colors.red,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  // mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Text(
-                                      'Welcome',
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w300),
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    Text(
-                                      state.userProfile.user?.fullName ??
-                                          state.userProfile.user!.name!,
-                                      style: const TextStyle(
-                                          fontSize: 24,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    )
-                                  ],
-                                ),
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: BlocBuilder<ProfileDetailsBloc, ProfileDetailsState>(
+                  builder: (context, state) {
+                    if (state is ProfileLoading) {
+                      //-------------------------------loading
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                          strokeWidth: 1,
+                        ),
+                      );
+                    }
+                    //-------------------------------------------sucess
+                    else if (state is ProfileSucess) {
+                      return Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                       
+                        children: [
+                          //welcome
+                          Container(
+                              //  color: Colors.amber,
+                              // width: size.width * 0.20,
+                              // height: size.height * 0.15 * 0.60,
+                              child: Center(
+                                child: CircleAvatar(
+                                    radius: 32,
+                                    backgroundColor: Colors.transparent,
+                                    backgroundImage: state.userProfile.user!
+                                                .profilePicture?.secureUrl !=
+                                            null
+                                        ? NetworkImage(state.userProfile.user!
+                                            .profilePicture!.secureUrl!)
+                                        : const AssetImage(
+                                                'assets/patient.png')
+                                            as ImageProvider),
+                              )),
+    
+                          //---------------------------------------name and welcome
+    
+                          Container(
+                            // width: size.width * 0.60,
+    
+                            // color: Colors.red,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                // mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Text(
+                                    'Welcome ,',
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w300),
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    state.userProfile.user?.fullName ??
+                                        state.userProfile.user!.name!,
+                                    maxLines: 1,
+                                    style: TextStyle(
+                                        fontSize: 20 * textScaleFactor,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  )
+                                ],
                               ),
                             ),
-
-                            const Spacer(),
-                            //------------------------------------------reminder icon
-                            SizedBox(
-                              height: size.height * 0.15 * 0.40,
-                              width: size.width * 0.10,
-                              child: CircleAvatar(
-                                radius: 18,
-                                backgroundColor: Colors.white.withOpacity(0.2),
-                                child: const CircleAvatar(
-                                  radius: 18,
-                                  child: Icon(Icons.notifications),
-                                ),
+                          ),
+                          Spacer(),
+    
+                          //------------------------------------------reminder icon
+                          InkWell(onTap: () {
+                            context.read<ViewNotificationsBloc>().add(
+                                GetNotifications(
+                                    notificationUserType: 'patient'));
+    
+                            Navigator.of(context).push(
+                              PageRouteBuilder(
+                                pageBuilder:
+                                    (context, animation, secondaryAnimation) {
+                                  // Build the new route/screen here
+                                  return ScreenNotification();
+                                },
+                                transitionsBuilder: (context, animation,
+                                    secondaryAnimation, child) {
+                                  // Define your custom transition animation here
+                                  return SlideTransition(
+                                    position: Tween<Offset>(
+                                      begin: const Offset(1.0, 0.0),
+                                      end: Offset.zero,
+                                    ).animate(animation),
+                                    child: child,
+                                  );
+                                },
                               ),
-                            )
-                          ],
-                        );
-                      } else if (state is ProfileFailed) {
-                        return Center(
-                          child: IconButton(
-                              onPressed: () {
-                                //-----------------------------------reload
-                                context
-                                    .read<ProfileDetailsBloc>()
-                                    .add(GetProfileDetails(widget.id));
-                              },
-                              icon: const Icon(
-                                Icons.refresh,
-                                color: Colors.white,
-                              )),
-                        );
-                      }
-
-                      return const SizedBox();
-                    },
-                  ),
+                            );
+                          }, child: BlocBuilder<NotificationTrackBloc,
+                              NotificationTrackState>(
+                            builder: (context, state) {
+                              return NotificationBell(
+                                  notificationCount: state.notificationCount);
+                            },
+                          ))
+                        ],
+                      );
+                    } else if (state is ProfileFailed) {
+                      return Center(
+                        child: IconButton(
+                            onPressed: () {
+                              //-----------------------------------reload
+                              context
+                                  .read<ProfileDetailsBloc>()
+                                  .add(GetProfileDetails(widget.id));
+                            },
+                            icon: const Icon(
+                              Icons.refresh,
+                              color: Colors.white,
+                            )),
+                      );
+                    }
+    
+                    return const SizedBox();
+                  },
                 ),
               ),
-
+    
               //---------------------------------------------search doctors
               GestureDetector(
                 onTap: () {
                   //----------------------------search page navigation
                   BlocProvider.of<SearchBloc>(context).add(ShowAllDoctorList());
-
+    
                   Navigator.of(context).push(
                     PageRouteBuilder(
                       pageBuilder: (context, animation, secondaryAnimation) {
@@ -200,7 +224,6 @@ class _ScreenHomeState extends State<ScreenHome> {
                   ),
                   child: Container(
                     height: size.height * 0.09,
-                    // /  color: Colors.redAccent,
                     child: Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Container(
@@ -235,13 +258,15 @@ class _ScreenHomeState extends State<ScreenHome> {
             left: size.width * 0.05,
             right: size.width * 0.05,
           ),
-          child:  Text(
+          child: Text(
             'Specialities',
             style: TextStyle(
-                fontSize: 18, fontWeight: FontWeight.w500, color:appBackGround),
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+                color: appBackGround),
           ),
         ),
-//---------------------------------------------------------------specility
+    //---------------------------------------------------------------specility
         Padding(
           padding: EdgeInsets.only(
               left: size.width * 0.05, right: size.width * 0.05, top: 10),
@@ -320,7 +345,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                             )),
                       );
                     }
-
+    
                     return const Center(
                       child: Text('Connectivity error'),
                     );
@@ -330,7 +355,7 @@ class _ScreenHomeState extends State<ScreenHome> {
             ),
           ),
         ),
-
+    
         //------------------------------------------2nd section
         Container(
           // color: Colors.red,
@@ -344,7 +369,7 @@ class _ScreenHomeState extends State<ScreenHome> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                 Text(
+                Text(
                   'Today Appointments',
                   style: TextStyle(
                       fontSize: 18,
@@ -368,14 +393,14 @@ class _ScreenHomeState extends State<ScreenHome> {
                           ),
                         );
                       }
-
+    
                       if (state is HomeTodayAppointsSuccess) {
                         if (state.appointmentList.isEmpty) {
                           return const Center(
                             child: Text('No Appointments Today'),
                           );
                         }
-
+    
                         return ListView.separated(
                             physics: const BouncingScrollPhysics(),
                             itemBuilder: (context, index) {

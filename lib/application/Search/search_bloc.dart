@@ -19,10 +19,10 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
       if (error.isEmpty) {
         emit(SearchSucess(apiResponse!.doctors!));
-        log('api call show all sucess');
+      
       } else {
         emit(SearchFailure(error));
-        log('api call failed bloc');
+       
       }
     });
 
@@ -34,7 +34,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
       if (error.isEmpty) {
         emit(SearchFilterSuccess(response!.doctors!));
-        // log('api call  filtersucess');
+       
       } else {
         emit(SearchFilterFailure(error));
 

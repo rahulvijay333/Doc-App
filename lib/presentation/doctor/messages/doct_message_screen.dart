@@ -41,49 +41,25 @@ class ScreemDoctMessage extends StatelessWidget {
                 height: size.height * 0.05,
               ),
               //----------------------------------------------------------search messages
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Container(
-                      color: Colors.grey[200],
-                      height: size.height * 0.06,
-                      width: size.width * 0.75,
-                      child: const Padding(
-                        padding: EdgeInsets.only(left: 8.0),
-                        child: Row(
-                          children: [
-                            Icon(Icons.search),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text('Search Messages..')
-                          ],
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Container(
+                  color: Colors.grey[200],
+                  height: size.height * 0.06,
+                  width: size.width,
+                  child: const Padding(
+                    padding: EdgeInsets.only(left: 8.0),
+                    child: Row(
+                      children: [
+                        Icon(Icons.search),
+                        SizedBox(
+                          width: 10,
                         ),
-                      ),
+                        Text('Search Messages..')
+                      ],
                     ),
                   ),
-
-                  //---------------------------------------------new message icon
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Container(
-                      height: size.height * 0.06,
-                      width: size.width * 0.15,
-                      color: Colors.blue,
-                      child: IconButton(
-                          onPressed: () {
-                            //----------------------------message function
-                          },
-                          icon: const Icon(
-                            Icons.add_comment,
-                            size: 30,
-                            color: Colors.white,
-                          )),
-                    ),
-                  )
-                ],
+                ),
               ),
               const SizedBox(
                 height: 20,
@@ -95,6 +71,7 @@ class ScreemDoctMessage extends StatelessWidget {
                     if (state is ViewAllChatsLoading) {
                       return const Center(
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text('Loading..'),
                             SizedBox(
@@ -119,7 +96,7 @@ class ScreemDoctMessage extends StatelessWidget {
                               //------------------------------view message
 
                               onTap: () {
-                                log(state.chatsList[index].id!);
+                         
                                 context.read<SeeMessagesBloc>().add(
                                     SeeChatsEvent(
                                         chatRoomID:
@@ -128,9 +105,6 @@ class ScreemDoctMessage extends StatelessWidget {
                                 if (state.chatsList.isNotEmpty) {
                                   //view
 
-                                  log(state.chatsList[index].participants![0]
-                                      .patient!.profilePicture!.secureUrl!
-                                      .toString());
                                   Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) {
                                       //-------------

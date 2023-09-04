@@ -21,89 +21,94 @@ class ScreenAppointments extends StatelessWidget {
         width: double.maxFinite,
         height: double.maxFinite,
         // decoration: backgroundDecoration,
-        child: Column(
-          children: [
-            SizedBox(
-              height: size.height * 0.07,
-              child: const Center(
-                child: Text(
-                  'Appointments',
-                  style: TextStyle(
-                      fontSize: 25,
-                      color: Colors.blue,
-                      fontWeight: FontWeight.bold),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: size.height * 0.07,
+                child: const Center(
+                  child: Text(
+                    'Appointments',
+                    style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Container(
-                  color: Colors.blue.withOpacity(0.1),
-                  //height: 40,
-                  height: size.height * 0.06,
+              const SizedBox(
+                height: 15,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                    color: Colors.blue.withOpacity(0.1),
+                    //height: 40,
+                    height: size.height * 0.06,
 
-                  child: Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: TabBar(
-                        labelStyle: TextStyle(
-                          fontSize: size.width * 0.03,
-                        ),
-                        labelColor: Colors.white,
-                        unselectedLabelColor: Colors.black,
-                        indicator: BoxDecoration(
-                          color: Colors.blue.withOpacity(0.8),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        tabs: const [
-                          Tab(
-                            iconMargin: EdgeInsets.only(),
-                            child: Text(
-                              'Today',
-                            ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: TabBar(
+                          physics: NeverScrollableScrollPhysics(),
+                          labelStyle: TextStyle(
+                            fontSize: size.width * 0.03,
                           ),
-                          Tab(
-                            //text: 'today',
-                            child: Text(
-                              'Upcoming',
-                            ),
+                          labelColor: Colors.white,
+                          unselectedLabelColor: Colors.black,
+                          indicator: BoxDecoration(
+                            color: Colors.blue.withOpacity(0.8),
+                            borderRadius: BorderRadius.circular(8),
                           ),
-                          Tab(
-                            //text: 'today',
-                            child: Text(
-                              'All ',
+                          tabs: const [
+                            Tab(
+                              iconMargin: EdgeInsets.only(),
+                              child: Text(
+                                'Today',
+                              ),
                             ),
-                          ),
-                        ]),
+                            Tab(
+                              //text: 'today',
+                              child: Text(
+                                'Upcoming',
+                              ),
+                            ),
+                            Tab(
+                              //text: 'today',
+                              child: Text(
+                                'All ',
+                              ),
+                            ),
+                          ]),
+                    ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Container(
-              height: size.height * 0.7,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 15.0, right: 15),
-                child: TabBarView(children: [
-                  ScreenTodayAppointmentPatient(
-                    size: size,
-                    status: 'today',
-                  ),
-                  ScreenTodayAppointmentPatient(
-                    size: size,
-                    status: 'upcoming',
-                  ),
-                  ScreenTodayAppointmentPatient(size: size, status: '')
-                ]),
+              const SizedBox(
+                height: 10,
               ),
-            )
-          ],
+              Container(
+                height: size.height * 0.7,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 15.0, right: 15),
+                  child: TabBarView(
+                      physics: NeverScrollableScrollPhysics(),
+                      children: [
+                        ScreenTodayAppointmentPatient(
+                          size: size,
+                          status: 'today',
+                        ),
+                        ScreenTodayAppointmentPatient(
+                          size: size,
+                          status: 'upcoming',
+                        ),
+                        ScreenTodayAppointmentPatient(size: size, status: '')
+                      ]),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

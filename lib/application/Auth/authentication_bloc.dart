@@ -30,7 +30,7 @@ class AuthenticationBloc
         String? userName = await sharedprefs.getName();
         String? userid = await sharedprefs.getId();
 
-        // log(getToken.toString());
+       
 
         emit(Autheticated(getRole!, getToken!, userName!, userid!));
         profilebloc.add(GetProfileDetails(userid));

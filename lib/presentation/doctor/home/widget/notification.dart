@@ -11,7 +11,7 @@ class NotificationBell extends StatelessWidget {
       children: [
         const Icon(
           Icons.notifications,
-          size: 28.0,
+          size: 30.0,
           color: Colors.white, // Adjust color as needed
         ),
         if (notificationCount > 0)
@@ -28,7 +28,7 @@ class NotificationBell extends StatelessWidget {
                 notificationCount.toString(),
                 style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 10.0,
+                  fontSize: 8.0,
                 ),
               ),
             ),

@@ -1,19 +1,14 @@
 import 'dart:developer';
 
-import 'package:appoint_medic/application/profile/profile_details_bloc.dart';
 import 'package:appoint_medic/domain/models/appointment_booked_response/appointment_booked_response.dart';
 import 'package:appoint_medic/domain/models/bookingDetails/booking_details.dart';
 import 'package:appoint_medic/domain/response_models/doctors_response_model/doctor.dart';
-import 'package:appoint_medic/domain/token_storage/secure_storage.dart';
 import 'package:appoint_medic/infrastructure/booking/booking_service.dart';
-import 'package:appoint_medic/infrastructure/key_razor/razor_pay_key.dart';
 import 'package:appoint_medic/infrastructure/payment_razorpay/payment_service.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
-import 'package:meta/meta.dart';
-import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 import '../../../../domain/response_models/profile_model/user.dart';
 

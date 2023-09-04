@@ -247,8 +247,10 @@ class ScreenOtpVerify extends StatelessWidget {
                                           child: SizedBox(
                                               height: 20,
                                               width: 20,
-                                              child:
-                                                  CircularProgressIndicator(color: Colors.white,strokeWidth: 1,)),
+                                              child: CircularProgressIndicator(
+                                                color: Colors.white,
+                                                strokeWidth: 1,
+                                              )),
                                         );
                                       } else if (state is OtpVerifySuccess) {
                                         //---------------------------------------------------------success new page

@@ -83,12 +83,9 @@ class CreateServiceImpl {
       } else {
         apiEndPoint = ApiEndPoints.doctorOtpVerify;
       }
-      log('$apiEndPoint -- $userEmail -- $userOTP');
 
       final Response response = await Dio().put(apiEndPoint,
           data: jsonEncode({"email": userEmail, "otp": userOTP}));
-
-          log(response.toString());
 
       if (response.statusCode == 200) {
         return ('');
@@ -167,20 +164,7 @@ class CreateServiceImpl {
       log(ApiEndPoints.onboardingDoctor.toString());
 
       final Response response = await Dio().put(ApiEndPoints.onboardingDoctor,
-          data: doctorForm.toFormData()
-
-          //  jsonEncode({
-          //   "username": doctorForm.username,
-          //   "gender": doctorForm.gender,
-          //   "speciality": doctorForm.speciality,
-          //   "phone": doctorForm.phone,
-          //   "houseName": doctorForm.houseName,
-          //   "city": doctorForm.city,
-          //   "state": doctorForm.state,
-          //   "services": doctorForm.services,
-          //   "qualification": doctorForm.qualification,
-          // })
-          ,
+          data: doctorForm.toFormData(),
           options: Options(headers: {
             'Authorization': 'Bearer $token',
           }, contentType: 'multipart/form-data'));
@@ -227,9 +211,6 @@ class CreateServiceImpl {
     final String? token = await getToken.retrieveToken();
 
     try {
-      log("profile editng 1");
-      log(doctorForm.fields.toString());
-
       final Response response = await Dio().put(ApiEndPoints.profileEditDoctor,
           data: doctorForm,
           options: Options(headers: {
@@ -237,7 +218,6 @@ class CreateServiceImpl {
           }, contentType: 'multipart/form-data'));
 
       if (response.statusCode == 200) {
-        log('profil editng success');
         return ('');
       } else {
         return ("Error in parsing area");

@@ -13,7 +13,7 @@ class ViewAppointmentsPatientSideService {
     final SecureStorageService getToken = getIt<SecureStorageService>();
     final String? token = await getToken.retrieveToken();
     try {
-      log('calling appointment api');
+     
       final response = await Dio().get(ApiEndPoints.getAppointmentList,
           queryParameters: {"status": status},
           options: Options(
@@ -21,7 +21,7 @@ class ViewAppointmentsPatientSideService {
           ));
 
       if (response.statusCode == 200) {
-        log('api call sucess');
+   
         return ('', ViewAppointmentPatientSide.fromJson(response.data));
       } else {
         return ('Error status code is not 200', null);

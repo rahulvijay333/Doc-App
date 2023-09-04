@@ -1,5 +1,6 @@
 import 'package:appoint_medic/application/login/login_bloc.dart';
 import 'package:appoint_medic/application/navbar/navbar_bloc.dart';
+import 'package:appoint_medic/application/notifications/notificationStatus_track/bloc/notification_track_bloc.dart';
 import 'package:appoint_medic/application/profile/profile_details_bloc.dart';
 import 'package:appoint_medic/core/color_constants.dart';
 import 'package:appoint_medic/presentation/login/screen_login.dart';
@@ -141,7 +142,7 @@ class ScreenProfile extends StatelessWidget {
                                       Navigator.of(context)
                                           .push(MaterialPageRoute(
                                         builder: (context) {
-                                          return ScreenPersonalDetails();
+                                          return const ScreenPersonalDetails();
                                         },
                                       ));
                                     },
@@ -234,7 +235,7 @@ class ScreenProfile extends StatelessWidget {
                                     Navigator.of(context)
                                         .pushReplacement(MaterialPageRoute(
                                       builder: (context) {
-                                        return ScreenLogin();
+                                        return const ScreenLogin();
                                       },
                                     ));
                                   });
@@ -267,9 +268,44 @@ class ScreenProfile extends StatelessWidget {
                                     color: Colors.blue[50]?.withOpacity(0.5),
                                     child: ListTile(
                                       onTap: () {
-                                        //--------------------------------------------------------logout function
-                                        BlocProvider.of<LoginBloc>(context).add(
-                                            LogOutButtonClicked('patient'));
+                                        //-------------------------------------logout function
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return AlertDialog(
+                                              title: const Text('Important'),
+                                              content: const Text(
+                                                  'Do you want to log out ?'),
+                                              actions: [
+                                                TextButton(
+                                                    onPressed: () {
+                                                      //------------------------exit function
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: const Text('No')),
+                                                TextButton(
+                                                    onPressed: () {
+                                                      //------------------------logout  function
+                                                      context
+                                                          .read<
+                                                              NotificationTrackBloc>()
+                                                          .add(
+                                                              ClearNotifications());
+                                                      BlocProvider.of<
+                                                                  LoginBloc>(
+                                                              context)
+                                                          .add(
+                                                              LogOutButtonClicked(
+                                                                  'patient'));
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: const Text('yes'))
+                                              ],
+                                            );
+                                          },
+                                        );
                                       },
                                       leading: const Icon(
                                         Icons.logout,

@@ -1,5 +1,9 @@
+import 'package:appoint_medic/application/notifications/bloc/view_notifications_bloc.dart';
+import 'package:appoint_medic/application/notifications/notificationStatus_track/bloc/notification_track_bloc.dart';
 import 'package:appoint_medic/presentation/doctor/home/widget/notification.dart';
+import 'package:appoint_medic/presentation/doctor/notifications-doc/screeen_notifications_doct.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../domain/models/doctor profile/doctor_profile_model/doctor.dart';
 
@@ -69,7 +73,37 @@ class ProfileTileCustom extends StatelessWidget {
                   ],
                 )),
 
-            NotificationBell(notificationCount: 0)
+            InkWell(onTap: () {
+              context
+                  .read<ViewNotificationsBloc>()
+                  .add(GetNotifications(notificationUserType: 'doctor'));
+
+              Navigator.of(context).push(
+                PageRouteBuilder(
+                  pageBuilder: (context, animation, secondaryAnimation) {
+                    // Build the new route/screen here
+                    return ScreenNotificationDoct();
+                  },
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                    // Define your custom transition animation here
+                    return SlideTransition(
+                      position: Tween<Offset>(
+                        begin: const Offset(1.0, 0.0),
+                        end: Offset.zero,
+                      ).animate(animation),
+                      child: child,
+                    );
+                  },
+                ),
+              );
+            }, child:
+                BlocBuilder<NotificationTrackBloc, NotificationTrackState>(
+              builder: (context, state) {
+                return NotificationBell(
+                    notificationCount: state.notificationCount);
+              },
+            ))
             // IconButton(onPressed: () {
 
             // }, icon: Icon(Icons.notifications))

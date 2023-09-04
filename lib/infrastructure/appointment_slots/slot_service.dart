@@ -17,8 +17,7 @@ class AppointmentSlotService {
           ));
 
       if (response.statusCode == 200) {
-        // log("api call sucess");
-        // log(response.data.toString());
+      
         return ('', AvailableSlotResponse.fromJson(response.data));
       } else {
         return ('Error in slot service', null);
@@ -43,7 +42,7 @@ class AppointmentSlotService {
       required String endTime,
       required String token}) async {
     try {
-      log('$startTime - $endTime');
+    
 
       String formattedStartTime = startTime.replaceAll('\u202f', ' ');
       String formattedEndTime = endTime.replaceAll('\u202f', ' ');
@@ -93,7 +92,7 @@ class AppointmentSlotService {
               ));
 
       if (response.statusCode == 200) {
-        log('delete sucess service section');
+     
         return '';
       } else {
         return 'Error happend in Api call';

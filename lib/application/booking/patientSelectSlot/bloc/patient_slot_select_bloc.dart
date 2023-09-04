@@ -1,7 +1,6 @@
 import 'package:appoint_medic/domain/response_models/booking_doctor_profile_slot_model/available_slot.dart';
 import 'package:appoint_medic/infrastructure/booking/booking_service.dart';
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 
 part 'patient_slot_select_event.dart';
 part 'patient_slot_select_state.dart';

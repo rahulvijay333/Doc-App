@@ -29,6 +29,10 @@ class ApiEndPoints {
   static const sendNewMessage = '$baseUrl/message';
   static const createNewChat = '$baseUrl/chat/patient/create';
 
+  //notifications
+  static const getNotificationsPatient = '$baseUrl/notification/patient';
+  static const notificationMarkread = '$baseUrl/notification/mark-read';
+
   //-----------------doctor login
   static const doctorLogin = '$baseUrl/auth/doctor/login';
   static const doctorLogout = '$baseUrl/auth/doctor/logout';
@@ -48,6 +52,9 @@ class ApiEndPoints {
   static const doctGetAllAppoints = '$baseUrl/doctor/appointments';
   static const doctApproveBooking = '$baseUrl/appointment';
   static const doctCancelBooking = '$baseUrl/appointment';
+
+  //notifications
+  static const getNotificationsDoctor = '$baseUrl/notification/doctor';
 
   //chat
 

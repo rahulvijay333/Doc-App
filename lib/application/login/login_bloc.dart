@@ -45,7 +45,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           String? role = response?.user!.role;
           String? token = response?.user!.token;
           String? id = response?.user!.id;
-          //log('token : - $token ');
+        
 
           String? userName = '';
 

@@ -9,7 +9,7 @@ import 'package:dio/dio.dart';
 
 class ViewAppointmentsDoctSideService {
   final SecureStorageService getToken = getIt<SecureStorageService>();
-  // final String? token = await getToken.retrieveToken();
+ 
   Future<(String, ViewAllAppDoctSideModel?)> getAllAppointmentsDoctSide(
       {required String status}) async {
     final String? token = await getToken.retrieveToken();
@@ -48,7 +48,7 @@ class ViewAppointmentsDoctSideService {
   Future<String> cancelBooking({required String bookingID}) async {
     final String? token = await getToken.retrieveToken();
     try {
-      log('calling doct appointment cancel api');
+    
       final response =
           await Dio().put('${ApiEndPoints.doctCancelBooking}/$bookingID/cancel',
               options: Options(
@@ -56,7 +56,7 @@ class ViewAppointmentsDoctSideService {
               ));
 
       if (response.statusCode == 200) {
-        log('Appointment cancel sucess');
+       
         return ('');
       } else {
         return ('Error status code is not 200');
@@ -84,7 +84,7 @@ class ViewAppointmentsDoctSideService {
   Future<String> approveBooking({required String bookingID}) async {
     final String? token = await getToken.retrieveToken();
     try {
-      log('calling doct appointment api');
+     
       final response = await Dio()
           .put('${ApiEndPoints.doctApproveBooking}/$bookingID/approve',
               options: Options(
@@ -92,7 +92,7 @@ class ViewAppointmentsDoctSideService {
               ));
 
       if (response.statusCode == 200) {
-        log('aprroved appointment');
+        
         return ('');
       } else {
         return ('Error status code is not 200');

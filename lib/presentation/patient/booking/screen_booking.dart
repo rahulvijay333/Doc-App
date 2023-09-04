@@ -52,7 +52,7 @@ class _ScreenBookingState extends State<ScreenBooking> {
 
   @override
   Widget build(BuildContext context) {
-    log('Screen bokking');
+
     final size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(

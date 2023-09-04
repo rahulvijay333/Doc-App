@@ -18,7 +18,7 @@ class DoctorProfileBloc extends Bloc<DoctorProfileEvent, DoctorProfileState> {
       final (error, response) = await doctorProfileService.getDoctorProfile();
 
       if (error.isEmpty) {
-        log('profile details updating call ');
+      
         emit(DoctorProfileSuccess(doctDetails: response!.doctor!));
       } else {
         emit(DoctorPrifleFailure('Error happened , '));

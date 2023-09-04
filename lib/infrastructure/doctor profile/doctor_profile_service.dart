@@ -20,7 +20,7 @@ class DoctorProfileService {
               ));
 
       if (response.statusCode == 200) {
-        log('got profile details of doctor');
+       
 
         try {
           final parseData = DoctorProfileModel.fromJson(response.data);

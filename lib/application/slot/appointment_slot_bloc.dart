@@ -22,10 +22,10 @@ class AppointmentSlotBloc
           date: event.date, token: event.token);
 
       if (error.isEmpty) {
-        log('slot upation call sucess');
+      
         emit(SlotSuccess(slotlist: response!));
       } else {
-        log('slot upation call failed');
+        
         emit(SlotFailure(error));
       }
     });

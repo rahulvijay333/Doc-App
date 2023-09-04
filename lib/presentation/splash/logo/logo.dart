@@ -29,8 +29,8 @@ class _FadeInContainerState extends State<FadeInContainer> {
           ? 1.0
           : 0.0, // Set opacity to 1.0 if _visible is true, 0.0 otherwise
       child: Container(
-        width: 200,
-        height: 200,
+        width: 150,
+        height: 150,
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/app_new_logo.png'),

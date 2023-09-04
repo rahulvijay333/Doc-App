@@ -10,12 +10,15 @@ import 'package:appoint_medic/application/chat/create_chat/bloc/create_chat_bloc
 import 'package:appoint_medic/application/chat/create_chat_doct/bloc/create_chat_doc_bloc.dart';
 import 'package:appoint_medic/application/chat/see_messages/bloc/see_messages_bloc.dart';
 import 'package:appoint_medic/application/chat/view_chats/bloc/view_all_chats_bloc.dart';
+import 'package:appoint_medic/application/chat/view_chats/search_chat/bloc/search_messages_bloc.dart';
 import 'package:appoint_medic/application/create_user/otp_verify/bloc/otp_verify_bloc.dart';
 import 'package:appoint_medic/application/doctor%20profile/appointments_section/bloc/home_appointment_today_bloc.dart';
 import 'package:appoint_medic/application/doctor%20profile/bloc/doctor_profile_bloc.dart';
 import 'package:appoint_medic/application/doctor%20profile/edit_profile/bloc/doctor_profile_edit_bloc.dart';
 import 'package:appoint_medic/application/login/login_bloc.dart';
 import 'package:appoint_medic/application/navbar/navbar_bloc.dart';
+import 'package:appoint_medic/application/notifications/bloc/view_notifications_bloc.dart';
+import 'package:appoint_medic/application/notifications/notificationStatus_track/bloc/notification_track_bloc.dart';
 import 'package:appoint_medic/application/profile/edit_profile/bloc/patient_edit_profile_bloc.dart';
 import 'package:appoint_medic/application/profile/profile_details_bloc.dart';
 import 'package:appoint_medic/application/searchByCatergory/search_by_category_bloc.dart';
@@ -34,6 +37,7 @@ import 'package:appoint_medic/infrastructure/booking/booking_service.dart';
 import 'package:appoint_medic/infrastructure/chats/chat_service.dart';
 import 'package:appoint_medic/infrastructure/doctor%20profile/doctor_profile_service.dart';
 import 'package:appoint_medic/infrastructure/login/loginServiceImpl.dart';
+import 'package:appoint_medic/infrastructure/notifications/notification_service.dart';
 import 'package:appoint_medic/infrastructure/payment_razorpay/payment_service.dart';
 import 'package:appoint_medic/infrastructure/profile/profile_service.dart';
 import 'package:appoint_medic/infrastructure/register/register_impl.dart';
@@ -45,19 +49,22 @@ import 'package:appoint_medic/presentation/register/screen_otp_verify.dart';
 
 import 'package:appoint_medic/presentation/splash/ScreenSplash.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-
-import 'presentation/register/screen_otp_sucess.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 final getIt = GetIt.instance;
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
+  // Initialize the locale data for 'en_IN' (English, India)
+  await initializeDateFormatting('en_IN', null);
+  debugPaintSizeEnabled = false;
   await Hive.initFlutter();
-  if (!Hive.isAdapterRegistered(UserDbAdapter().typeId)) {
-    Hive.registerAdapter(UserDbAdapter());
-  }
+  // if (!Hive.isAdapterRegistered(UserDbAdapter().typeId)) {
+  //   Hive.registerAdapter(UserDbAdapter());
+  // }
 
 //--------------------------------------------------open hive logged in storage box
   final dbFunction = DbFunctionClass();
@@ -94,6 +101,7 @@ class MyApp extends StatelessWidget {
         ViewAppointmentsDoctSideService();
     final ChatService chatService = ChatService();
     final DoctorProfileService doctProfService = DoctorProfileService();
+    final NotificationService notificationService = NotificationService();
 
     return MultiBlocProvider(
         providers: [
@@ -180,23 +188,28 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => OtpVerifyBloc(onboarding), //otp
+          ),
+          BlocProvider(
+            create: (context) => ViewNotificationsBloc(notificationService),
+          ),
+          BlocProvider(
+            create: (context) => NotificationTrackBloc(notificationService),
+          ),
+          BlocProvider(
+            create: (context) => SearchMessagesBloc(chatService),
           )
         ],
-        child:
-            MaterialApp(debugShowCheckedModeBanner: false, 
-            
+        child: MaterialApp(
+            debugShowCheckedModeBanner: false,
             theme: ThemeData(
-              elevatedButtonTheme: ElevatedButtonThemeData(
-
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(appBackGround),
-                )
-              )
-            ),
+                elevatedButtonTheme: ElevatedButtonThemeData(
+                    style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(appBackGround),
+            ))),
             home: ScreenSplash()
 
-                //
+            //
 
-                ));
+            ));
   }
 }

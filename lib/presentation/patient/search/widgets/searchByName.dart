@@ -14,6 +14,7 @@ class SearchByNameWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return BlocBuilder<SearchBloc, SearchState>(
       builder: (context, state) {
         if (state is SearchNameLoading) {
@@ -88,75 +89,79 @@ class SearchByNameWidget extends StatelessWidget {
                             const SizedBox(
                               width: 25,
                             ),
-                            Container(
-                              height: 135,
-                              width: 220,
-                              // color: Colors.amber,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Dr. ${state.searchNameResults[index].fullName}',
-                                    maxLines: 1,
-                                    style: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  Row(
-                                    children: [
-                                      //Image(image: NetworkImage(''))
-                                      const Icon(
-                                        Icons.medical_information,
-                                        size: 15,
-                                      ),
-                                      Text(state.searchNameResults[index]
-                                          .speciality!.name!)
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-
-                                  // const SizedBox(
-                                  //   height: 0,
-                                  // ),
-                                  //-------------------------------------------location & rating
-                                  const Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            Icons.location_on,
-                                            size: 15,
-                                          ),
-                                          Text(
-                                            'Calicut,Kerala',
-                                            maxLines: 1,
-                                            style: TextStyle(fontSize: 12),
-                                          )
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      //-----------------------------------------booking
-                                    },
-                                    child: const Text('Book'),
-                                    style: ButtonStyle(
-                                        minimumSize:
-                                            MaterialStateProperty.all<Size>(
-                                      const Size(25, 25),
-                                    )),
-                                  )
-                                ],
+                            Expanded(
+                              child: Container(
+                                height: 135,
+                               
+                                //  color: Colors.amber,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    SizedBox(height: size.height*0.001,),
+                                    Text(
+                                      'Dr.${state.searchNameResults[index].fullName}',
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Row(
+                                      children: [
+                                        //Image(image: NetworkImage(''))
+                                        const Icon(
+                                          Icons.medical_information,
+                                          size: 15,
+                                        ),
+                                        Text(state.searchNameResults[index]
+                                            .speciality!.name!)
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                            
+                                    // const SizedBox(
+                                    //   height: 0,
+                                    // ),
+                                    //-------------------------------------------location & rating
+                                    const Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              Icons.location_on,
+                                              size: 15,
+                                            ),
+                                            Text(
+                                              'Calicut,Kerala',
+                                              maxLines: 1,
+                                              style: TextStyle(fontSize: 12),
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                            
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        //-----------------------------------------booking
+                                      },
+                                      child: const Text('Book'),
+                                      style: ButtonStyle(
+                                          minimumSize:
+                                              MaterialStateProperty.all<Size>(
+                                        const Size(25, 25),
+                                      )),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           ],

@@ -5,7 +5,6 @@ import 'dart:io';
 import 'package:appoint_medic/core/api_endPoints/api_endpoints.dart';
 import 'package:appoint_medic/domain/error/create_error.dart';
 import 'package:appoint_medic/domain/login_service.dart';
-import 'package:appoint_medic/domain/response_models/admin/admin_response/admin_response.dart';
 import 'package:appoint_medic/domain/response_models/doctor_response/doctor_response.dart';
 import 'package:appoint_medic/domain/response_models/logout/logout_response/logout_response.dart';
 import 'package:appoint_medic/domain/response_models/patient/patient_response/patient_response.dart';
@@ -44,10 +43,7 @@ class LoginServiceImpl implements LoginService {
       if (response.statusCode == 200) {
         // ---------------------------------------------------------------------Successful login
 
-        if (logintype == 'admin') {
-          log('admin called service imple');
-          responseData = AdminResponse.fromJson(response.data);
-        } else if (logintype == 'patient') {
+        if (logintype == 'patient') {
           responseData = PatientResponse.fromJson(response.data);
         } else if (logintype == 'doctor') {
           responseData = DoctorResponse.fromJson(response.data);

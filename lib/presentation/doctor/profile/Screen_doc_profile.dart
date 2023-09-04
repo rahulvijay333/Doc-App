@@ -1,6 +1,7 @@
 import 'package:appoint_medic/application/doctor%20profile/bloc/doctor_profile_bloc.dart';
 import 'package:appoint_medic/application/login/login_bloc.dart';
 import 'package:appoint_medic/application/navbar/navbar_bloc.dart';
+import 'package:appoint_medic/application/notifications/notificationStatus_track/bloc/notification_track_bloc.dart';
 import 'package:appoint_medic/presentation/doctor/profile/widget/view.dart';
 import 'package:appoint_medic/presentation/login/screen_login.dart';
 import 'package:flutter/material.dart';
@@ -237,10 +238,40 @@ class ScreenDocProfile extends StatelessWidget {
                                       color: Colors.white.withOpacity(0.6),
                                       child: ListTile(
                                         onTap: () {
+                                          showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return AlertDialog(
+                                                title: const Text('Important'),
+                                                content: const Text(
+                                                    'Do you want to log out ?'),
+                                                actions: [
+                                                  TextButton(
+                                                      onPressed: () {
+                                                        //------------------------exit function
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                      child: const Text('No')),
+                                                  TextButton(
+                                                      onPressed: () {
+                                                        //------------------------logout  function
+                                                      context.read<NotificationTrackBloc>().add(ClearNotifications());
+                                                        BlocProvider.of<
+                                                                    LoginBloc>(
+                                                                context)
+                                                            .add(
+                                                                LogOutButtonClicked(
+                                                                    'doctor'));
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                      child: const Text('yes'))
+                                                ],
+                                              );
+                                            },
+                                          );
                                           //--------------------------------------------------------logout function
-                                          BlocProvider.of<LoginBloc>(context)
-                                              .add(LogOutButtonClicked(
-                                                  'doctor'));
                                         },
                                         leading: const Icon(
                                           Icons.logout,
@@ -250,19 +281,6 @@ class ScreenDocProfile extends StatelessWidget {
                                       ),
                                     ),
                                   );
-
-                                  // return ElevatedButton(
-                                  //     onPressed: () {
-                                  //       BlocProvider.of<LoginBloc>(context)
-                                  //           .add(LogOutButtonClicked('doctor'));
-
-                                  //       // Navigator.of(context).pushReplacement(MaterialPageRoute(
-                                  //       //   builder: (ctx) {
-                                  //       //     return ScreenLogin();
-                                  //       //   },
-                                  //       // ));
-                                  //     },
-                                  //     child: const Text('LogOut'));
                                 },
                               )
                             ],
@@ -292,63 +310,3 @@ class ScreenDocProfile extends StatelessWidget {
     );
   }
 }
-
-// class ScreenDocProfile extends StatelessWidget {
-//   const ScreenDocProfile({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       child: Center(
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             const Text('Profile Screeen'),
-//             BlocBuilder<LoginBloc, LoginState>(
-//               builder: (context, state) {
-//                 if (state is LogoutLoading) {
-//                   // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-//                   //   ScaffoldMessenger.of(context).showSnackBar(
-//                   //       const SnackBar(content: Text('Logging out...')));
-//                   // });
-
-//                   return Center(
-//                     child: CircularProgressIndicator(),
-//                   );
-//                 } else if (state is LogoutSucess) {
-//                   WidgetsBinding.instance.addPostFrameCallback((_) {
-//                     context.read<NavbarBloc>().add(PageChangeEvent(page: 0));
-
-//                     Navigator.of(context).pushReplacement(MaterialPageRoute(
-//                       builder: (context) {
-//                         return ScreenLogin();
-//                       },
-//                     ));
-//                   });
-//                 } else if (state is LogOutFailed) {
-//                   WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-//                     ScaffoldMessenger.of(context).showSnackBar(
-//                         const SnackBar(content: Text('Logging out failed..')));
-//                   });
-//                 }
-
-//                 return ElevatedButton(
-//                     onPressed: () {
-//                       BlocProvider.of<LoginBloc>(context)
-//                           .add(LogOutButtonClicked('doctor'));
-
-//                       // Navigator.of(context).pushReplacement(MaterialPageRoute(
-//                       //   builder: (ctx) {
-//                       //     return ScreenLogin();
-//                       //   },
-//                       // ));
-//                     },
-//                     child: const Text('LogOut'));
-//               },
-//             )
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }

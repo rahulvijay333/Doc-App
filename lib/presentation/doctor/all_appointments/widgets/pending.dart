@@ -35,6 +35,7 @@ class ScreenPendingAppoint extends StatelessWidget {
           }
 
           return ListView.separated(
+              physics: BouncingScrollPhysics(),
               itemBuilder: (context, index) {
                 final stateShort = state.appointmentList[index];
                 //log(stateShort.selectedDate.toString());

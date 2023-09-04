@@ -16,7 +16,6 @@ class SpecialityService {
 
       //log(response);
       if (response.statusCode == 200) {
-        log('api categopries call sucess');
         return ('', GetSpecialitiesResponse.fromJson(response.data));
       } else {
         return ('Error happend in ApiCall  service ', null);
@@ -30,12 +29,9 @@ class SpecialityService {
         } else if (error.response!.statusCode == 500) {
           return ('Internal Server Error', null);
         } else {
-          // log(error.response!.statusCode.toString());
-          // log(error.toString());
           return ('Server Connection Failed', null);
         }
       } else {
-        //log('exception Service');
         return ('Api Call Error Service', null);
       }
     }

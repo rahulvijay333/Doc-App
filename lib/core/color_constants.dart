@@ -94,15 +94,13 @@ InputDecoration commonInputDecoration({
   );
 }
 
+InputDecoration customOtpBoxdecoration() {
+  return InputDecoration(
+    focusColor: Colors.red,
+    border: OutlineInputBorder(),
+    focusedBorder: OutlineInputBorder(),
+    counterText: '',
+  );
+}
 
-  InputDecoration customOtpBoxdecoration() {
-    return InputDecoration(
-      focusColor: Colors.red,
-      border: OutlineInputBorder(),
-      focusedBorder: OutlineInputBorder(),
-      counterText: '',
-    );
-  }
-
-
-var appBackGround =  Color.fromRGBO(0, 116, 217, 1);
+var appBackGround = Color.fromRGBO(0, 116, 217, 1);

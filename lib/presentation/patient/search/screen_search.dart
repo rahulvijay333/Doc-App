@@ -15,7 +15,7 @@ class ScreenSearch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //log('Screen building ');
+   
     final size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
