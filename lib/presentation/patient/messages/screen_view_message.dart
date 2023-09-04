@@ -1,15 +1,9 @@
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:appoint_medic/application/chat/create_chat/bloc/create_chat_bloc.dart';
 import 'package:appoint_medic/application/chat/see_messages/bloc/see_messages_bloc.dart';
 import 'package:appoint_medic/core/color_constants.dart';
-import 'package:appoint_medic/domain/response_models/new_message/new_chat_response/new_chat_response.dart';
-import 'package:appoint_medic/domain/token_storage/secure_storage.dart';
-import 'package:appoint_medic/main.dart';
-import 'package:appoint_medic/presentation/splash/ScreenSplash.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -172,7 +166,6 @@ class _ScreenViewMesgPatientState extends State<ScreenViewMesgPatient> {
 
                                   final messages = state.groupedMessages[date];
 
-                                
                                   return Column(children: [
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
@@ -194,10 +187,12 @@ class _ScreenViewMesgPatientState extends State<ScreenViewMesgPatient> {
                                         itemBuilder: (context, index) {
                                           //--------------------------------------------------format and time
 
-                                          String formattedTime = DateFormat(
-                                                  'h.mm a')
-                                              .format(messages[index].updatedAt.toLocal())
-                                              .toLowerCase();
+                                          String formattedTime =
+                                              DateFormat('h.mm a')
+                                                  .format(messages[index]
+                                                      .updatedAt
+                                                      .toLocal())
+                                                  .toLowerCase();
 
                                           return Column(
                                             crossAxisAlignment:
@@ -251,10 +246,11 @@ class _ScreenViewMesgPatientState extends State<ScreenViewMesgPatient> {
                                                                   right: 8,
                                                                   top: 10,
                                                                   bottom: 10),
-                                                          child: Text( 
-                                                            
-                                                              messages[index].content ,
-                                                                 style: const TextStyle(
+                                                          child: Text(
+                                                            messages[index]
+                                                                .content,
+                                                            style:
+                                                                const TextStyle(
                                                                     fontSize:
                                                                         18,
                                                                     color: Colors

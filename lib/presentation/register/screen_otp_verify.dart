@@ -1,14 +1,8 @@
 import 'dart:developer';
-
 import 'package:appoint_medic/application/create_user/otp_verify/bloc/otp_verify_bloc.dart';
 import 'package:appoint_medic/core/color_constants.dart';
-import 'package:appoint_medic/core/text_constants.dart';
-import 'package:appoint_medic/presentation/login/screen_login.dart';
-import 'package:appoint_medic/presentation/register/otp_screen.dart';
-import 'package:appoint_medic/presentation/register/otp_screen.dart';
 import 'package:appoint_medic/presentation/register/screen_otp_sucess.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

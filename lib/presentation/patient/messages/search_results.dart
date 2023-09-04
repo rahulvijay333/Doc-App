@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:appoint_medic/application/chat/see_messages/bloc/see_messages_bloc.dart';
 import 'package:appoint_medic/application/chat/view_chats/search_chat/bloc/search_messages_bloc.dart';
 import 'package:appoint_medic/presentation/patient/messages/screen_view_message.dart';

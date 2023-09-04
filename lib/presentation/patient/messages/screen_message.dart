@@ -69,6 +69,8 @@ class ScreenMesgsPatient extends StatelessWidget {
                               borderSide: BorderSide(color: Colors.grey))),
                       onChanged: (value) {
                         if (value.isEmpty) {
+                          FocusScope.of(context).unfocus();
+
                           log('refreshed');
                           BlocProvider.of<ViewAllChatsBloc>(context)
                               .add(GetAllChatsCall());
