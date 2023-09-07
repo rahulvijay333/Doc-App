@@ -1,9 +1,12 @@
+import 'package:appoint_medic/application/forgot_password/bloc/forgot_password_bloc.dart';
 import 'package:appoint_medic/application/login/login_bloc.dart';
 import 'package:appoint_medic/application/navbar/navbar_bloc.dart';
 import 'package:appoint_medic/application/notifications/notificationStatus_track/bloc/notification_track_bloc.dart';
 import 'package:appoint_medic/application/profile/profile_details_bloc.dart';
 import 'package:appoint_medic/core/color_constants.dart';
+import 'package:appoint_medic/presentation/login/screen_forgot_pass.dart';
 import 'package:appoint_medic/presentation/login/screen_login.dart';
+import 'package:appoint_medic/presentation/patient/profile/widgets/screen_change_password.dart';
 import 'package:appoint_medic/presentation/patient/profile/widgets/view_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -163,7 +166,24 @@ class ScreenProfile extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10),
                                 child: Container(
                                   color: Colors.blue[50]?.withOpacity(0.5),
-                                  child: const ListTile(
+                                  child: ListTile(
+                                    onTap: () {
+                                      //--------------------------------------chamge password function
+                                      context.read<ForgotPasswordBloc>().add(
+                                          ForgotPasswordCall(
+                                              message: 'message',
+                                              userType: ''));
+
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(
+                                        builder: (context) {
+                                          return ScreenChangePasswordPatient(
+                                            userType: 'patient',
+                                            title: 'Want to change password ?',
+                                          );
+                                        },
+                                      ));
+                                    },
                                     leading: Icon(
                                       Icons.password,
                                       color: Colors.blue,

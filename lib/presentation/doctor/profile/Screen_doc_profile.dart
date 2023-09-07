@@ -1,7 +1,9 @@
 import 'package:appoint_medic/application/doctor%20profile/bloc/doctor_profile_bloc.dart';
+import 'package:appoint_medic/application/forgot_password/bloc/forgot_password_bloc.dart';
 import 'package:appoint_medic/application/login/login_bloc.dart';
 import 'package:appoint_medic/application/navbar/navbar_bloc.dart';
 import 'package:appoint_medic/application/notifications/notificationStatus_track/bloc/notification_track_bloc.dart';
+import 'package:appoint_medic/presentation/doctor/profile/widget/screen_change_password.dart';
 import 'package:appoint_medic/presentation/doctor/profile/widget/view.dart';
 import 'package:appoint_medic/presentation/login/screen_login.dart';
 import 'package:flutter/material.dart';
@@ -126,7 +128,7 @@ class ScreenDocProfile extends StatelessWidget {
                                       Navigator.of(context)
                                           .push(MaterialPageRoute(
                                         builder: (context) {
-                                          return ScreenViewPersonalDetails();
+                                          return const ScreenViewPersonalDetails();
                                         },
                                       ));
                                     },
@@ -147,13 +149,31 @@ class ScreenDocProfile extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10),
                                 child: Container(
                                   color: Colors.white.withOpacity(0.6),
-                                  child: const ListTile(
-                                    leading: Icon(
+                                  child: ListTile(
+                                    onTap: () {
+                                      //----------------------------------------change password function
+
+                                      context.read<ForgotPasswordBloc>().add(
+                                          ForgotPasswordCall(
+                                              message: 'message',
+                                              userType: ''));
+
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(
+                                        builder: (context) {
+                                          return ScreenChangePasswordDoctor(
+                                            userType: 'doctor',
+                                            title: 'Change your passsord ?',
+                                          );
+                                        },
+                                      ));
+                                    },
+                                    leading: const Icon(
                                       Icons.password,
                                       color: Colors.blue,
                                     ),
-                                    title: Text('Change Password'),
-                                    trailing: Icon(
+                                    title: const Text('Change Password'),
+                                    trailing: const Icon(
                                       Icons.arrow_forward_ios,
                                       size: 18,
                                     ),
@@ -200,25 +220,16 @@ class ScreenDocProfile extends StatelessWidget {
                               BlocBuilder<LoginBloc, LoginState>(
                                 builder: (context, state) {
                                   if (state is LogoutLoading) {
-                                    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-                                    //   ScaffoldMessenger.of(context).showSnackBar(
-                                    //       const SnackBar(content: Text('Logging out...')));
-                                    // });
-
-                                    return Center(
+                                    return const Center(
                                       child: CircularProgressIndicator(),
                                     );
                                   } else if (state is LogoutSucess) {
                                     WidgetsBinding.instance
                                         .addPostFrameCallback((_) {
-                                      // context
-                                      //     .read<NavbarBloc>()
-                                      //     .add(PageChangeEvent(page: 0));
-
                                       Navigator.of(context)
                                           .pushReplacement(MaterialPageRoute(
                                         builder: (context) {
-                                          return ScreenLogin();
+                                          return const ScreenLogin();
                                         },
                                       ));
                                     });
@@ -256,7 +267,11 @@ class ScreenDocProfile extends StatelessWidget {
                                                   TextButton(
                                                       onPressed: () {
                                                         //------------------------logout  function
-                                                      context.read<NotificationTrackBloc>().add(ClearNotifications());
+                                                        context
+                                                            .read<
+                                                                NotificationTrackBloc>()
+                                                            .add(
+                                                                ClearNotifications());
                                                         BlocProvider.of<
                                                                     LoginBloc>(
                                                                 context)

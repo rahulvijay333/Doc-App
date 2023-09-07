@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DoctorScreenMain extends StatelessWidget {
-  const DoctorScreenMain({
+   DoctorScreenMain({
     super.key,
     required this.name,
     required this.token,
@@ -18,95 +18,96 @@ class DoctorScreenMain extends StatelessWidget {
   final String name;
   final String token;
 
+   final TextEditingController searchController = TextEditingController();
+
+  final ValueNotifier<String> searchnotifier = ValueNotifier('');
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    final _pages = [
+    final pages = [
       ScreenDoctHome(
         name: name,
       ),
-      ScreenAllAppointments(),
+      const ScreenAllAppointments(),
       ScreenAvailableTime(
         token: token,
       ),
-      ScreemDoctMessage(),
-      ScreenDocProfile()
+      ScreemDoctMessage(searchController: searchController,searchnotifier: searchnotifier),
+      const ScreenDocProfile()
     ];
 
     return SafeArea(
       child: Scaffold(
           backgroundColor: const Color.fromRGBO(217, 217, 217, 1),
-          body: Stack(
-            alignment: Alignment.bottomCenter,
-            children: [
-              BlocBuilder<NavbarBloc, NavbarState>(
-                builder: (context, state) {
-                  return _pages[state.pageIndex];
-                },
-              ),
-              Positioned(
-                bottom: 20,
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(10)),
-                  height: 50,
-                  width: size.width * 0.8,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      IconButton(
-                          onPressed: () {
-                            BlocProvider.of<NavbarBloc>(context)
-                                .add(PageChangeEvent(page: 0));
-                          },
-                          icon: const Icon(
-                            Icons.home,
-                            color: Colors.white,
-                          )),
-                      IconButton(
-                          onPressed: () {
-                            BlocProvider.of<NavbarBloc>(context)
-                                .add(PageChangeEvent(page: 1));
-                          },
-                          icon: const Icon(
-                            Icons.edit_calendar_outlined,
-                            color: Colors.white,
-                          )),
-                      IconButton(
-                          onPressed: () {
-                            BlocProvider.of<NavbarBloc>(context)
-                                .add(PageChangeEvent(page: 2));
-                          },
-                          icon: const Icon(
-                            Icons.access_time,
-                            color: Colors.white,
-                          )),
-                      IconButton(
-                          onPressed: () {
-                            BlocProvider.of<NavbarBloc>(context)
-                                .add(PageChangeEvent(page: 3));
-                          },
-                          icon: const Icon(
-                            Icons.message,
-                            color: Colors.white,
-                          )),
-                      IconButton(
-                          onPressed: () {
-                            BlocProvider.of<NavbarBloc>(context)
-                                .add(PageChangeEvent(page: 4));
-                          },
-                          icon: const Icon(
-                            Icons.person_2_rounded,
-                            color: Colors.white,
-                          ))
-                    ],
+          body: BlocBuilder<NavbarBloc, NavbarState>(
+            builder: (context, state) {
+              return pages[state.pageIndex];
+            },
+          ),
+          
+          bottomNavigationBar: Padding(
+            padding: const EdgeInsets.only(left: 25,right: 25,bottom: 10),
+            child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(10)),
+                    height: 50,
+                    width: size.width * 0.8,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        IconButton(
+                            onPressed: () {
+                              BlocProvider.of<NavbarBloc>(context)
+                                  .add(PageChangeEvent(page: 0));
+                            },
+                            icon: const Icon(
+                              Icons.home,
+                              color: Colors.white,
+                            )),
+                        IconButton(
+                            onPressed: () {
+                              BlocProvider.of<NavbarBloc>(context)
+                                  .add(PageChangeEvent(page: 1));
+                            },
+                            icon: const Icon(
+                              Icons.edit_calendar_outlined,
+                              color: Colors.white,
+                            )),
+                        IconButton(
+                            onPressed: () {
+                              BlocProvider.of<NavbarBloc>(context)
+                                  .add(PageChangeEvent(page: 2));
+                            },
+                            icon: const Icon(
+                              Icons.access_time,
+                              color: Colors.white,
+                            )),
+                        IconButton(
+                            onPressed: () {
+                              BlocProvider.of<NavbarBloc>(context)
+                                  .add(PageChangeEvent(page: 3));
+                            },
+                            icon: const Icon(
+                              Icons.message,
+                              color: Colors.white,
+                            )),
+                        IconButton(
+                            onPressed: () {
+                              BlocProvider.of<NavbarBloc>(context)
+                                  .add(PageChangeEvent(page: 4));
+                            },
+                            icon: const Icon(
+                              Icons.person_2_rounded,
+                              color: Colors.white,
+                            ))
+                      ],
+                    ),
                   ),
-                ),
-              )
-            ],
-          )),
+          ),
+          ),
     );
   }
 }

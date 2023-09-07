@@ -37,5 +37,41 @@ class SearchMessagesBloc
         }
       }
     });
+
+    on<SearchMessageByDoctor>((event, emit) async {
+      emit(SearchMessagesLoading());
+
+      final (error, response) = await _chatService.getAllChats();
+
+      if (error.isEmpty) {
+        if (response == null) {
+          emit(SearchMessagesSucess(searchedMessage: []));
+        } else {
+          final List<GetChatListRespModel> sortedChatslist = [];
+
+          for (var chat in response) {
+            if (chat.latestMessage?.content == null) {
+            } else {
+              sortedChatslist.add(chat);
+            }
+          }
+
+          // final searchedList = sortedChatslist
+          //     .where((element) => element.participants![0].patient!.name!
+          //         .toLowerCase()
+          //         .contains(event.searchKey.toLowerCase()))
+          //     .toList();
+
+          final searchList = sortedChatslist.where((chat) {
+            String? name = chat.participants![0].patient?.fullName ??
+                chat.participants![0].patient!.name;
+
+            return name!.toLowerCase().contains(event.searchKey.toLowerCase());
+          }).toList();
+
+          emit(SearchMessagesSucess(searchedMessage: searchList));
+        }
+      }
+    });
   }
 }

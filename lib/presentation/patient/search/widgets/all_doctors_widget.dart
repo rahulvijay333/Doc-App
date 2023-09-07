@@ -11,6 +11,7 @@ class AllDoctorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     // BlocProvider.of<SearchBloc>(context).add(ShowAllDoctorList());
     return BlocBuilder<SearchBloc, SearchState>(
       builder: (context, state) {
@@ -54,7 +55,7 @@ class AllDoctorWidget extends StatelessWidget {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(10),
                               child: Container(
-                                  width: 100,
+                                  width: size.width *0.25,
                                   height: 110,
                                   color: Colors.grey,
                                   child: state.doctorList[index]
@@ -109,8 +110,8 @@ class AllDoctorWidget extends StatelessWidget {
                             ),
                             Container(
                               height: 135,
-                              width: 220,
-                              // color: Colors.amber,
+                              width: size.width *0.5,
+                              //  color: Colors.amber,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -118,8 +119,8 @@ class AllDoctorWidget extends StatelessWidget {
                                   Text(
                                     'Dr. ${state.doctorList[index].fullName}',
                                     maxLines: 1,
-                                    style: const TextStyle(
-                                        fontSize: 20,
+                                    style:  TextStyle(
+                                        fontSize: size.width *0.5 * 0.11,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   const SizedBox(

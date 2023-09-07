@@ -15,6 +15,7 @@ import 'package:appoint_medic/application/create_user/otp_verify/bloc/otp_verify
 import 'package:appoint_medic/application/doctor%20profile/appointments_section/bloc/home_appointment_today_bloc.dart';
 import 'package:appoint_medic/application/doctor%20profile/bloc/doctor_profile_bloc.dart';
 import 'package:appoint_medic/application/doctor%20profile/edit_profile/bloc/doctor_profile_edit_bloc.dart';
+import 'package:appoint_medic/application/forgot_password/bloc/forgot_password_bloc.dart';
 import 'package:appoint_medic/application/login/login_bloc.dart';
 import 'package:appoint_medic/application/navbar/navbar_bloc.dart';
 import 'package:appoint_medic/application/notifications/bloc/view_notifications_bloc.dart';
@@ -36,6 +37,7 @@ import 'package:appoint_medic/infrastructure/auth/auth_service_impl.dart';
 import 'package:appoint_medic/infrastructure/booking/booking_service.dart';
 import 'package:appoint_medic/infrastructure/chats/chat_service.dart';
 import 'package:appoint_medic/infrastructure/doctor%20profile/doctor_profile_service.dart';
+import 'package:appoint_medic/infrastructure/forgot_password/forgot_pass_service.dart';
 import 'package:appoint_medic/infrastructure/login/loginServiceImpl.dart';
 import 'package:appoint_medic/infrastructure/notifications/notification_service.dart';
 import 'package:appoint_medic/infrastructure/payment_razorpay/payment_service.dart';
@@ -102,6 +104,7 @@ class MyApp extends StatelessWidget {
     final ChatService chatService = ChatService();
     final DoctorProfileService doctProfService = DoctorProfileService();
     final NotificationService notificationService = NotificationService();
+    final PasswordResetService passwordResetService = PasswordResetService();
 
     return MultiBlocProvider(
         providers: [
@@ -197,6 +200,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => SearchMessagesBloc(chatService),
+          ),
+          BlocProvider(
+            create: (context) => ForgotPasswordBloc(passwordResetService),
           )
         ],
         child: MaterialApp(

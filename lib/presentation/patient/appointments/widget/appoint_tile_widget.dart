@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:appoint_medic/application/chat/create_chat/bloc/create_chat_bloc.dart';
+import 'package:appoint_medic/core/color_constants.dart';
 import 'package:appoint_medic/presentation/patient/messages/create_chat/screen_createChat.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,7 +37,7 @@ class AppointmentListTileWidget extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: Container(
-          height: size.height * 0.14,
+          // height: size.height * 0.14,
           width: size.width,
           color: Colors.blue.withOpacity(0.1),
           child: Padding(
@@ -51,7 +52,7 @@ class AppointmentListTileWidget extends StatelessWidget {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: Container(
-                          height: size.height * 0.14 * 0.4,
+                          height: size.width*0.15,
                           width: size.width * 0.15,
                           // color: Colors.amber,
                           child: Image(
@@ -86,9 +87,9 @@ class AppointmentListTileWidget extends StatelessWidget {
                               'Dr. $doctorname',
                               style: TextStyle(
                                   fontSize: size.width * 0.7 * 0.07,
-                                  fontWeight: FontWeight.w500),
+                                  fontWeight: FontWeight.w600),
                             ),
-                            Text(speciality ?? '')
+                            Text(speciality ?? '',style: TextStyle(fontSize: size.width*0.033),)
                           ],
                         ),
                       ),
@@ -114,24 +115,25 @@ class AppointmentListTileWidget extends StatelessWidget {
                 ),
                 const Divider(),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Row(
                       children: [
-                        const Icon(
+                         Icon(
                           Icons.calendar_today,
-                          size: 16,
+                          color: appBackGround,
+                          size:size.width*0.035,
                         ),
-                        Text(date!),
+                        Text(date!,style: TextStyle(fontSize: size.width*0.036),),
                       ],
                     ),
                     Row(
                       children: [
-                        const Icon(
+                         Icon(
                           Icons.timer_outlined,
-                          size: 16,
+                          size:size.width*0.035,color: appBackGround,
                         ),
-                        Text('$startTime - $endTime'),
+                        Text('$startTime - $endTime',style: TextStyle(fontSize: size.width*0.036),),
                       ],
                     ),
                     Row(
@@ -140,14 +142,14 @@ class AppointmentListTileWidget extends StatelessWidget {
                           bookingStatus == 'Approved'
                               ? Icons.verified_user
                               : Icons.pending_actions,
-                          size: 16,
+                          size:size.width*0.035,
                           color: bookingStatus == 'Approved'
                               ? Colors.green
                               : Colors.red,
                         ),
                         Text(
                           bookingStatus!,
-                          style: TextStyle(
+                          style: TextStyle(fontSize: size.width*0.036,
                               color: bookingStatus == 'Approved'
                                   ? Colors.green
                                   : Colors.red),

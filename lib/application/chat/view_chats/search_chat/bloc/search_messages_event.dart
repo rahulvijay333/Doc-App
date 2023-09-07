@@ -7,3 +7,9 @@ class SearchMessage extends SearchMessagesEvent {
 
   SearchMessage({required this.searchKey});
 }
+
+class SearchMessageByDoctor extends SearchMessagesEvent {
+  final String searchKey;
+
+  SearchMessageByDoctor({required this.searchKey});
+}

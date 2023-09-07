@@ -8,6 +8,10 @@ class ApiEndPoints {
   static const patientLogOut = '$baseUrl/auth/patient/logout';
   static const patientOtpVerify = '$baseUrl/auth/patient/verify';
 
+  //reset password
+  static const patientResetPassToken = '$baseUrl/auth/patient/password/reset';
+  static const patientResetPassword ='$baseUrl/auth/patient/password/new';
+
   static const patientGetAllDoctors = '$baseUrl/patient/doctors/all';
   static const getAllSpecialities = '$baseUrl/doctor/specialities';
   //profile
@@ -38,6 +42,9 @@ class ApiEndPoints {
   static const doctorLogout = '$baseUrl/auth/doctor/logout';
   static const doctorNewUser = '$baseUrl/auth/doctor/register';
   static const doctorOtpVerify = '$baseUrl/auth/doctor/verify';
+  //reset password
+    static const doctorResetPassToken = '$baseUrl/auth/doctor/password/reset';
+  static const doctorResetPassword ='$baseUrl/auth/doctor/password/new';
 
   //profile
   static const getDoctorProfileDetails = '$baseUrl/doctor/profile';

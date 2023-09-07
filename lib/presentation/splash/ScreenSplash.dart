@@ -18,7 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-late String userType;
+
 
 class ScreenSplash extends StatefulWidget {
   const ScreenSplash({Key? key});
@@ -38,7 +38,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
           // Handle loading state if necessary
         } else if (state is Autheticated) {
           if (state.role == 'doctor') {
-            userType = 'Doctor';
+            
             context.read<NavbarBloc>().add(PageChangeEvent(page: 0));
             context.read<DoctorProfileBloc>().add(GetDoctorProfileCall());
             //------------------notifications refresh
@@ -54,7 +54,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
                           name: state.name,
                         )));
           } else if (state.role == 'patient') {
-            userType = 'Patient';
+        
             context.read<NavbarBloc>().add(PageChangeEvent(page: 0));
             //-----------------------------------------------------------------gettting profile details  event
             BlocProvider.of<ProfileDetailsBloc>(context)
