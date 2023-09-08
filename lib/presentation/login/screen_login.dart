@@ -11,10 +11,8 @@ import 'package:appoint_medic/presentation/doctor/AdminNotVerified/screen_admin_
 import 'package:appoint_medic/presentation/doctor/doc_main_screen.dart';
 import 'package:appoint_medic/presentation/login/screen_forgot_pass.dart';
 import 'package:appoint_medic/presentation/onBoarding/doctor/screen_onb_doctor.dart';
-import 'package:appoint_medic/presentation/onBoarding/patient/screen_onB_patient.dart';
 import 'package:appoint_medic/presentation/patient/main_page.dart';
 import 'package:appoint_medic/presentation/register/screen_register.dart';
-import 'package:appoint_medic/presentation/splash/ScreenSplash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -338,21 +336,13 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                     if (state is LoginLoading) {
                                       unfocus();
                                       return const Center(
-                                          child: CircularProgressIndicator());
+                                          child: SizedBox(
+                                            
+                                            width: 25,
+                                            height: 25,
+                                            child: CircularProgressIndicator(strokeWidth: 1,)));
                                     } else if (state is LoginOnBordingPatient) {
-                                      // WidgetsBinding.instance
-                                      //     .addPostFrameCallback((_) {
-                                      //   unfocus();
-                                      //   Navigator.of(context)
-                                      //       .pushReplacement(
-                                      //           MaterialPageRoute(
-                                      //     builder: (context) {
-                                      //       return ScreenOnBoardingPatient(
-                                      //         token: state.token,
-                                      //       );
-                                      //     },
-                                      //   ));
-                                      // });
+                                      
                                     }
                                     //------------------------------------------------Onboradind doctor
                                     else if (state is LoginOnBordingDoctor) {
@@ -427,8 +417,8 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                               MaterialPageRoute(
                                             builder: (context) {
                                               return DoctorScreenMain(
-                                                name: state.name!,
-                                                token: state.token!,
+                                                
+                                              
                                               );
                                             },
                                           ));
@@ -441,7 +431,8 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                           .addPostFrameCallback((timeStamp) {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(SnackBar(
-                                                duration: const Duration(seconds: 2),
+                                              behavior: SnackBarBehavior.floating,
+                                                duration: const Duration(seconds: 1),
                                                 content: Text(state.error)));
                                       });
 

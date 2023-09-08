@@ -1,8 +1,6 @@
-import 'dart:developer';
 
 import 'package:appoint_medic/infrastructure/doctor%20profile/doctor_profile_service.dart';
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 
 import '../../../domain/models/doctor profile/doctor_profile_model/doctor.dart';
 

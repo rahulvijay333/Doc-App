@@ -42,6 +42,7 @@ class ScreenMainPage extends StatelessWidget {
     ];
 
     final size = MediaQuery.of(context).size;
+    log('widget : ${size.width} ,  height : ${size.height}');
     return SafeArea(
       child: Scaffold(
         body: BlocBuilder<NavbarBloc, NavbarState>(
@@ -50,7 +51,7 @@ class ScreenMainPage extends StatelessWidget {
           },
         ),
         bottomNavigationBar: Padding(
-          padding: const EdgeInsets.only(left: 25,right: 25,bottom: 20),
+          padding: const EdgeInsets.only(left: 25, right: 25, bottom: 20),
           child: Container(
             decoration: BoxDecoration(
                 color: appBackGround, borderRadius: BorderRadius.circular(10)),

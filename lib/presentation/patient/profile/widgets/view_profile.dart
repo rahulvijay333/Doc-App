@@ -69,7 +69,7 @@ class ScreenPersonalDetails extends StatelessWidget {
                           height: size.height * 0.01,
                         ),
                         Container(
-                          height: size.height * 0.15,
+                          // height: size.height * 0.15,
                           child: Padding(
                             padding: const EdgeInsets.all(20.0),
                             child: Column(
@@ -83,9 +83,15 @@ class ScreenPersonalDetails extends StatelessWidget {
                                       color: Colors.blue,
                                       fontWeight: FontWeight.bold),
                                 ),
+                                SizedBox(
+                                  height: size.width * 0.02,
+                                ),
                                 Text(
                                   'Gender: ${state.userProfile.user?.gender ?? 'Not Set'} ',
                                   style: TextStyle(),
+                                ),
+                                SizedBox(
+                                  height: size.width * 0.02,
                                 ),
                                 Text(
                                     'Address : ${state.userProfile.user!.address?.houseName ?? "Not Set"} ,${state.userProfile.user!.address?.city ?? ""} ,${state.userProfile.user!.address?.state ?? ""}'),
@@ -102,16 +108,19 @@ class ScreenPersonalDetails extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          height: size.height * 0.10,
+                          // height: size.height * 0.10,
                           child: Padding(
                             padding: const EdgeInsets.all(20.0),
                             child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 //Text('Age : ${doct.gender}'),
                                 Text(
                                     'Phone : ${state.userProfile.user!.phone ?? "Not set"}'),
+                                SizedBox(
+                                  height: size.width * 0.02,
+                                ),
                                 Text(
                                     'Email : ${state.userProfile.user!.email}'),
                               ],

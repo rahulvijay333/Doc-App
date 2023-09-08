@@ -31,7 +31,7 @@ class ScreenSpeciality extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  height: size.height * 0.07,
+                  // height: size.height * 0.07,
                   color: appBackGround,
                   child: Row(
                     children: [
@@ -88,7 +88,7 @@ class ScreenSpeciality extends StatelessWidget {
                                     },
                                     child: Container(
                                       width: double.maxFinite,
-                                      height: 120,
+                                      // height: 120,
                                       color: const Color.fromARGB(
                                           50, 217, 217, 217),
                                       child: Row(
@@ -100,7 +100,7 @@ class ScreenSpeciality extends StatelessWidget {
                                             borderRadius:
                                                 BorderRadius.circular(10),
                                             child: Container(
-                                              width: 100,
+                                              width: size.width * 0.28,
                                               height: 110,
                                               color: Colors.grey,
                                               child: Image.network(
@@ -143,12 +143,12 @@ class ScreenSpeciality extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                          const SizedBox(
-                                            width: 25,
+                                          SizedBox(
+                                            width: size.width * 0.03,
                                           ),
                                           Container(
-                                            height: 135,
-                                            width: 220,
+                                            // height: 135,
+                                            width: size.width * 0.5,
                                             // color: Colors.amber,
                                             child: Column(
                                               crossAxisAlignment:
@@ -159,8 +159,10 @@ class ScreenSpeciality extends StatelessWidget {
                                                 Text(
                                                   'Dr. ${state.searchCatResults[index].fullName}',
                                                   maxLines: 1,
-                                                  style: const TextStyle(
-                                                      fontSize: 20,
+                                                  style: TextStyle(
+                                                      fontSize: size.width *
+                                                          0.5 *
+                                                          0.1,
                                                       fontWeight:
                                                           FontWeight.bold),
                                                 ),

@@ -4,7 +4,6 @@ import 'package:appoint_medic/domain/models/chat_list/chatmessages_parsing/chat_
 import 'package:appoint_medic/infrastructure/chats/chat_service.dart';
 import 'package:bloc/bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:meta/meta.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 
 part 'see_messages_event.dart';

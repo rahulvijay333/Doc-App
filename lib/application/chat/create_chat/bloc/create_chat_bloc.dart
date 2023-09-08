@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:appoint_medic/domain/models/chat_list/create_chat_by_patient_response/create_chat_by_patient_response.dart';
 import 'package:appoint_medic/domain/models/chat_list/get_chat_list_resp_model/get_chat_list_resp_model.dart';

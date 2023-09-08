@@ -9,7 +9,7 @@ class DeleteSlotDialoge extends StatelessWidget {
   final BuildContext contextAT;
   final String slotID;
   final String mainSlotID;
-  final String token;
+
   final String date;
 
   const DeleteSlotDialoge(
@@ -17,7 +17,7 @@ class DeleteSlotDialoge extends StatelessWidget {
       required this.contextAT,
       required this.slotID,
       required this.mainSlotID,
-      required this.token,
+      
       required this.date});
 
   @override
@@ -37,7 +37,7 @@ class DeleteSlotDialoge extends StatelessWidget {
             context.read<AppointmentSlotBloc>().add(deleteSlotEvent(
                 mainSlotID: mainSlotID,
                 slotID: slotID,
-                token: token,
+              
                 date: date,
                 context: contextAT));
 

@@ -30,7 +30,6 @@ import 'package:appoint_medic/application/view_appointments_doctor/bloc/view_app
 import 'package:appoint_medic/application/view_appointments_screen/bloc/view_appointments_patient_side_bloc.dart';
 import 'package:appoint_medic/core/color_constants.dart';
 import 'package:appoint_medic/domain/db/db_functions.dart';
-import 'package:appoint_medic/domain/db/db_model.dart';
 import 'package:appoint_medic/domain/token_storage/secure_storage.dart';
 import 'package:appoint_medic/infrastructure/appointment_slots/slot_service.dart';
 import 'package:appoint_medic/infrastructure/auth/auth_service_impl.dart';
@@ -47,7 +46,6 @@ import 'package:appoint_medic/infrastructure/search_screen/search_service.dart';
 import 'package:appoint_medic/infrastructure/specialities/get_speciality_service.dart';
 import 'package:appoint_medic/infrastructure/view_appointments_doctor_service/appointments_fetch_service.dart';
 import 'package:appoint_medic/infrastructure/view_appointments_patient_side/view_appointments_pat_service.dart';
-import 'package:appoint_medic/presentation/register/screen_otp_verify.dart';
 
 import 'package:appoint_medic/presentation/splash/ScreenSplash.dart';
 import 'package:flutter/material.dart';

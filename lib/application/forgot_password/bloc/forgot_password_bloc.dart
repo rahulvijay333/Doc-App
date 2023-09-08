@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:appoint_medic/infrastructure/forgot_password/forgot_pass_service.dart';
 import 'package:bloc/bloc.dart';

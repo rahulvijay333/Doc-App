@@ -10,6 +10,7 @@ import 'package:dio/dio.dart';
 class DoctorProfileService {
   Future<(String, DoctorProfileModel?)> getDoctorProfile() async {
     final SecureStorageService getToken = getIt<SecureStorageService>();
+    //secure storage
     final String? token = await getToken.retrieveToken();
 
     try {

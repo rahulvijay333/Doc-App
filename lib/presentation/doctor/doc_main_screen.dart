@@ -9,16 +9,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DoctorScreenMain extends StatelessWidget {
-   DoctorScreenMain({
+  DoctorScreenMain({
     super.key,
-    required this.name,
-    required this.token,
+   
+   
   });
 
-  final String name;
-  final String token;
+ 
+  
 
-   final TextEditingController searchController = TextEditingController();
+  final TextEditingController searchController = TextEditingController();
 
   final ValueNotifier<String> searchnotifier = ValueNotifier('');
 
@@ -27,87 +27,84 @@ class DoctorScreenMain extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     final pages = [
-      ScreenDoctHome(
-        name: name,
-      ),
+      const ScreenDoctHome(),
       const ScreenAllAppointments(),
       ScreenAvailableTime(
-        token: token,
+        
       ),
-      ScreemDoctMessage(searchController: searchController,searchnotifier: searchnotifier),
+      ScreemDoctMessage(
+          searchController: searchController, searchnotifier: searchnotifier),
       const ScreenDocProfile()
     ];
 
     return SafeArea(
       child: Scaffold(
-          backgroundColor: const Color.fromRGBO(217, 217, 217, 1),
-          body: BlocBuilder<NavbarBloc, NavbarState>(
-            builder: (context, state) {
-              return pages[state.pageIndex];
-            },
+        backgroundColor: const Color.fromRGBO(217, 217, 217, 1),
+        body: BlocBuilder<NavbarBloc, NavbarState>(
+          builder: (context, state) {
+            return pages[state.pageIndex];
+          },
+        ),
+        bottomNavigationBar: Padding(
+          padding:  EdgeInsets.only(left: size.width * 0.06, right: size.width * 0.06, bottom: size.width*0.05),
+          child: Container(
+            decoration: BoxDecoration(
+                color: Colors.blue, borderRadius: BorderRadius.circular(10)),
+            height: size.width * 0.15,
+            width: size.width * 0.8,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                IconButton(
+                    onPressed: () {
+                      BlocProvider.of<NavbarBloc>(context)
+                          .add(PageChangeEvent(page: 0));
+                    },
+                    icon:  Icon(size: size.width *0.06,
+                      Icons.home,
+                      color: Colors.white,
+                    )),
+                IconButton(
+                    onPressed: () {
+                      BlocProvider.of<NavbarBloc>(context)
+                          .add(PageChangeEvent(page: 1));
+                    },
+                    icon:  Icon(size: size.width *0.06,
+                      Icons.edit_calendar_outlined,
+                      color: Colors.white,
+                    )),
+                IconButton(
+                    onPressed: () {
+                      BlocProvider.of<NavbarBloc>(context)
+                          .add(PageChangeEvent(page: 2));
+                    },
+                    icon:  Icon(size: size.width *0.06,
+                      Icons.access_time,
+                      color: Colors.white,
+                    )),
+                IconButton(
+                    onPressed: () {
+                      BlocProvider.of<NavbarBloc>(context)
+                          .add(PageChangeEvent(page: 3));
+                    },
+                    icon:  Icon(size: size.width *0.06,
+                      Icons.message,
+                      color: Colors.white,
+                    )),
+                IconButton(
+                    onPressed: () {
+                      BlocProvider.of<NavbarBloc>(context)
+                          .add(PageChangeEvent(page: 4));
+                    },
+                    icon:  Icon(size: size.width *0.06,
+                      Icons.person_2_rounded,
+                      color: Colors.white,
+                    ))
+              ],
+            ),
           ),
-          
-          bottomNavigationBar: Padding(
-            padding: const EdgeInsets.only(left: 25,right: 25,bottom: 10),
-            child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(10)),
-                    height: 50,
-                    width: size.width * 0.8,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        IconButton(
-                            onPressed: () {
-                              BlocProvider.of<NavbarBloc>(context)
-                                  .add(PageChangeEvent(page: 0));
-                            },
-                            icon: const Icon(
-                              Icons.home,
-                              color: Colors.white,
-                            )),
-                        IconButton(
-                            onPressed: () {
-                              BlocProvider.of<NavbarBloc>(context)
-                                  .add(PageChangeEvent(page: 1));
-                            },
-                            icon: const Icon(
-                              Icons.edit_calendar_outlined,
-                              color: Colors.white,
-                            )),
-                        IconButton(
-                            onPressed: () {
-                              BlocProvider.of<NavbarBloc>(context)
-                                  .add(PageChangeEvent(page: 2));
-                            },
-                            icon: const Icon(
-                              Icons.access_time,
-                              color: Colors.white,
-                            )),
-                        IconButton(
-                            onPressed: () {
-                              BlocProvider.of<NavbarBloc>(context)
-                                  .add(PageChangeEvent(page: 3));
-                            },
-                            icon: const Icon(
-                              Icons.message,
-                              color: Colors.white,
-                            )),
-                        IconButton(
-                            onPressed: () {
-                              BlocProvider.of<NavbarBloc>(context)
-                                  .add(PageChangeEvent(page: 4));
-                            },
-                            icon: const Icon(
-                              Icons.person_2_rounded,
-                              color: Colors.white,
-                            ))
-                      ],
-                    ),
-                  ),
-          ),
-          ),
+        ),
+      ),
     );
   }
 }

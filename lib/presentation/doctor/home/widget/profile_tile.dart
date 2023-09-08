@@ -11,12 +11,12 @@ class ProfileTileCustom extends StatelessWidget {
   const ProfileTileCustom({
     super.key,
     required this.size,
-    required this.name,
+   
     required this.doctorDetails,
   });
 
   final Size size;
-  final String name;
+  
   final Doctor doctorDetails;
   @override
   Widget build(BuildContext context) {
@@ -35,8 +35,8 @@ class ProfileTileCustom extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(15),
               child: Container(
-                height: size.height * 0.3 * 0.30,
-                width: size.height * 0.3 * 0.30,
+                height: size.width * 0.15 ,
+                width: size.width * 0.15 ,
                 child: Image.network(
                   doctorDetails.profilePicture!.secureUrl!,
                   fit: BoxFit.cover,
@@ -53,22 +53,22 @@ class ProfileTileCustom extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Welcome,',
+                     Text('Welcome,',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 18,
+                          fontSize: size.width*0.6*0.06,
                         )),
                     SizedBox(height: size.height * 0.3 * 0.40 * 0.05),
                     Text('Dr.${doctorDetails.fullName}',
-                        style: const TextStyle(
+                        style:  TextStyle(
                             color: Colors.white,
-                            fontSize: 24,
+                            fontSize: size.width*0.6*0.1,
                             fontWeight: FontWeight.bold)),
                     SizedBox(height: size.height * 0.3 * 0.40 * 0.02),
                     Text('${doctorDetails.qualification}',
-                        style: const TextStyle(
+                        style:  TextStyle(
                           color: Colors.white,
-                          fontSize: 12,
+                          fontSize: size.width*0.6*0.05,
                         )),
                   ],
                 )),

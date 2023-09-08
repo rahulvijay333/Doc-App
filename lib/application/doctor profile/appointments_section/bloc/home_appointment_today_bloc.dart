@@ -1,6 +1,5 @@
 import 'package:appoint_medic/infrastructure/view_appointments_doctor_service/appointments_fetch_service.dart';
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 
 import '../../../../domain/response_models/view_appointments_page/doctor_side/view_all_app_doct_side_model/appointment.dart';
 

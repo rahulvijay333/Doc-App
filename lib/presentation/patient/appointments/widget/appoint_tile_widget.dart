@@ -41,7 +41,7 @@ class AppointmentListTileWidget extends StatelessWidget {
           width: size.width,
           color: Colors.blue.withOpacity(0.1),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(5.0),
             child: Column(
               children: [
                 Padding(
@@ -78,16 +78,16 @@ class AppointmentListTileWidget extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        // color: Colors.red,
-                        width: size.width * 0.5,
+                        //  color: Colors.red,
+                        width: size.width * 0.44,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               'Dr. $doctorname',
                               style: TextStyle(
-                                  fontSize: size.width * 0.7 * 0.07,
-                                  fontWeight: FontWeight.w600),
+                                  fontSize: size.width * 0.5 * 0.1,
+                                  fontWeight: FontWeight.w500),
                             ),
                             Text(speciality ?? '',style: TextStyle(fontSize: size.width*0.033),)
                           ],

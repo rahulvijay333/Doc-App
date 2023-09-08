@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:appoint_medic/application/booking/patientSelectSlot/bloc/patient_slot_select_bloc.dart';
 import 'package:appoint_medic/application/booking/patientTrackBooking/bloc/booking_tracker_bloc.dart';
+import 'package:appoint_medic/core/color_constants.dart';
 import 'package:appoint_medic/domain/models/bookingDetails/booking_details.dart';
 import 'package:appoint_medic/domain/response_models/doctors_response_model/doctor.dart';
 import 'package:appoint_medic/presentation/patient/booking/confirm_booking_3.dart';
@@ -52,7 +53,6 @@ class _ScreenBookingState extends State<ScreenBooking> {
 
   @override
   Widget build(BuildContext context) {
-
     final size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -78,13 +78,13 @@ class _ScreenBookingState extends State<ScreenBooking> {
                 //------------------------------------------->>>appbar
 
                 //doctor details
-                const Padding(
-                  padding: EdgeInsets.only(
-                      left: 15.0, right: 15, bottom: 15, top: 10),
+                 Padding(
+                  padding: const EdgeInsets.only(
+                      left: 15.0, right: 15, bottom: 14, top: 10),
                   child: Text(
                     'Doctor details',
                     style: TextStyle(
-                        fontSize: 18,
+                        fontSize: size.width * 0.05,
                         color: Colors.blue,
                         fontWeight: FontWeight.w500),
                   ),
@@ -93,6 +93,7 @@ class _ScreenBookingState extends State<ScreenBooking> {
                 Padding(
                   padding: const EdgeInsets.only(left: 15.0, right: 15),
                   child: Container(
+                    //--------------------------------------------------------image
                     decoration: BoxDecoration(
                         color: Colors.blue.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(10)),
@@ -106,7 +107,7 @@ class _ScreenBookingState extends State<ScreenBooking> {
                             borderRadius: BorderRadius.circular(10),
                             child: Container(
                               height: size.height * 0.16,
-                              width: 150,
+                              width: size.width *0.3,
                               child: Image.network(
                                   widget.doctor.profilePicture?.secureUrl ?? '',
                                   fit: BoxFit.cover, loadingBuilder:
@@ -131,41 +132,40 @@ class _ScreenBookingState extends State<ScreenBooking> {
                               }),
                             ),
                           ),
-                          const SizedBox(
-                            width: 25,
+                           SizedBox(
+                            width: size.width * 0.04,
                           ),
                           Container(
                             // color: Colors.amber,
-                            height: size.height * 0.16,
-                            width: 170,
+                            height: size.height * 0.15,
+                            width: size.width * 0.40,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   'Dr.${widget.doctor.fullName!}',
-                                  style: const TextStyle(
-                                      fontSize: 20,
+                                  style:  TextStyle(
+                                      fontSize: size.width * 0.05,
                                       fontWeight: FontWeight.w500),
                                 ),
                                 Text(
-                                  widget.doctor.speciality!.name!,
+                                  widget.doctor.speciality!.name!, style: TextStyle(fontSize: size.width * 0.038),
                                 ),
-                                const SizedBox(
-                                  height: 35,
+                                 SizedBox(
+                                  height: size.width * 0.04,
                                 ),
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  
                                   children: [
-                                    const Text(
-                                      'Payment',
-                                      style: TextStyle(fontSize: 16),
+                                     Text(
+                                      'Fees :',
+                                      style: TextStyle(fontSize:  size.width * 0.036),
                                     ),
                                     Text(
-                                      '${widget.doctor.speciality!.fees!} Rs',
+                                      '${widget.doctor.speciality!.fees!} Rs', textAlign: TextAlign.center,
                                       style:
-                                          const TextStyle(color: Colors.blue),
+                                           TextStyle(color: Colors.blue,fontSize: size.width * 0.036),
                                     )
                                   ],
                                 ),
@@ -178,46 +178,45 @@ class _ScreenBookingState extends State<ScreenBooking> {
                   ),
                 ),
                 //doctor details
-                const Padding(
-                  padding: EdgeInsets.only(
-                      left: 15.0, right: 15, bottom: 5, top: 10),
+                 Padding(
+                  //---------------------------------------------------------------------------date
+                  padding: const EdgeInsets.only(
+                      left: 15.0, right: 15, bottom: 14, top: 10),
                   child: Text(
                     'Date',
                     style: TextStyle(
-                        fontSize: 18,
+                        fontSize: size.width * 0.05,
                         color: Colors.blue,
                         fontWeight: FontWeight.w500),
                   ),
                 ),
                 //------------------------------------------------display date
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 15,
-                    right: 215,
-                    top: 5,
-                  ),
-                  child: GestureDetector(
-                    onTap: () {
-                      _selectDate(context);
-                    },
+                GestureDetector(
+                  onTap: () {
+                    _selectDate(context);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 15,right: 15),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: Container(
                           //-------------------------------------display date
                           height: 40,
+                          width: size.width*0.5,
                           color: Colors.blue.withOpacity(0.2),
                           child: Center(
                               child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              const Icon(
+                               Icon(
                                 Icons.calendar_month,
-                                size: 22,
+                                color: appBackGround,
+                                size: size.width * 0.5*0.13,
                               ),
                               Text(
                                 DateFormat('dd MMM ,y').format(selectedDate),
                                 // '${selectedDate.toLocal()}'.split(' ')[0],
-                                style: const TextStyle(fontSize: 18),
+                                style:  TextStyle(fontSize: size.width * 0.04),
                               ),
                             ],
                           ))),
@@ -227,13 +226,13 @@ class _ScreenBookingState extends State<ScreenBooking> {
 
                 //----------------------------------------------------------------------------------display slots
 
-                const Padding(
+                 Padding(
                   padding:
-                      EdgeInsets.only(left: 15.0, right: 15, bottom: 5, top: 5),
+                      const EdgeInsets.only(left: 15.0, right: 15, bottom: 14, top: 10),
                   child: Text(
                     'Available slots',
                     style: TextStyle(
-                        fontSize: 18,
+                        fontSize: size.width * 0.05,
                         color: Colors.blue,
                         fontWeight: FontWeight.w500),
                   ),
@@ -274,7 +273,7 @@ class _ScreenBookingState extends State<ScreenBooking> {
                             return Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: GridView.builder(
-                                physics: BouncingScrollPhysics(),
+                                physics: const BouncingScrollPhysics(),
                                 shrinkWrap: true,
                                 itemCount:
                                     state.searchResultSlots[0].slots!.length,
@@ -342,7 +341,7 @@ class _ScreenBookingState extends State<ScreenBooking> {
                                               children: [
                                                 Text(
                                                   '${state.searchResultSlots[0].slots![index].startTime} -  ${state.searchResultSlots[0].slots![index].endTime}',
-                                                  maxLines: 1,
+                                                  maxLines: 1,style: TextStyle(fontSize: size.width * 0.030),
                                                 ),
                                                 state
                                                             .searchResultSlots[
@@ -350,7 +349,7 @@ class _ScreenBookingState extends State<ScreenBooking> {
                                                             .slots![index]
                                                             .status ==
                                                         false
-                                                    ? Icon(
+                                                    ? const Icon(
                                                         Icons.timer_outlined,
                                                         size: 15,
                                                       )
@@ -424,7 +423,7 @@ class _ScreenBookingState extends State<ScreenBooking> {
                                           Text(
                                             '${state.bookingDetails.startTime} -  ${state.bookingDetails.endTime}',
                                             maxLines: 1,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 fontWeight: FontWeight.w500),
                                           ),
                                           InkWell(
@@ -487,6 +486,7 @@ class _ScreenBookingState extends State<ScreenBooking> {
                                   //-----------------------------------------------booking not selected error
                                   ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
+                                        duration: Duration(seconds: 1),
                                           behavior: SnackBarBehavior.floating,
                                           margin: EdgeInsets.all(15),
                                           content:
@@ -509,6 +509,33 @@ class _ScreenBookingState extends State<ScreenBooking> {
                             },
                           ));
                         });
+                      } else if (state is BookingOrderIDFailed) {
+                        WidgetsBinding.instance
+                            .addPostFrameCallback((timeStamp) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              behavior: SnackBarBehavior.floating,
+                              duration: const Duration(seconds: 1),
+                              margin: const EdgeInsets.all(15),
+                              content: Text(state.error)));
+                        });
+
+                        // return Center(
+                        //   child: SizedBox(
+                        //     height: 40,
+                        //     width: 150,
+                        //     child: ElevatedButton(
+                        //         onPressed: () {
+                        //           //-----------------------------------------------booking not selected error
+                        //           ScaffoldMessenger.of(context).showSnackBar(
+                        //               const SnackBar(
+                        //                   behavior: SnackBarBehavior.floating,
+                        //                   margin: EdgeInsets.all(15),
+                        //                   content:
+                        //                       Text('select slot to proceed')));
+                        //         },
+                        //         child: const Text('Proceed')),
+                        //   ),
+                        // );
                       }
                       return const SizedBox();
                     },

@@ -12,10 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ScreenDoctHome extends StatelessWidget {
   const ScreenDoctHome({
     super.key,
-    required this.name,
   });
-
-  final String name;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +52,6 @@ class ScreenDoctHome extends StatelessWidget {
                     //------------------------------------------------------name details
                     child: ProfileTileCustom(
                       size: size,
-                      name: name,
                       doctorDetails: state.doctDetails,
                     ),
                   );
@@ -116,7 +112,7 @@ class ScreenDoctHome extends StatelessWidget {
 
           Container(
               width: size.width,
-              height: size.height * 0.68,
+              height: size.height * 0.65,
               decoration: const BoxDecoration(
                 color: Color.fromRGBO(217, 217, 217, 1),
                 // color: Colors.red,

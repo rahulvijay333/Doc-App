@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:appoint_medic/domain/response_models/available_slot_response/available_slot_response.dart';
 import 'package:appoint_medic/infrastructure/appointment_slots/slot_service.dart';
@@ -19,13 +18,12 @@ class AppointmentSlotBloc
     on<GetSlotsListEvent>((event, emit) async {
       emit(SlotLoading());
       final (error, response) = await appointmentSlotService.getslotsByDate(
-          date: event.date, token: event.token);
+        date: event.date,
+      );
 
       if (error.isEmpty) {
-      
         emit(SlotSuccess(slotlist: response!));
       } else {
-        
         emit(SlotFailure(error));
       }
     });
@@ -35,7 +33,8 @@ class AppointmentSlotBloc
       final datetime = (DateTime.now().toLocal()).toString().split(' ')[0];
 
       final (error, response) = await appointmentSlotService.getslotsByDate(
-          date: datetime, token: event.token);
+        date: datetime,
+      );
 
       if (error.isEmpty) {
         emit(SlotSuccess(slotlist: response!));
@@ -48,13 +47,13 @@ class AppointmentSlotBloc
       // emit(SlotLoading());
 
       final response = await appointmentSlotService.addSlot(
-          date: event.date,
-          startTime: event.startTime,
-          endTime: event.endTime,
-          token: event.token);
+        date: event.date,
+        startTime: event.startTime,
+        endTime: event.endTime,
+      );
 
       if (response.isEmpty) {
-        add(GetSlotsListEvent(date: event.date, token: event.token));
+        add(GetSlotsListEvent(date: event.date, ));
       } else {
         ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(
           margin: const EdgeInsets.only(left: 20, bottom: 80, right: 20),
@@ -68,13 +67,13 @@ class AppointmentSlotBloc
     on<deleteSlotEvent>((event, emit) async {
       try {
         final response = await appointmentSlotService.deleteSlot(
-            mainSlotID: event.mainSlotID,
-            slodID: event.slotID,
-            token: event.token);
+          mainSlotID: event.mainSlotID,
+          slodID: event.slotID,
+        );
 
         if (response.isEmpty) {
           //event call
-          add(GetSlotsListEvent(date: event.date, token: event.token));
+          add(GetSlotsListEvent(date: event.date,));
 
           //-------------------display message
           ScaffoldMessenger.of(event.context).showSnackBar(const SnackBar(

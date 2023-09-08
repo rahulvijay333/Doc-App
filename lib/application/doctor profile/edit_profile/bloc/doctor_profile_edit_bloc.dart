@@ -1,7 +1,6 @@
 import 'package:appoint_medic/infrastructure/register/register_impl.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
-import 'package:meta/meta.dart';
 
 part 'doctor_profile_edit_event.dart';
 part 'doctor_profile_edit_state.dart';

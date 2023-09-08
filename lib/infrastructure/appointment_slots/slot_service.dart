@@ -1,14 +1,18 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:appoint_medic/core/api_endPoints/api_endpoints.dart';
 import 'package:appoint_medic/domain/response_models/available_slot_response/available_slot_response.dart';
+import 'package:appoint_medic/domain/token_storage/secure_storage.dart';
+import 'package:appoint_medic/main.dart';
 import 'package:dio/dio.dart';
 
 class AppointmentSlotService {
+  final SecureStorageService getToken = getIt<SecureStorageService>();
   Future<(String, AvailableSlotResponse?)> getslotsByDate(
-      {required String date, required String token}) async {
+      {required String date}) async {
+ 
+    final String? token = await getToken.retrieveToken();
     try {
       final Response response = await Dio().get(ApiEndPoints.getDoctorSlots,
           queryParameters: {"date": date},
@@ -17,7 +21,6 @@ class AppointmentSlotService {
           ));
 
       if (response.statusCode == 200) {
-      
         return ('', AvailableSlotResponse.fromJson(response.data));
       } else {
         return ('Error in slot service', null);
@@ -40,10 +43,10 @@ class AppointmentSlotService {
       {required String date,
       required String startTime,
       required String endTime,
-      required String token}) async {
+      }) async {
     try {
-    
-
+      final SecureStorageService getToken = getIt<SecureStorageService>();
+      final String? token = await getToken.retrieveToken();
       String formattedStartTime = startTime.replaceAll('\u202f', ' ');
       String formattedEndTime = endTime.replaceAll('\u202f', ' ');
       final Response response = await Dio().post(ApiEndPoints.addDoctorSlots,
@@ -83,7 +86,8 @@ class AppointmentSlotService {
   Future<String> deleteSlot(
       {required String mainSlotID,
       required String slodID,
-      required String token}) async {
+      }) async {
+    final String? token = await getToken.retrieveToken();
     try {
       final Response response = await Dio()
           .delete('${ApiEndPoints.deleteSlot}$mainSlotID/slots/$slodID',
@@ -92,7 +96,6 @@ class AppointmentSlotService {
               ));
 
       if (response.statusCode == 200) {
-     
         return '';
       } else {
         return 'Error happend in Api call';

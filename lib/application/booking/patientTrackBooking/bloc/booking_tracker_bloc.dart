@@ -57,6 +57,10 @@ class BookingTrackerBloc
         log('Getting order failed $error');
 
         emit(BookingOrderIDFailed(error));
+
+        await Future.delayed(Duration(seconds: 1));
+
+        emit(BookingTrackerInitial());
       }
     });
 

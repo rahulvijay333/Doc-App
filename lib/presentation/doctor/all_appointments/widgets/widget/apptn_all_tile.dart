@@ -48,7 +48,7 @@ class AppointmentAllTileCustom extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(15),
       child: Container(
-        height: 120,
+        // height: 120,
         width: double.maxFinite,
         color: Colors.white.withOpacity(0.8),
         child: Padding(

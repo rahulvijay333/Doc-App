@@ -45,7 +45,7 @@ class AllDoctorWidget extends StatelessWidget {
                       },
                       child: Container(
                         width: double.maxFinite,
-                        height: 120,
+                        // height: 120,
                         color: const Color.fromARGB(50, 217, 217, 217),
                         child: Row(
                           children: [
@@ -105,11 +105,11 @@ class AllDoctorWidget extends StatelessWidget {
                                               fit: BoxFit.cover,
                                             )),
                             ),
-                            const SizedBox(
-                              width: 25,
+                             SizedBox(
+                              width: size.width * 0.02,
                             ),
                             Container(
-                              height: 135,
+                              // height: 135,
                               width: size.width *0.5,
                               //  color: Colors.amber,
                               child: Column(
@@ -203,8 +203,8 @@ class AllDoctorWidget extends StatelessWidget {
                 );
               },
               separatorBuilder: (context, index) {
-                return const SizedBox(
-                  height: 5,
+                return  SizedBox(
+                  height: 10,
                 );
               },
               itemCount: state.doctorList.length);

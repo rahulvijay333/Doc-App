@@ -49,7 +49,7 @@ class AppointmentTile extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(15),
       child: Container(
-        height: 120,
+       
         width: double.maxFinite,
         color: Colors.white.withOpacity(0.8),
         child: Padding(
@@ -63,7 +63,7 @@ class AppointmentTile extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Container(
-                      height: size.width * 0.16,
+                      // height: size.width * 0.16,
                       width: size.width * 0.16,
                       child: Image.network(
                         patientImage,
@@ -87,8 +87,8 @@ class AppointmentTile extends StatelessWidget {
                 ],
               ),
               const VerticalDivider(color: Colors.grey),
-              const SizedBox(
-                width: 5,
+               SizedBox(
+                width: size.width*0.01,
               ),
               Expanded(
                 child: Container(
@@ -129,11 +129,11 @@ class AppointmentTile extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20),
                               child: Container(
                                 height: 28,
-                                width: 80,
+                                width: size.width * 0.15,
                                 color: Colors.green,
-                                child: const Center(
+                                child:  Center(
                                     child: Text('Accept',
-                                        style: TextStyle(color: Colors.white))),
+                                        style: TextStyle(color: Colors.white,fontSize: size.width * 0.15 *0.2))),
                               ),
                             ),
                           ),
@@ -148,12 +148,12 @@ class AppointmentTile extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20),
                               child: Container(
                                 height: 28,
-                                width: 80,
+                               width: size.width * 0.15,
                                 color: Colors.red,
-                                child: const Center(
+                                child:  Center(
                                     child: Text(
                                   'cancel',
-                                  style: TextStyle(color: Colors.white),
+                                  style: TextStyle(color: Colors.white,fontSize: size.width * 0.15 *0.2),
                                 )),
                               ),
                             ),
