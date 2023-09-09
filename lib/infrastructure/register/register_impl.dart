@@ -5,11 +5,8 @@ import 'dart:io';
 import 'package:appoint_medic/core/api_endPoints/api_endpoints.dart';
 import 'package:appoint_medic/domain/error/create_error.dart';
 import 'package:appoint_medic/domain/models/onboardingDoctor/doctor_onb_model.dart';
-import 'package:appoint_medic/domain/models/onboardingPatient/patient_onb_model.dart';
 import 'package:appoint_medic/domain/new_user/new_user.dart';
-import 'package:appoint_medic/domain/registeration.dart';
 import 'package:appoint_medic/domain/response_models/onboarding_sucess_response_model/onboarding_sucess_response_model.dart';
-import 'package:appoint_medic/domain/response_models/signup/new_user_response/new_user_response.dart';
 import 'package:appoint_medic/domain/token_storage/secure_storage.dart';
 import 'package:appoint_medic/main.dart';
 import 'package:dio/dio.dart';
@@ -53,18 +50,14 @@ class CreateServiceImpl {
       if (error is DioException) {
         if (error.error is SocketException) {
           // Handle socket error here
-          log('Socket error occurred: ${error.error}');
 
           return ('Error connecting to end point', null);
         } else {
           final errorModel = CreateError.fromJson(error.response!.data);
-          print('Dio error occurred: ${errorModel}');
+
           return (errorModel.error, null);
         }
       }
-
-      log(error.toString());
-      log('Error is createUser service implementation call');
 
       return ('Some error occurred in api call', null);
     }
@@ -161,22 +154,17 @@ class CreateServiceImpl {
     required DoctorProfileFormData doctorForm,
   }) async {
     try {
-      log(ApiEndPoints.onboardingDoctor.toString());
-
       final Response response = await Dio().put(ApiEndPoints.onboardingDoctor,
           data: doctorForm.toFormData(),
           options: Options(headers: {
             'Authorization': 'Bearer $token',
           }, contentType: 'multipart/form-data'));
 
-      log(response.statusCode.toString());
-
       if (response.statusCode == 200) {
         try {
           final responseData =
               OnboardingSucessResponseModel.fromJson(response.data);
         } catch (e) {
-          log('Error parsing response of onboarding');
           return ('Error in parsing', null);
         }
 
@@ -188,17 +176,12 @@ class CreateServiceImpl {
       if (error is DioException) {
         if (error.error is SocketException) {
           // Handle socket error here
-          log('Socket error occurred: ${error.error}');
 
           return ('Error connecting to end point', null);
         } else {
-          log('Dio error occurred: $error');
           return (error.toString(), null);
         }
       }
-
-      log(error.toString());
-      log('Error is onboarding service implementation call');
 
       return ('Some error occurred in api call', null);
     }
@@ -226,17 +209,12 @@ class CreateServiceImpl {
       if (error is DioException) {
         if (error.error is SocketException) {
           // Handle socket error here
-          log('Socket error occurred: ${error.error}');
 
           return ('Error connecting to end point');
         } else {
-          log('Dio error occurred: $error');
           return (error.toString());
         }
       }
-
-      log(error.toString());
-      log('Error is onboarding service implementation call');
 
       return ('Some error occurred in api call');
     }

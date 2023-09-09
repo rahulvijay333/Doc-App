@@ -22,7 +22,7 @@ class ScreenMesgsPatient extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log('screen builing');
+  
     final size = MediaQuery.sizeOf(context);
 
     BlocProvider.of<ViewAllChatsBloc>(context).add(GetAllChatsCall());
@@ -74,20 +74,20 @@ class ScreenMesgsPatient extends StatelessWidget {
                         if (value.isEmpty) {
                           FocusScope.of(context).unfocus();
 
-                          log('refreshed');
+                     
                           BlocProvider.of<ViewAllChatsBloc>(context)
                               .add(GetAllChatsCall());
                           searchnotifier.value = value;
                         } else {
                           searchnotifier.value = value;
                           searchnotifier.notifyListeners();
-                          log(searchnotifier.value);
+                         
 
                           context.read<SearchMessagesBloc>().add(
                               SearchMessage(searchKey: searchController.text));
                         }
 
-                        log('hey somethings is happengin');
+                        
                       },
                     ),
                   ),
@@ -103,11 +103,11 @@ class ScreenMesgsPatient extends StatelessWidget {
                 valueListenable: searchnotifier,
                 builder: (context, searchValue, child) {
                   if (searchValue.isNotEmpty) {
-                    log('searchscreen coming');
+                  
 
                     return const ScreenSearchMesgsPatient();
                   } else {
-                    log('normal screeb klaidubf');
+                  
                     return Expanded(
                       child: BlocBuilder<ViewAllChatsBloc, ViewAllChatsState>(
                         builder: (context, state) {
@@ -135,8 +135,7 @@ class ScreenMesgsPatient extends StatelessWidget {
 
                             return ListView.separated(
                                 itemBuilder: (context, index) {
-                                  // log(state.chatsList[index].id!);
-
+                                
                                   return InkWell(
                                     //------------------------------view ----------------------sending to view messages screen
 

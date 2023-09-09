@@ -1,10 +1,5 @@
-import 'dart:developer';
-
-import 'package:appoint_medic/application/Search/search_bloc.dart';
 import 'package:appoint_medic/application/navbar/navbar_bloc.dart';
-import 'package:appoint_medic/application/profile/profile_details_bloc.dart';
 import 'package:appoint_medic/core/color_constants.dart';
-import 'package:appoint_medic/domain/db/db_model.dart';
 import 'package:appoint_medic/presentation/patient/appointments/screen_appointments.dart';
 import 'package:appoint_medic/presentation/patient/home/screen_home.dart';
 import 'package:appoint_medic/presentation/patient/messages/screen_message.dart';
@@ -42,7 +37,7 @@ class ScreenMainPage extends StatelessWidget {
     ];
 
     final size = MediaQuery.of(context).size;
-    log('widget : ${size.width} ,  height : ${size.height}');
+
     return SafeArea(
       child: Scaffold(
         body: BlocBuilder<NavbarBloc, NavbarState>(

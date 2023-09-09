@@ -10,7 +10,7 @@ class ScreenViewDoctorProfileBook extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //log(doctor.gender!);
+  
     final size = MediaQuery.of(context).size;
     return SafeArea(
         child: DefaultTabController(

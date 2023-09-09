@@ -58,7 +58,7 @@ class BookingService {
             headers: {'Authorization': 'Bearer $token'},
           ));
 
-      // log(response.data.toString());
+     
 
       if (response.statusCode == 200) {
         return ('', BookingInitizationResponse.fromJson(response.data));
@@ -86,18 +86,8 @@ class BookingService {
     final SecureStorageService getToken = getIt<SecureStorageService>();
     final String? token = await getToken.retrieveToken();
     try {
-      // log(bookingDetails.date);
-      log(jsonEncode({
-        "doctorId": bookingDetails.doctorID,
-        "dateId": bookingDetails.dateID,
-        "slotId": bookingDetails.slotID,
-        "startTime": bookingDetails.startTime,
-        "endTime": bookingDetails.endTime,
-        "fees": bookingDetails.fees,
-        "paymentId": bookingDetails.paymentid,
-        "orderId": bookingDetails.orderID,
-        "selectedDate": bookingDetails.date
-      }));
+     
+    
       final response = await Dio().post(ApiEndPoints.completeBooking,
           data: jsonEncode({
             "doctorId": bookingDetails.doctorID,
@@ -114,10 +104,10 @@ class BookingService {
             headers: {'Authorization': 'Bearer $token'},
           ));
 
-      log(response.statusCode.toString());
+  
 
       if (response.statusCode == 200) {
-        // log(BookingInitizationResponse.fromJson(response.data).order!.id!);
+    
         return ('', AppointmentBookedResponse.fromJson(response.data));
       } else {
         return ('Error happened in booking initiation Api call', null);

@@ -37,7 +37,7 @@ class ChatService {
         if (e.error is SocketException) {
           return ('Server connection failed', null);
         } else if (e.response!.statusCode == 404) {
-          log('No chats found');
+        
           return ('', null);
         } else if (e.response!.statusCode == 500) {
           return (e.message.toString(), null);

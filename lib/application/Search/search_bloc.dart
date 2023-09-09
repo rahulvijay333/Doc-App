@@ -51,7 +51,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
       if (error.isEmpty) {
         emit(SearchNameSucess(response!.doctors!));
-        // log('api call  filtersucess');
+      
       } else {
         emit(SearchNameFailure(error));
 

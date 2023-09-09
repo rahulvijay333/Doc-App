@@ -119,7 +119,7 @@ class AppointmentTile extends StatelessWidget {
                         children: [
                           InkWell(
                             onTap: () {
-                              log('pressed accept from pending page');
+                           
                               //---------------------------approve
                               context
                                   .read<ViewAppointmentsDoctSideBloc>()

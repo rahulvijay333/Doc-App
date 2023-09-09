@@ -47,7 +47,6 @@ class _ScreenHomeState extends State<ScreenHome> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    double textScaleFactor = MediaQuery.of(context).textScaleFactor;
 
     return Container(
       width: size.width,
@@ -84,7 +83,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                             //welcome
                             Container(
                                 //  color: Colors.amber,
-                           
+
                                 child: CircleAvatar(
                                     radius: size.width * 0.07,
                                     backgroundColor: Colors.transparent,
@@ -95,17 +94,16 @@ class _ScreenHomeState extends State<ScreenHome> {
                                             .profilePicture!.secureUrl!)
                                         : const AssetImage('assets/patient.png')
                                             as ImageProvider)),
-                        
 
                             //---------------------------------------name and welcome
 
                             Padding(
-                              padding:  EdgeInsets.only(left: size.width * 0.01),
+                              padding: EdgeInsets.only(left: size.width * 0.01),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 // mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                   Text(
+                                  Text(
                                     'Welcome ,',
                                     style: TextStyle(
                                         fontSize: size.width * 0.045,
@@ -120,14 +118,14 @@ class _ScreenHomeState extends State<ScreenHome> {
                                         state.userProfile.user!.name!,
                                     maxLines: 1,
                                     style: TextStyle(
-                                        fontSize: size.width* 0.07,
+                                        fontSize: size.width * 0.065,
                                         color: Colors.white,
-                                        fontWeight: FontWeight.bold),
+                                        fontWeight: FontWeight.w500),
                                   )
                                 ],
                               ),
                             ),
-                                Spacer(),
+                            Spacer(),
 
                             //------------------------------------------reminder icon
                             InkWell(onTap: () {
@@ -281,7 +279,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                       );
                     } else if (state is SpecialitySucess) {
                       return ListView.separated(
-                        padding: EdgeInsets.all(3),
+                          padding: EdgeInsets.all(3),
                           physics: const BouncingScrollPhysics(),
                           scrollDirection: Axis.horizontal,
                           // shrinkWrap: true,

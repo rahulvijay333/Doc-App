@@ -31,7 +31,7 @@ class ScreenSpeciality extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  // height: size.height * 0.07,
+                 height: size.height * 0.07,
                   color: appBackGround,
                   child: Row(
                     children: [

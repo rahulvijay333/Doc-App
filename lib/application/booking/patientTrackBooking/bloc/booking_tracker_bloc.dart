@@ -39,7 +39,7 @@ class BookingTrackerBloc
           bookingDetails: event.bookingDetails);
 
       if (error.isEmpty) {
-        log('order id call is  ${response!.order!.id!}');
+        
 
         final updatedBookingDetails = BookingDetails(
             doctorID: event.bookingDetails.doctorID,
@@ -47,7 +47,7 @@ class BookingTrackerBloc
             slotID: event.bookingDetails.slotID,
             startTime: event.bookingDetails.startTime,
             endTime: event.bookingDetails.endTime,
-            orderID: response.order!.id!,
+            orderID: response!.order!.id!,
             fees: int.parse(event.bookingDetails.fees.toString()),
             date: event.bookingDetails.date);
 

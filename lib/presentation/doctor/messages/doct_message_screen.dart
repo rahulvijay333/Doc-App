@@ -71,7 +71,7 @@ class ScreemDoctMessage extends StatelessWidget {
                               if (value.isEmpty) {
                                 // FocusScope.of(context).unfocus();
               
-                                log('refreshed');
+                             
                                 BlocProvider.of<ViewAllChatsBloc>(context)
                                     .add(GetAllChatsCall());
                                 searchnotifier.value = value;

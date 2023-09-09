@@ -14,7 +14,7 @@ class CreateChatDocBloc extends Bloc<CreateChatDocEvent, CreateChatDocState> {
   CreateChatDocBloc(this.chatService) : super(CreateChatDocInitial()) {
     on<StartChat>((event, emit) async {
       //------------------------------------loading state
-      log('create chat loading');
+     
       emit(CheckingChatsLoading());
 
       //---------------------------searching state
@@ -22,11 +22,8 @@ class CreateChatDocBloc extends Bloc<CreateChatDocEvent, CreateChatDocState> {
       final (error, response) = await chatService.getAllChats();
 
       if (error.isEmpty) {
-        log('got list of chats');
-        //  var value = response!
-        //       .where((chat) => chat.participants!.contains(event.userID)).toList();
+      
 
-        // log("chat room id : is  ${value.toString()}");
         GetChatListRespModel? found;
 
         if (response != null) {
@@ -52,11 +49,10 @@ class CreateChatDocBloc extends Bloc<CreateChatDocEvent, CreateChatDocState> {
             emit(CreateChatFailure());
           }
 
-          log('No chat room found');
+         
         } else {
           emit(CheckingHistoryLoading());
-          log('chat room found');
-          log(found.id.toString());
+     
 
           emit(OldChatCreated(oldChatDetails: found));
         }

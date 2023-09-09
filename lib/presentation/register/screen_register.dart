@@ -247,7 +247,7 @@ class _ScreenRegisterState extends State<ScreenRegister> {
                                       activeColor: Colors.blue,
                                       onChanged: (value) {
                                         isDoctorNotifier.value = value;
-                                        log(isDoctorNotifier.value.toString());
+                                      
                                       },
                                     );
                                   },
@@ -307,7 +307,7 @@ class _ScreenRegisterState extends State<ScreenRegister> {
                                 }
                                 //-------------------------------------------------------create accound failed
                                 else if (state is CreateUserFailed) {
-                                  log('error is state : ${state.errorMessage}');
+                                 
                                   WidgetsBinding.instance
                                       .addPostFrameCallback((timeStamp) {
                                     ScaffoldMessenger.of(context).showSnackBar(

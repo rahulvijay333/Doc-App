@@ -40,7 +40,7 @@ class SearchService {
       {String? name, String? gender, String? speciality}) async {
     try {
       final dio = Dio(BaseOptions());
-      //log('$name - $gender , $speciality');
+     
 
       final Response response = await dio.get(ApiEndPoints.patientGetAllDoctors,
           queryParameters: {
@@ -49,7 +49,7 @@ class SearchService {
             'specialities': speciality
           });
 
-      //log(response);
+   
       if (response.statusCode == 200) {
        
         return ('', DoctorsResponseModel.fromJson(response.data));
@@ -65,12 +65,11 @@ class SearchService {
         } else if (error.response!.statusCode == 500) {
           return ('Internal Server Error', null);
         } else {
-          // log(error.response!.statusCode.toString());
-          // log(error.toString());
+        
           return ('Server Connection Failed', null);
         }
       } else {
-        //log('exception Service');
+       
         return ('Api Call Error Service', null);
       }
     }

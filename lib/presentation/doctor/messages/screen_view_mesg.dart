@@ -65,7 +65,7 @@ class _ScreenViewMesgDoctorState extends State<ScreenViewMesgDoctor> {
 
   void setUpSocketListener() {
     socket.on('new messages', (data) {
-      log('----------------____>>>>New messages received:  when listening to "new messages event');
+     
       // Update your UI or trigger a chat refresh
 
       if (mounted) {
@@ -77,14 +77,14 @@ class _ScreenViewMesgDoctorState extends State<ScreenViewMesgDoctor> {
 
     socket.on('message received', (data) {
       // Handle incoming messages
-      log('Received message: $data');
-      log('----------------____>>>>message received:  when listening to "message received');
+     
+      
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // log("patient url is ${widget.patientImage}");
+   
     final size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(

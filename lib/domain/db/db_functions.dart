@@ -18,7 +18,7 @@ class DbFunctionClass {
   }
 
   Future<void> clearDb() async {
-    log('Database cleared');
+    
     await dbbox.clear();
   }
 
@@ -37,7 +37,7 @@ class DbFunctionClass {
           id: response.user!.id!);
 
       await dbbox.put(response.user!.id!, user);
-      log('saved to database');
+     
 
       return user;
     } else if (response is PatientResponse) {
@@ -49,7 +49,7 @@ class DbFunctionClass {
           token: response.user!.token!,
           id: response.user!.id!);
       await dbbox.put(response.user!.id!, user);
-      log(user.id.toString());
+     
       return user;
     } else if (response is DoctorResponse) {
       final user = UserDb(
@@ -61,7 +61,7 @@ class DbFunctionClass {
           id: response.user!.id!);
 
       await dbbox.put(response.user!.id!, user);
-      log('saved to database');
+      
       return user;
     }
   }

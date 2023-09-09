@@ -53,30 +53,30 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             //-------------------------------------------------------directing to onborading doctor
             if (response.user!.fullName == null ||
                 response.user!.fullName!.isEmpty) {
-              log('this doctor fullname is empty');
+            
               emit(LoginOnBordingDoctor(token: response.user!.token!));
             } else if (response.user!.isAdminVerified == false) {
               emit(LoginAdminVerificationSate());
             } else {
-              log(id!);
+           
               userName = response.user!.fullName;
               prefs.saveRole(role!);
               prefs.saveLoggedInState(true);
               prefs.saveToken(token!);
               prefs.saveName(userName!);
-              prefs.saveId(id);
+              prefs.saveId(id!);
               secureStorageService.storeToken(token);
 
               emit(LoginSucess(
                   role: role, name: userName, id: id, token: token));
             }
           } else if (response is PatientResponse) {
-            log(id!);
+         
             prefs.saveRole(role!);
             prefs.saveLoggedInState(true);
             prefs.saveToken(token!);
             prefs.saveName(userName);
-            prefs.saveId(id);
+            prefs.saveId(id!);
             await secureStorageService.storeToken(token);
 
             emit(LoginSucess(role: role, name: userName, id: id, token: token));
@@ -101,7 +101,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           await loginService.logoutButton(role: event.role);
 
       if (error.isEmpty) {
-        log('logout bloc sucess');
+      
         await prefs.saveLoggedInState(false);
         await prefs.saveRole('');
         await prefs.saveToken('');

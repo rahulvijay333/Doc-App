@@ -96,7 +96,7 @@ class ScreenOtpVerify extends StatelessWidget {
                                       onChanged: (value) {
                                         if (value.length == 1) {
                                           otp1 = value;
-                                          log(value.toString());
+                                     
                                           FocusScope.of(context).nextFocus();
                                         } else {
                                           otp1 = '';
@@ -216,7 +216,7 @@ class ScreenOtpVerify extends StatelessWidget {
                                 SizedBox(
                                   width: 120,
                                   child: ElevatedButton(onPressed: () {
-                                    log('some thig is');
+                                   
 
                                     if (otp1.isNotEmpty &&
                                         otp2.isNotEmpty &&
@@ -224,7 +224,7 @@ class ScreenOtpVerify extends StatelessWidget {
                                         otp4.isNotEmpty) {
                                       final String enteredOtp =
                                           otp1 + otp2 + otp3 + otp4;
-                                      log(enteredOtp);
+                                    
 
                                       //-------------------------------------------------call otp verify bloc
                                       context.read<OtpVerifyBloc>().add(

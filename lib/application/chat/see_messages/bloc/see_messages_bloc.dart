@@ -57,7 +57,7 @@ class SeeMessagesBloc extends Bloc<SeeMessagesEvent, SeeMessagesState> {
         add(RefreshMessageCall(chatroom: event.chatRoomID));
         event.socket.emit('new message', response);
       } else {
-        log('error sending message');
+       
       }
     });
 

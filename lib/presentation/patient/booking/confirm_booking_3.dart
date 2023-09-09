@@ -45,7 +45,7 @@ class _ScreenConfirmBookingState extends State<ScreenConfirmBooking> {
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     // Handle payment success
-    log('payemnt sucess');
+    
 
     final details = BookingDetails(
         doctorID: widget.bookingdetails.doctorID,
@@ -76,18 +76,18 @@ class _ScreenConfirmBookingState extends State<ScreenConfirmBooking> {
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
-    log('payemnt failed due to error ${response.message}');
+   
     //------------------------------------------------------------------------stop paybutton loading
     context.read<PaymentBloc>().add(PaymentButtonStopLoading());
 
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        behavior: SnackBarBehavior.floating,
+        behavior: SnackBarBehavior.floating,duration: Duration(seconds: 1),
         margin: const EdgeInsets.all(15),
         content: Text(response.message.toString())));
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
-    log('some error');
+   
 
     context.read<PaymentBloc>().add(PaymentButtonStopLoading());
   }
@@ -99,7 +99,6 @@ class _ScreenConfirmBookingState extends State<ScreenConfirmBooking> {
       child: Scaffold(
         body: Column(
           children: [
-            //------------------------------------------------appa bar
             Container(
               height: size.height * 0.07,
               width: size.width,
@@ -128,187 +127,205 @@ class _ScreenConfirmBookingState extends State<ScreenConfirmBooking> {
                 ],
               ),
             ),
-
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Doctor details',
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.blue,
-                        fontWeight: FontWeight.w500),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  DoctorTileWidget(
-                    doctorName: widget.doc.fullName!,
-                    specialityName: widget.doc.speciality!.name!,
-                    date: widget.bookingdetails.date,
-                    starttime: widget.bookingdetails.startTime,
-                    endTime: widget.bookingdetails.endTime,
-                    size: size,
-                    gender: widget.doc.gender!,
-                    imageUrl: widget.doc.profilePicture!.secureUrl,
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  const Text(
-                    'Patient details',
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.blue,
-                        fontWeight: FontWeight.w500),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  //-------------------------------------------------------------patient details
-                  BlocBuilder<ProfileDetailsBloc, ProfileDetailsState>(
-                    builder: (context, state) {
-                      if (state is ProfileSucess) {
-                        //------------------------------------------profile details
-                        profileDetails = state.userProfile.user!;
-                        return ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Container(
-                            color: Colors.blue.withOpacity(0.2),
-                            child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: ListTile(
-                                  leading: CircleAvatar(
-                                    backgroundImage: NetworkImage(state
-                                        .userProfile
-                                        .user!
-                                        .profilePicture!
-                                        .secureUrl!),
-                                  ),
-                                  title:
-                                      Text(state.userProfile.user!.fullName!),
-                                  subtitle:
-                                      Text(state.userProfile.user!.email!),
-                                )),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Doctor details',
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.blue,
+                                fontWeight: FontWeight.w500),
                           ),
-                        );
-                      }
-                      return const SizedBox();
-                    },
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  //---------------------------------------------------------payment
-                  const Text(
-                    'Payment details',
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.blue,
-                        fontWeight: FontWeight.w500),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text('Consultation Fee '),
-                            Text('${widget.doc.speciality!.fees.toString()} Rs')
-                          ],
-                        ),
-                        const Divider(),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text('Amount to pay '),
-                            Text('${widget.doc.speciality!.fees.toString()} Rs')
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Center(
-                    child: SizedBox(
-                      height: 40,
-                      width: 120,
-                      child: BlocBuilder<PaymentBloc, PaymentState>(
-                        builder: (context, state) {
-                          if (state is PayButtonStartLoading) {
-                            return Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          } else {
-                            return ElevatedButton(
-                              onPressed: () async {
-                                final connectivityResult =
-                                    await (Connectivity().checkConnectivity());
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          DoctorTileWidget(
+                            doctorName: widget.doc.fullName!,
+                            specialityName: widget.doc.speciality!.name!,
+                            date: widget.bookingdetails.date,
+                            starttime: widget.bookingdetails.startTime,
+                            endTime: widget.bookingdetails.endTime,
+                            size: size,
+                            gender: widget.doc.gender!,
+                            imageUrl: widget.doc.profilePicture!.secureUrl,
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          const Text(
+                            'Patient details',
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.blue,
+                                fontWeight: FontWeight.w500),
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          //-------------------------------------------------------------patient details
+                          BlocBuilder<ProfileDetailsBloc, ProfileDetailsState>(
+                            builder: (context, state) {
+                              if (state is ProfileSucess) {
+                                //------------------------------------------profile details
+                                profileDetails = state.userProfile.user!;
+                                return ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Container(
+                                    color: Colors.blue.withOpacity(0.2),
+                                    child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: ListTile(
+                                          leading: CircleAvatar(
+                                            radius: size.width * 0.060,
+                                            backgroundImage: NetworkImage(
+                                                state
+                                                    .userProfile
+                                                    .user!
+                                                    .profilePicture!
+                                                    .secureUrl!),
+                                          ),
+                                          title: Text(state
+                                              .userProfile.user!.fullName!),
+                                          subtitle: Text(state
+                                              .userProfile.user!.email!),
+                                        )),
+                                  ),
+                                );
+                              }
+                              return const SizedBox();
+                            },
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
 
-                                if (connectivityResult ==
-                                        ConnectivityResult.wifi ||
-                                    connectivityResult ==
-                                        ConnectivityResult.wifi) {
-                                  context
-                                      .read<PaymentBloc>()
-                                      .add(PaymentButtonLoading());
-                                  try {
-                                    var options = {
-                                      'key': razor_key,
-                                      'order_id': widget.bookingdetails.orderID,
-                                      'amount':
-                                          ((widget.doc.speciality!.fees)! *
-                                              100), // Amount in paise
-                                      'name': 'DocCure',
-                                      'description':
-                                          'Dr.${widget.doc.fullName}',
-                                      'prefill': {
-                                        'contact': profileDetails!.phone,
-                                        'email': profileDetails!.email
+                          //---------------------------------------------------------payment
+                          const Text(
+                            'Payment details',
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.blue,
+                                fontWeight: FontWeight.w500),
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Container(
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const Text('Consultation Fee '),
+                                    Text(
+                                        '${widget.doc.speciality!.fees.toString()} Rs')
+                                  ],
+                                ),
+                                const Divider(),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const Text('Amount to pay '),
+                                    Text(
+                                        '${widget.doc.speciality!.fees.toString()} Rs')
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 30,
+                          ),
+                          Center(
+                            child: SizedBox(
+                              height: 40,
+                              width: 120,
+                              child: BlocBuilder<PaymentBloc, PaymentState>(
+                                builder: (context, state) {
+                                  if (state is PayButtonStartLoading) {
+                                    return Center(
+                                      child: CircularProgressIndicator(),
+                                    );
+                                  } else {
+                                    return ElevatedButton(
+                                      onPressed: () async {
+                                        final connectivityResult =
+                                            await (Connectivity()
+                                                .checkConnectivity());
+
+                                        if (connectivityResult ==
+                                                ConnectivityResult.wifi ||
+                                            connectivityResult ==
+                                                ConnectivityResult.wifi) {
+                                          context
+                                              .read<PaymentBloc>()
+                                              .add(PaymentButtonLoading());
+                                          try {
+                                            var options = {
+                                              'key': razor_key,
+                                              'order_id':
+                                                  widget.bookingdetails.orderID,
+                                              'amount': ((widget
+                                                      .doc.speciality!.fees)! *
+                                                  100), // Amount in paise
+                                              'name': 'DocCure',
+                                              'description':
+                                                  'Dr.${widget.doc.fullName}',
+                                              'prefill': {
+                                                'contact':
+                                                    profileDetails!.phone,
+                                                'email': profileDetails!.email
+                                              },
+                                              'external': {
+                                                'wallets': [
+                                                  'paytm'
+                                                ] // List of allowed wallets
+                                              }
+                                            };
+                                            _razorpay.open(options);
+                                          } on SocketException catch (e) {
+                                            // Handle socket-related exceptions (no network connectivity)
+                                            log('SocketException: $e');
+                                          } on FormatException catch (e) {
+                                            // Handle format-related exceptions (e.g., parsing JSON)
+                                            log('FormatException: $e');
+                                          } catch (e) {
+                                            // Handle other exceptions
+                                            log('Exception: $e');
+                                          }
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(const SnackBar(
+                                                  behavior:
+                                                      SnackBarBehavior.floating,
+                                                  margin: EdgeInsets.all(15),
+                                                  content: Text(
+                                                      'Check internet connection')));
+                                        }
                                       },
-                                      'external': {
-                                        'wallets': [
-                                          'paytm'
-                                        ] // List of allowed wallets
-                                      }
-                                    };
-                                    _razorpay.open(options);
-                                  } on SocketException catch (e) {
-                                    // Handle socket-related exceptions (no network connectivity)
-                                    log('SocketException: $e');
-                                  } on FormatException catch (e) {
-                                    // Handle format-related exceptions (e.g., parsing JSON)
-                                    log('FormatException: $e');
-                                  } catch (e) {
-                                    // Handle other exceptions
-                                    log('Exception: $e');
+                                      child: const Text('Pay'),
+                                    );
                                   }
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                          behavior: SnackBarBehavior.floating,
-                                          margin: EdgeInsets.all(15),
-                                          content: Text(
-                                              'Check internet connection')));
-                                }
-                              },
-                              child: const Text('Pay'),
-                            );
-                          }
-                        },
+                                },
+                              ),
+                            ),
+                          )
+                        ],
                       ),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
-            )
+            ),
           ],
         ),
       ),

@@ -37,9 +37,9 @@ class ViewNotificationsBloc
       final response = await notificationService.markReadNotification();
 
       if(response.isEmpty){
-        log('success read');
+      
       } else {
-        log('failed read');
+        
       }
 
 

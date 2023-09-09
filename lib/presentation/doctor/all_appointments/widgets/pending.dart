@@ -11,7 +11,7 @@ class ScreenPendingAppoint extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log('Pending page');
+   
     //------------------------------------------------------api call
     context
         .read<ViewAppointmentsDoctSideBloc>()

@@ -27,12 +27,12 @@ class SlotOperationsBloc
            );
 
         if (response.isEmpty) {
-          log('Response is empy , delete operation sucess');
+        
           emit(SSucess('SucessFully slot deleted'));
           slotAuth
               .add(DeleteSlotLoadUpdate(date: event.date,));
         } else {
-          log('Some error happend in slot operation bloc');
+        
           emit(SFailure('Slot deletion failed'));
         }
       } catch (e) {

@@ -69,7 +69,7 @@ class NotificationService {
               ));
 
       if (response.statusCode == 200) {
-        log(' marking read success');
+    
         return ('');
       } else {
         log('error in marking read');

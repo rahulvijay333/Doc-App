@@ -27,7 +27,7 @@ class ViewAppointmentsDoctSideService {
       }
     } catch (e) {
       if (e is DioException) {
-        log(e.message.toString());
+      
         if (e.error is SocketException) {
           return ('Internet connection Error', null);
         } else if (e.response!.statusCode == 404) {
@@ -38,7 +38,7 @@ class ViewAppointmentsDoctSideService {
           return ('Server Connection Failed', null);
         }
       } else {
-        //log('exception Service');
+      
         return ('Api Call Error Service', null);
       }
     }
