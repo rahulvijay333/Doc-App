@@ -40,7 +40,7 @@ class _ScreenViewMesgDoctorState extends State<ScreenViewMesgDoctor> {
   @override
   void initState() {
     socket = IO.io(
-        'http://100.26.104.81:4000',
+        'https://angelvision.cloud',
         IO.OptionBuilder()
             .setTransports(['websocket'])
             .disableAutoConnect()

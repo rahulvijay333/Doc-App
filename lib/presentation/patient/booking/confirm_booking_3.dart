@@ -45,7 +45,6 @@ class _ScreenConfirmBookingState extends State<ScreenConfirmBooking> {
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     // Handle payment success
-    
 
     final details = BookingDetails(
         doctorID: widget.bookingdetails.doctorID,
@@ -76,19 +75,17 @@ class _ScreenConfirmBookingState extends State<ScreenConfirmBooking> {
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
-   
     //------------------------------------------------------------------------stop paybutton loading
     context.read<PaymentBloc>().add(PaymentButtonStopLoading());
 
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        behavior: SnackBarBehavior.floating,duration: Duration(seconds: 1),
+        behavior: SnackBarBehavior.floating,
+        duration: Duration(seconds: 1),
         margin: const EdgeInsets.all(15),
         content: Text(response.message.toString())));
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
-   
-
     context.read<PaymentBloc>().add(PaymentButtonStopLoading());
   }
 
@@ -184,17 +181,16 @@ class _ScreenConfirmBookingState extends State<ScreenConfirmBooking> {
                                         child: ListTile(
                                           leading: CircleAvatar(
                                             radius: size.width * 0.060,
-                                            backgroundImage: NetworkImage(
-                                                state
-                                                    .userProfile
-                                                    .user!
-                                                    .profilePicture!
-                                                    .secureUrl!),
+                                            backgroundImage: NetworkImage(state
+                                                .userProfile
+                                                .user!
+                                                .profilePicture!
+                                                .secureUrl!),
                                           ),
                                           title: Text(state
                                               .userProfile.user!.fullName!),
-                                          subtitle: Text(state
-                                              .userProfile.user!.email!),
+                                          subtitle: Text(
+                                              state.userProfile.user!.email!),
                                         )),
                                   ),
                                 );
@@ -265,7 +261,7 @@ class _ScreenConfirmBookingState extends State<ScreenConfirmBooking> {
                                         if (connectivityResult ==
                                                 ConnectivityResult.wifi ||
                                             connectivityResult ==
-                                                ConnectivityResult.wifi) {
+                                                ConnectivityResult.mobile) {
                                           context
                                               .read<PaymentBloc>()
                                               .add(PaymentButtonLoading());

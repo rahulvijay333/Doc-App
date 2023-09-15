@@ -1,4 +1,4 @@
-const baseUrl = 'http://100.26.104.81:4000/api';
+const baseUrl = 'https://angelvision.cloud/api';
 // const baseUrl = 'http://192.168.1.100:4000/api';
 
 class ApiEndPoints {
