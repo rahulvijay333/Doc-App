@@ -92,12 +92,10 @@ class BookingTrackerBloc
     });
 
 //----------------------------------------------------------razoray start
-    // on<BookingStartPayment>((event, emit) async {
-    //   log('loading for paymeny');
-    //   emit(Bookingloading());
-    // });
+    
 
     on<BookingTrackClear>((event, emit) {
+      log('cleared track');
       emit(BookingTrackerInitial());
     });
   }

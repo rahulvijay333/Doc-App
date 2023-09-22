@@ -32,7 +32,7 @@ class HomeAppointmentsTile extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(12),
       child: Container(
-          height: 110,
+          // height: 110,
           color: Colors.blue.withOpacity(0.1),
           child: Column(
             children: [
@@ -48,12 +48,12 @@ class HomeAppointmentsTile extends StatelessWidget {
               ),
               ListTile(
                 leading: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(10),
+                  child: SizedBox(
+                    width: 45,
                     child: Image(
                       image: NetworkImage(doctImageUrl),
                       fit: BoxFit.cover,
-                      width: 50,
-                      height: 50,
                       errorBuilder: (context, error, stackTrace) {
                         return Image.asset('assets/patient.png');
                       },
@@ -68,7 +68,9 @@ class HomeAppointmentsTile extends StatelessWidget {
                           ),
                         );
                       },
-                    )),
+                    ),
+                  ),
+                ),
                 title: Text("Dr.$doctorname"),
                 subtitle: Text(speciality),
                 trailing: IconButton(

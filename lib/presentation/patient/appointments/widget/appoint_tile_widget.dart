@@ -157,7 +157,8 @@ class AppointmentListTileWidget extends StatelessWidget {
                       ],
                     )
                   ],
-                )
+                ),
+                SizedBox(height: size.width*0.01,)
               ],
             ),
           )),

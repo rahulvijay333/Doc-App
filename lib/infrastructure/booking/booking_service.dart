@@ -98,7 +98,8 @@ class BookingService {
             "fees": bookingDetails.fees,
             "paymentId": bookingDetails.paymentid,
             "orderId": bookingDetails.orderID,
-            "selectedDate": bookingDetails.date
+            "selectedDate": bookingDetails.date,
+            "reason": bookingDetails.reason
           }),
           options: Options(
             headers: {'Authorization': 'Bearer $token'},

@@ -49,9 +49,9 @@ class SearchByNameWidget extends StatelessWidget {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(10),
                               child: Container(
-                                  width: 100,
+                                  width: size.width * 0.25,
                                   height: 110,
-                                  color: Colors.grey.withOpacity(0.3),
+                                  //  color: Colors.grey.withOpacity(0.3),
                                   child: state.searchNameResults[index]
                                               .profilePicture !=
                                           null
@@ -92,13 +92,16 @@ class SearchByNameWidget extends StatelessWidget {
                             Expanded(
                               child: Container(
                                 height: 135,
-                               
+
                                 //  color: Colors.amber,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    SizedBox(height: size.height*0.001,),
+                                    SizedBox(
+                                      height: size.height * 0.001,
+                                    ),
                                     Text(
                                       'Dr.${state.searchNameResults[index].fullName}',
                                       maxLines: 1,
@@ -124,7 +127,7 @@ class SearchByNameWidget extends StatelessWidget {
                                     const SizedBox(
                                       height: 5,
                                     ),
-                            
+
                                     // const SizedBox(
                                     //   height: 0,
                                     // ),
@@ -148,7 +151,7 @@ class SearchByNameWidget extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                            
+
                                     ElevatedButton(
                                       onPressed: () {
                                         //-----------------------------------------booking

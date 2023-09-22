@@ -74,235 +74,237 @@ class _ScreenAvailableTimeState extends State<ScreenAvailableTime> {
   @override
   Widget build(BuildContext contextAvailableTimings) {
     final size = MediaQuery.of(context).size;
-    return Column(
-      // mainAxisSize: MainAxisSize.max,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          height: size.height * 0.07,
-          width: size.width,
-          color: Colors.blue,
-          child: const Center(
-            child: Text(
-              'Available Timings',
-              style: TextStyle(
-                  fontSize: 22,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
+    return SingleChildScrollView(
+      child: Column(
+        // mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            height: size.height * 0.07,
+            width: size.width,
+            color: Colors.blue,
+            child: const Center(
+              child: Text(
+                'Available Timings',
+                style: TextStyle(
+                    fontSize: 22,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
-          child: Container(
-            child: const Text(
-              'Date',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+          Padding(
+            padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
+            child: Container(
+              child: const Text(
+                'Date',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+              ),
             ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(
-            left: 15,
-            right: 15,
-            top: 20,
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 15,
+              right: 15,
+              top: 20,
+            ),
+            child: GestureDetector(
+              onTap: () {
+                _selectDate(context);
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Container(
+                    //-------------------------------------display date
+                    width: size.width * 0.4,
+                    height: 40,
+                    color: Colors.white,
+                    child: Center(
+                        child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        const Icon(Icons.calendar_month),
+                        Text(
+                          selectedDateFormatted,
+                          style: TextStyle(fontSize: size.width * 0.4 * 0.12),
+                        ),
+                      ],
+                    ))),
+              ),
+            ),
           ),
-          child: GestureDetector(
-            onTap: () {
-              _selectDate(context);
-            },
+          Padding(
+            padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
+            child: Container(
+              child: const Text(
+                'Slots',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+              ),
+            ),
+          ),
+    //------------------------------------------2nd column
+          Padding(
+            padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Container(
-                  //-------------------------------------display date
-                  width: size.width * 0.4,
-                  height: 40,
+                  height: size.height * 0.45,
+                  width: size.width,
                   color: Colors.white,
-                  child: Center(
-                      child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      const Icon(Icons.calendar_month),
-                      Text(
-                        selectedDateFormatted,
-                        style: TextStyle(fontSize: size.width * 0.4 * 0.12),
-                      ),
-                    ],
-                  ))),
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
-          child: Container(
-            child: const Text(
-              'Slots',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-            ),
-          ),
-        ),
-//------------------------------------------2nd column
-        Padding(
-          padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Container(
-                height: size.height * 0.45,
-                width: size.width,
-                color: Colors.white,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: BlocBuilder<AppointmentSlotBloc, AppointmentSlotState>(
-                    builder: (context, state) {
-                      if (state is SlotLoading) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      } else if (state is SlotSuccess) {
-                        if (state.slotlist.filteredSlots!.isEmpty) {
-                          return const SizedBox(
-                            child: Center(child: Text('No Slots Added')),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: BlocBuilder<AppointmentSlotBloc, AppointmentSlotState>(
+                      builder: (context, state) {
+                        if (state is SlotLoading) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
                           );
-                        }
-
-                        if (state.slotlist.filteredSlots![0].slots!.isEmpty) {
-                          return const SizedBox(
-                            child: Center(child: Text('No Slots Added')),
-                          );
-                        } else {
-                          return GridView.builder(
-                            shrinkWrap: true,
-                            itemCount:
-                                state.slotlist.filteredSlots![0].slots!.length,
-                            gridDelegate:
-                                const SliverGridDelegateWithMaxCrossAxisExtent(
-                                    mainAxisExtent: 40,
-                                    mainAxisSpacing: 20,
-                                    crossAxisSpacing: 20,
-                                    maxCrossAxisExtent: 200),
-                            itemBuilder: (context, index) {
-                              return ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Container(
-                                  color: state.slotlist.filteredSlots![0]
-                                              .slots![index].status ==
-                                          false
-                                      ? Colors.blue[100]
-                                      : Colors.red[100],
-                                  child: Center(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [
-                                        SizedBox(
-                                          width: size.width * 0.01,
-                                        ),
-                                        Expanded(
-                                          flex: 5,
-                                          child: Text(
-                                            '${state.slotlist.filteredSlots![0].slots![index].startTime} -  ${state.slotlist.filteredSlots![0].slots![index].endTime}',
-                                            maxLines: 1,
-                                            style: TextStyle(
-                                                fontSize: size.width > 600
-                                                    ? 18
-                                                    : size.width * 0.5 * 0.07),
+                        } else if (state is SlotSuccess) {
+                          if (state.slotlist.filteredSlots!.isEmpty) {
+                            return const SizedBox(
+                              child: Center(child: Text('No Slots Added')),
+                            );
+                          }
+    
+                          if (state.slotlist.filteredSlots![0].slots!.isEmpty) {
+                            return const SizedBox(
+                              child: Center(child: Text('No Slots Added')),
+                            );
+                          } else {
+                            return GridView.builder(
+                              shrinkWrap: true,
+                              itemCount:
+                                  state.slotlist.filteredSlots![0].slots!.length,
+                              gridDelegate:
+                                  const SliverGridDelegateWithMaxCrossAxisExtent(
+                                      mainAxisExtent: 40,
+                                      mainAxisSpacing: 20,
+                                      crossAxisSpacing: 20,
+                                      maxCrossAxisExtent: 200),
+                              itemBuilder: (context, index) {
+                                return ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Container(
+                                    color: state.slotlist.filteredSlots![0]
+                                                .slots![index].status ==
+                                            false
+                                        ? Colors.blue[100]
+                                        : Colors.red[100],
+                                    child: Center(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          SizedBox(
+                                            width: size.width * 0.01,
                                           ),
-                                        ),
-                                        Expanded(
-                                            child: state
-                                                        .slotlist
-                                                        .filteredSlots![0]
-                                                        .slots![index]
-                                                        .status! ==
-                                                    false
-                                                ? IconButton(
-                                                    onPressed: () {
-                                                      // log(contextAvailableTimings.widget.toString());
-                                                      // ------------------delete functon pls complete
-                                                      showDialog(
-                                                        context: context,
-                                                        builder: (ctx) {
-                                                          return DeleteSlotDialoge(
-                                                            contextAT:
-                                                                contextAvailableTimings,
-                                                            slotID: state
-                                                                .slotlist
-                                                                .filteredSlots![
-                                                                    0]
-                                                                .slots![index]
-                                                                .id!,
-                                                            mainSlotID: state
-                                                                .slotlist
-                                                                .filteredSlots![
-                                                                    0]
-                                                                .id!,
-
-                                                            date:
-                                                                '${selectedDate.toLocal()}'
-                                                                    .split(
-                                                                        ' ')[0],
-                                                            // );
-                                                          );
-                                                        },
-                                                      );
-                                                    },
-                                                    icon: const Icon(
-                                                      Icons.cancel,
+                                          Expanded(
+                                            flex: 5,
+                                            child: Text(
+                                              '${state.slotlist.filteredSlots![0].slots![index].startTime} -  ${state.slotlist.filteredSlots![0].slots![index].endTime}',
+                                              maxLines: 1,
+                                              style: TextStyle(
+                                                  fontSize: size.width > 600
+                                                      ? 18
+                                                      : size.width * 0.5 * 0.07),
+                                            ),
+                                          ),
+                                          Expanded(
+                                              child: state
+                                                          .slotlist
+                                                          .filteredSlots![0]
+                                                          .slots![index]
+                                                          .status! ==
+                                                      false
+                                                  ? IconButton(
+                                                      onPressed: () {
+                                                        // log(contextAvailableTimings.widget.toString());
+                                                        // ------------------delete functon pls complete
+                                                        showDialog(
+                                                          context: context,
+                                                          builder: (ctx) {
+                                                            return DeleteSlotDialoge(
+                                                              contextAT:
+                                                                  contextAvailableTimings,
+                                                              slotID: state
+                                                                  .slotlist
+                                                                  .filteredSlots![
+                                                                      0]
+                                                                  .slots![index]
+                                                                  .id!,
+                                                              mainSlotID: state
+                                                                  .slotlist
+                                                                  .filteredSlots![
+                                                                      0]
+                                                                  .id!,
+    
+                                                              date:
+                                                                  '${selectedDate.toLocal()}'
+                                                                      .split(
+                                                                          ' ')[0],
+                                                              // );
+                                                            );
+                                                          },
+                                                        );
+                                                      },
+                                                      icon: const Icon(
+                                                        Icons.cancel,
+                                                        size: 16,
+                                                      ))
+                                                  : const Icon(
+                                                      Icons.lock,
                                                       size: 16,
                                                     ))
-                                                : const Icon(
-                                                    Icons.lock,
-                                                    size: 16,
-                                                  ))
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                              );
-                            },
+                                );
+                              },
+                            );
+                          }
+                        } else if (state is SlotFailure) {
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              //-------------------------------------------------------refresh
+                              const Text('Error Occured'),
+                              IconButton(
+                                  onPressed: () {
+                                    context
+                                        .read<AppointmentSlotBloc>()
+                                        .add(GetSlotsListEvent(
+                                          date: '${selectedDate.toLocal()}'
+                                              .split(' ')[0],
+                                        ));
+                                  },
+                                  icon: const Icon(Icons.refresh))
+                            ],
                           );
                         }
-                      } else if (state is SlotFailure) {
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            //-------------------------------------------------------refresh
-                            const Text('Error Occured'),
-                            IconButton(
-                                onPressed: () {
-                                  context
-                                      .read<AppointmentSlotBloc>()
-                                      .add(GetSlotsListEvent(
-                                        date: '${selectedDate.toLocal()}'
-                                            .split(' ')[0],
-                                      ));
-                                },
-                                icon: const Icon(Icons.refresh))
-                          ],
+    
+                        return const SizedBox(
+                          child: Center(child: Text('No Slots To Show')),
                         );
-                      }
-
-                      return const SizedBox(
-                        child: Center(child: Text('No Slots To Show')),
-                      );
-                    },
-                  ),
-                )),
+                      },
+                    ),
+                  )),
+            ),
           ),
-        ),
-
-        SizedBox(
-          height: size.height * 0.01,
-        ),
-        Center(
-          child: ElevatedButton(
-              onPressed: () {
-                _addSlot(context, selectedDate);
-              },
-              child: const Text('Add Slot')),
-        )
-        //--------------------------------------------------------------------date
-      ],
+    
+          SizedBox(
+            height: size.height * 0.01,
+          ),
+          Center(
+            child: ElevatedButton(
+                onPressed: () {
+                  _addSlot(context, selectedDate);
+                },
+                child: const Text('Add Slot')),
+          )
+          //--------------------------------------------------------------------date
+        ],
+      ),
     );
   }
 

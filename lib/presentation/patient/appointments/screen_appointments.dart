@@ -1,11 +1,9 @@
 import 'dart:developer';
 
-import 'package:appoint_medic/application/view_appointments_screen/bloc/view_appointments_patient_side_bloc.dart';
 import 'package:appoint_medic/presentation/patient/appointments/widget/screen_view_appoint_list.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
+
 
 class ScreenAppointments extends StatelessWidget {
   const ScreenAppointments({super.key});
@@ -51,7 +49,7 @@ class ScreenAppointments extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: TabBar(
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           labelStyle: TextStyle(
                             fontSize: size.width * 0.03,
                           ),
@@ -93,7 +91,7 @@ class ScreenAppointments extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 15.0, right: 15),
                   child: TabBarView(
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       children: [
                         ScreenTodayAppointmentPatient(
                           size: size,

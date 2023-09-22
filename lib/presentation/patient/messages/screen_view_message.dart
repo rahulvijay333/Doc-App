@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:appoint_medic/application/chat/create_chat/bloc/create_chat_bloc.dart';
 import 'package:appoint_medic/application/chat/see_messages/bloc/see_messages_bloc.dart';
+import 'package:appoint_medic/core/api_endPoints/api_endpoints.dart';
 import 'package:appoint_medic/core/color_constants.dart';
 
 import 'package:flutter/material.dart';
@@ -37,7 +38,7 @@ class _ScreenViewMesgPatientState extends State<ScreenViewMesgPatient> {
   @override
   void initState() {
     socket = IO.io(
-        'https://angelvision.cloud',
+        socketUrlOnline,
         IO.OptionBuilder()
             .setTransports(['websocket'])
             .disableAutoConnect()

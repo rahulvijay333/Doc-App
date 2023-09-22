@@ -9,6 +9,7 @@ class BookingDetails {
   final String? orderID;
   final int? fees;
   final String date;
+  final String? reason;
 
   BookingDetails(
       {required this.doctorID,
@@ -17,6 +18,7 @@ class BookingDetails {
       required this.startTime,
       required this.endTime,
       required this.date,
+      this.reason,
       this.paymentid,
       this.orderID,
       required this.fees});

@@ -12,7 +12,7 @@ class AllDoctorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    // BlocProvider.of<SearchBloc>(context).add(ShowAllDoctorList());
+
     return BlocBuilder<SearchBloc, SearchState>(
       builder: (context, state) {
         if (state is SearchLoading) {
@@ -30,11 +30,6 @@ class AllDoctorWidget extends StatelessWidget {
                     //-------------------------------------------------------------------navigation to appointment
                     child: GestureDetector(
                       onTap: () {
-                        // Navigator.of(context).push(MaterialPageRoute(
-                        //   builder: (ctx) => ScreenBooking(
-                        //     doctor: state.doctorList[index],
-                        //   ),
-                        // ));
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) {
                             return ScreenViewDoctorProfileBook(
@@ -55,9 +50,9 @@ class AllDoctorWidget extends StatelessWidget {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(10),
                               child: Container(
-                                  width: size.width *0.25,
+                                  width: size.width * 0.25,
                                   height: 110,
-                                  color: Colors.grey,
+                                
                                   child: state.doctorList[index]
                                               .profilePicture !=
                                           null
@@ -73,7 +68,7 @@ class AllDoctorWidget extends StatelessWidget {
                                             return const Center(
                                               child: CircularProgressIndicator(
                                                 strokeWidth: 1,
-                                                color: Colors.white,
+                                                color: Colors.blue,
                                               ),
                                             );
                                           },
@@ -105,12 +100,12 @@ class AllDoctorWidget extends StatelessWidget {
                                               fit: BoxFit.cover,
                                             )),
                             ),
-                             SizedBox(
+                            SizedBox(
                               width: size.width * 0.02,
                             ),
                             Container(
                               // height: 135,
-                              width: size.width *0.5,
+                              width: size.width * 0.5,
                               //  color: Colors.amber,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -119,8 +114,8 @@ class AllDoctorWidget extends StatelessWidget {
                                   Text(
                                     'Dr. ${state.doctorList[index].fullName}',
                                     maxLines: 1,
-                                    style:  TextStyle(
-                                        fontSize: size.width *0.5 * 0.11,
+                                    style: TextStyle(
+                                        fontSize: size.width * 0.5 * 0.11,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   const SizedBox(
@@ -141,10 +136,7 @@ class AllDoctorWidget extends StatelessWidget {
                                     height: 5,
                                   ),
 
-                                  // const SizedBox(
-                                  //   height: 0,
-                                  // ),
-                                  //-------------------------------------------location & rating
+                            
                                   const Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -203,7 +195,7 @@ class AllDoctorWidget extends StatelessWidget {
                 );
               },
               separatorBuilder: (context, index) {
-                return  SizedBox(
+                return SizedBox(
                   height: 10,
                 );
               },
