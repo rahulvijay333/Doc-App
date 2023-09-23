@@ -46,3 +46,5 @@ app.*.map.json
 #razorpay key
 /lib/infrastructure/key_razor/razor_pay_key.dart
 /lib/infrastructure/key_razor
+
+/android/app/key
