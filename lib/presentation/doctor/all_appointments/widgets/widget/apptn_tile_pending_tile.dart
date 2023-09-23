@@ -20,6 +20,7 @@ class AppointmentTile extends StatelessWidget {
     required this.bookID,
     required this.isCancelled,
     required this.patientID,
+    required this.reason
   });
 
   final String patientName;
@@ -32,6 +33,7 @@ class AppointmentTile extends StatelessWidget {
   final bool isCancelled;
   final String bookID;
   final String patientID;
+  final String reason;
 
   @override
   Widget build(BuildContext context) {
@@ -165,21 +167,49 @@ class AppointmentTile extends StatelessWidget {
                 ),
               ),
               Center(
-                child: IconButton(
-                    onPressed: () {
-                      //------------------------------------------message function
-                      BlocProvider.of<CreateChatDocBloc>(context)
-                          .add(StartChat(userID: patientID));
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) {
-                          return ScreenCreateChatDoc();
+                child: Column(
+                  children: [
+                    IconButton(
+                        onPressed: () {
+                          //------------------------------------------message function
+                          BlocProvider.of<CreateChatDocBloc>(context)
+                              .add(StartChat(userID: patientID));
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) {
+                              return ScreenCreateChatDoc();
+                            },
+                          ));
                         },
-                      ));
-                    },
-                    icon: Icon(
-                      Icons.message_outlined,
-                      color: Colors.blue,
-                    )),
+                        icon: Icon(
+                          Icons.message_outlined,
+                          color: Colors.blue,
+                        )),
+                          IconButton(
+                        onPressed: () {
+                          //show reason for booking
+                             showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: Text('Medical Reason'),
+                                content: Text(
+                                  reason.isEmpty ? "NA" : reason,
+                                  maxLines: 3,style: TextStyle(color: Colors.black.withOpacity(0.5))
+                                ),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text('OK'))
+                                ],
+                              );
+                            },
+                          );
+                        },
+                        icon: Icon(Icons.info_outline, color: Colors.blue))
+                  ],
+                ),
               )
             ],
           ),

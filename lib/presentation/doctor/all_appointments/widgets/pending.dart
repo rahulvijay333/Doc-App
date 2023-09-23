@@ -1,17 +1,13 @@
-import 'dart:developer';
-
 import 'package:appoint_medic/application/view_appointments_doctor/bloc/view_appointments_doct_side_bloc.dart';
 import 'package:appoint_medic/presentation/doctor/all_appointments/widgets/widget/apptn_tile_pending_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 
 class ScreenPendingAppoint extends StatelessWidget {
   const ScreenPendingAppoint({super.key});
 
   @override
   Widget build(BuildContext context) {
-   
     //------------------------------------------------------api call
     context
         .read<ViewAppointmentsDoctSideBloc>()
@@ -51,6 +47,7 @@ class ScreenPendingAppoint extends StatelessWidget {
                   bookID: state.appointmentList[index].id!,
                   isCancelled: state.appointmentList[index].isCancelled!,
                   patientID: state.appointmentList[index].patientId!,
+                  reason: state.appointmentList[index].reason ?? '',
                 );
               },
               separatorBuilder: (context, index) {

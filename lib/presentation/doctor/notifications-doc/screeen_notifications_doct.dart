@@ -33,9 +33,12 @@ class ScreenNotificationDoct extends StatelessWidget {
                         Icons.arrow_back_ios_new,
                         color: Colors.white,
                       )),
-                  const Text(
+                  Text(
                     'Notifications',
-                    style: TextStyle(fontSize: 20, color: Colors.white),
+                    style: TextStyle(
+                        fontSize: size.width > 600 ? 24 : size.width * 0.05,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500),
                   )
                 ],
               ),
@@ -67,40 +70,45 @@ class ScreenNotificationDoct extends StatelessWidget {
                       child: ListView.separated(
                           physics: const BouncingScrollPhysics(),
                           itemBuilder: (context, index) {
-                            return Container(
-                              height: 60,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Patient :${state.notificationList[index].sender?.name}',
-                                    style: const TextStyle(fontSize: 18),
-                                  ),
-                                  const Spacer(),
-                                  Text(
-                                      '${state.notificationList[index].message}'),
-                                  Row(
+                            return ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Container(
+                                height: 70,
+                                color: Colors.blue.withOpacity(0.1),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
+                                      Text(
+                                        '${state.notificationList[index].sender?.name}',
+                                        style: const TextStyle(fontSize: 18),
+                                      ),
                                       const Spacer(),
                                       Text(
-                                        '${DateFormat('dd MMM,yyyy').format(state.notificationList[index].createdAt!)} ,${DateFormat("h.mm a").format(state.notificationList[index].createdAt!).toLowerCase()}',
-                                        style:
-                                            const TextStyle(color: Colors.grey),
+                                        '${state.notificationList[index].message}',
+                                        style: TextStyle(color: Colors.blue),
+                                      ),
+                                      Row(
+                                        children: [
+                                          const Spacer(),
+                                          Text(
+                                            '${DateFormat('dd MMM,yyyy').format(state.notificationList[index].createdAt!)} ,${DateFormat("h.mm a").format(state.notificationList[index].createdAt!).toLowerCase()}',
+                                            style: const TextStyle(
+                                                color: Colors.grey),
+                                          )
+                                        ],
                                       )
                                     ],
-                                  )
-                                ],
+                                  ),
+                                ),
                               ),
                             );
                           },
                           separatorBuilder: (context, index) {
-                            return const Column(
-                              children: [
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Divider(),
-                              ],
+                            return SizedBox(
+                              height: 5,
                             );
                           },
                           itemCount: state.notificationList.length),

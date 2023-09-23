@@ -61,20 +61,20 @@ class ScreenProfile extends StatelessWidget {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: Container(
-                                width: size.width * 0.8,
-                                //  color: Colors.yellow,
+                                 width: size.width > 800 ? 700 : size.width*0.8,
+                                  // color: Colors.yellow,
                                 height: size.height * 0.30,
                                 //-------------------------------------------------------------profile bloc
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Container(
-                                      width: size.width * 0.8 * 0.50,
-                                      //  color: Colors.red,
-                                      height: size.width * 0.8 * 0.50,
+                                      // width: size.width * 0.8 * 0.50,
+                                        // color: Colors.red,
+                                      // height: size.width * 0.8 * 0.50,
                                       child: CircleAvatar(
                                         backgroundColor: Colors.white,
-                                        // radius: 80,
+                                       radius: 80,
                                         child: ClipOval(
                                             child: state
                                                         .userProfile
@@ -116,15 +116,15 @@ class ScreenProfile extends StatelessWidget {
                                                     'assets/patient.png')),
                                       ),
                                     ),
-                                    const SizedBox(
-                                      height: 10,
+                                     SizedBox(
+                                      height: size.height*0.01,
                                     ),
                                     Center(
                                       child: Text(
                                         state.userProfile.user!.fullName ??
                                             state.userProfile.user!.name!,
                                         style: TextStyle(
-                                            fontSize: size.width * 0.8 * 0.08,
+                                            fontSize: size.width >700 ? 24: size.width  * 0.8 * 0.06,
                                             fontWeight: FontWeight.bold),
                                       ),
                                     )
@@ -136,7 +136,7 @@ class ScreenProfile extends StatelessWidget {
                           child: Container(
                             //  color: Colors.amber,
                             // height: size.height * 0.45,
-                            width: size.width * 0.90,
+                            width: size.width  > 800 ? 800 : size.width * 0.8,
 
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,

@@ -51,7 +51,7 @@ class ScreenMainPage extends StatelessWidget {
             decoration: BoxDecoration(
                 color: appBackGround, borderRadius: BorderRadius.circular(10)),
             height: 50,
-            // width: size.width * 0.5,
+            
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [

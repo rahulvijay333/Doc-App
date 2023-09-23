@@ -50,8 +50,8 @@ class DoctorScreenMain extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
                 color: Colors.blue, borderRadius: BorderRadius.circular(10)),
-            height: size.width * 0.15,
-            width: size.width * 0.8,
+            height: size.height * 0.055,
+           
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [

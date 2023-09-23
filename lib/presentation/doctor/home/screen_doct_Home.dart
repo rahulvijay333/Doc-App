@@ -1,10 +1,6 @@
-import 'dart:developer';
-
 import 'package:appoint_medic/application/doctor%20profile/appointments_section/bloc/home_appointment_today_bloc.dart';
 import 'package:appoint_medic/application/doctor%20profile/bloc/doctor_profile_bloc.dart';
-import 'package:appoint_medic/domain/db/db_model.dart';
 import 'package:appoint_medic/presentation/doctor/home/widget/appmtns_tile.dart';
-import 'package:appoint_medic/presentation/doctor/home/widget/icon_text.dart';
 import 'package:appoint_medic/presentation/doctor/home/widget/profile_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -150,22 +146,26 @@ class ScreenDoctHome extends StatelessWidget {
                             }
 
                             return ListView.separated(
-                                physics: BouncingScrollPhysics(),
+                                physics: const BouncingScrollPhysics(),
                                 itemBuilder: (context, index) {
                                   return ApointTodayTileWidget(
-                                      size: size,
-                                      patientName: state.appointmentList[index]
-                                          .patient!.fullName!,
-                                      imgUrl: state.appointmentList[index]
-                                          .patient!.profilePicture?.secureUrl,
-                                      date: state
-                                          .appointmentList[index].selectedDate!,
-                                      startTime: state
-                                          .appointmentList[index].startTime!,
-                                      endTime:
-                                          state.appointmentList[index].endTime!,
-                                      patientID: state
-                                          .appointmentList[index].patientId!);
+                                    size: size,
+                                    patientName: state.appointmentList[index]
+                                        .patient!.fullName!,
+                                    imgUrl: state.appointmentList[index]
+                                        .patient!.profilePicture?.secureUrl,
+                                    date: state
+                                        .appointmentList[index].selectedDate!,
+                                    startTime:
+                                        state.appointmentList[index].startTime!,
+                                    endTime:
+                                        state.appointmentList[index].endTime!,
+                                    patientID:
+                                        state.appointmentList[index].patientId!,
+                                    reason:
+                                        state.appointmentList[index].reason ??
+                                            'NA',
+                                  );
                                 },
                                 separatorBuilder: (context, index) {
                                   return const SizedBox(
@@ -178,7 +178,7 @@ class ScreenDoctHome extends StatelessWidget {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text('Error occured'),
+                                  const Text('Error occured'),
                                   TextButton(
                                       onPressed: () {
                                         //-------------------------------------resfresh
@@ -186,7 +186,7 @@ class ScreenDoctHome extends StatelessWidget {
                                             .read<HomeAppointmentTodayBloc>()
                                             .add(ViewTodaysAppointments());
                                       },
-                                      child: Icon(Icons.refresh))
+                                      child: const Icon(Icons.refresh))
                                 ],
                               ),
                             );
@@ -196,7 +196,7 @@ class ScreenDoctHome extends StatelessWidget {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text('Error occured'),
+                                const Text('Error occured'),
                                 TextButton(
                                     onPressed: () {
                                       //-------------------------------------resfresh
@@ -204,7 +204,7 @@ class ScreenDoctHome extends StatelessWidget {
                                           .read<HomeAppointmentTodayBloc>()
                                           .add(ViewTodaysAppointments());
                                     },
-                                    child: Icon(Icons.refresh))
+                                    child: const Icon(Icons.refresh))
                               ],
                             ),
                           );

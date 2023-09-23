@@ -48,9 +48,9 @@ class ScreemDoctMessage extends StatelessWidget {
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
                   children: [
-                    SizedBox(
-                      height: size.height * 0.05,
-                    ),
+                    // SizedBox(
+                    //   height: size.height * 0.05,
+                    // ),
                     //----------------------------------------------------------search messages
                     ClipRRect(
                       borderRadius: BorderRadius.circular(10),

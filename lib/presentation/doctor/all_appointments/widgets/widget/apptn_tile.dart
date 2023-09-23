@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:appoint_medic/application/chat/create_chat_doct/bloc/create_chat_doc_bloc.dart';
 import 'package:appoint_medic/presentation/doctor/messages/create%20_chat/create_chat_doc.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +17,7 @@ class AppointmentTileCustom extends StatelessWidget {
     required this.bookID,
     required this.isCancelled,
     required this.patientID,
+    required this.reason,
   });
 
   final String patientName;
@@ -31,6 +30,7 @@ class AppointmentTileCustom extends StatelessWidget {
   final bool isCancelled;
   final String bookID;
   final String patientID;
+  final String reason;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,6 @@ class AppointmentTileCustom extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(15),
       child: Container(
-      
         width: double.maxFinite,
         color: Colors.white.withOpacity(0.8),
         child: Padding(
@@ -61,7 +60,7 @@ class AppointmentTileCustom extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: Container(
+                    child: SizedBox(
                       height: size.width * 0.16,
                       width: size.width * 0.16,
                       child: Image.network(
@@ -90,58 +89,83 @@ class AppointmentTileCustom extends StatelessWidget {
                 width: 5,
               ),
               Expanded(
-                child: Container(
-                  // color: Colors.blue,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        patientName,
-                        maxLines: 1,
-                        style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w500),
-                      ),
-                      Text(emailID,
-                          style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.black.withOpacity(0.5))),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text('Slot : $startTime - $endTime'),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      //---------------------condition here
-                      isDoctorApproved
-                          ? const Text(
-                              'Approved',
-                              style: TextStyle(color: Colors.green),
-                            )
-                          : const Text(
-                              'Cancelled',
-                              style: TextStyle(color: Colors.red),
-                            )
-                    ],
-                  ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      patientName,
+                      maxLines: 1,
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.w500),
+                    ),
+                    Text(emailID,
+                        style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.black.withOpacity(0.5))),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text('Slot : $startTime - $endTime'),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    //---------------------condition here
+                    isDoctorApproved
+                        ? const Text(
+                            'Approved',
+                            style: TextStyle(color: Colors.green),
+                          )
+                        : const Text(
+                            'Cancelled',
+                            style: TextStyle(color: Colors.red),
+                          )
+                  ],
                 ),
               ),
               Center(
-                child: IconButton(
-                    onPressed: () {
-                      //------------------------------------------message function
-                      BlocProvider.of<CreateChatDocBloc>(context)
-                          .add(StartChat(userID: patientID));
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) {
-                          return ScreenCreateChatDoc();
+                child: Column(
+                  children: [
+                    IconButton(
+                        onPressed: () {
+                          //------------------------------------------message function
+                          BlocProvider.of<CreateChatDocBloc>(context)
+                              .add(StartChat(userID: patientID));
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) {
+                              return const ScreenCreateChatDoc();
+                            },
+                          ));
                         },
-                      ));
-                    },
-                    icon: Icon(
-                      Icons.message_outlined,
-                      color: Colors.blue,
-                    )),
+                        icon: const Icon(
+                          Icons.message_outlined,
+                          color: Colors.blue,
+                        )),
+                    IconButton(
+                        onPressed: () {
+                          //show reason for booking
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: const Text('Medical Reason'),
+                                content: Text(
+                                  reason.isEmpty ? "NA" : reason,
+                                  maxLines: 3,style: TextStyle(color: Colors.black.withOpacity(0.5))
+                                ),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text('OK'))
+                                ],
+                              );
+                            },
+                          );
+                        },
+                        icon: const Icon(Icons.info_outline, color: Colors.blue))
+                  ],
+                ),
               )
             ],
           ),

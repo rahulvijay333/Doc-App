@@ -21,7 +21,7 @@ class ScreenBooking extends StatefulWidget {
 class _ScreenBookingState extends State<ScreenBooking> {
   final TextEditingController reasonCntroller = TextEditingController();
   DateTime selectedDate = DateTime.now();
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  // final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   int selectedSlotIndex =
       -1; // Initialize to -1 to indicate no slot is selected initially
 
@@ -29,7 +29,7 @@ class _ScreenBookingState extends State<ScreenBooking> {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: selectedDate,
-      firstDate: DateTime(2020),
+      firstDate: DateTime.now(),
       lastDate: DateTime(2101),
     );
 
@@ -346,8 +346,8 @@ class _ScreenBookingState extends State<ScreenBooking> {
                                                       ? Colors.blue
                                                           .withOpacity(0.5)
                                                       : Colors.white
-                                                  : Colors.grey
-                                                      .withOpacity(0.6),
+                                                  : Colors
+                                                      .white,
                                               child: Padding(
                                                 padding:
                                                     const EdgeInsets.all(8.0),

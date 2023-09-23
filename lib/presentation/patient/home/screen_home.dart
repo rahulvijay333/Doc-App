@@ -268,7 +268,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                 borderRadius: BorderRadius.circular(10),
                 child: Container(
                   height: size.height * 0.13,
-                  width: size.width,
+                  width: size.width >700 ? null :size.width,
                   color: appBackGround.withOpacity(0.2),
                   child: BlocBuilder<SpecialityBloc, SpecialityState>(
                     builder: (context, state) {
@@ -282,6 +282,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                         return Padding(
                           padding:  EdgeInsets.only(left: size.width * 0.02, right: size.width * 0.02),
                           child: ListView.separated(
+                            shrinkWrap: true,
                               physics: const BouncingScrollPhysics(),
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) {

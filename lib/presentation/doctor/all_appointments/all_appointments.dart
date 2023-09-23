@@ -83,12 +83,13 @@ class ScreenAllAppointments extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 5,
+              Container(
+              
+                height: size.height * 0.02,
               ),
               Container(
-                height: size.height * 0.7,
-                // color: Colors.amber,
+                height: size.height * 0.70,
+                  // color: Colors.amber,
                 child: const Padding(
                   padding: EdgeInsets.only(left: 15.0, right: 15),
                   child: TabBarView(

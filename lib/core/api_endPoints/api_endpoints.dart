@@ -1,8 +1,8 @@
-// const baseUrl = 'https://angelvision.cloud/api';
-const baseUrl = 'http://192.168.1.100:4000/api';
+const baseUrl = 'https://angelvision.cloud/api';
+// const baseUrl = 'http://192.168.1.100:4000/api';
 
-// const socketUrlOnline = 'https://angelvision.cloud';
-const socketUrlOnline = 'http:192.168.1.100:4000';
+const socketUrlOnline = 'https://angelvision.cloud';
+// const socketUrlOnline = 'http:192.168.1.100:4000';
 
 class ApiEndPoints {
   //-----------------patient - login Auth

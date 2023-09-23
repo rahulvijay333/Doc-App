@@ -7,19 +7,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 class AppointmentAllTileCustom extends StatelessWidget {
-  const AppointmentAllTileCustom({
-    super.key,
-    required this.patientName,
-    required this.emailID,
-    required this.date,
-    required this.startTime,
-    required this.endTime,
-    required this.isDoctorApproved,
-    required this.patientImage,
-    required this.bookID,
-    required this.isCancelled,
-    required this.patientID,
-  });
+  const AppointmentAllTileCustom(
+      {super.key,
+      required this.patientName,
+      required this.emailID,
+      required this.date,
+      required this.startTime,
+      required this.endTime,
+      required this.isDoctorApproved,
+      required this.patientImage,
+      required this.bookID,
+      required this.isCancelled,
+      required this.patientID,
+      required this.reason});
 
   final String patientName;
   final String emailID;
@@ -31,6 +31,7 @@ class AppointmentAllTileCustom extends StatelessWidget {
   final bool isCancelled;
   final String bookID;
   final String patientID;
+  final String reason;
 
   @override
   Widget build(BuildContext context) {
@@ -134,21 +135,49 @@ class AppointmentAllTileCustom extends StatelessWidget {
                 ),
               ),
               Center(
-                child: IconButton(
-                    onPressed: () {
-                      //------------------------------------------message function
-                      BlocProvider.of<CreateChatDocBloc>(context)
-                          .add(StartChat(userID: patientID));
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) {
-                          return ScreenCreateChatDoc();
+                child: Column(
+                  children: [
+                    IconButton(
+                        onPressed: () {
+                          //------------------------------------------message function
+                          BlocProvider.of<CreateChatDocBloc>(context)
+                              .add(StartChat(userID: patientID));
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) {
+                              return const ScreenCreateChatDoc();
+                            },
+                          ));
                         },
-                      ));
-                    },
-                    icon: Icon(
-                      Icons.message_outlined,
-                      color: Colors.blue,
-                    )),
+                        icon: const Icon(
+                          Icons.message_outlined,
+                          color: Colors.blue,
+                        )),
+                    IconButton(
+                        onPressed: () {
+                          //show reason for booking
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: const Text('Medical Reason',),
+                                content: Text(
+                                  reason.isEmpty ? "NA" : reason,
+                                  maxLines: 3,style: TextStyle(color: Colors.black.withOpacity(0.5)),
+                                ),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text('OK'))
+                                ],
+                              );
+                            },
+                          );
+                        },
+                        icon: const Icon(Icons.info_outline, color: Colors.blue))
+                  ],
+                ),
               )
             ],
           ),

@@ -46,7 +46,7 @@ class ScreenCancelledAppoint extends StatelessWidget {
                   patientImage: stateShort.patient!.profilePicture!.secureUrl!,
                   bookID: state.appointmentList[index].id!,
                   isCancelled: state.appointmentList[index].isCancelled!,
-                  patientID: state.appointmentList[index].patientId!,
+                  patientID: state.appointmentList[index].patientId!, reason: state.appointmentList[index].reason ?? '',
                 );
               },
               separatorBuilder: (context, index) {
