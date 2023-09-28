@@ -22,7 +22,6 @@ class ScreenMesgsPatient extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  
     final size = MediaQuery.sizeOf(context);
 
     BlocProvider.of<ViewAllChatsBloc>(context).add(GetAllChatsCall());
@@ -74,20 +73,16 @@ class ScreenMesgsPatient extends StatelessWidget {
                         if (value.isEmpty) {
                           FocusScope.of(context).unfocus();
 
-                     
                           BlocProvider.of<ViewAllChatsBloc>(context)
                               .add(GetAllChatsCall());
                           searchnotifier.value = value;
                         } else {
                           searchnotifier.value = value;
                           searchnotifier.notifyListeners();
-                         
 
                           context.read<SearchMessagesBloc>().add(
                               SearchMessage(searchKey: searchController.text));
                         }
-
-                        
                       },
                     ),
                   ),
@@ -103,11 +98,8 @@ class ScreenMesgsPatient extends StatelessWidget {
                 valueListenable: searchnotifier,
                 builder: (context, searchValue, child) {
                   if (searchValue.isNotEmpty) {
-                  
-
                     return const ScreenSearchMesgsPatient();
                   } else {
-                  
                     return Expanded(
                       child: BlocBuilder<ViewAllChatsBloc, ViewAllChatsState>(
                         builder: (context, state) {
@@ -135,7 +127,6 @@ class ScreenMesgsPatient extends StatelessWidget {
 
                             return ListView.separated(
                                 itemBuilder: (context, index) {
-                                
                                   return InkWell(
                                     //------------------------------view ----------------------sending to view messages screen
 
@@ -180,10 +171,8 @@ class ScreenMesgsPatient extends StatelessWidget {
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(10),
                                       child: Container(
-                                        
                                           height: size.height * 0.10,
-                                          color:
-                                              appBackGround.withOpacity(0.5),
+                                          color: appBackGround.withOpacity(0.5),
                                           child: MessageTile(
                                             senderName:
                                                 "Dr.${state.chatsList[index].participants![0].doctor!.fullName!}",
@@ -209,8 +198,9 @@ class ScreenMesgsPatient extends StatelessWidget {
                                 },
                                 itemCount: state.chatsList.length);
                           } else if (state is ViewAllChatsFailure) {
-                            Center(
+                            return Center(
                               child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   const Text('Error happened'),
                                   const SizedBox(
@@ -220,9 +210,10 @@ class ScreenMesgsPatient extends StatelessWidget {
                                       onPressed: () {
                                         //-------------------------------------refrsh
 
-                                        context
-                                            .read<ViewAllChatsBloc>()
-                                            .add(ViewAllChatsEvent());
+                                        // context
+                                        //     .read<ViewAllChatsBloc>()
+                                        //     .add(ViewAllChatsEvent());
+                                      BlocProvider.of<ViewAllChatsBloc>(context).add(GetAllChatsCall());
                                       },
                                       icon: const Icon(Icons.refresh))
                                 ],

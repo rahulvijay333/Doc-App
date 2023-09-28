@@ -30,7 +30,7 @@ class AppbarCustomSize extends StatelessWidget {
           Expanded(
               child: Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
           )),
         ],

@@ -33,7 +33,7 @@ class AppointmentListTileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log((size.width * 0.12).toString());
+  
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: Container(

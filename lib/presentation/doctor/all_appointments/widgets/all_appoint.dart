@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ScreenAllAppoint extends StatelessWidget {
   const ScreenAllAppoint({super.key});
 
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -47,15 +46,36 @@ class ScreenAllAppoint extends StatelessWidget {
                   patientImage: stateShort.patient!.profilePicture!.secureUrl!,
                   bookID: state.appointmentList[index].id!,
                   isCancelled: state.appointmentList[index].isCancelled!,
-                  patientID: state.appointmentList[index].patientId!, reason: state.appointmentList[index].reason ?? '' ,
+                  patientID: state.appointmentList[index].patientId!,
+                  reason: state.appointmentList[index].reason ?? '',
                 );
               },
               separatorBuilder: (context, index) {
-                return  SizedBox(
-                  height:size.width*0.01 ,
+                return SizedBox(
+                  height: size.width * 0.01,
                 );
               },
               itemCount: state.appointmentList.length);
+        } else if (state is DoctSideApptsFailed) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('offline'),
+                const SizedBox(
+                  height: 5,
+                ),
+                IconButton(
+                    onPressed: () {
+                      //-------------------------------------refrsh
+                      context
+                          .read<ViewAppointmentsDoctSideBloc>()
+                          .add(ViewApptDoctorSideCall(status: ''));
+                    },
+                    icon: const Icon(Icons.refresh))
+              ],
+            ),
+          );
         }
 
         return const Center(

@@ -176,11 +176,13 @@ class _ScreenAvailableTimeState extends State<ScreenAvailableTime> {
                               itemCount:
                                   state.slotlist.filteredSlots![0].slots!.length,
                               gridDelegate:
-                                  const SliverGridDelegateWithMaxCrossAxisExtent(
+                                   SliverGridDelegateWithMaxCrossAxisExtent(
                                       mainAxisExtent: 40,
-                                      mainAxisSpacing: 20,
-                                      crossAxisSpacing: 20,
-                                      maxCrossAxisExtent: 200),
+                                      // mainAxisSpacing: 20,
+                                      crossAxisSpacing: size.width * 0.01,
+                                      maxCrossAxisExtent: size.width*0.46
+                                      
+                                      ),
                               itemBuilder: (context, index) {
                                 return ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
@@ -206,7 +208,7 @@ class _ScreenAvailableTimeState extends State<ScreenAvailableTime> {
                                               style: TextStyle(
                                                   fontSize: size.width > 600
                                                       ? 18
-                                                      : size.width * 0.5 * 0.07),
+                                                      : size.width * 0.46 * 0.07),
                                             ),
                                           ),
                                           Expanded(

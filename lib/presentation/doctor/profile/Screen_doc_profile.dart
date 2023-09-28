@@ -56,7 +56,7 @@ class ScreenDocProfile extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20),
                             child: Container(
                                 width: size.width * 0.8,
-                                // color: Colors.yellow,
+                                //  color: Colors.yellow,
                                 height: size.height * 0.25,
                                 //-------------------------------------------------------------profile bloc
                                 child: Column(
@@ -103,9 +103,9 @@ class ScreenDocProfile extends StatelessWidget {
                                       height: 10,
                                     ),
                                     Text(
-                                      state.doctDetails.fullName!,
-                                      style: const TextStyle(
-                                          fontSize: 20,
+                                      state.doctDetails.fullName!,maxLines: 1,
+                                      style:  TextStyle(
+                                          fontSize: size.width * 0.045,
                                           fontWeight: FontWeight.bold),
                                     )
                                   ],
@@ -192,16 +192,16 @@ class ScreenDocProfile extends StatelessWidget {
                                         Navigator.of(context)
                                             .push(MaterialPageRoute(
                                           builder: (context) {
-                                            return DoctorAboutWidget();
+                                            return const DoctorAboutWidget();
                                           },
                                         ));
                                       },
-                                      leading: Icon(
+                                      leading: const Icon(
                                         Icons.info,
                                         color: Colors.blue,
                                       ),
-                                      title: Text('About'),
-                                      trailing: Icon(
+                                      title: const Text('About'),
+                                      trailing: const Icon(
                                         Icons.arrow_forward_ios,
                                         size: 18,
                                       ),
@@ -218,16 +218,16 @@ class ScreenDocProfile extends StatelessWidget {
                                         Navigator.of(context)
                                             .push(MaterialPageRoute(
                                           builder: (context) {
-                                            return TermsAndConditionsWidget();
+                                            return const TermsAndConditionsWidget();
                                           },
                                         ));
                                       },
-                                      leading: Icon(
+                                      leading: const Icon(
                                         Icons.book,
                                         color: Colors.blue,
                                       ),
-                                      title: Text('Terms and Conditions'),
-                                      trailing: Icon(
+                                      title: const Text('Terms and Conditions'),
+                                      trailing: const Icon(
                                         Icons.arrow_forward_ios,
                                         size: 18,
                                       ),
@@ -247,12 +247,12 @@ class ScreenDocProfile extends StatelessWidget {
                                           },
                                         ));
                                       },
-                                      leading: Icon(
+                                      leading: const Icon(
                                         Icons.security,
                                         color: Colors.blue,
                                       ),
-                                      title: Text('Privacy'),
-                                      trailing: Icon(
+                                      title: const Text('Privacy'),
+                                      trailing: const Icon(
                                         Icons.arrow_forward_ios,
                                         size: 18,
                                       ),
@@ -280,8 +280,11 @@ class ScreenDocProfile extends StatelessWidget {
                                           .addPostFrameCallback((timeStamp) {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(const SnackBar(
+                                              duration: Duration(seconds: 2),
+                                              margin: EdgeInsets.all(15),
+                                              behavior: SnackBarBehavior.floating,
                                                 content: Text(
-                                                    'Logging out failed..')));
+                                                    'Log out failed..')));
                                       });
                                     }
 

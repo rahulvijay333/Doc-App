@@ -1,5 +1,6 @@
 import 'package:appoint_medic/application/doctor%20profile/appointments_section/bloc/home_appointment_today_bloc.dart';
 import 'package:appoint_medic/application/doctor%20profile/bloc/doctor_profile_bloc.dart';
+import 'package:appoint_medic/application/notifications/notificationStatus_track/bloc/notification_track_bloc.dart';
 import 'package:appoint_medic/presentation/doctor/home/widget/appmtns_tile.dart';
 import 'package:appoint_medic/presentation/doctor/home/widget/profile_tile.dart';
 import 'package:flutter/material.dart';
@@ -133,6 +134,9 @@ class ScreenDoctHome extends StatelessWidget {
                           HomeAppointmentTodayState>(
                         builder: (context, state) {
                           if (state is TodayAppointmentLoading) {
+                            context
+                                .read<NotificationTrackBloc>()
+                                .add(CheckNotifications(userType: 'doctor'));
                             return const Center(
                               child: CircularProgressIndicator(
                                 strokeWidth: 1,

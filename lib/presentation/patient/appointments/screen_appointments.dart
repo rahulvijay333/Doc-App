@@ -11,7 +11,7 @@ class ScreenAppointments extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
-    log((size.width * 0.02).toString());
+ 
 
     return DefaultTabController(
       length: 3,

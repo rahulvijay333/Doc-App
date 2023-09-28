@@ -243,7 +243,7 @@ class _ScreenOnBoardingDoctorState extends State<ScreenOnBoardingDoctor> {
                 context.read<OnBoardingBloc>().add(ClearOnboardingState());
 
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => ScreenLogin(),
+                  builder: (context) => const ScreenLogin(),
                 ));
               },
               icon: const Icon(Icons.logout))
@@ -532,17 +532,29 @@ class _ScreenOnBoardingDoctorState extends State<ScreenOnBoardingDoctor> {
                     child: BlocBuilder<OnBoardingBloc, OnBoardingState>(
                       builder: (context, state) {
                         if (state is OnBoardingLoading) {
-                          return CircularProgressIndicator(
-                            color: Colors.white,
+                          return const Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                            ),
                           );
                         } else if (state is OnBordingSuccess) {
-                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                          WidgetsBinding.instance
+                              .addPostFrameCallback((_) async {
                             //-------------remove keyboard
+
                             FocusManager.instance.primaryFocus?.unfocus();
+
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    duration: Duration(seconds: 2),
+                                    margin: EdgeInsets.all(15),
+                                    behavior: SnackBarBehavior.floating,
+                                    content: Text('form submit success')));
+                            await Future.delayed(const Duration(seconds: 2));
                             Navigator.of(context)
                                 .pushReplacement(MaterialPageRoute(
                               builder: (context) {
-                                return ScreenLogin();
+                                return const ScreenLogin();
                               },
                             ));
 
@@ -560,7 +572,7 @@ class _ScreenOnBoardingDoctorState extends State<ScreenOnBoardingDoctor> {
                                 .add(ClearOnboardingState());
                           });
                         }
-                        return Text('Submit');
+                        return const Text('Submit');
                       },
                     ),
                   ),

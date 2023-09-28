@@ -72,10 +72,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
               mainAxisSize: MainAxisSize.min,
               children: [
 
-                //------------------------------------------------item
-              
-                //-----------------------------------------------------app name
-                //------------------------------------item 2
+             
                 Container(
                   color: appBackGround,
                   child: Column(
@@ -100,14 +97,12 @@ class _ScreenLoginState extends State<ScreenLogin> {
                 
                       //---------------------------------------image + text
                       Container(
-                        // height: size.height * 0.32,
+                    
                         color: appBackGround,
                         child: Column(
                           children: [
                                   SizedBox(height: size.height*0.04,),
-                            // const SizedBox(
-                            //   height: 35,
-                            // ),
+                           
                             //---------------------------------------app text
                              Text(
                               'Your Health, Our Priority: Book with Confidence!',
@@ -143,7 +138,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
                   child: Container(
                     color: Colors.white,
                     width: size.width,
-                    // height: size.height * 0.58,
+                
                     child: Padding(
                       padding:
                           const EdgeInsets.only(left: 20.0, right: 20, top: 10),

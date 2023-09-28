@@ -50,6 +50,7 @@ class ScreenForgotPassword extends StatelessWidget {
                           Icons.arrow_back_ios_new,
                           color: Colors.white,
                         )),
+                        Text('Reset Password',style: TextStyle(fontSize: size.width * 0.04,color: Colors.white),)
                   ],
                 ),
               ),

@@ -33,6 +33,9 @@ class ScreenHome extends StatefulWidget {
 class _ScreenHomeState extends State<ScreenHome> {
   @override
   void initState() {
+    context
+        .read<NotificationTrackBloc>()
+        .add(CheckNotifications(userType: 'patient'));
     super.initState();
   }
 
@@ -41,6 +44,9 @@ class _ScreenHomeState extends State<ScreenHome> {
     context
         .read<HomeTodayAppointmentsBloc>()
         .add(GetTodayAppointmentPatientCall());
+    context
+        .read<NotificationTrackBloc>()
+        .add(CheckNotifications(userType: 'patient'));
     super.didChangeDependencies();
   }
 
@@ -58,7 +64,7 @@ class _ScreenHomeState extends State<ScreenHome> {
             //-------------------------------------------------1st section
             Container(
               // height: size.height * 0.23,
-      
+
               color: appBackGround,
               child: Column(
                 children: [
@@ -84,7 +90,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                               //welcome
                               Container(
                                   //  color: Colors.amber,
-      
+
                                   child: CircleAvatar(
                                       radius: size.width * 0.07,
                                       backgroundColor: Colors.transparent,
@@ -93,13 +99,15 @@ class _ScreenHomeState extends State<ScreenHome> {
                                               null
                                           ? NetworkImage(state.userProfile.user!
                                               .profilePicture!.secureUrl!)
-                                          : const AssetImage('assets/patient.png')
+                                          : const AssetImage(
+                                                  'assets/patient.png')
                                               as ImageProvider)),
-      
+
                               //---------------------------------------name and welcome
-      
+
                               Padding(
-                                padding: EdgeInsets.only(left: size.width * 0.01),
+                                padding:
+                                    EdgeInsets.only(left: size.width * 0.01),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   // mainAxisAlignment: MainAxisAlignment.center,
@@ -127,17 +135,17 @@ class _ScreenHomeState extends State<ScreenHome> {
                                 ),
                               ),
                               Spacer(),
-      
+
                               //------------------------------------------reminder icon
                               InkWell(onTap: () {
                                 context.read<ViewNotificationsBloc>().add(
                                     GetNotifications(
                                         notificationUserType: 'patient'));
-      
+
                                 Navigator.of(context).push(
                                   PageRouteBuilder(
-                                    pageBuilder:
-                                        (context, animation, secondaryAnimation) {
+                                    pageBuilder: (context, animation,
+                                        secondaryAnimation) {
                                       // Build the new route/screen here
                                       return ScreenNotification();
                                     },
@@ -158,7 +166,8 @@ class _ScreenHomeState extends State<ScreenHome> {
                                   NotificationTrackState>(
                                 builder: (context, state) {
                                   return NotificationBell(
-                                      notificationCount: state.notificationCount);
+                                      notificationCount:
+                                          state.notificationCount);
                                 },
                               ))
                             ],
@@ -178,22 +187,23 @@ class _ScreenHomeState extends State<ScreenHome> {
                                 )),
                           );
                         }
-      
+
                         return const SizedBox();
                       },
                     ),
                   ),
-      
+
                   //---------------------------------------------search doctors
                   GestureDetector(
                     onTap: () {
                       //----------------------------search page navigation
                       BlocProvider.of<SearchBloc>(context)
                           .add(ShowAllDoctorList());
-      
+
                       Navigator.of(context).push(
                         PageRouteBuilder(
-                          pageBuilder: (context, animation, secondaryAnimation) {
+                          pageBuilder:
+                              (context, animation, secondaryAnimation) {
                             // Build the new route/screen here
                             return ScreenSearch();
                           },
@@ -268,7 +278,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                 borderRadius: BorderRadius.circular(10),
                 child: Container(
                   height: size.height * 0.13,
-                  width: size.width >700 ? null :size.width,
+                  width: size.width > 700 ? null : size.width,
                   color: appBackGround.withOpacity(0.2),
                   child: BlocBuilder<SpecialityBloc, SpecialityState>(
                     builder: (context, state) {
@@ -280,9 +290,11 @@ class _ScreenHomeState extends State<ScreenHome> {
                         );
                       } else if (state is SpecialitySucess) {
                         return Padding(
-                          padding:  EdgeInsets.only(left: size.width * 0.02, right: size.width * 0.02),
+                          padding: EdgeInsets.only(
+                              left: size.width * 0.02,
+                              right: size.width * 0.02),
                           child: ListView.separated(
-                            shrinkWrap: true,
+                              shrinkWrap: true,
                               physics: const BouncingScrollPhysics(),
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) {
@@ -295,8 +307,8 @@ class _ScreenHomeState extends State<ScreenHome> {
                                             .push(MaterialPageRoute(
                                           builder: (context) {
                                             return ScreenSpeciality(
-                                                speciality:
-                                                    state.specialityList[index]);
+                                                speciality: state
+                                                    .specialityList[index]);
                                           },
                                         ));
                                       },
@@ -335,7 +347,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                               )),
                         );
                       }
-      
+
                       return const Center(
                         child: Text('Connectivity error'),
                       );
@@ -344,7 +356,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                 ),
               ),
             ),
-      
+
             //------------------------------------------2nd section
             Container(
               // color: Colors.red,
@@ -382,14 +394,14 @@ class _ScreenHomeState extends State<ScreenHome> {
                               ),
                             );
                           }
-      
+
                           if (state is HomeTodayAppointsSuccess) {
                             if (state.appointmentList.isEmpty) {
                               return const Center(
                                 child: Text('No Appointments Today'),
                               );
                             }
-      
+
                             return ListView.separated(
                                 physics: const BouncingScrollPhysics(),
                                 itemBuilder: (context, index) {
@@ -397,21 +409,21 @@ class _ScreenHomeState extends State<ScreenHome> {
                                     size: size,
                                     date: state
                                         .appointmentList[index].selectedDate!,
-                                    doctorname: state
-                                        .appointmentList[index].doctor!.fullName!,
+                                    doctorname: state.appointmentList[index]
+                                        .doctor!.fullName!,
                                     startTime:
                                         state.appointmentList[index].startTime!,
                                     endTime:
                                         state.appointmentList[index].endTime!,
-                                    speciality: state
-                                        .appointmentList[index].speciality!.name!,
+                                    speciality: state.appointmentList[index]
+                                        .speciality!.name!,
                                     doctImageUrl: state.appointmentList[index]
                                         .doctor!.profilePicture!.secureUrl!,
-                                    bookingStatus: state
-                                        .appointmentList[index].isApprovedByDoctor
+                                    bookingStatus: state.appointmentList[index]
+                                        .isApprovedByDoctor
                                         .toString(),
-                                    doctorID:
-                                        state.appointmentList[index].doctor!.id!,
+                                    doctorID: state
+                                        .appointmentList[index].doctor!.id!,
                                   );
                                 },
                                 separatorBuilder: (context, index) {
@@ -433,7 +445,8 @@ class _ScreenHomeState extends State<ScreenHome> {
                                       //------------------------------------------refresh function
                                       context
                                           .read<HomeTodayAppointmentsBloc>()
-                                          .add(GetTodayAppointmentPatientCall());
+                                          .add(
+                                              GetTodayAppointmentPatientCall());
                                     },
                                     icon: const Icon(Icons.refresh))
                               ],

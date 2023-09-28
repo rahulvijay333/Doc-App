@@ -70,15 +70,14 @@ class ScreemDoctMessage extends StatelessWidget {
                             onChanged: (value) {
                               if (value.isEmpty) {
                                 // FocusScope.of(context).unfocus();
-              
-                             
+
                                 BlocProvider.of<ViewAllChatsBloc>(context)
                                     .add(GetAllChatsCall());
                                 searchnotifier.value = value;
                               } else {
                                 searchnotifier.value = value;
                                 searchnotifier.notifyListeners();
-              
+
                                 context.read<SearchMessagesBloc>().add(
                                     SearchMessageByDoctor(
                                         searchKey: searchController.text));
@@ -124,21 +123,21 @@ class ScreemDoctMessage extends StatelessWidget {
                                       child: Text('No Chats'),
                                     );
                                   }
-              
+
                                   return ListView.separated(
                                       itemBuilder: (context, index) {
                                         return InkWell(
                                           //------------------------------view message
-              
+
                                           onTap: () {
                                             context.read<SeeMessagesBloc>().add(
                                                 SeeChatsEvent(
                                                     chatRoomID: state
                                                         .chatsList[index].id!));
-              
+
                                             if (state.chatsList.isNotEmpty) {
                                               //view
-              
+
                                               Navigator.of(context)
                                                   .push(MaterialPageRoute(
                                                 builder: (context) {
@@ -208,17 +207,18 @@ class ScreemDoctMessage extends StatelessWidget {
                                       },
                                       itemCount: state.chatsList.length);
                                 } else if (state is ViewAllChatsFailure) {
-                                  Center(
+                                  return Center(
                                     child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        const Text('Error happened'),
+                                        const Text('offline'),
                                         const SizedBox(
                                           height: 5,
                                         ),
                                         IconButton(
                                             onPressed: () {
                                               //-------------------------------------refrsh
-              
+
                                               context
                                                   .read<ViewAllChatsBloc>()
                                                   .add(ViewAllChatsEvent());

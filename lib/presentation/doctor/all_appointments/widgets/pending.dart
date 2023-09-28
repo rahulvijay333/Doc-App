@@ -56,6 +56,26 @@ class ScreenPendingAppoint extends StatelessWidget {
                 );
               },
               itemCount: state.appointmentList.length);
+        } else if (state is DoctSideApptsFailed) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('offline'),
+                const SizedBox(
+                  height: 5,
+                ),
+                IconButton(
+                    onPressed: () {
+                      //-------------------------------------refrsh
+                      context
+                          .read<ViewAppointmentsDoctSideBloc>()
+                          .add(ViewApptDoctorSideCall(status: 'pending'));
+                    },
+                    icon: const Icon(Icons.refresh))
+              ],
+            ),
+          );
         }
 
         return const Center(

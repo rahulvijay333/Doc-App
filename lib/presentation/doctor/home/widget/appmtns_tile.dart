@@ -83,6 +83,7 @@ class ApointTodayTileWidget extends StatelessWidget {
                             ),
                     ),
                   ),
+                  SizedBox(width: size.width * 0.01,),
                   Expanded(
                     child: Column(
                       children: [
@@ -91,8 +92,8 @@ class ApointTodayTileWidget extends StatelessWidget {
                           maxLines: 1,
                           style:  TextStyle(fontSize: size.width*0.05 * 1.2),
                         ),
-                        const Divider(thickness: 0.1,
-                          color: Colors.grey,
+                         Divider(thickness: 0.1,
+                          color: Colors.grey.withOpacity(0.5),
                         ),
                         Text('Time : $startTime - $endTime',
                             style: const TextStyle(
