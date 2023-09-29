@@ -43,11 +43,7 @@ final textfieldInputDecorationEmail = InputDecoration(
 
 final loginButtonStyle = ButtonStyle(
   backgroundColor: MaterialStateProperty.all<Color>(appBackGround),
-  shape: MaterialStateProperty.all<OutlinedBorder>(
-    RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(10.0),
-    ),
-  ),
+  
   minimumSize: MaterialStateProperty.all<Size>(
     const Size(double.maxFinite, 50),
   ),

@@ -11,4 +11,14 @@ class CreateButtonClicked extends CreateUserEvent {
   CreateButtonClicked({required this.newUser, required this.userType});
 }
 
+class OtpVerificationCall extends CreateUserEvent {
+  final String email;
+  final String otp;
+  final String userType;
+
+  OtpVerificationCall({required this.email, required this.otp, required this.userType});
+
+
+}
+
 class InitialiCreateBloc extends CreateUserEvent {}

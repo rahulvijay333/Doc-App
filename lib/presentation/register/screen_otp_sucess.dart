@@ -8,12 +8,12 @@ class ScreenOtpSuccess extends StatelessWidget {
   const ScreenOtpSuccess({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+  Widget build(BuildContext context1) {
+    final size = MediaQuery.of(context1).size;
     return SafeArea(
       child: WillPopScope(
         onWillPop: () async {
-          BlocProvider.of<OtpVerifyBloc>(context).add(ClearOtpVerifyState());
+          BlocProvider.of<OtpVerifyBloc>(context1).add(ClearOtpVerifyState());
 
           return true;
         },
@@ -46,13 +46,15 @@ class ScreenOtpSuccess extends StatelessWidget {
                   child: ElevatedButton(
                       onPressed: () {
                         //---------------------------------------------back to home
-                        BlocProvider.of<OtpVerifyBloc>(context)
+                        BlocProvider.of<OtpVerifyBloc>(context1)
                             .add(ClearOtpVerifyState());
-                        Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(
-                              builder: (context) => const ScreenLogin(),
-                            ),
-                            (route) => false);
+                        // Navigator.of(context1).pushAndRemoveUntil(
+                        //     MaterialPageRoute(
+                        //       builder: (context) => const ScreenLogin(),
+                        //     ),
+                        //     (route) => false);
+
+                        Navigator.of(context1).pop();
                       },
                       child: const Text('Login')),
                 )

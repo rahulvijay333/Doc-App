@@ -1,6 +1,7 @@
 import 'package:appoint_medic/application/doctor%20profile/appointments_section/bloc/home_appointment_today_bloc.dart';
 import 'package:appoint_medic/application/doctor%20profile/bloc/doctor_profile_bloc.dart';
 import 'package:appoint_medic/application/notifications/notificationStatus_track/bloc/notification_track_bloc.dart';
+import 'package:appoint_medic/core/color_constants.dart';
 import 'package:appoint_medic/presentation/doctor/home/widget/appmtns_tile.dart';
 import 'package:appoint_medic/presentation/doctor/home/widget/profile_tile.dart';
 import 'package:flutter/material.dart';
@@ -26,12 +27,12 @@ class ScreenDoctHome extends StatelessWidget {
           Container(
             width: size.width,
             height: size.height * 0.18,
-            decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
+            decoration:  BoxDecoration(
+                borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(30),
                     bottomRight: Radius.circular(30)),
                 // color: Colors.amber,
-                color: Color.fromRGBO(0, 150, 255, 10)),
+                color: appBackGround),
             child: BlocBuilder<DoctorProfileBloc, DoctorProfileState>(
               builder: (context, state) {
                 if (state is DoctorProfileLoading) {

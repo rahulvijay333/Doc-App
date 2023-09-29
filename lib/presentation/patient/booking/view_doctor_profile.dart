@@ -33,12 +33,12 @@ class ScreenViewDoctorProfileBook extends StatelessWidget {
                         Icons.arrow_back_ios_new,
                         color: Colors.white,
                       )),
-                  const Text(
+                   Text(
                     'View Profile',
                     style: TextStyle(
-                        fontSize: 18,
+                        fontSize: size.width * 0.04,
                         color: Colors.white,
-                        fontWeight: FontWeight.bold),
+                        ),
                   ),
                 ],
               ),
@@ -140,10 +140,10 @@ class ScreenViewDoctorProfileBook extends StatelessWidget {
                   ),
                   Center(
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(8),
                       child: SizedBox(
-                        height: size.width * 0.12,
-                        width: size.width * 0.5,
+                        height:40,
+                        width: size.width * 0.4,
                         child: ElevatedButton(
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
@@ -152,7 +152,7 @@ class ScreenViewDoctorProfileBook extends StatelessWidget {
                               },
                             ));
                           },
-                          child: Text('Book Appointment',style: TextStyle(fontSize: size.width * 0.5 *0.09),),
+                          child: Text('Book Appointment',style: TextStyle(fontSize: size.width * 0.4 *0.08),),
                         ),
                       ),
                     ),

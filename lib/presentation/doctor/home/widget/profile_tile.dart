@@ -21,7 +21,7 @@ class ProfileTileCustom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      //  color: Colors.red,
+        // color: Colors.red,
       width: size.width,
       height: size.height * 0.3 * 0.50,
       child: Center(

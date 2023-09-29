@@ -177,12 +177,12 @@ class _ScreenConfirmBookingState extends State<ScreenConfirmBooking> {
                           Icons.arrow_back_ios_new,
                           color: Colors.white,
                         )),
-                    const Text(
-                      'Confirm',
+                     Text(
+                      'Confirmation',
                       style: TextStyle(
-                          fontSize: 18,
+                           fontSize: size.width * 0.04,
                           color: Colors.white,
-                          fontWeight: FontWeight.bold),
+                         ),
                     ),
                   ],
                 ),
@@ -196,10 +196,10 @@ class _ScreenConfirmBookingState extends State<ScreenConfirmBooking> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
+                             Text(
                               'Doctor details',
                               style: TextStyle(
-                                  fontSize: 18,
+                                fontSize: size.width * 0.04,
                                   color: Colors.blue,
                                   fontWeight: FontWeight.w500),
                             ),
@@ -219,10 +219,10 @@ class _ScreenConfirmBookingState extends State<ScreenConfirmBooking> {
                             const SizedBox(
                               height: 15,
                             ),
-                            const Text(
+                             Text(
                               'Patient details',
                               style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: size.width * 0.04,
                                   color: Colors.blue,
                                   fontWeight: FontWeight.w500),
                             ),
@@ -307,7 +307,11 @@ class _ScreenConfirmBookingState extends State<ScreenConfirmBooking> {
                                                     maxLines: 4,
                                                   ),
                                                 ),
-                                              )
+                                              ),
+                                               SizedBox(
+                                                height: size.height * 0.01,
+                                              ),
+
                                             ],
                                           )),
                                     ),
@@ -363,12 +367,15 @@ class _ScreenConfirmBookingState extends State<ScreenConfirmBooking> {
                             Center(
                               child: SizedBox(
                                 height: 40,
-                                width: 120,
+                                width: size.width * 0.4,
                                 child: BlocBuilder<PaymentBloc, PaymentState>(
                                   builder: (context, state) {
                                     if (state is PayButtonStartLoading) {
                                       return const Center(
-                                        child: CircularProgressIndicator(),
+                                        child: SizedBox(
+
+                                          width: 25,height: 25,
+                                          child: CircularProgressIndicator(strokeWidth: 1,)),
                                       );
                                     } else {
                                       return ElevatedButton(
@@ -395,7 +402,7 @@ class _ScreenConfirmBookingState extends State<ScreenConfirmBooking> {
                                                   'amount': ((widget.doc
                                                           .speciality!.fees)! *
                                                       100), // Amount in paise
-                                                  'name': 'DocCure',
+                                                  'name': 'AppointMedic',
                                                   'description':
                                                       'Dr.${widget.doc.fullName}',
                                                   'prefill': {
@@ -443,7 +450,7 @@ class _ScreenConfirmBookingState extends State<ScreenConfirmBooking> {
                                                         'Check internet connection')));
                                           }
                                         },
-                                        child: const Text('Pay'),
+                                        child:  Text('Pay',style: TextStyle(fontSize: size.width*0.4 * 0.08,),),
                                       );
                                     }
                                   },

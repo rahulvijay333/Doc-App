@@ -76,8 +76,7 @@ class AppointmentTile extends StatelessWidget {
                   Container(
                     //  color: Colors.red,
                     width: size.width * 0.24,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                    child: Center(
                       child: Text(
                         formatedDate,
                         style: TextStyle(
@@ -101,19 +100,20 @@ class AppointmentTile extends StatelessWidget {
                       Text(
                         patientName,
                         maxLines: 1,
-                        style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w500),
+                        style:  TextStyle(
+                            fontSize: size.width * 0.05, fontWeight: FontWeight.w500),
                       ),
                       Text(emailID,
                           style: TextStyle(
-                              fontSize: 14,
+                             fontSize: size.width*0.03,
                               color: Colors.black.withOpacity(0.5))),
-                      const SizedBox(
-                        height: 10,
+                       SizedBox(
+                         height: size.width*0.02,
                       ),
-                      Text('Slot : $startTime - $endTime'),
-                      const SizedBox(
-                        height: 10,
+                      Text('Slot : $startTime - $endTime', style:  TextStyle(
+                            fontSize: size.width * 0.035)),
+                       SizedBox(
+                          height: size.width*0.02,
                       ),
                       //---------------------condition here
                       Row(
@@ -176,11 +176,11 @@ class AppointmentTile extends StatelessWidget {
                               .add(StartChat(userID: patientID));
                           Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) {
-                              return ScreenCreateChatDoc();
+                              return const ScreenCreateChatDoc();
                             },
                           ));
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.message_outlined,
                           color: Colors.blue,
                         )),
@@ -191,7 +191,7 @@ class AppointmentTile extends StatelessWidget {
                             context: context,
                             builder: (context) {
                               return AlertDialog(
-                                title: Text('Medical Reason'),
+                                title: const Text('Medical Reason'),
                                 content: Text(
                                   reason.isEmpty ? "NA" : reason,
                                   maxLines: 3,style: TextStyle(color: Colors.black.withOpacity(0.5))
@@ -201,13 +201,13 @@ class AppointmentTile extends StatelessWidget {
                                       onPressed: () {
                                         Navigator.of(context).pop();
                                       },
-                                      child: Text('OK'))
+                                      child: const Text('OK'))
                                 ],
                               );
                             },
                           );
                         },
-                        icon: Icon(Icons.info_outline, color: Colors.blue))
+                        icon: const Icon(Icons.info_outline, color: Colors.blue))
                   ],
                 ),
               )

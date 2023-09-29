@@ -33,12 +33,12 @@ class ScreenProfile extends StatelessWidget {
               // color: Colors.blue,
               width: size.width,
               height: size.height * 0.07,
-              child: const Center(
+              child:  Center(
                 child: Text(
                   'Profile',
                   style: TextStyle(
-                      fontSize: 25,
-                      color: Colors.blue,
+                      fontSize: size.width * 0.055,
+                      color: appBackGround,
                       fontWeight: FontWeight.bold),
                 ),
               ),
@@ -69,53 +69,48 @@ class ScreenProfile extends StatelessWidget {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Container(
-                                      // width: size.width * 0.8 * 0.50,
-                                      // color: Colors.red,
-                                      // height: size.width * 0.8 * 0.50,
-                                      child: CircleAvatar(
-                                        backgroundColor: Colors.white,
-                                        radius: 80,
-                                        child: ClipOval(
-                                            child: state
-                                                        .userProfile
-                                                        .user!
-                                                        .profilePicture
-                                                        ?.secureUrl !=
-                                                    null
-                                                ? Image.network(
-                                                    state
-                                                        .userProfile
-                                                        .user!
-                                                        .profilePicture!
-                                                        .secureUrl!,
-                                                    fit: BoxFit.cover,
-                                                    width: 160,
-                                                    height: 160,
-                                                    errorBuilder: (context,
-                                                        error, stackTrace) {
-                                                      return Image.asset(
-                                                          'assets/patient.png');
-                                                    },
-                                                    loadingBuilder: (context,
-                                                        child,
-                                                        loadingProgress) {
-                                                      if (loadingProgress ==
-                                                          null) {
-                                                        return child;
-                                                      }
+                                    CircleAvatar(
+                                      backgroundColor: Colors.white,
+                                      radius: 80,
+                                      child: ClipOval(
+                                          child: state
+                                                      .userProfile
+                                                      .user!
+                                                      .profilePicture
+                                                      ?.secureUrl !=
+                                                  null
+                                              ? Image.network(
+                                                  state
+                                                      .userProfile
+                                                      .user!
+                                                      .profilePicture!
+                                                      .secureUrl!,
+                                                  fit: BoxFit.cover,
+                                                  width: 160,
+                                                  height: 160,
+                                                  errorBuilder: (context,
+                                                      error, stackTrace) {
+                                                    return Image.asset(
+                                                        'assets/patient.png');
+                                                  },
+                                                  loadingBuilder: (context,
+                                                      child,
+                                                      loadingProgress) {
+                                                    if (loadingProgress ==
+                                                        null) {
+                                                      return child;
+                                                    }
 
-                                                      return const Center(
-                                                        child:
-                                                            CircularProgressIndicator(
-                                                          strokeWidth: 1,
-                                                        ),
-                                                      );
-                                                    },
-                                                  )
-                                                : Image.asset(
-                                                    'assets/patient.png')),
-                                      ),
+                                                    return const Center(
+                                                      child:
+                                                          CircularProgressIndicator(
+                                                        strokeWidth: 1,
+                                                      ),
+                                                    );
+                                                  },
+                                                )
+                                              : Image.asset(
+                                                  'assets/patient.png')),
                                     ),
                                     SizedBox(
                                       height: size.height * 0.01,
@@ -137,8 +132,7 @@ class ScreenProfile extends StatelessWidget {
                         ),
                         Center(
                           child: Container(
-                            //  color: Colors.amber,
-                            // height: size.height * 0.45,
+                       
                             width: size.width > 800 ? 800 : size.width * 0.8,
 
                             child: Column(
@@ -149,7 +143,7 @@ class ScreenProfile extends StatelessWidget {
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
                                   child: Container(
-                                    // color: Colors.blue[50]?.withOpacity(0.5),
+                              
                                     child: ListTile(
                                       onTap: () {
                                         Navigator.of(context)
@@ -159,9 +153,9 @@ class ScreenProfile extends StatelessWidget {
                                           },
                                         ));
                                       },
-                                      leading: const Icon(
+                                      leading:  Icon(
                                         Icons.person,
-                                        color: Colors.blue,
+                                         color: appBackGround,
                                       ),
                                       title: const Text('Personal Details'),
                                       trailing: const Icon(
@@ -195,9 +189,9 @@ class ScreenProfile extends StatelessWidget {
                                           },
                                         ));
                                       },
-                                      leading: const Icon(
+                                      leading:  Icon(
                                         Icons.password,
-                                        color: Colors.blue,
+                                      color: appBackGround,
                                       ),
                                       title: const Text('Change Password'),
                                       trailing: const Icon(
@@ -223,9 +217,9 @@ class ScreenProfile extends StatelessWidget {
                                           },
                                         ));
                                       },
-                                      leading: const Icon(
+                                      leading:  Icon(
                                         Icons.info,
-                                        color: Colors.blue,
+                                        color: appBackGround,
                                       ),
                                       title: const Text('About'),
                                       trailing: const Icon(
@@ -249,9 +243,9 @@ class ScreenProfile extends StatelessWidget {
                                           },
                                         ));
                                       },
-                                      leading: const Icon(
+                                      leading:  Icon(
                                         Icons.book,
-                                        color: Colors.blue,
+                                        color: appBackGround,
                                       ),
                                       title: const Text('Terms and Conditions'),
                                       trailing: const Icon(
@@ -264,7 +258,7 @@ class ScreenProfile extends StatelessWidget {
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
                                   child: Container(
-                                    // color: Colors.blue[50]?.withOpacity(0.5),
+                                
                                     child: ListTile(
                                       onTap: () {
                                         //----------------------privacy
@@ -275,9 +269,9 @@ class ScreenProfile extends StatelessWidget {
                                           },
                                         ));
                                       },
-                                      leading: const Icon(
+                                      leading:  Icon(
                                         Icons.security,
-                                        color: Colors.blue,
+                                       color: appBackGround,
                                       ),
                                       title: const Text('Privacy'),
                                       trailing: const Icon(
@@ -393,9 +387,9 @@ class ScreenProfile extends StatelessWidget {
                                             },
                                           );
                                         },
-                                        leading: const Icon(
+                                        leading:  Icon(
                                           Icons.logout,
-                                          color: Colors.blue,
+                                        color: appBackGround
                                         ),
                                         title: const Text('Log Out'),
                                       ),

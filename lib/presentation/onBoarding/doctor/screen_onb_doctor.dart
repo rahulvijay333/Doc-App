@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:appoint_medic/application/Onboarding/on_boarding_bloc.dart';
 import 'package:appoint_medic/application/login/login_bloc.dart';
 import 'package:appoint_medic/application/speciality/speciality_bloc.dart';
+import 'package:appoint_medic/core/color_constants.dart';
 import 'package:appoint_medic/domain/models/onboardingDoctor/doctor_onb_model.dart';
 import 'package:appoint_medic/presentation/login/screen_login.dart';
 import 'package:file_picker/file_picker.dart';
@@ -232,352 +233,383 @@ class _ScreenOnBoardingDoctorState extends State<ScreenOnBoardingDoctor> {
       //_serviceController.clear();
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-              onPressed: () {
-                //---------------------------------------------------------------logout funtion
-                context.read<LoginBloc>().add(ClearLoginStateEvent());
+    final size = MediaQuery.of(context).size;
 
-                context.read<OnBoardingBloc>().add(ClearOnboardingState());
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: appBackGround,
+          actions: [
+            IconButton(
+                onPressed: () {
+                  //---------------------------------------------------------------logout funtion
+                  context.read<LoginBloc>().add(ClearLoginStateEvent());
 
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => const ScreenLogin(),
-                ));
-              },
-              icon: const Icon(Icons.logout))
-        ],
-        title: const Text('Complete Registration'),
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(30.0),
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Form(
-            key: _formkey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    showPhotoOptions();
-                  },
-                  //------------------------------------photo section
-                  child: Container(
-                    width: 150,
-                    height: 150,
-                    // color: Colors.grey,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: profileErrorColor),
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.grey.withOpacity(0.5),
-                        image: (imageFile != null)
-                            ? DecorationImage(
-                                fit: BoxFit.cover, image: FileImage(imageFile!))
-                            : null),
-                    child: (imageFile == null)
-                        ? const Icon(
-                            Icons.person,
-                            size: 50,
-                          )
-                        : const SizedBox(),
-                  ),
-                ),
-                SizedBox(
-                    height: 20,
-                    child: profilePic == true
-                        ? const Text(
-                            'Profile picture required',
-                            style: TextStyle(color: Colors.red),
-                          )
-                        : const Text('')),
-                //--------------------------------full name
-                TextFormField(
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'full name required';
-                    } else {
-                      return null;
-                    }
-                  },
-                  controller: _fullNameController,
-                  decoration: const InputDecoration(
-                    labelText: 'Full Name',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                const SizedBox(height: 16.0),
-                TextFormField(
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Gender required';
-                    } else {
-                      return null;
-                    }
-                  },
-                  controller: _genderController,
-                  decoration: const InputDecoration(
-                    labelText: 'Gender',
-                    border: OutlineInputBorder(),
-                  ),
-                  readOnly: true,
-                  onTap: () async {
-                    String? selectedValue = await _showGenderDialog(context);
-                    if (selectedValue != null) {
-                      setState(() {
-                        _genderController.text = selectedValue;
-                      });
-                    }
-                  },
-                ),
-                const SizedBox(height: 16.0),
-                TextFormField(
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Speciality required';
-                    } else {
-                      return null;
-                    }
-                  },
-                  controller: _categoryController,
-                  onTap: () async {
-                    List<String?> selectedValues =
-                        await _showCategoryDialog(context);
+                  context.read<OnBoardingBloc>().add(ClearOnboardingState());
 
-                    if (selectedValues.isNotEmpty) {
-                      setState(() {
-                        // _selectedCategory = selectedValue;
-                        _categoryController.text = selectedValues[0]!;
-                        _categorycode.text = selectedValues[1]!;
-                      });
-                    }
-                  },
-                  readOnly: true,
-                  decoration: const InputDecoration(
-                    labelText: 'Select Speciality',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                const SizedBox(height: 16.0),
-                //--------------------------------------phone
-                TextFormField(
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'phone number required';
-                    } else if (value.length < 10 || value.length > 10) {
-                      return 'enter valid phone number';
-                    } else {
-                      return null;
-                    }
-                  },
-                  controller: _phoneController,
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    labelText: 'Phone',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                const SizedBox(height: 16.0),
-                //---------------------------------------house name
-                TextFormField(
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'House name required';
-                    } else {
-                      return null;
-                    }
-                  },
-                  controller: _houseNameController,
-                  decoration: const InputDecoration(
-                    labelText: 'House Name',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                const SizedBox(height: 16.0),
-                //---------------------------------------city
-                TextFormField(
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'city required';
-                    } else {
-                      return null;
-                    }
-                  },
-                  controller: _cityController,
-                  decoration: const InputDecoration(
-                    labelText: 'City',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                const SizedBox(height: 16.0),
-                //--------------------------------------state
-                TextFormField(
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'state required';
-                    } else {
-                      return null;
-                    }
-                  },
-                  controller: _stateController,
-                  decoration: const InputDecoration(
-                    labelText: 'State',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                const SizedBox(height: 16.0),
-                //-------------------------------------service
-                TextFormField(
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'service required';
-                    } else {
-                      return null;
-                    }
-                  },
-                  controller: _serviceController,
-                  decoration: const InputDecoration(
-                    labelText: 'Service',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                const SizedBox(height: 16.0),
-                //------------------------------------qualification
-                TextFormField(
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'qualification required';
-                    } else {
-                      return null;
-                    }
-                  },
-                  controller: _qualificationController,
-                  decoration: const InputDecoration(
-                    labelText: 'Qualification',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                const SizedBox(height: 10.0),
-                Container(
-                  //color: Colors.blue.withOpacity(0.2),
-                  height: 40,
-                  decoration: BoxDecoration(
-                      color: Colors.blue.withOpacity(0.2),
-                      border: Border.all(color: certificateUploadError),
-                      borderRadius: BorderRadius.circular(8)),
-
-                  child: TextButton(
-                    onPressed: _pickPDFFile,
-                    child: _selectedFilePath.isEmpty
-                        ? const Text('Upload Certificate')
-                        : const Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text('File selected'),
-                              Icon(Icons.file_copy)
-                            ],
-                          ),
-                  ),
-                ),
-                const SizedBox(height: 10.0),
-                Center(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // Perform actions on form submission
-
-                      if (imageFile == null) {
-                        setState(() {
-                          profileErrorColor = Colors.red;
-                        });
-                      } else {
-                        setState(() {
-                          profileErrorColor = Colors.transparent;
-                        });
-                      }
-                      if (_selectedFilePath.isEmpty) {
-                        setState(() {
-                          certificateUploadError = Colors.red;
-                        });
-                      } else {
-                        setState(() {
-                          certificateUploadError = Colors.transparent;
-                        });
-                      }
-
-                      //------------------------------------------------------------qualify values needs to modyfy
-
-                      if (_formkey.currentState!.validate()) {
-                        final doctor = DoctorProfileFormData(
-                            username: _fullNameController.text,
-                            gender: _genderController.text,
-                            speciality: _categorycode.text,
-                            phone: _phoneController.text,
-                            houseName: _houseNameController.text,
-                            city: _cityController.text,
-                            state: _stateController.text,
-                            services: _serviceController.text,
-                            qualification: _qualificationController.text,
-                            certificate: File(_selectedFilePath),
-                            profilePic: imageFile);
-                        log('VAlue are present');
-                        // log(_addServices(_serviceController.text).toString());
-                        log(doctor.toString());
-
-                        context.read<OnBoardingBloc>().add(OnBoardDoctorEvent(
-                            token: widget.token, doctorform: doctor));
-                      }
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => const ScreenLogin(),
+                  ));
+                },
+                icon: const Icon(Icons.logout))
+          ],
+          title: Text(
+            'Complete Registration',
+            style: TextStyle(fontSize: size.width * 0.045),
+          ),
+          centerTitle: true,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(30.0),
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Form(
+              key: _formkey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      showPhotoOptions();
                     },
-                    child: BlocBuilder<OnBoardingBloc, OnBoardingState>(
-                      builder: (context, state) {
-                        if (state is OnBoardingLoading) {
-                          return const Center(
-                            child: CircularProgressIndicator(
-                              color: Colors.white,
-                            ),
-                          );
-                        } else if (state is OnBordingSuccess) {
-                          WidgetsBinding.instance
-                              .addPostFrameCallback((_) async {
-                            //-------------remove keyboard
-
-                            FocusManager.instance.primaryFocus?.unfocus();
-
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    duration: Duration(seconds: 2),
-                                    margin: EdgeInsets.all(15),
-                                    behavior: SnackBarBehavior.floating,
-                                    content: Text('form submit success')));
-                            await Future.delayed(const Duration(seconds: 2));
-                            Navigator.of(context)
-                                .pushReplacement(MaterialPageRoute(
-                              builder: (context) {
-                                return const ScreenLogin();
-                              },
-                            ));
-
-                            BlocProvider.of<LoginBloc>(context)
-                                .add(ClearLoginStateEvent());
-                          });
-                        } else if (state is OnBordingFailure) {
-                          WidgetsBinding.instance
-                              .addPostFrameCallback((timeStamp) {
-                            //------------------
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text(state.error)));
-
-                            BlocProvider.of<OnBoardingBloc>(context)
-                                .add(ClearOnboardingState());
-                          });
-                        }
-                        return const Text('Submit');
-                      },
+                    //------------------------------------photo section
+                    child: Container(
+                      width: 150,
+                      height: 150,
+                      // color: Colors.grey,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: profileErrorColor),
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.grey.withOpacity(0.5),
+                          image: (imageFile != null)
+                              ? DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: FileImage(imageFile!))
+                              : null),
+                      child: (imageFile == null)
+                          ? const Icon(
+                              Icons.person,
+                              size: 50,
+                            )
+                          : const SizedBox(),
                     ),
                   ),
-                ),
-              ],
+                  SizedBox(
+                      height: 20,
+                      child: profilePic == true
+                          ? const Text(
+                              'Profile picture required',
+                              style: TextStyle(color: Colors.red),
+                            )
+                          : const Text('')),
+                  //--------------------------------full name
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'full name required';
+                      } else {
+                        return null;
+                      }
+                    },
+                    controller: _fullNameController,
+                    decoration: const InputDecoration(
+                      labelText: 'Full Name',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  const SizedBox(height: 16.0),
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Gender required';
+                      } else {
+                        return null;
+                      }
+                    },
+                    controller: _genderController,
+                    decoration: const InputDecoration(
+                      labelText: 'Gender',
+                      border: OutlineInputBorder(),
+                    ),
+                    readOnly: true,
+                    onTap: () async {
+                      String? selectedValue = await _showGenderDialog(context);
+                      if (selectedValue != null) {
+                        setState(() {
+                          _genderController.text = selectedValue;
+                        });
+                      }
+                    },
+                  ),
+                  const SizedBox(height: 16.0),
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Speciality required';
+                      } else {
+                        return null;
+                      }
+                    },
+                    controller: _categoryController,
+                    onTap: () async {
+                      List<String?> selectedValues =
+                          await _showCategoryDialog(context);
+
+                      if (selectedValues.isNotEmpty) {
+                        setState(() {
+                          // _selectedCategory = selectedValue;
+                          _categoryController.text = selectedValues[0]!;
+                          _categorycode.text = selectedValues[1]!;
+                        });
+                      }
+                    },
+                    readOnly: true,
+                    decoration: const InputDecoration(
+                      labelText: 'Select Speciality',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  const SizedBox(height: 16.0),
+                  //--------------------------------------phone
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'phone number required';
+                      } else if (value.length < 10 || value.length > 10) {
+                        return 'enter valid phone number';
+                      } else {
+                        return null;
+                      }
+                    },
+                    controller: _phoneController,
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      labelText: 'Phone',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  const SizedBox(height: 16.0),
+                  //---------------------------------------house name
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'House name required';
+                      } else {
+                        return null;
+                      }
+                    },
+                    controller: _houseNameController,
+                    decoration: const InputDecoration(
+                      labelText: 'House Name',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  const SizedBox(height: 16.0),
+                  //---------------------------------------city
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'city required';
+                      } else {
+                        return null;
+                      }
+                    },
+                    controller: _cityController,
+                    decoration: const InputDecoration(
+                      labelText: 'City',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  const SizedBox(height: 16.0),
+                  //--------------------------------------state
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'state required';
+                      } else {
+                        return null;
+                      }
+                    },
+                    controller: _stateController,
+                    decoration: const InputDecoration(
+                      labelText: 'State',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  const SizedBox(height: 16.0),
+                  //-------------------------------------service
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'service required';
+                      } else {
+                        return null;
+                      }
+                    },
+                    controller: _serviceController,
+                    decoration: const InputDecoration(
+                      labelText: 'Service',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  const SizedBox(height: 16.0),
+                  //------------------------------------qualification
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'qualification required';
+                      } else {
+                        return null;
+                      }
+                    },
+                    controller: _qualificationController,
+                    decoration: const InputDecoration(
+                      labelText: 'Qualification',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  const SizedBox(height: 10.0),
+                  Container(
+                    //color: Colors.blue.withOpacity(0.2),
+                    height: 40,
+                    decoration: BoxDecoration(
+                        color: Colors.blue.withOpacity(0.2),
+                        border: Border.all(color: certificateUploadError),
+                        borderRadius: BorderRadius.circular(8)),
+
+                    child: TextButton(
+                      onPressed: _pickPDFFile,
+                      child: _selectedFilePath.isEmpty
+                          ? const Text('Upload Certificate')
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text('File selected'),
+                                Icon(Icons.file_copy),
+                                SizedBox(
+                                  width: size.width * 0.02,
+                                ),
+                                IconButton(
+                                    padding: EdgeInsets.zero,
+                                    onPressed: () {
+                                      setState(() {
+                                        _selectedFilePath = '';
+                                      });
+                                    },
+                                    icon: Icon(Icons.cancel))
+                              ],
+                            ),
+                    ),
+                  ),
+                  const SizedBox(height: 10.0),
+                  Center(
+                    child: SizedBox(
+                      width: size.width * 0.4,
+                      height: 40,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          // Perform actions on form submission
+
+                          if (imageFile == null) {
+                            setState(() {
+                              profileErrorColor = Colors.red;
+                            });
+                          } else {
+                            setState(() {
+                              profileErrorColor = Colors.transparent;
+                            });
+                          }
+                          if (_selectedFilePath.isEmpty) {
+                            setState(() {
+                              certificateUploadError = Colors.red;
+                            });
+                          } else {
+                            setState(() {
+                              certificateUploadError = Colors.transparent;
+                            });
+                          }
+
+                          //------------------------------------------------------------qualify values needs to modyfy
+
+                          if (_formkey.currentState!.validate()) {
+                            final doctor = DoctorProfileFormData(
+                                username: _fullNameController.text,
+                                gender: _genderController.text,
+                                speciality: _categorycode.text,
+                                phone: _phoneController.text,
+                                houseName: _houseNameController.text,
+                                city: _cityController.text,
+                                state: _stateController.text,
+                                services: _serviceController.text,
+                                qualification: _qualificationController.text,
+                                certificate: File(_selectedFilePath),
+                                profilePic: imageFile);
+                            log('VAlue are present');
+                            // log(_addServices(_serviceController.text).toString());
+                            log(doctor.toString());
+
+                            context.read<OnBoardingBloc>().add(
+                                OnBoardDoctorEvent(
+                                    token: widget.token, doctorform: doctor));
+                          }
+                        },
+                        child: BlocBuilder<OnBoardingBloc, OnBoardingState>(
+                          builder: (context, state) {
+                            if (state is OnBoardingLoading) {
+                              return const Center(
+                                child: SizedBox(
+                                  width: 25,
+                                  height: 25,
+                                  child: CircularProgressIndicator(
+                                    color: Colors.white,
+                                    strokeWidth: 1,
+                                  ),
+                                ),
+                              );
+                            } else if (state is OnBordingSuccess) {
+                              WidgetsBinding.instance
+                                  .addPostFrameCallback((_) async {
+                                //-------------remove keyboard
+
+                                FocusManager.instance.primaryFocus?.unfocus();
+
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        duration: Duration(seconds: 2),
+                                        margin: EdgeInsets.all(15),
+                                        behavior: SnackBarBehavior.floating,
+                                        content: Text('form submit success')));
+                                await Future.delayed(
+                                    const Duration(seconds: 2));
+                                Navigator.of(context)
+                                    .pushReplacement(MaterialPageRoute(
+                                  builder: (context) {
+                                    return const ScreenLogin();
+                                  },
+                                ));
+
+                                BlocProvider.of<LoginBloc>(context)
+                                    .add(ClearLoginStateEvent());
+                              });
+                            } else if (state is OnBordingFailure) {
+                              WidgetsBinding.instance
+                                  .addPostFrameCallback((timeStamp) {
+                                //------------------
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text(state.error)));
+
+                                BlocProvider.of<OnBoardingBloc>(context)
+                                    .add(ClearOnboardingState());
+                              });
+                            }
+                            return const Text('Submit');
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

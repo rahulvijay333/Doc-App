@@ -138,7 +138,7 @@ class PrivacyPolicyWidget extends StatelessWidget {
                     ),
                     const SizedBox(height: 8.0),
                     const Text(
-                      'You have the right to access, correct, or delete your personal information. To do so, please contact us at [your contact email or phone number]. Please note that certain information may be retained as required by law or for legitimate business purposes.',
+                      'You have the right to access, correct, or delete your personal information. To do so, please contact us at domain.test.mail333@gmail.com. Please note that certain information may be retained as required by law or for legitimate business purposes.',
                       style: TextStyle(fontSize: 16.0),
                     ),
                     const SizedBox(height: 16.0),
@@ -177,7 +177,7 @@ class PrivacyPolicyWidget extends StatelessWidget {
                     ),
                     const SizedBox(height: 8.0),
                     const Text(
-                      'If you have any questions or concerns about this Privacy Policy or our practices, please reach out to us at [your contact email or phone number].',
+                      'If you have any questions or concerns about this Privacy Policy or our practices, please reach out to us at domain.test.mail333@gmail.com.',
                       style: TextStyle(fontSize: 16.0),
                     ),
                   ],

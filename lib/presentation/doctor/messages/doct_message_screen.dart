@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:appoint_medic/application/chat/see_messages/bloc/see_messages_bloc.dart';
 import 'package:appoint_medic/application/chat/view_chats/bloc/view_all_chats_bloc.dart';
 import 'package:appoint_medic/application/chat/view_chats/search_chat/bloc/search_messages_bloc.dart';
+import 'package:appoint_medic/core/color_constants.dart';
 import 'package:appoint_medic/presentation/doctor/messages/screen_view_mesg.dart';
 import 'package:appoint_medic/presentation/doctor/messages/search_message/screen_seach_msg.dart';
 import 'package:appoint_medic/presentation/patient/messages/widget/message_tile.dart';
@@ -31,13 +32,13 @@ class ScreemDoctMessage extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              color: Colors.blue,
+              color: appBackGround,
               height: size.height * 0.07,
-              child: const Center(
+              child: Center(
                 child: Text(
                   'Messages',
                   style: TextStyle(
-                      fontSize: 22,
+                      fontSize: size.width * 0.055,
                       color: Colors.white,
                       fontWeight: FontWeight.bold),
                 ),
@@ -48,9 +49,6 @@ class ScreemDoctMessage extends StatelessWidget {
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
                   children: [
-                    // SizedBox(
-                    //   height: size.height * 0.05,
-                    // ),
                     //----------------------------------------------------------search messages
                     ClipRRect(
                       borderRadius: BorderRadius.circular(10),
@@ -209,7 +207,8 @@ class ScreemDoctMessage extends StatelessWidget {
                                 } else if (state is ViewAllChatsFailure) {
                                   return Center(
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         const Text('offline'),
                                         const SizedBox(

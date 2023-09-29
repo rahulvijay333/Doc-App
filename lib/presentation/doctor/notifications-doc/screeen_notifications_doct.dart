@@ -43,7 +43,7 @@ class ScreenNotificationDoct extends StatelessWidget {
                     Text(
                       'Notifications',
                       style: TextStyle(
-                          fontSize: size.width > 600 ? 24 : size.width * 0.05,
+                          fontSize: size.width > 600 ? 24 : size.width * 0.04,
                           color: Colors.white,
                           fontWeight: FontWeight.w500),
                     )
@@ -102,7 +102,7 @@ class ScreenNotificationDoct extends StatelessWidget {
                                           children: [
                                             const Spacer(),
                                             Text(
-                                              '${DateFormat('dd MMM,yyyy').format(state.notificationList[index].createdAt!)} ,${DateFormat("h.mm a").format(state.notificationList[index].createdAt!).toLowerCase()}',
+                                              '${DateFormat('dd MMM,yyyy').format(state.notificationList[index].createdAt!)} ,${DateFormat("h.mm a").format(state.notificationList[index].createdAt!.toLocal()).toLowerCase()}',
                                               style: const TextStyle(
                                                   color: Colors.grey),
                                             )

@@ -56,7 +56,6 @@ class AppointmentTileCustom extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(10),
@@ -70,10 +69,9 @@ class AppointmentTileCustom extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    //  color: Colors.red,
+                    // color: Colors.red,
                     width: size.width * 0.24,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                    child: Center(
                       child: Text(
                         formatedDate,
                         style: TextStyle(
@@ -85,8 +83,8 @@ class AppointmentTileCustom extends StatelessWidget {
                 ],
               ),
               const VerticalDivider(color: Colors.grey),
-              const SizedBox(
-                width: 5,
+              SizedBox(
+                width: size.width * 0.01,
               ),
               Expanded(
                 child: Column(
@@ -95,19 +93,21 @@ class AppointmentTileCustom extends StatelessWidget {
                     Text(
                       patientName,
                       maxLines: 1,
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.w500),
+                      style: TextStyle(
+                          fontSize: size.width * 0.05,
+                          fontWeight: FontWeight.w500),
                     ),
                     Text(emailID,
                         style: TextStyle(
-                            fontSize: 14,
+                            fontSize: size.width * 0.03,
                             color: Colors.black.withOpacity(0.5))),
-                    const SizedBox(
-                      height: 10,
+                    SizedBox(
+                      height: size.width * 0.02,
                     ),
-                    Text('Slot : $startTime - $endTime'),
-                    const SizedBox(
-                      height: 10,
+                    Text('Slot : $startTime - $endTime',
+                        style: TextStyle(fontSize: size.width * 0.035)),
+                    SizedBox(
+                      height: size.width * 0.025,
                     ),
                     //---------------------condition here
                     isDoctorApproved
@@ -148,10 +148,10 @@ class AppointmentTileCustom extends StatelessWidget {
                             builder: (context) {
                               return AlertDialog(
                                 title: const Text('Medical Reason'),
-                                content: Text(
-                                  reason.isEmpty ? "NA" : reason,
-                                  maxLines: 3,style: TextStyle(color: Colors.black.withOpacity(0.5))
-                                ),
+                                content: Text(reason.isEmpty ? "NA" : reason,
+                                    maxLines: 3,
+                                    style: TextStyle(
+                                        color: Colors.black.withOpacity(0.5))),
                                 actions: [
                                   TextButton(
                                       onPressed: () {
@@ -163,7 +163,8 @@ class AppointmentTileCustom extends StatelessWidget {
                             },
                           );
                         },
-                        icon: const Icon(Icons.info_outline, color: Colors.blue))
+                        icon:
+                            const Icon(Icons.info_outline, color: Colors.blue))
                   ],
                 ),
               )

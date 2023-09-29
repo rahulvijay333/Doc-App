@@ -51,8 +51,8 @@ class ScreenSpeciality extends StatelessWidget {
                       Expanded(
                           child: Text(
                         speciality.name!,
-                        style: const TextStyle(
-                            fontSize: 20,
+                        style:  TextStyle(
+                            fontSize: size.width * 0.04,
                             color: Colors.white,
                             fontWeight: FontWeight.bold),
                       )),

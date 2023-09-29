@@ -91,7 +91,7 @@ class _ScreenBookingState extends State<ScreenBooking> {
                         child: Text(
                           'Doctor details',
                           style: TextStyle(
-                              fontSize: size.width * 0.05,
+                              fontSize: size.width * 0.04,
                               color: Colors.blue,
                               fontWeight: FontWeight.w500),
                         ),
@@ -163,7 +163,7 @@ class _ScreenBookingState extends State<ScreenBooking> {
                         child: Text(
                           'Date',
                           style: TextStyle(
-                              fontSize: size.width * 0.05,
+                              fontSize: size.width * 0.04,
                               color: Colors.blue,
                               fontWeight: FontWeight.w500),
                         ),
@@ -184,20 +184,22 @@ class _ScreenBookingState extends State<ScreenBooking> {
                                 color: Colors.blue.withOpacity(0.2),
                                 child: Center(
                                     child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Icon(
                                       Icons.calendar_month,
                                       color: appBackGround,
                                       size: size.width * 0.5 * 0.13,
                                     ),
+                                    SizedBox(
+                                      width: size.width * 0.5 * 0.1,
+                                    ),
                                     Text(
                                       DateFormat('dd MMM ,y')
                                           .format(selectedDate),
                                       // '${selectedDate.toLocal()}'.split(' ')[0],
                                       style: TextStyle(
-                                          fontSize: size.width * 0.04),
+                                          fontSize: size.width * 0.5 * 0.08),
                                     ),
                                   ],
                                 ))),
@@ -213,7 +215,7 @@ class _ScreenBookingState extends State<ScreenBooking> {
                         child: Text(
                           'Available slots',
                           style: TextStyle(
-                              fontSize: size.width * 0.05,
+                              fontSize: size.width * 0.04,
                               color: Colors.blue,
                               fontWeight: FontWeight.w500),
                         ),
@@ -346,8 +348,7 @@ class _ScreenBookingState extends State<ScreenBooking> {
                                                       ? Colors.blue
                                                           .withOpacity(0.5)
                                                       : Colors.white
-                                                  : Colors
-                                                      .white,
+                                                  : Colors.white,
                                               child: Padding(
                                                 padding:
                                                     const EdgeInsets.all(8.0),
@@ -429,28 +430,26 @@ class _ScreenBookingState extends State<ScreenBooking> {
                             }
                             //----------------------------------------------------------------------selected slot state
                             else if (state is BookingTrackerSelected) {
-                              return Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Center(
-                                    child: SizedBox(
-                                      height: 40,
-                                      width: 150,
-                                      child: ElevatedButton(
-                                          onPressed: () {
-                                            //-----------------------------------------------booking proceed next
-
-                                            context
-                                                .read<BookingTrackerBloc>()
-                                                .add(BookingStartApiCallOrderID(
-                                                    bookingDetails:
-                                                        state.bookingDetails,
-                                                    doct: state.doct));
-                                          },
-                                          child: const Text('Proceed')),
-                                    ),
-                                  )
-                                ],
+                              return Center(
+                                child: SizedBox(
+                                  height: 40,
+                                  width: size.width * 0.40,
+                                  child: ElevatedButton(
+                                      onPressed: () {
+                                        //-----------------------------------------------booking proceed next
+                              
+                                        context.read<BookingTrackerBloc>().add(
+                                            BookingStartApiCallOrderID(
+                                                bookingDetails:
+                                                    state.bookingDetails,
+                                                doct: state.doct));
+                                      },
+                                      child:   Text(
+                                          'Proceed',
+                                          style: TextStyle(
+                                              fontSize: size.width * 0.40 * 0.08),
+                                        )),
+                                ),
                               );
                             }
 
@@ -459,7 +458,7 @@ class _ScreenBookingState extends State<ScreenBooking> {
                               return Center(
                                 child: SizedBox(
                                   height: 40,
-                                  width: 150,
+                                  width: size.width * 0.40,
                                   child: ElevatedButton(
                                       onPressed: () {
                                         //-----------------------------------------------booking not selected error
@@ -472,16 +471,19 @@ class _ScreenBookingState extends State<ScreenBooking> {
                                                 content: Text(
                                                     'select slot to proceed')));
                                       },
-                                      child: const Text('Proceed')),
+                                      child: Text(
+                                        'Proceed',
+                                        style: TextStyle(
+                                            fontSize: size.width * 0.40 * 0.08),
+                                      )),
                                 ),
                               );
                             } else if (state is BookingGotOrderID) {
-                              
-
                               //--------------------------------------if order id is received move to confirmation page
                               WidgetsBinding.instance
                                   .addPostFrameCallback((timeStamp) {
-                                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                                Navigator.of(context)
+                                    .pushReplacement(MaterialPageRoute(
                                   builder: (context1) {
                                     return ScreenConfirmBooking(
                                       bookingdetails: state.bookingDetails,
@@ -600,12 +602,11 @@ class AppbarCustom extends StatelessWidget {
                 Icons.arrow_back_ios_new,
                 color: Colors.white,
               )),
-          const Expanded(
-              child: Text(
+           Text(
             'Appointment',
             style: TextStyle(
-                fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
-          )),
+             fontSize: size.width *0.04, color: Colors.white,),
+          ),
         ],
       ),
     );

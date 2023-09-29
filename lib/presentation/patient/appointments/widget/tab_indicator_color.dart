@@ -1,3 +1,4 @@
+import 'package:appoint_medic/core/color_constants.dart';
 import 'package:flutter/material.dart';
 
 class IndicatorContainer extends Decoration {
@@ -12,7 +13,7 @@ class _IndicatorContainerBoxPainter extends BoxPainter {
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
     final Rect rect = Offset(offset.dx, offset.dy + 35.0) &
         Size(configuration.size!.width / 20, 20.0);
-    final Paint paint = Paint()..color = Colors.blue; //
+    final Paint paint = Paint()..color = appBackGround; //
 
     canvas.drawRect(rect, paint);
   }

@@ -40,7 +40,7 @@ class ScreenMesgsPatient extends StatelessWidget {
                   child: Text(
                     'Messages',
                     style: TextStyle(
-                        fontSize: 25,
+                        fontSize: size.width * 0.055,
                         color: appBackGround,
                         fontWeight: FontWeight.bold),
                   ),

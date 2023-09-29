@@ -4,6 +4,8 @@ import 'package:appoint_medic/presentation/patient/appointments/widget/screen_vi
 
 import 'package:flutter/material.dart';
 
+import '../../../core/color_constants.dart';
+
 
 class ScreenAppointments extends StatelessWidget {
   const ScreenAppointments({super.key});
@@ -24,12 +26,12 @@ class ScreenAppointments extends StatelessWidget {
             children: [
               SizedBox(
                 height: size.height * 0.07,
-                child: const Center(
+                child:  Center(
                   child: Text(
                     'Appointments',
                     style: TextStyle(
-                        fontSize: 25,
-                        color: Colors.blue,
+                        fontSize: size.width * 0.055,
+                        color: appBackGround,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -42,21 +44,21 @@ class ScreenAppointments extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Container(
-                    color: Colors.blue.withOpacity(0.1),
+                    color: appBackGround.withOpacity(0.1),
                     //height: 40,
-                    height: size.height * 0.06,
+                    height: 50,
 
                     child: Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: TabBar(
                           physics: const NeverScrollableScrollPhysics(),
                           labelStyle: TextStyle(
-                            fontSize: size.width * 0.03,
+                            fontSize: size.width * 0.025,
                           ),
                           labelColor: Colors.white,
                           unselectedLabelColor: Colors.black,
                           indicator: BoxDecoration(
-                            color: Colors.blue.withOpacity(0.8),
+                            color:  appBackGround.withOpacity(0.8),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           tabs: const [

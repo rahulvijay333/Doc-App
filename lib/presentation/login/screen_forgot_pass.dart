@@ -61,7 +61,7 @@ class ScreenForgotPassword extends StatelessWidget {
                     builder: (context, state) {
                       if (state is ForgotPasswordInitial) {
                         return const Center(
-                          child: Text('Forgot password'),
+                          child: Text('Forgot password ?'),
                         );
                       } else if (state is ForgotPasswordEnterEmail) {
                         return EnterEmailWidget(

@@ -27,7 +27,7 @@ class EnterEmailWidget extends StatelessWidget {
         Text(
           title,
           style: TextStyle(
-              fontSize: size.width * 0.07, fontWeight: FontWeight.w500),
+              fontSize: size.width * 0.05, fontWeight: FontWeight.w500),
         ),
         SizedBox(
           height: size.height * 0.03,
@@ -36,7 +36,7 @@ class EnterEmailWidget extends StatelessWidget {
         Text(
           'Please confirm your email',
           style: TextStyle(
-              fontSize: size.width * 0.04,
+              fontSize: size.width * 0.035,
               color: Colors.black.withOpacity(0.8)),
         ),
         SizedBox(
@@ -91,7 +91,7 @@ class EnterEmailWidget extends StatelessWidget {
 
                           //--------------------------------------------------------
                         },
-                        child: Text('Proceed'))),
+                        child: const Text('Proceed'))),
               ),
             ],
           ),

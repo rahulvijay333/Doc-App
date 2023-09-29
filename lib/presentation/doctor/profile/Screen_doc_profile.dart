@@ -3,6 +3,7 @@ import 'package:appoint_medic/application/forgot_password/bloc/forgot_password_b
 import 'package:appoint_medic/application/login/login_bloc.dart';
 import 'package:appoint_medic/application/navbar/navbar_bloc.dart';
 import 'package:appoint_medic/application/notifications/notificationStatus_track/bloc/notification_track_bloc.dart';
+import 'package:appoint_medic/core/color_constants.dart';
 import 'package:appoint_medic/presentation/doctor/profile/widget/about_app.dart';
 import 'package:appoint_medic/presentation/doctor/profile/widget/privacyD.dart';
 import 'package:appoint_medic/presentation/doctor/profile/widget/screen_change_password.dart';
@@ -28,15 +29,15 @@ class ScreenDocProfile extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              // color: Colors.blue,
+             color: appBackGround,
               width: size.width,
               height: size.height * 0.07,
-              child: const Center(
+              child:  Center(
                 child: Text(
                   'Profile',
                   style: TextStyle(
-                      fontSize: 25,
-                      color: Colors.blue,
+                      fontSize: size.width * 0.055,
+                      color: Colors.white,
                       fontWeight: FontWeight.bold),
                 ),
               ),
@@ -134,9 +135,9 @@ class ScreenDocProfile extends StatelessWidget {
                                           },
                                         ));
                                       },
-                                      leading: const Icon(
+                                      leading:  Icon(
                                         Icons.person,
-                                        color: Colors.blue,
+                                        color: appBackGround
                                       ),
                                       title: const Text('Personal Details'),
                                       trailing: const Icon(
@@ -170,9 +171,9 @@ class ScreenDocProfile extends StatelessWidget {
                                           },
                                         ));
                                       },
-                                      leading: const Icon(
+                                      leading:  Icon(
                                         Icons.password,
-                                        color: Colors.blue,
+                                      color: appBackGround
                                       ),
                                       title: const Text('Change Password'),
                                       trailing: const Icon(
@@ -196,9 +197,9 @@ class ScreenDocProfile extends StatelessWidget {
                                           },
                                         ));
                                       },
-                                      leading: const Icon(
+                                      leading:  Icon(
                                         Icons.info,
-                                        color: Colors.blue,
+                                        color: appBackGround
                                       ),
                                       title: const Text('About'),
                                       trailing: const Icon(
@@ -222,9 +223,9 @@ class ScreenDocProfile extends StatelessWidget {
                                           },
                                         ));
                                       },
-                                      leading: const Icon(
+                                      leading:  Icon(
                                         Icons.book,
-                                        color: Colors.blue,
+                                       color: appBackGround
                                       ),
                                       title: const Text('Terms and Conditions'),
                                       trailing: const Icon(
@@ -247,9 +248,9 @@ class ScreenDocProfile extends StatelessWidget {
                                           },
                                         ));
                                       },
-                                      leading: const Icon(
+                                      leading:  Icon(
                                         Icons.security,
-                                        color: Colors.blue,
+                                        color: appBackGround
                                       ),
                                       title: const Text('Privacy'),
                                       trailing: const Icon(
@@ -335,9 +336,9 @@ class ScreenDocProfile extends StatelessWidget {
                                             );
                                             //--------------------------------------------------------logout function
                                           },
-                                          leading: const Icon(
+                                          leading:  Icon(
                                             Icons.logout,
-                                            color: Colors.blue,
+                                            color: appBackGround
                                           ),
                                           title: const Text('Log Out'),
                                         ),
