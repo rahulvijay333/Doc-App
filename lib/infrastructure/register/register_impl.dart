@@ -14,7 +14,7 @@ import 'package:dio/dio.dart';
 import '../../domain/response_models/create account/create_new_acount_response/create_new_acount_response.dart';
 
 class CreateServiceImpl {
-  Future<(String, CreateNewAcountResponse?)> createAccount(
+  Future<String> createAccount(
       {required CreateUserModel user, required String userType}) async {
     String apiEndPoint = '';
 
@@ -40,10 +40,10 @@ class CreateServiceImpl {
 
       //---------------------------------------------------------reponse checking
 
-      if (response.statusCode == 201) {
-        return ('', CreateNewAcountResponse.fromJson(response.data));
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return ('');
       } else {
-        return ('Error in service implemention', null);
+        return ('Error in service implemention');
       }
       //----------------------------------------error - verify admin or email verify
     } catch (error) {
@@ -51,15 +51,15 @@ class CreateServiceImpl {
         if (error.error is SocketException) {
           // Handle socket error here
 
-          return ('Error connecting to end point', null);
+          return ('Error connecting to end point');
         } else {
           final errorModel = CreateError.fromJson(error.response!.data);
 
-          return (errorModel.error, null);
+          return (errorModel.error);
         }
       }
 
-      return ('Some error occurred in api call', null);
+      return ('Some error occurred in api call');
     }
   }
 
@@ -77,8 +77,12 @@ class CreateServiceImpl {
         apiEndPoint = ApiEndPoints.doctorOtpVerify;
       }
 
+      log(apiEndPoint);
+
       final Response response = await Dio().put(apiEndPoint,
           data: jsonEncode({"email": userEmail, "otp": userOTP}));
+
+      log(response.data.toString());
 
       if (response.statusCode == 200) {
         return ('');
@@ -88,14 +92,11 @@ class CreateServiceImpl {
     } catch (error) {
       if (error is DioException) {
         if (error.error is SocketException) {
-          // Handle socket error here
-          log('Socket error occurred: ${error.error}');
-
-          return ('Error connecting to end point');
+          return ('Server connectivity issue ');
         } else {
-          // final errorModel = CreateError.fromJson(error.response!.data);
-          print('Dio error occurred: ${error}');
-          return (error.toString());
+          final errorModel = DisplayErrorOtp.fromJson(error.response!.data);
+
+          return (errorModel.errorMessage);
         }
       } else {
         return ('Error occured in OTP verification');

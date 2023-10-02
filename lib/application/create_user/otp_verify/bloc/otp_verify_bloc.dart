@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:appoint_medic/infrastructure/register/register_impl.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -25,6 +27,7 @@ class OtpVerifyBloc extends Bloc<OtpVerifyEvent, OtpVerifyState> {
     });
 
     on<ClearOtpVerifyState>((event, emit) {
+      log('otp state cleared');
       emit(OtpVerifyInitial());
     });
   }

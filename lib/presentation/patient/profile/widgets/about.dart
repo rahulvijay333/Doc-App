@@ -69,7 +69,7 @@ class ScreenAbout extends StatelessWidget {
                     ),
                      SizedBox(height: 16.0),
                      Text(
-                      'Welcome to AppointMedic, your trusted partner in accessing quality healthcare on your terms. At Appointment, we are dedicated to revolutionizing the way you connect with healthcare professionals. Our mission is simple: to bridge the gap between patients and doctors seamlessly and efficiently.',
+                      'Welcome to AppointMedic, your trusted partner in accessing quality healthcare on your terms. At AppointMedic, we are dedicated to revolutionizing the way you connect with healthcare professionals. Our mission is simple: to bridge the gap between patients and doctors seamlessly and efficiently.',
                       style: TextStyle(fontSize: 16.0),
                     ),
                      SizedBox(height: 16.0),

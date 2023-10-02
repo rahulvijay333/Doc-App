@@ -31,7 +31,7 @@ class EnterNewPasswordWidget extends StatelessWidget {
         Text(
           'Enter new password',
           style: TextStyle(
-              fontSize: size.width * 0.06, fontWeight: FontWeight.w500),
+              fontSize: size.width * 0.05, fontWeight: FontWeight.w500),
         ),
         SizedBox(
           height: size.height * 0.03,

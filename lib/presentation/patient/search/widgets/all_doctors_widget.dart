@@ -52,7 +52,6 @@ class AllDoctorWidget extends StatelessWidget {
                               child: Container(
                                   width: size.width * 0.25,
                                   height: 110,
-                                
                                   child: state.doctorList[index]
                                               .profilePicture !=
                                           null
@@ -135,38 +134,26 @@ class AllDoctorWidget extends StatelessWidget {
                                   const SizedBox(
                                     height: 5,
                                   ),
-
-                            
-                                  const Row(
+                                  Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Row(
                                         children: [
-                                          Icon(
+                                          const Icon(
                                             Icons.location_on,
-                                            size: 15,
+                                            size: 15,color: Colors.green,
                                           ),
                                           Text(
-                                            'Calicut,Kerala',
+                                            '${state.doctorList[index].address?.city ?? 'Trivandrum'},${state.doctorList[index].address?.state ?? 'Kerala'}',
                                             maxLines: 1,
-                                            style: TextStyle(fontSize: 12),
+                                            style: TextStyle(
+                                                fontSize: size.width * 0.030),
                                           )
                                         ],
                                       ),
-                                      // RatingBarIndicator(
-                                      //   rating: 4,
-                                      //   itemSize: 18,
-                                      //   itemBuilder:
-                                      //       (context, index) {
-                                      //     return const Icon(
-                                      //         Icons.star,
-                                      //         color: Colors.orange);
-                                      //   },
-                                      // ),
                                     ],
                                   ),
-                                  // const Text(' ₹ 500 Rs'),
                                   ElevatedButton(
                                     onPressed: () {
                                       //-----------------------------------------booking
@@ -195,7 +182,7 @@ class AllDoctorWidget extends StatelessWidget {
                 );
               },
               separatorBuilder: (context, index) {
-                return SizedBox(
+                return const SizedBox(
                   height: 10,
                 );
               },

@@ -20,6 +20,7 @@ class AppointmentTile extends StatelessWidget {
     required this.bookID,
     required this.isCancelled,
     required this.patientID,
+    required this.reason
   });
 
   final String patientName;
@@ -32,6 +33,7 @@ class AppointmentTile extends StatelessWidget {
   final bool isCancelled;
   final String bookID;
   final String patientID;
+  final String reason;
 
   @override
   Widget build(BuildContext context) {
@@ -65,17 +67,19 @@ class AppointmentTile extends StatelessWidget {
                     child: Container(
                       // height: size.width * 0.16,
                       width: size.width * 0.16,
-                      child: Image.network(
+                      child: patientImage.isNotEmpty ?
+                      
+                      
+                      Image.network(
                         patientImage,
                         fit: BoxFit.cover,
-                      ),
+                      ) :Image.asset('assets/patient.png'),
                     ),
                   ),
                   Container(
                     //  color: Colors.red,
                     width: size.width * 0.24,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                    child: Center(
                       child: Text(
                         formatedDate,
                         style: TextStyle(
@@ -99,19 +103,20 @@ class AppointmentTile extends StatelessWidget {
                       Text(
                         patientName,
                         maxLines: 1,
-                        style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w500),
+                        style:  TextStyle(
+                            fontSize: size.width * 0.05, fontWeight: FontWeight.w500),
                       ),
                       Text(emailID,
                           style: TextStyle(
-                              fontSize: 14,
+                             fontSize: size.width*0.03,
                               color: Colors.black.withOpacity(0.5))),
-                      const SizedBox(
-                        height: 10,
+                       SizedBox(
+                         height: size.width*0.02,
                       ),
-                      Text('Slot : $startTime - $endTime'),
-                      const SizedBox(
-                        height: 10,
+                      Text('Slot : $startTime - $endTime', style:  TextStyle(
+                            fontSize: size.width * 0.035)),
+                       SizedBox(
+                          height: size.width*0.02,
                       ),
                       //---------------------condition here
                       Row(
@@ -165,21 +170,49 @@ class AppointmentTile extends StatelessWidget {
                 ),
               ),
               Center(
-                child: IconButton(
-                    onPressed: () {
-                      //------------------------------------------message function
-                      BlocProvider.of<CreateChatDocBloc>(context)
-                          .add(StartChat(userID: patientID));
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) {
-                          return ScreenCreateChatDoc();
+                child: Column(
+                  children: [
+                    IconButton(
+                        onPressed: () {
+                          //------------------------------------------message function
+                          BlocProvider.of<CreateChatDocBloc>(context)
+                              .add(StartChat(userID: patientID));
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) {
+                              return const ScreenCreateChatDoc();
+                            },
+                          ));
                         },
-                      ));
-                    },
-                    icon: Icon(
-                      Icons.message_outlined,
-                      color: Colors.blue,
-                    )),
+                        icon: const Icon(
+                          Icons.message_outlined,
+                          color: Colors.blue,
+                        )),
+                          IconButton(
+                        onPressed: () {
+                          //show reason for booking
+                             showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: const Text('Medical Reason'),
+                                content: Text(
+                                  reason.isEmpty ? "NA" : reason,
+                                  maxLines: 3,style: TextStyle(color: Colors.black.withOpacity(0.5))
+                                ),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text('OK'))
+                                ],
+                              );
+                            },
+                          );
+                        },
+                        icon: const Icon(Icons.info_outline, color: Colors.blue))
+                  ],
+                ),
               )
             ],
           ),

@@ -1,3 +1,5 @@
+
+
 import 'package:appoint_medic/application/searchByCatergory/search_by_category_bloc.dart';
 import 'package:appoint_medic/core/color_constants.dart';
 import 'package:appoint_medic/domain/response_models/get_specialities_response/speciality.dart';
@@ -16,6 +18,7 @@ class ScreenSpeciality extends StatelessWidget {
     BlocProvider.of<SearchByCategoryBloc>(context)
         .add(SearchDoctorBySpeciality(speciality.id!));
     final size = MediaQuery.of(context).size;
+   
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -31,7 +34,7 @@ class ScreenSpeciality extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                 height: size.height * 0.07,
+                  height: size.height * 0.07,
                   color: appBackGround,
                   child: Row(
                     children: [
@@ -48,8 +51,8 @@ class ScreenSpeciality extends StatelessWidget {
                       Expanded(
                           child: Text(
                         speciality.name!,
-                        style: const TextStyle(
-                            fontSize: 20,
+                        style:  TextStyle(
+                            fontSize: size.width * 0.04,
                             color: Colors.white,
                             fontWeight: FontWeight.bold),
                       )),
@@ -102,7 +105,7 @@ class ScreenSpeciality extends StatelessWidget {
                                             child: Container(
                                               width: size.width * 0.28,
                                               height: 110,
-                                              color: Colors.grey,
+                                              
                                               child: Image.network(
                                                 state
                                                         .searchCatResults[index]
@@ -169,35 +172,44 @@ class ScreenSpeciality extends StatelessWidget {
                                                 const SizedBox(
                                                   height: 5,
                                                 ),
-                                                Text(state
-                                                    .searchCatResults[index]
-                                                    .speciality!
-                                                    .name!),
-                                                const SizedBox(
-                                                  height: 10,
+                                                Row(
+                                                  children: [
+                                                    const Icon(
+                                                      Icons.medical_information,
+                                                      size: 15,
+                                                    ),
+                                                    Text(state
+                                                        .searchCatResults[index]
+                                                        .speciality!
+                                                        .name!),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: size.height * 0.01,
                                                 ),
 
                                                 // const SizedBox(
                                                 //   height: 0,
                                                 // ),
                                                 //-------------------------------------------location & rating
-                                                const Row(
+                                                Row(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment
                                                           .spaceBetween,
                                                   children: [
                                                     Row(
                                                       children: [
-                                                        Icon(
+                                                        const Icon(
                                                           Icons.location_on,
                                                           size: 15,
                                                           color: Colors.green,
                                                         ),
                                                         Text(
-                                                          'Calicut,Kerala',
+                                                          '${state.searchCatResults[index].address?.city ?? "Trivandrum"},${state.searchCatResults[index].address?.state ?? 'Kerala'}',
                                                           maxLines: 1,
-                                                          style: TextStyle(
-                                                              fontSize: 12),
+                                                          style:
+                                                              const TextStyle(
+                                                                  fontSize: 12),
                                                         )
                                                       ],
                                                     ),
@@ -242,8 +254,24 @@ class ScreenSpeciality extends StatelessWidget {
                             },
                             itemCount: state.searchCatResults.length);
                       } else if (state is SearchByCategoryFailure) {
+
+
+                        
                         return Center(
-                          child: Text(state.errorMessage),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('No doctors Available'),
+                              IconButton(
+                                  onPressed: () {
+                                    BlocProvider.of<SearchByCategoryBloc>(
+                                            context)
+                                        .add(SearchDoctorBySpeciality(
+                                            speciality.id!));
+                                  },
+                                  icon: Icon(Icons.refresh))
+                            ],
+                          ),
                         );
                       }
 

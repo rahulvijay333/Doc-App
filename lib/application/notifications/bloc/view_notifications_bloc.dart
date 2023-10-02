@@ -28,7 +28,6 @@ class ViewNotificationsBloc
           emit(NotificationsSuccess(notificationList: response.notification!));
         }
       } else {
-      
         emit(NotificationsFailed('Error happened While Checking Notification'));
       }
     });
@@ -36,13 +35,8 @@ class ViewNotificationsBloc
     on<NotificationMarkRead>((event, emit) async {
       final response = await notificationService.markReadNotification();
 
-      if(response.isEmpty){
-      
-      } else {
-        
-      }
-
-
+      if (response.isEmpty) {
+      } else {}
     });
   }
 }

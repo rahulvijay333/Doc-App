@@ -50,6 +50,7 @@ class ScreenForgotPassword extends StatelessWidget {
                           Icons.arrow_back_ios_new,
                           color: Colors.white,
                         )),
+                        Text('Reset Password',style: TextStyle(fontSize: size.width * 0.04,color: Colors.white),)
                   ],
                 ),
               ),
@@ -60,7 +61,7 @@ class ScreenForgotPassword extends StatelessWidget {
                     builder: (context, state) {
                       if (state is ForgotPasswordInitial) {
                         return const Center(
-                          child: Text('Forgot password'),
+                          child: Text('Forgot password ?'),
                         );
                       } else if (state is ForgotPasswordEnterEmail) {
                         return EnterEmailWidget(

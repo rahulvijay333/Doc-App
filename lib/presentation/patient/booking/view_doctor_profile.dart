@@ -10,7 +10,6 @@ class ScreenViewDoctorProfileBook extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  
     final size = MediaQuery.of(context).size;
     return SafeArea(
         child: DefaultTabController(
@@ -18,7 +17,7 @@ class ScreenViewDoctorProfileBook extends StatelessWidget {
       child: Scaffold(
         body: Column(
           children: [
-              Container(
+            Container(
               height: size.height * 0.07,
               color: Colors.blue,
               child: Row(
@@ -33,27 +32,24 @@ class ScreenViewDoctorProfileBook extends StatelessWidget {
                         Icons.arrow_back_ios_new,
                         color: Colors.white,
                       )),
-                  const Text(
+                  Text(
                     'View Profile',
                     style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
+                      fontSize: size.width * 0.04,
+                      color: Colors.white,
+                    ),
                   ),
                 ],
               ),
             ),
             Expanded(
               child: ListView(
-                physics: ScrollPhysics(),
+                physics: const ScrollPhysics(),
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                
                   Container(
                     //-------------------------------------------------------------------profile image
-                    // color: Colors.amber,
-                    // width: size.width * 0.50,
-                    // height: size.height * 0.30 * 0.80,
+
                     height: size.height * 0.35,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(0),
@@ -62,9 +58,11 @@ class ScreenViewDoctorProfileBook extends StatelessWidget {
                             fit: BoxFit.cover,
                             image: doctor.profilePicture == null
                                 ? doctor.gender == 'female'
-                                    ? const AssetImage('assets/female_doctor.png')
+                                    ? const AssetImage(
+                                        'assets/female_doctor.png')
                                     : const AssetImage('assets/doctor_male.png')
-                                : NetworkImage(doctor.profilePicture!.secureUrl!)
+                                : NetworkImage(
+                                        doctor.profilePicture!.secureUrl!)
                                     as ImageProvider)),
                   ),
                   Padding(
@@ -100,12 +98,12 @@ class ScreenViewDoctorProfileBook extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 15.0, right: 15),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(10),
                           topRight: Radius.circular(10)),
                       child: Container(
                         color: Colors.blue.withOpacity(0.1),
-                        child: TabBar(labelColor: Colors.blue, tabs: [
+                        child: const TabBar(labelColor: Colors.blue, tabs: [
                           Tab(
                             text: 'About',
                           ),
@@ -116,7 +114,7 @@ class ScreenViewDoctorProfileBook extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Padding(
@@ -125,25 +123,30 @@ class ScreenViewDoctorProfileBook extends StatelessWidget {
                       // color: Colors.red,
                       height: 150,
                       child: TabBarView(children: [
-                        Text(
-                          aboutSection,
-                          style: TextStyle(color: Colors.black.withOpacity(0.6)),
-                        ),
                         Center(
+                          child: Text(
+                            // aboutSection,
+                            'About Section',
+
+                            style:
+                                TextStyle(color: Colors.black.withOpacity(0.6)),
+                          ),
+                        ),
+                        const Center(
                           child: Text('Reviews(comming soon)'),
                         ),
                       ]),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 8,
                   ),
                   Center(
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(8),
                       child: SizedBox(
-                        height: size.width * 0.12,
-                        width: size.width * 0.5,
+                        height: 40,
+                        width: size.width * 0.4,
                         child: ElevatedButton(
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
@@ -152,7 +155,10 @@ class ScreenViewDoctorProfileBook extends StatelessWidget {
                               },
                             ));
                           },
-                          child: Text('Book Appointment',style: TextStyle(fontSize: size.width * 0.5 *0.09),),
+                          child: Text(
+                            'Book',
+                            style: TextStyle(fontSize: size.width * 0.4 * 0.08),
+                          ),
                         ),
                       ),
                     ),

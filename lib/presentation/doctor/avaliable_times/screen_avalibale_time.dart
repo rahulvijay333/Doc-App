@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
+import '../../../core/color_constants.dart';
+
 class ScreenAvailableTime extends StatefulWidget {
   const ScreenAvailableTime({
     super.key,
@@ -25,7 +27,7 @@ class _ScreenAvailableTimeState extends State<ScreenAvailableTime> {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: selectedDate,
-      firstDate: DateTime(2020),
+      firstDate: DateTime.now(),
       lastDate: DateTime(2101),
     );
 
@@ -82,12 +84,12 @@ class _ScreenAvailableTimeState extends State<ScreenAvailableTime> {
           Container(
             height: size.height * 0.07,
             width: size.width,
-            color: Colors.blue,
-            child: const Center(
+            color: appBackGround,
+            child:  Center(
               child: Text(
                 'Available Timings',
                 style: TextStyle(
-                    fontSize: 22,
+                    fontSize: size.width * 0.055,
                     color: Colors.white,
                     fontWeight: FontWeight.bold),
               ),
@@ -96,9 +98,9 @@ class _ScreenAvailableTimeState extends State<ScreenAvailableTime> {
           Padding(
             padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
             child: Container(
-              child: const Text(
+              child:  Text(
                 'Date',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: size.width * 0.04, fontWeight: FontWeight.w500),
               ),
             ),
           ),
@@ -121,12 +123,13 @@ class _ScreenAvailableTimeState extends State<ScreenAvailableTime> {
                     color: Colors.white,
                     child: Center(
                         child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Icon(Icons.calendar_month),
+                        SizedBox(width: size.width *0.4*0.02,),
                         Text(
                           selectedDateFormatted,
-                          style: TextStyle(fontSize: size.width * 0.4 * 0.12),
+                          style: TextStyle(fontSize: size.width * 0.4 * 0.10),
                         ),
                       ],
                     ))),
@@ -136,9 +139,9 @@ class _ScreenAvailableTimeState extends State<ScreenAvailableTime> {
           Padding(
             padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
             child: Container(
-              child: const Text(
+              child:  Text(
                 'Slots',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: size.width * 0.04, fontWeight: FontWeight.w500),
               ),
             ),
           ),
@@ -176,11 +179,13 @@ class _ScreenAvailableTimeState extends State<ScreenAvailableTime> {
                               itemCount:
                                   state.slotlist.filteredSlots![0].slots!.length,
                               gridDelegate:
-                                  const SliverGridDelegateWithMaxCrossAxisExtent(
+                                   SliverGridDelegateWithMaxCrossAxisExtent(
                                       mainAxisExtent: 40,
-                                      mainAxisSpacing: 20,
-                                      crossAxisSpacing: 20,
-                                      maxCrossAxisExtent: 200),
+                                      // mainAxisSpacing: 20,
+                                      crossAxisSpacing: size.width * 0.01,
+                                      maxCrossAxisExtent: size.width*0.46
+                                      
+                                      ),
                               itemBuilder: (context, index) {
                                 return ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
@@ -206,7 +211,7 @@ class _ScreenAvailableTimeState extends State<ScreenAvailableTime> {
                                               style: TextStyle(
                                                   fontSize: size.width > 600
                                                       ? 18
-                                                      : size.width * 0.5 * 0.07),
+                                                      : size.width * 0.46 * 0.07),
                                             ),
                                           ),
                                           Expanded(
@@ -296,11 +301,15 @@ class _ScreenAvailableTimeState extends State<ScreenAvailableTime> {
             height: size.height * 0.01,
           ),
           Center(
-            child: ElevatedButton(
-                onPressed: () {
-                  _addSlot(context, selectedDate);
-                },
-                child: const Text('Add Slot')),
+            child: SizedBox(
+              width: size.width *0.4,
+              height: 40,
+              child: ElevatedButton(
+                  onPressed: () {
+                    _addSlot(context, selectedDate);
+                  },
+                  child:  Text('Add Slot',style: TextStyle(fontSize: size.width * 0.4 *0.08),)),
+            ),
           )
           //--------------------------------------------------------------------date
         ],

@@ -21,7 +21,7 @@ class ProfileTileCustom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      //  color: Colors.red,
+        // color: Colors.red,
       width: size.width,
       height: size.height * 0.3 * 0.50,
       child: Center(
@@ -29,8 +29,8 @@ class ProfileTileCustom extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            const SizedBox(
-              width: 5,
+             SizedBox(
+              width: size.width*0.01,
             ),
             ClipRRect(
               borderRadius: BorderRadius.circular(15),
@@ -43,8 +43,8 @@ class ProfileTileCustom extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(
-              width: 5,
+             SizedBox(
+              width: size.width*0.01,
             ),
             Container(
                 height: size.height * 0.3 * 0.30,
@@ -59,7 +59,8 @@ class ProfileTileCustom extends StatelessWidget {
                           fontSize: size.width*0.6*0.06,
                         )),
                     SizedBox(height: size.height * 0.3 * 0.40 * 0.05),
-                    Text('Dr.${doctorDetails.fullName}',
+                    Text('Dr.${doctorDetails.fullName}',maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                         style:  TextStyle(
                             color: Colors.white,
                             fontSize: size.width*0.6*0.1,
@@ -104,9 +105,7 @@ class ProfileTileCustom extends StatelessWidget {
                     notificationCount: state.notificationCount);
               },
             ))
-            // IconButton(onPressed: () {
-
-            // }, icon: Icon(Icons.notifications))
+         
           ],
         ),
       ),

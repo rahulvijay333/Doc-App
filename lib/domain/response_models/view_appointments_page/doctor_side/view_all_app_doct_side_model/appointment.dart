@@ -18,6 +18,7 @@ class Appointment {
   String? slotId;
   String? paymentId;
   String? orderId;
+  String? reason;
   bool? isApprovedByDoctor;
   bool? isCancelled;
   bool? isRefund;

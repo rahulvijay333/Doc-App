@@ -42,7 +42,7 @@ class DoctorPrivacyPolicyWidget extends StatelessWidget {
                      
                       SizedBox(height: 16.0),
                       Text(
-                        'This  Privacy Policy describes how we collect, use, and protect your personal information as a registered doctor on the Doccure app.',
+                        'This  Privacy Policy describes how we collect, use, and protect your personal information as a registered doctor on the AppointMedic app.',
                         style: TextStyle(fontSize: 16.0),
                       ),
                       SizedBox(height: 16.0),
@@ -55,7 +55,7 @@ class DoctorPrivacyPolicyWidget extends StatelessWidget {
                       ),
                       SizedBox(height: 8.0),
                       Text(
-                        'When you register as a doctor on the Doccure app, we collect the following types of information:',
+                        'When you register as a doctor on the AppointMedic app, we collect the following types of information:',
                         style: TextStyle(fontSize: 16.0),
                       ),
                       SizedBox(height: 8.0),
@@ -183,7 +183,7 @@ class DoctorPrivacyPolicyWidget extends StatelessWidget {
                       ),
                       SizedBox(height: 8.0),
                       Text(
-                        'If you have any questions or concerns about this Doctor Privacy Policy or our practices, please contact our support team at [your contact email or phone number].',
+                        'If you have any questions or concerns about this Doctor Privacy Policy or our practices, please contact our support team at domain.test.mail333@gmail.com.',
                         style: TextStyle(fontSize: 16.0),
                       ),
                     ],

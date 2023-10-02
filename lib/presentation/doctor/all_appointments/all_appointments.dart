@@ -4,6 +4,8 @@ import 'package:appoint_medic/presentation/doctor/all_appointments/widgets/cance
 import 'package:appoint_medic/presentation/doctor/all_appointments/widgets/pending.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/color_constants.dart';
+
 class ScreenAllAppointments extends StatelessWidget {
   const ScreenAllAppointments({super.key});
 
@@ -19,13 +21,13 @@ class ScreenAllAppointments extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                color: Colors.blue,
+                color: appBackGround,
                 height: size.height * 0.07,
-                child: const Center(
+                child: Center(
                   child: Text(
                     'Appointments',
                     style: TextStyle(
-                        fontSize: 25,
+                        fontSize: size.width * 0.055,
                         color: Colors.white,
                         fontWeight: FontWeight.bold),
                   ),
@@ -38,7 +40,7 @@ class ScreenAllAppointments extends StatelessWidget {
                   child: Container(
                     color: Colors.white,
                     //height: 40,
-                    height: size.height * 0.06,
+                    height: 50,
 
                     child: Padding(
                       padding: const EdgeInsets.all(5.0),
@@ -50,32 +52,36 @@ class ScreenAllAppointments extends StatelessWidget {
                           labelColor: Colors.white,
                           unselectedLabelColor: Colors.black,
                           indicator: BoxDecoration(
-                            color: Colors.blue.withOpacity(0.8),
+                            color: appBackGround.withOpacity(0.8),
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          tabs: const [
+                          tabs: [
                             Tab(
                               iconMargin: EdgeInsets.only(),
                               child: Text(
                                 'Approved',
+                                style: TextStyle(fontSize: size.width * 0.028),
                               ),
                             ),
                             Tab(
                               //text: 'today',
                               child: Text(
                                 'Pending',
+                                style: TextStyle(fontSize: size.width * 0.028),
                               ),
                             ),
                             Tab(
                               //text: 'today',
                               child: Text(
                                 'Cancelled ',
+                                style: TextStyle(fontSize: size.width * 0.028),
                               ),
                             ),
                             Tab(
                               //text: 'today',
                               child: Text(
                                 'All ',
+                                style: TextStyle(fontSize: size.width * 0.028),
                               ),
                             ),
                           ]),
@@ -83,11 +89,11 @@ class ScreenAllAppointments extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 5,
+              Container(
+                height: size.height * 0.02,
               ),
               Container(
-                height: size.height * 0.7,
+                height: size.height * 0.70,
                 // color: Colors.amber,
                 child: const Padding(
                   padding: EdgeInsets.only(left: 15.0, right: 15),

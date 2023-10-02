@@ -33,12 +33,12 @@ class ScreenProfile extends StatelessWidget {
               // color: Colors.blue,
               width: size.width,
               height: size.height * 0.07,
-              child: const Center(
+              child:  Center(
                 child: Text(
                   'Profile',
                   style: TextStyle(
-                      fontSize: 25,
-                      color: Colors.blue,
+                      fontSize: size.width * 0.055,
+                      color: appBackGround,
                       fontWeight: FontWeight.bold),
                 ),
               ),
@@ -61,70 +61,68 @@ class ScreenProfile extends StatelessWidget {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: Container(
-                                width: size.width * 0.8,
-                                //  color: Colors.yellow,
+                                width:
+                                    size.width > 800 ? 700 : size.width * 0.8,
+                                // color: Colors.yellow,
                                 height: size.height * 0.30,
                                 //-------------------------------------------------------------profile bloc
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Container(
-                                      width: size.width * 0.8 * 0.50,
-                                      //  color: Colors.red,
-                                      height: size.width * 0.8 * 0.50,
-                                      child: CircleAvatar(
-                                        backgroundColor: Colors.white,
-                                        // radius: 80,
-                                        child: ClipOval(
-                                            child: state
-                                                        .userProfile
-                                                        .user!
-                                                        .profilePicture
-                                                        ?.secureUrl !=
-                                                    null
-                                                ? Image.network(
-                                                    state
-                                                        .userProfile
-                                                        .user!
-                                                        .profilePicture!
-                                                        .secureUrl!,
-                                                    fit: BoxFit.cover,
-                                                    width: 160,
-                                                    height: 160,
-                                                    errorBuilder: (context,
-                                                        error, stackTrace) {
-                                                      return Image.asset(
-                                                          'assets/patient.png');
-                                                    },
-                                                    loadingBuilder: (context,
-                                                        child,
-                                                        loadingProgress) {
-                                                      if (loadingProgress ==
-                                                          null) {
-                                                        return child;
-                                                      }
+                                    CircleAvatar(
+                                      backgroundColor: Colors.white,
+                                      radius: 80,
+                                      child: ClipOval(
+                                          child: state
+                                                      .userProfile
+                                                      .user!
+                                                      .profilePicture
+                                                      ?.secureUrl !=
+                                                  null
+                                              ? Image.network(
+                                                  state
+                                                      .userProfile
+                                                      .user!
+                                                      .profilePicture!
+                                                      .secureUrl!,
+                                                  fit: BoxFit.cover,
+                                                  width: 160,
+                                                  height: 160,
+                                                  errorBuilder: (context,
+                                                      error, stackTrace) {
+                                                    return Image.asset(
+                                                        'assets/patient.png');
+                                                  },
+                                                  loadingBuilder: (context,
+                                                      child,
+                                                      loadingProgress) {
+                                                    if (loadingProgress ==
+                                                        null) {
+                                                      return child;
+                                                    }
 
-                                                      return const Center(
-                                                        child:
-                                                            CircularProgressIndicator(
-                                                          strokeWidth: 1,
-                                                        ),
-                                                      );
-                                                    },
-                                                  )
-                                                : Image.asset(
-                                                    'assets/patient.png')),
-                                      ),
+                                                    return const Center(
+                                                      child:
+                                                          CircularProgressIndicator(
+                                                        strokeWidth: 1,
+                                                      ),
+                                                    );
+                                                  },
+                                                )
+                                              : Image.asset(
+                                                  'assets/patient.png')),
                                     ),
-                                    const SizedBox(
-                                      height: 10,
+                                    SizedBox(
+                                      height: size.height * 0.01,
                                     ),
                                     Center(
                                       child: Text(
                                         state.userProfile.user!.fullName ??
                                             state.userProfile.user!.name!,
                                         style: TextStyle(
-                                            fontSize: size.width * 0.8 * 0.08,
+                                            fontSize: size.width > 700
+                                                ? 24
+                                                : size.width * 0.8 * 0.06,
                                             fontWeight: FontWeight.bold),
                                       ),
                                     )
@@ -134,9 +132,8 @@ class ScreenProfile extends StatelessWidget {
                         ),
                         Center(
                           child: Container(
-                            //  color: Colors.amber,
-                            // height: size.height * 0.45,
-                            width: size.width * 0.90,
+                       
+                            width: size.width > 800 ? 800 : size.width * 0.8,
 
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -146,7 +143,7 @@ class ScreenProfile extends StatelessWidget {
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
                                   child: Container(
-                                    // color: Colors.blue[50]?.withOpacity(0.5),
+                              
                                     child: ListTile(
                                       onTap: () {
                                         Navigator.of(context)
@@ -156,9 +153,9 @@ class ScreenProfile extends StatelessWidget {
                                           },
                                         ));
                                       },
-                                      leading: const Icon(
+                                      leading:  Icon(
                                         Icons.person,
-                                        color: Colors.blue,
+                                         color: appBackGround,
                                       ),
                                       title: const Text('Personal Details'),
                                       trailing: const Icon(
@@ -192,9 +189,9 @@ class ScreenProfile extends StatelessWidget {
                                           },
                                         ));
                                       },
-                                      leading: const Icon(
+                                      leading:  Icon(
                                         Icons.password,
-                                        color: Colors.blue,
+                                      color: appBackGround,
                                       ),
                                       title: const Text('Change Password'),
                                       trailing: const Icon(
@@ -220,9 +217,9 @@ class ScreenProfile extends StatelessWidget {
                                           },
                                         ));
                                       },
-                                      leading: const Icon(
+                                      leading:  Icon(
                                         Icons.info,
-                                        color: Colors.blue,
+                                        color: appBackGround,
                                       ),
                                       title: const Text('About'),
                                       trailing: const Icon(
@@ -242,16 +239,16 @@ class ScreenProfile extends StatelessWidget {
                                         Navigator.of(context)
                                             .push(MaterialPageRoute(
                                           builder: (context) {
-                                            return TermsAndConditionsWidget();
+                                            return const TermsAndConditionsWidget();
                                           },
                                         ));
                                       },
-                                      leading: Icon(
+                                      leading:  Icon(
                                         Icons.book,
-                                        color: Colors.blue,
+                                        color: appBackGround,
                                       ),
-                                      title: Text('Terms and Conditions'),
-                                      trailing: Icon(
+                                      title: const Text('Terms and Conditions'),
+                                      trailing: const Icon(
                                         Icons.arrow_forward_ios,
                                         size: 18,
                                       ),
@@ -261,7 +258,7 @@ class ScreenProfile extends StatelessWidget {
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
                                   child: Container(
-                                    // color: Colors.blue[50]?.withOpacity(0.5),
+                                
                                     child: ListTile(
                                       onTap: () {
                                         //----------------------privacy
@@ -272,12 +269,12 @@ class ScreenProfile extends StatelessWidget {
                                           },
                                         ));
                                       },
-                                      leading: Icon(
+                                      leading:  Icon(
                                         Icons.security,
-                                        color: Colors.blue,
+                                       color: appBackGround,
                                       ),
-                                      title: Text('Privacy'),
-                                      trailing: Icon(
+                                      title: const Text('Privacy'),
+                                      trailing: const Icon(
                                         Icons.arrow_forward_ios,
                                         size: 18,
                                       ),
@@ -291,8 +288,9 @@ class ScreenProfile extends StatelessWidget {
                                     WidgetsBinding.instance
                                         .addPostFrameCallback((timeStamp) {
                                       ScaffoldMessenger.of(context)
-                                          .showSnackBar( SnackBar(elevation: 0,
-                                            backgroundColor: Colors.white,
+                                          .showSnackBar(SnackBar(
+                                              elevation: 0,
+                                              backgroundColor: Colors.white,
                                               behavior:
                                                   SnackBarBehavior.floating,
                                               margin: EdgeInsets.only(
@@ -300,8 +298,10 @@ class ScreenProfile extends StatelessWidget {
                                                   right: 45,
                                                   bottom: size.height * 0.005),
                                               content: Center(
-                                                  child:
-                                                      Text('Logging out...',style: TextStyle(color: appBackGround)))));
+                                                  child: Text('Logging out...',
+                                                      style: TextStyle(
+                                                          color:
+                                                              appBackGround)))));
                                     });
                                   } else if (state is LogoutSucess) {
                                     WidgetsBinding.instance
@@ -320,19 +320,21 @@ class ScreenProfile extends StatelessWidget {
                                     WidgetsBinding.instance
                                         .addPostFrameCallback((timeStamp) {
                                       ScaffoldMessenger.of(context)
-                                          .showSnackBar( SnackBar(
-                                            
-                                            elevation: 0,
-                                            backgroundColor: Colors.white,
+                                          .showSnackBar(SnackBar(
+                                              elevation: 0,
+                                              backgroundColor: Colors.white,
                                               behavior:
                                                   SnackBarBehavior.floating,
                                               margin: EdgeInsets.only(
                                                   left: 45,
                                                   right: 45,
                                                   bottom: size.height * 0.005),
-                                              content: Center(
+                                              content: const Center(
                                                   child: Text(
-                                                      'Logout failed..',style: TextStyle(color: Colors.red),))));
+                                                'Logout failed..',
+                                                style: TextStyle(
+                                                    color: Colors.red),
+                                              ))));
 
                                       context
                                           .read<LoginBloc>()
@@ -385,9 +387,9 @@ class ScreenProfile extends StatelessWidget {
                                             },
                                           );
                                         },
-                                        leading: const Icon(
+                                        leading:  Icon(
                                           Icons.logout,
-                                          color: Colors.blue,
+                                        color: appBackGround
                                         ),
                                         title: const Text('Log Out'),
                                       ),
@@ -401,15 +403,18 @@ class ScreenProfile extends StatelessWidget {
                       ],
                     );
                   } else if (state is ProfileFailed) {
-                    return Column(children: [
-                      const Text('Error connecting to server'),
-                      TextButton.icon(
-                          onPressed: () {
-                            //---------------------------------------refresh
-                          },
-                          icon: const Icon(Icons.refresh),
-                          label: const Text('Refresh'))
-                    ]);
+                    return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text('Offline'),
+                          IconButton(
+                              onPressed: () {
+                                context
+                                    .read<ProfileDetailsBloc>()
+                                    .add(GetProfileDetails(id));
+                              },
+                              icon: const Icon(Icons.refresh))
+                        ]);
                   }
 
                   return const SizedBox();

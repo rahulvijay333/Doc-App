@@ -38,7 +38,6 @@ class PrivacyPolicyWidget extends StatelessWidget {
                   physics: const BouncingScrollPhysics(),
                   // crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                  
                     const SizedBox(height: 16.0),
                     const Text(
                       'This Privacy Policy explains how we collect, use, and protect your personal information when you use the AppointMedic app.',
@@ -48,9 +47,9 @@ class PrivacyPolicyWidget extends StatelessWidget {
                     Text(
                       'Information We Collect',
                       style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,color: appBackGround
-                      ),
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          color: appBackGround),
                     ),
                     const SizedBox(height: 8.0),
                     const Text(
@@ -62,18 +61,13 @@ class PrivacyPolicyWidget extends StatelessWidget {
                       '- Registration Information: To enable you to book appointments and use our services, we collect your registration details, including your name, email address, and phone number.',
                       style: TextStyle(fontSize: 16.0),
                     ),
-                    const SizedBox(height: 8.0),
-                    const Text(
-                      '- Usage Information: We collect data on how you interact with the app, including the features you use, timestamps of your interactions, and other usage statistics.',
-                      style: TextStyle(fontSize: 16.0),
-                    ),
                     const SizedBox(height: 16.0),
                     Text(
                       'How We Use Your Information',
                       style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,color: appBackGround
-                      ),
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          color: appBackGround),
                     ),
                     const SizedBox(height: 8.0),
                     const Text(
@@ -104,9 +98,9 @@ class PrivacyPolicyWidget extends StatelessWidget {
                     Text(
                       'Sharing Your Information',
                       style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,color: appBackGround
-                      ),
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          color: appBackGround),
                     ),
                     const SizedBox(height: 8.0),
                     const Text(
@@ -120,11 +114,6 @@ class PrivacyPolicyWidget extends StatelessWidget {
                     ),
                     const SizedBox(height: 8.0),
                     const Text(
-                      '- Service Providers: Third-party service providers may receive your information to assist in operating the app and delivering services.',
-                      style: TextStyle(fontSize: 16.0),
-                    ),
-                    const SizedBox(height: 8.0),
-                    const Text(
                       '- Legal Requirements: We may disclose your information in response to lawful requests by public authorities, including those related to national security or law enforcement.',
                       style: TextStyle(fontSize: 16.0),
                     ),
@@ -132,22 +121,22 @@ class PrivacyPolicyWidget extends StatelessWidget {
                     Text(
                       'Your Choices',
                       style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,color: appBackGround
-                      ),
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          color: appBackGround),
                     ),
                     const SizedBox(height: 8.0),
                     const Text(
-                      'You have the right to access, correct, or delete your personal information. To do so, please contact us at [your contact email or phone number]. Please note that certain information may be retained as required by law or for legitimate business purposes.',
+                      'You have the right to access, correct, or delete your personal information. To do so, please contact us at domain.test.mail333@gmail.com. Please note that certain information may be retained as required by law or for legitimate business purposes.',
                       style: TextStyle(fontSize: 16.0),
                     ),
                     const SizedBox(height: 16.0),
                     Text(
                       'Security',
                       style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,color: appBackGround
-                      ),
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          color: appBackGround),
                     ),
                     const SizedBox(height: 8.0),
                     const Text(
@@ -158,9 +147,9 @@ class PrivacyPolicyWidget extends StatelessWidget {
                     Text(
                       'Changes to This Privacy Policy',
                       style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,color: appBackGround
-                      ),
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          color: appBackGround),
                     ),
                     const SizedBox(height: 8.0),
                     const Text(
@@ -171,13 +160,13 @@ class PrivacyPolicyWidget extends StatelessWidget {
                     Text(
                       'Contact Us',
                       style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,color: appBackGround
-                      ),
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          color: appBackGround),
                     ),
                     const SizedBox(height: 8.0),
                     const Text(
-                      'If you have any questions or concerns about this Privacy Policy or our practices, please reach out to us at [your contact email or phone number].',
+                      'If you have any questions or concerns about this Privacy Policy or our practices, please reach out to us at domain.test.mail333@gmail.com.',
                       style: TextStyle(fontSize: 16.0),
                     ),
                   ],

@@ -8,6 +8,7 @@ class ScreenAllAppoint extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     //------------------------------------------------------api call
     context
         .read<ViewAppointmentsDoctSideBloc>()
@@ -36,24 +37,46 @@ class ScreenAllAppoint extends StatelessWidget {
                 final stateShort = state.appointmentList[index];
 
                 return AppointmentAllTileCustom(
-                  patientName: stateShort.patient!.fullName!,
+                  patientName:
+                      stateShort.patient!.fullName ?? stateShort.patient!.name!,
                   emailID: stateShort.patient!.email!,
                   date: state.appointmentList[index].selectedDate,
                   startTime: stateShort.startTime!,
                   endTime: stateShort.endTime!,
                   isDoctorApproved: stateShort.isApprovedByDoctor!,
-                  patientImage: stateShort.patient!.profilePicture!.secureUrl!,
+                  patientImage: stateShort.patient!.profilePicture?.secureUrl ?? '',
                   bookID: state.appointmentList[index].id!,
                   isCancelled: state.appointmentList[index].isCancelled!,
                   patientID: state.appointmentList[index].patientId!,
+                  reason: state.appointmentList[index].reason ?? '',
                 );
               },
               separatorBuilder: (context, index) {
-                return const SizedBox(
-                  height: 15,
+                return SizedBox(
+                  height: size.width * 0.01,
                 );
               },
               itemCount: state.appointmentList.length);
+        } else if (state is DoctSideApptsFailed) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('offline'),
+                const SizedBox(
+                  height: 5,
+                ),
+                IconButton(
+                    onPressed: () {
+                      //-------------------------------------refrsh
+                      context
+                          .read<ViewAppointmentsDoctSideBloc>()
+                          .add(ViewApptDoctorSideCall(status: ''));
+                    },
+                    icon: const Icon(Icons.refresh))
+              ],
+            ),
+          );
         }
 
         return const Center(

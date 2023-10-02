@@ -106,8 +106,8 @@ class SearchByNameWidget extends StatelessWidget {
                                       'Dr.${state.searchNameResults[index].fullName}',
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
-                                      style: const TextStyle(
-                                          fontSize: 20,
+                                      style:  TextStyle(
+                                          fontSize: size.width *0.045,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     const SizedBox(
@@ -124,15 +124,15 @@ class SearchByNameWidget extends StatelessWidget {
                                             .speciality!.name!)
                                       ],
                                     ),
-                                    const SizedBox(
-                                      height: 5,
+                                     SizedBox(
+                                      height: size.height*0.001,
                                     ),
 
                                     // const SizedBox(
                                     //   height: 0,
                                     // ),
                                     //-------------------------------------------location & rating
-                                    const Row(
+                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
@@ -143,7 +143,7 @@ class SearchByNameWidget extends StatelessWidget {
                                               size: 15,
                                             ),
                                             Text(
-                                              'Calicut,Kerala',
+                                            '${state.searchNameResults[index].address?.city ?? 'Trivandrum'},${state.searchNameResults[index].address?.state ?? 'Kerala'}',
                                               maxLines: 1,
                                               style: TextStyle(fontSize: 12),
                                             )
@@ -155,6 +155,13 @@ class SearchByNameWidget extends StatelessWidget {
                                     ElevatedButton(
                                       onPressed: () {
                                         //-----------------------------------------booking
+
+                                          Navigator.of(context)
+                                          .push(MaterialPageRoute(
+                                        builder: (ctx) => ScreenBooking(
+                                          doctor: state.searchNameResults[index],
+                                        ),
+                                      ));
                                       },
                                       child: const Text('Book'),
                                       style: ButtonStyle(

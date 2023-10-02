@@ -36,16 +36,17 @@ class ScreenApprovedAppoint extends StatelessWidget {
                 final stateShort = state.appointmentList[index];
 
                 return AppointmentTileCustom(
-                  patientName: stateShort.patient!.fullName!,
+                  patientName: stateShort.patient!.fullName ?? stateShort.patient!.name!,
                   emailID: stateShort.patient!.email!,
                   date: state.appointmentList[index].selectedDate,
                   startTime: stateShort.startTime!,
                   endTime: stateShort.endTime!,
                   isDoctorApproved: stateShort.isApprovedByDoctor!,
-                  patientImage: stateShort.patient!.profilePicture!.secureUrl!,
+                  patientImage: stateShort.patient!.profilePicture?.secureUrl! ?? '',
                   bookID: state.appointmentList[index].id!,
                   isCancelled: state.appointmentList[index].isCancelled!,
                   patientID: state.appointmentList[index].patientId!,
+                  reason: state.appointmentList[index].reason ?? '',
                 );
               },
               separatorBuilder: (context, index) {
@@ -54,6 +55,26 @@ class ScreenApprovedAppoint extends StatelessWidget {
                 );
               },
               itemCount: state.appointmentList.length);
+        } else if (state is DoctSideApptsFailed) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('offline'),
+                const SizedBox(
+                  height: 5,
+                ),
+                IconButton(
+                    onPressed: () {
+                      //-------------------------------------refrsh
+                      context
+                          .read<ViewAppointmentsDoctSideBloc>()
+                          .add(ViewApptDoctorSideCall(status: 'approved'));
+                    },
+                    icon: const Icon(Icons.refresh))
+              ],
+            ),
+          );
         }
 
         return const Center(

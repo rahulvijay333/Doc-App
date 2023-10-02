@@ -1,4 +1,6 @@
 import 'package:appoint_medic/application/booking/patientTrackBooking/bloc/booking_tracker_bloc.dart';
+import 'package:appoint_medic/core/color_constants.dart';
+import 'package:appoint_medic/presentation/patient/booking/screen_booking.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,12 +21,12 @@ class ScreenSuccessPayment extends StatelessWidget {
             Container(
               height: size.height * 0.07,
               width: size.width,
-              color: Colors.blue,
-              child: const Center(
+              color: appBackGround,
+              child:  Center(
                 child: Text(
                   'Payment Status',
                   style: TextStyle(
-                      fontSize: 18,
+                      fontSize: size.width * 0.04,
                       color: Colors.white,
                       fontWeight: FontWeight.bold),
                 ),
@@ -54,10 +56,12 @@ class ScreenSuccessPayment extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset(
-                          'assets/payment_success.gif',
-                          height: size.height * 0.1,
-                          width: size.width * 0.20,
+                          
+                          'assets/payment_2.gif',
+                          height:size.width * 0.30,
+                          width: size.width * 0.30,
                           fit: BoxFit.cover,
+                          
                         ),
                         TextCustomWidget(
                           size: size,

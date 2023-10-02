@@ -33,7 +33,7 @@ class AppointmentListTileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log((size.width * 0.12).toString());
+  
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: Container(
@@ -122,18 +122,18 @@ class AppointmentListTileWidget extends StatelessWidget {
                          Icon(
                           Icons.calendar_today,
                           color: appBackGround,
-                          size:size.width*0.035,
+                          size:size.width*0.034,
                         ),
-                        Text(date!,style: TextStyle(fontSize: size.width*0.036),),
+                        Text(date!,style: TextStyle(fontSize: size.width*0.030),),
                       ],
                     ),
                     Row(
                       children: [
                          Icon(
                           Icons.timer_outlined,
-                          size:size.width*0.035,color: appBackGround,
+                          size:size.width*0.034,color: appBackGround,
                         ),
-                        Text('$startTime - $endTime',style: TextStyle(fontSize: size.width*0.036),),
+                        Text('$startTime - $endTime',style: TextStyle(fontSize: size.width*0.030),),
                       ],
                     ),
                     Row(
@@ -142,14 +142,14 @@ class AppointmentListTileWidget extends StatelessWidget {
                           bookingStatus == 'Approved'
                               ? Icons.verified_user
                               : Icons.pending_actions,
-                          size:size.width*0.035,
+                          size:size.width*0.034,
                           color: bookingStatus == 'Approved'
                               ? Colors.green
                               : Colors.red,
                         ),
                         Text(
                           bookingStatus!,
-                          style: TextStyle(fontSize: size.width*0.036,
+                          style: TextStyle(fontSize: size.width*0.030,
                               color: bookingStatus == 'Approved'
                                   ? Colors.green
                                   : Colors.red),

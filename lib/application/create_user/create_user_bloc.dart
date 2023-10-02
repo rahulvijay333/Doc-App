@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:appoint_medic/domain/new_user/new_user.dart';
 import 'package:appoint_medic/infrastructure/register/register_impl.dart';
 import 'package:bloc/bloc.dart';
@@ -12,7 +14,7 @@ class CreateUserBloc extends Bloc<CreateUserEvent, CreateUserState> {
       //--------------------------------------------------initial loading
       emit(CreateUserLoading());
 
-      final (error, response) = await createServiceImpl.createAccount(
+      final (error) = await createServiceImpl.createAccount(
           user: event.newUser, userType: event.userType);
 
       if (error.isEmpty) {
@@ -28,7 +30,24 @@ class CreateUserBloc extends Bloc<CreateUserEvent, CreateUserState> {
       }
     });
 
+    on<OtpVerificationCall>((event, emit) async {
+      emit(OtpVerificationLoading());
+      final response = await createServiceImpl.verifyEmailOtp(
+          userType: event.userType, userEmail: event.email, userOTP: event.otp);
+
+      if (response.isEmpty) {
+        emit(OtpVerifiedSuccess());
+      } else {
+        emit(OtpVerifiedFailed(error: response));
+
+        await Future.delayed(Duration(seconds: 2));
+        // emit(CreateUserSuccess(email: event.email, userType: event.userType));
+         emit(CreateUserInitial());
+      }
+    });
+
     on<InitialiCreateBloc>((event, emit) {
+      log('cetaed user state cleread');
       emit(CreateUserInitial());
     });
   }

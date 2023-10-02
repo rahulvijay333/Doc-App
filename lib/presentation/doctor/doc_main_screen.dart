@@ -8,6 +8,8 @@ import 'package:appoint_medic/presentation/doctor/profile/Screen_doc_profile.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../core/color_constants.dart';
+
 class DoctorScreenMain extends StatelessWidget {
   DoctorScreenMain({
     super.key,
@@ -49,9 +51,9 @@ class DoctorScreenMain extends StatelessWidget {
           padding:  EdgeInsets.only(left: size.width * 0.06, right: size.width * 0.06, bottom: size.width*0.05),
           child: Container(
             decoration: BoxDecoration(
-                color: Colors.blue, borderRadius: BorderRadius.circular(10)),
-            height: size.width * 0.15,
-            width: size.width * 0.8,
+               color: appBackGround, borderRadius: BorderRadius.circular(10)),
+            height: size.height * 0.055,
+           
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [

@@ -1,4 +1,5 @@
 import 'package:appoint_medic/application/login/login_bloc.dart';
+import 'package:appoint_medic/core/color_constants.dart';
 import 'package:appoint_medic/presentation/login/screen_login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,13 +16,13 @@ class ScreenAdminNotVerified extends StatelessWidget {
           children: [
             Container(
                 height: size.height * 0.07,
-                color: Colors.blue,
+                color: appBackGround,
                 width: size.width,
-                child: const Center(
+                child: Center(
                   child: Text(
-                    'DocCure',
+                    'AppointMedic',
                     style: TextStyle(
-                        fontSize: 22,
+                        fontSize: size.width * 0.055,
                         fontWeight: FontWeight.bold,
                         color: Colors.white),
                   ),
@@ -32,8 +33,11 @@ class ScreenAdminNotVerified extends StatelessWidget {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Admin has not verified your account yet'),
-                      SizedBox(
+                      Text(
+                        'Admin has not verified your account yet',
+                        style: TextStyle(fontSize: size.width * 0.035,color: Colors.red),
+                      ),
+                      const SizedBox(
                         height: 15,
                       ),
                       TextButton.icon(
@@ -47,12 +51,12 @@ class ScreenAdminNotVerified extends StatelessWidget {
                             Navigator.of(context)
                                 .pushReplacement(MaterialPageRoute(
                               builder: (context) {
-                                return ScreenLogin();
+                                return const ScreenLogin();
                               },
                             ));
                           },
-                          icon: Icon(Icons.logout),
-                          label: Text('Back to login'))
+                          icon: const Icon(Icons.logout),
+                          label: const Text('Back to login'))
                     ]),
               ),
             ))

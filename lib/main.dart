@@ -11,6 +11,7 @@ import 'package:appoint_medic/application/chat/create_chat_doct/bloc/create_chat
 import 'package:appoint_medic/application/chat/see_messages/bloc/see_messages_bloc.dart';
 import 'package:appoint_medic/application/chat/view_chats/bloc/view_all_chats_bloc.dart';
 import 'package:appoint_medic/application/chat/view_chats/search_chat/bloc/search_messages_bloc.dart';
+import 'package:appoint_medic/application/create_user/create_user_bloc.dart';
 import 'package:appoint_medic/application/create_user/otp_verify/bloc/otp_verify_bloc.dart';
 import 'package:appoint_medic/application/doctor%20profile/appointments_section/bloc/home_appointment_today_bloc.dart';
 import 'package:appoint_medic/application/doctor%20profile/bloc/doctor_profile_bloc.dart';
@@ -103,6 +104,7 @@ class MyApp extends StatelessWidget {
     final DoctorProfileService doctProfService = DoctorProfileService();
     final NotificationService notificationService = NotificationService();
     final PasswordResetService passwordResetService = PasswordResetService();
+    final CreateServiceImpl createApiObject = CreateServiceImpl();
 
     return MultiBlocProvider(
         providers: [
@@ -201,6 +203,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => ForgotPasswordBloc(passwordResetService),
+          ),
+          BlocProvider(
+            create: (context) => CreateUserBloc(createApiObject),
           )
         ],
         child: MaterialApp(

@@ -66,7 +66,6 @@ class _ScreenConfirmBookingState extends State<ScreenConfirmBooking> {
         paymentid: response.paymentId);
 
     if (details.orderID != null && details.paymentid != null) {
-      // log('did : ${widget.bookingdetails.doctorID}, dateid : ${widget.bookingdetails.dateID}, slotid : ${widget.bookingdetails.slotID} ,  startd : ${state.bookingDetails.startTime}, end ;${state.bookingDetails.endTime},fees : ${state.bookingDetails.fees},orderid : ${state.bookingDetails.orderID}, paymn : ${response.paymentId}');
       //--------------------------------------------------final appointment bloc call
       context.read<BookingTrackerBloc>().add(BookingSucessPayment(
           bookingdetails: details,
@@ -101,299 +100,425 @@ class _ScreenConfirmBookingState extends State<ScreenConfirmBooking> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return SafeArea(
-      child: Scaffold(
-        body: Column(
-          children: [
-            Container(
-              height: size.height * 0.07,
-              width: size.width,
-              color: Colors.blue,
-              child: Row(
-                children: [
-                  IconButton(
+      child: WillPopScope(
+        onWillPop: () async {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: const Text('Important'),
+                content:
+                    const Text('Do you want to exit from booking process ?'),
+                actions: [
+                  TextButton(
                       onPressed: () {
-                        //-------------------------------------------pop function
-                        context
-                            .read<BookingTrackerBloc>()
-                            .add(BookingTrackClear());
                         Navigator.of(context).pop();
+                        //no
                       },
-                      icon: const Icon(
-                        Icons.arrow_back_ios_new,
-                        color: Colors.white,
-                      )),
-                  const Text(
-                    'Confirm',
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
-                  ),
+                      child: const Text('No')),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+
+                        Navigator.of(context).pop();
+                        //no
+                      },
+                      child: const Text('Yes'))
                 ],
-              ),
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
+              );
+            },
+          );
+
+          return true;
+        },
+        child: Scaffold(
+          body: Column(
+            children: [
+              Container(
+                height: size.height * 0.07,
+                width: size.width,
+                color: Colors.blue,
+                child: Row(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'Doctor details',
-                            style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.blue,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          DoctorTileWidget(
-                            doctorName: widget.doc.fullName!,
-                            specialityName: widget.doc.speciality!.name!,
-                            date: widget.bookingdetails.date,
-                            starttime: widget.bookingdetails.startTime,
-                            endTime: widget.bookingdetails.endTime,
-                            size: size,
-                            gender: widget.doc.gender!,
-                            imageUrl: widget.doc.profilePicture!.secureUrl,
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          const Text(
-                            'Patient details',
-                            style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.blue,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          //-------------------------------------------------------------patient details
-                          BlocBuilder<ProfileDetailsBloc, ProfileDetailsState>(
-                            builder: (context, state) {
-                              if (state is ProfileSucess) {
-                                //------------------------------------------profile details
-                                profileDetails = state.userProfile.user!;
-                                return ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Container(
-                                    color: Colors.blue.withOpacity(0.1),
-                                    child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            ListTile(
-                                              leading: CircleAvatar(
-                                                radius: size.width * 0.060,
-                                                backgroundImage: NetworkImage(
-                                                    state
-                                                        .userProfile
-                                                        .user!
-                                                        .profilePicture!
-                                                        .secureUrl!),
+                    IconButton(
+                        onPressed: () {
+                          //-------------------------------------------pop function
+                          context
+                              .read<BookingTrackerBloc>()
+                              .add(BookingTrackClear());
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: const Text('Important'),
+                                content: const Text(
+                                    'Do you want to exit from booking process ?'),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                        //no
+                                      },
+                                      child: const Text('No')),
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+
+                                        Navigator.of(context).pop();
+                                        //no
+                                      },
+                                      child: const Text('Yes'))
+                                ],
+                              );
+                            },
+                          );
+                        },
+                        icon: const Icon(
+                          Icons.arrow_back_ios_new,
+                          color: Colors.white,
+                        )),
+                    Text(
+                      'Confirmation',
+                      style: TextStyle(
+                        fontSize: size.width * 0.04,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Doctor details',
+                              style: TextStyle(
+                                  fontSize: size.width * 0.04,
+                                  color: Colors.blue,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            DoctorTileWidget(
+                              doctorName: widget.doc.fullName!,
+                              specialityName: widget.doc.speciality!.name!,
+                              date: widget.bookingdetails.date,
+                              starttime: widget.bookingdetails.startTime,
+                              endTime: widget.bookingdetails.endTime,
+                              size: size,
+                              gender: widget.doc.gender!,
+                              imageUrl: widget.doc.profilePicture!.secureUrl,
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            Text(
+                              'Patient details',
+                              style: TextStyle(
+                                  fontSize: size.width * 0.04,
+                                  color: Colors.blue,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            //-------------------------------------------------------------patient details
+                            BlocBuilder<ProfileDetailsBloc,
+                                ProfileDetailsState>(
+                              builder: (context, state) {
+                                if (state is ProfileSucess) {
+                                  //------------------------------------------profile details
+                                  profileDetails = state.userProfile.user!;
+                                  return ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Container(
+                                      color: Colors.blue.withOpacity(0.1),
+                                      child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              ListTile(
+                                                leading: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  child: SizedBox(
+                                                    width: 45,
+                                                    child: state
+                                                                .userProfile
+                                                                .user!
+                                                                .profilePicture
+                                                                ?.secureUrl !=
+                                                            null
+                                                        ? Image(
+                                                            image: NetworkImage(state
+                                                                .userProfile
+                                                                .user!
+                                                                .profilePicture!
+                                                                .secureUrl!),
+                                                            fit: BoxFit.cover,
+                                                            errorBuilder:
+                                                                (context, error,
+                                                                    stackTrace) {
+                                                              return Image.asset(
+                                                                  'assets/patient.png');
+                                                            },
+                                                            loadingBuilder:
+                                                                (context, child,
+                                                                    loadingProgress) {
+                                                              if (loadingProgress ==
+                                                                  null) {
+                                                                return child;
+                                                              }
+
+                                                              return const Center(
+                                                                child:
+                                                                    CircularProgressIndicator(
+                                                                  strokeWidth:
+                                                                      1,
+                                                                ),
+                                                              );
+                                                            },
+                                                          )
+                                                        : Image.asset(
+                                                            'assets/patient.png'),
+                                                  ),
+                                                ),
+
+                                                // leading: CircleAvatar(
+                                                //   radius: size.width * 0.060,
+                                                //   backgroundImage: NetworkImage(
+                                                //       state
+                                                //           .userProfile
+                                                //           .user!
+                                                //           .profilePicture!
+                                                //           .secureUrl!),
+                                                // ),
+                                                title: Text(state.userProfile
+                                                    .user!.fullName ?? state.userProfile
+                                                    .user!.name! ),
+                                                subtitle: Text(state
+                                                    .userProfile.user!.email!),
                                               ),
-                                              title: Text(state
-                                                  .userProfile.user!.fullName!),
-                                              subtitle: Text(state
-                                                  .userProfile.user!.email!),
-                                            ),
-                                            Text(
-                                              'Medical Reason :',
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: size.width * 0.035),
-                                            ),
-                                            SizedBox(
-                                              height: size.height * 0.01,
-                                            ),
-                                            Container(
-                                              width: size.width,
-                                              height: size.height * 0.12,
-                                              color:
-                                                  Colors.white.withOpacity(0.5),
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 8.0, right: 8),
-                                                child: TextFormField(
-                                                  style: TextStyle(
-                                                      fontSize:
-                                                          size.width * 0.040),
-                                                  controller: reasonController,
-                                                  maxLength: 180,
-                                                  validator: (value) {
-                                                    if (value == null ||
-                                                        value.isEmpty) {
-                                                      return 'reason is required';
-                                                    } else {
-                                                      return "";
-                                                    }
-                                                  },
-                                                  decoration: const InputDecoration(
-                                                      hintText:
-                                                          'Type medical reason here....',
-                                                      border: InputBorder.none,
-                                                      focusedBorder:
-                                                          InputBorder.none),
-                                                  maxLines: 4,
+                                              Text(
+                                                'Medical Reason :',
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.w400,
+                                                    fontSize:
+                                                        size.width * 0.035),
+                                              ),
+                                              SizedBox(
+                                                height: size.height * 0.01,
+                                              ),
+                                              Container(
+                                                width: size.width,
+                                                height: size.height * 0.12,
+                                                color: Colors.white
+                                                    .withOpacity(0.5),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 8.0, right: 8),
+                                                  child: TextFormField(
+                                                    style: TextStyle(
+                                                        fontSize:
+                                                            size.width * 0.040),
+                                                    controller:
+                                                        reasonController,
+                                                    maxLength: 180,
+                                                    validator: (value) {
+                                                      if (value == null ||
+                                                          value.isEmpty) {
+                                                        return 'reason is required';
+                                                      } else {
+                                                        return "";
+                                                      }
+                                                    },
+                                                    decoration:
+                                                        const InputDecoration(
+                                                            hintText:
+                                                                'Type medical reason here....',
+                                                            border: InputBorder
+                                                                .none,
+                                                            focusedBorder:
+                                                                InputBorder
+                                                                    .none),
+                                                    maxLines: 4,
+                                                  ),
                                                 ),
                                               ),
-                                            )
-                                          ],
-                                        )),
-                                  ),
-                                );
-                              }
-                              return const SizedBox();
-                            },
-                          ),
-
-                          const SizedBox(
-                            height: 15,
-                          ),
-
-                          //---------------------------------------------------------payment
-                          Text(
-                            'Payment details',
-                            style: TextStyle(
-                                fontSize: size.width * 0.05,
-                                color: Colors.blue,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          Container(
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    const Text('Consultation Fee '),
-                                    Text(
-                                        '${widget.doc.speciality!.fees.toString()} Rs')
-                                  ],
-                                ),
-                                const Divider(),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    const Text('Amount to pay '),
-                                    Text(
-                                        '${widget.doc.speciality!.fees.toString()} Rs')
-                                  ],
-                                )
-                              ],
+                                              SizedBox(
+                                                height: size.height * 0.01,
+                                              ),
+                                            ],
+                                          )),
+                                    ),
+                                  );
+                                }
+                                return const SizedBox();
+                              },
                             ),
-                          ),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          Center(
-                            child: SizedBox(
-                              height: 40,
-                              width: 120,
-                              child: BlocBuilder<PaymentBloc, PaymentState>(
-                                builder: (context, state) {
-                                  if (state is PayButtonStartLoading) {
-                                    return const Center(
-                                      child: CircularProgressIndicator(),
-                                    );
-                                  } else {
-                                    return ElevatedButton(
-                                      onPressed: () async {
-                                        final connectivityResult =
-                                            await (Connectivity()
-                                                .checkConnectivity());
 
-                                        if (connectivityResult ==
-                                                ConnectivityResult.wifi ||
-                                            connectivityResult ==
-                                                ConnectivityResult.mobile) {
-                                          if (reasonController
-                                              .text.isNotEmpty) {
-                                            context
-                                                .read<PaymentBloc>()
-                                                .add(PaymentButtonLoading());
+                            const SizedBox(
+                              height: 15,
+                            ),
 
-                                            try {
-                                              var options = {
-                                                'key': razor_key,
-                                                'order_id': widget
-                                                    .bookingdetails.orderID,
-                                                'amount': ((widget.doc
-                                                        .speciality!.fees)! *
-                                                    100), // Amount in paise
-                                                'name': 'DocCure',
-                                                'description':
-                                                    'Dr.${widget.doc.fullName}',
-                                                'prefill': {
-                                                  'contact':
-                                                      profileDetails!.phone,
-                                                  'email': profileDetails!.email
-                                                },
-                                                'external': {
-                                                  'wallets': [
-                                                    'paytm'
-                                                  ] // List of allowed wallets
-                                                }
-                                              };
-                                              _razorpay.open(options);
-                                            } on SocketException catch (e) {
-                                              // Handle socket-related exceptions (no network connectivity)
-                                              log('SocketException: $e');
-                                            } on FormatException catch (e) {
-                                              // Handle format-related exceptions (e.g., parsing JSON)
-                                              log('FormatException: $e');
-                                            } catch (e) {
-                                              // Handle other exceptions
-                                              log('Exception: $e');
+                            //---------------------------------------------------------payment
+                            Text(
+                              'Payment details',
+                              style: TextStyle(
+                                  fontSize: size.width * 0.05,
+                                  color: Colors.blue,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            Container(
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const Text('Consultation Fee '),
+                                      Text(
+                                          '${widget.doc.speciality!.fees.toString()} Rs')
+                                    ],
+                                  ),
+                                  const Divider(),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const Text('Amount to pay '),
+                                      Text(
+                                          '${widget.doc.speciality!.fees.toString()} Rs')
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            Center(
+                              child: SizedBox(
+                                height: 40,
+                                width: size.width * 0.4,
+                                child: BlocBuilder<PaymentBloc, PaymentState>(
+                                  builder: (context, state) {
+                                    if (state is PayButtonStartLoading) {
+                                      return const Center(
+                                        child: SizedBox(
+                                            width: 25,
+                                            height: 25,
+                                            child: CircularProgressIndicator(
+                                              strokeWidth: 1,
+                                            )),
+                                      );
+                                    } else {
+                                      return ElevatedButton(
+                                        onPressed: () async {
+                                          final connectivityResult =
+                                              await (Connectivity()
+                                                  .checkConnectivity());
+
+                                          if (connectivityResult ==
+                                                  ConnectivityResult.wifi ||
+                                              connectivityResult ==
+                                                  ConnectivityResult.mobile) {
+                                            if (reasonController
+                                                .text.isNotEmpty) {
+                                              context
+                                                  .read<PaymentBloc>()
+                                                  .add(PaymentButtonLoading());
+
+                                              try {
+                                                var options = {
+                                                  'key': razor_key,
+                                                  'order_id': widget
+                                                      .bookingdetails.orderID,
+                                                  'amount': ((widget.doc
+                                                          .speciality!.fees)! *
+                                                      100), // Amount in paise
+                                                  'name': 'AppointMedic',
+                                                  'description':
+                                                      'Dr.${widget.doc.fullName}',
+                                                  'prefill': {
+                                                    'contact':
+                                                        profileDetails!.phone,
+                                                    'email':
+                                                        profileDetails!.email
+                                                  },
+                                                  'external': {
+                                                    'wallets': [
+                                                      'paytm'
+                                                    ] // List of allowed wallets
+                                                  }
+                                                };
+                                                _razorpay.open(options);
+                                              } on SocketException catch (e) {
+                                                // Handle socket-related exceptions (no network connectivity)
+                                                log('SocketException: $e');
+                                              } on FormatException catch (e) {
+                                                // Handle format-related exceptions (e.g., parsing JSON)
+                                                log('FormatException: $e');
+                                              } catch (e) {
+                                                // Handle other exceptions
+                                                log('Exception: $e');
+                                              }
+                                            } else {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(const SnackBar(
+                                                      duration:
+                                                          Duration(seconds: 2),
+                                                      behavior: SnackBarBehavior
+                                                          .floating,
+                                                      margin:
+                                                          EdgeInsets.all(15),
+                                                      content: Text(
+                                                          'Medical reason is required')));
                                             }
                                           } else {
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(const SnackBar(
-                                                    duration:
-                                                        Duration(seconds: 2),
                                                     behavior: SnackBarBehavior
                                                         .floating,
                                                     margin: EdgeInsets.all(15),
                                                     content: Text(
-                                                        'Medical reason is required')));
+                                                        'Check internet connection')));
                                           }
-                                        } else {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(const SnackBar(
-                                                  behavior:
-                                                      SnackBarBehavior.floating,
-                                                  margin: EdgeInsets.all(15),
-                                                  content: Text(
-                                                      'Check internet connection')));
-                                        }
-                                      },
-                                      child: const Text('Pay'),
-                                    );
-                                  }
-                                },
+                                        },
+                                        child: Text(
+                                          'Pay',
+                                          style: TextStyle(
+                                            fontSize: size.width * 0.4 * 0.08,
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                  },
+                                ),
                               ),
-                            ),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
