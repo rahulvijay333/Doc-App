@@ -103,12 +103,22 @@ class _ScreenLoginState extends State<ScreenLogin> {
 
                             //---------------------------------------app text
                             Text(
-                              'Your Health, Our Priority: Book with Confidence!',
+                              'Your Health, Our Priority',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: size.width * 0.040,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                             Text(
+                              'Book with Confidence!',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: size.width * 0.038,
                                   fontWeight: FontWeight.bold),
                             ),
+
+
+
                             SizedBox(
                               height: size.width * 0.045,
                             ),
@@ -142,7 +152,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
                       child: Form(
                         key: _formkey,
                         child: Container(
-                          width: 200,
+                       
                           color: Colors.white,
                           child: SingleChildScrollView(
                             child: Column(
@@ -177,7 +187,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                   child: Text(
                                     emailError,
                                     style: TextStyle(
-                                        fontSize: 12,
+                                        fontSize: size.width * 0.028,
                                         color: emailError.isEmpty
                                             ? Colors.white
                                             : Colors.red),
@@ -221,7 +231,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                       child: Text(
                                         passwordError,
                                         style: TextStyle(
-                                            fontSize: 12,
+                                            fontSize: size.width * 0.028,
                                             color: passwordError.isEmpty
                                                 ? Colors.white
                                                 : Colors.red),
@@ -304,10 +314,10 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                           },
                                         );
                                       },
-                                      child: const Text(
+                                      child:  Text(
                                         'Did you forget password ?',
                                         style: TextStyle(
-                                            color: Colors.blue, fontSize: 12),
+                                            color: Colors.blue, fontSize: size.width * 0.03),
                                       ),
                                     ),
                                   ],

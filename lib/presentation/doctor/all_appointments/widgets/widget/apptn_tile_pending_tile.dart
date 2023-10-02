@@ -67,10 +67,13 @@ class AppointmentTile extends StatelessWidget {
                     child: Container(
                       // height: size.width * 0.16,
                       width: size.width * 0.16,
-                      child: Image.network(
+                      child: patientImage.isNotEmpty ?
+                      
+                      
+                      Image.network(
                         patientImage,
                         fit: BoxFit.cover,
-                      ),
+                      ) :Image.asset('assets/patient.png'),
                     ),
                   ),
                   Container(

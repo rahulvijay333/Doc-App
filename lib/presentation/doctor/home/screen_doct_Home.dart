@@ -27,7 +27,7 @@ class ScreenDoctHome extends StatelessWidget {
           Container(
             width: size.width,
             height: size.height * 0.18,
-            decoration:  BoxDecoration(
+            decoration: BoxDecoration(
                 borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(30),
                     bottomRight: Radius.circular(30)),
@@ -156,7 +156,9 @@ class ScreenDoctHome extends StatelessWidget {
                                   return ApointTodayTileWidget(
                                     size: size,
                                     patientName: state.appointmentList[index]
-                                        .patient!.fullName!,
+                                            .patient?.fullName ??
+                                        state.appointmentList[index].patient!
+                                            .name!,
                                     imgUrl: state.appointmentList[index]
                                         .patient!.profilePicture?.secureUrl,
                                     date: state

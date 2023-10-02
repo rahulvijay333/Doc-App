@@ -177,12 +177,12 @@ class _ScreenConfirmBookingState extends State<ScreenConfirmBooking> {
                           Icons.arrow_back_ios_new,
                           color: Colors.white,
                         )),
-                     Text(
+                    Text(
                       'Confirmation',
                       style: TextStyle(
-                           fontSize: size.width * 0.04,
-                          color: Colors.white,
-                         ),
+                        fontSize: size.width * 0.04,
+                        color: Colors.white,
+                      ),
                     ),
                   ],
                 ),
@@ -196,10 +196,10 @@ class _ScreenConfirmBookingState extends State<ScreenConfirmBooking> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                             Text(
+                            Text(
                               'Doctor details',
                               style: TextStyle(
-                                fontSize: size.width * 0.04,
+                                  fontSize: size.width * 0.04,
                                   color: Colors.blue,
                                   fontWeight: FontWeight.w500),
                             ),
@@ -219,7 +219,7 @@ class _ScreenConfirmBookingState extends State<ScreenConfirmBooking> {
                             const SizedBox(
                               height: 15,
                             ),
-                             Text(
+                            Text(
                               'Patient details',
                               style: TextStyle(
                                   fontSize: size.width * 0.04,
@@ -247,17 +247,64 @@ class _ScreenConfirmBookingState extends State<ScreenConfirmBooking> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               ListTile(
-                                                leading: CircleAvatar(
-                                                  radius: size.width * 0.060,
-                                                  backgroundImage: NetworkImage(
-                                                      state
-                                                          .userProfile
-                                                          .user!
-                                                          .profilePicture!
-                                                          .secureUrl!),
+                                                leading: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  child: SizedBox(
+                                                    width: 45,
+                                                    child: state
+                                                                .userProfile
+                                                                .user!
+                                                                .profilePicture
+                                                                ?.secureUrl !=
+                                                            null
+                                                        ? Image(
+                                                            image: NetworkImage(state
+                                                                .userProfile
+                                                                .user!
+                                                                .profilePicture!
+                                                                .secureUrl!),
+                                                            fit: BoxFit.cover,
+                                                            errorBuilder:
+                                                                (context, error,
+                                                                    stackTrace) {
+                                                              return Image.asset(
+                                                                  'assets/patient.png');
+                                                            },
+                                                            loadingBuilder:
+                                                                (context, child,
+                                                                    loadingProgress) {
+                                                              if (loadingProgress ==
+                                                                  null) {
+                                                                return child;
+                                                              }
+
+                                                              return const Center(
+                                                                child:
+                                                                    CircularProgressIndicator(
+                                                                  strokeWidth:
+                                                                      1,
+                                                                ),
+                                                              );
+                                                            },
+                                                          )
+                                                        : Image.asset(
+                                                            'assets/patient.png'),
+                                                  ),
                                                 ),
+
+                                                // leading: CircleAvatar(
+                                                //   radius: size.width * 0.060,
+                                                //   backgroundImage: NetworkImage(
+                                                //       state
+                                                //           .userProfile
+                                                //           .user!
+                                                //           .profilePicture!
+                                                //           .secureUrl!),
+                                                // ),
                                                 title: Text(state.userProfile
-                                                    .user!.fullName!),
+                                                    .user!.fullName ?? state.userProfile
+                                                    .user!.name! ),
                                                 subtitle: Text(state
                                                     .userProfile.user!.email!),
                                               ),
@@ -308,10 +355,9 @@ class _ScreenConfirmBookingState extends State<ScreenConfirmBooking> {
                                                   ),
                                                 ),
                                               ),
-                                               SizedBox(
+                                              SizedBox(
                                                 height: size.height * 0.01,
                                               ),
-
                                             ],
                                           )),
                                     ),
@@ -373,9 +419,11 @@ class _ScreenConfirmBookingState extends State<ScreenConfirmBooking> {
                                     if (state is PayButtonStartLoading) {
                                       return const Center(
                                         child: SizedBox(
-
-                                          width: 25,height: 25,
-                                          child: CircularProgressIndicator(strokeWidth: 1,)),
+                                            width: 25,
+                                            height: 25,
+                                            child: CircularProgressIndicator(
+                                              strokeWidth: 1,
+                                            )),
                                       );
                                     } else {
                                       return ElevatedButton(
@@ -450,7 +498,12 @@ class _ScreenConfirmBookingState extends State<ScreenConfirmBooking> {
                                                         'Check internet connection')));
                                           }
                                         },
-                                        child:  Text('Pay',style: TextStyle(fontSize: size.width*0.4 * 0.08,),),
+                                        child: Text(
+                                          'Pay',
+                                          style: TextStyle(
+                                            fontSize: size.width * 0.4 * 0.08,
+                                          ),
+                                        ),
                                       );
                                     }
                                   },
