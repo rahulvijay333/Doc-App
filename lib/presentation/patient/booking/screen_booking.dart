@@ -278,6 +278,7 @@ class _ScreenBookingState extends State<ScreenBooking> {
                                                 true) {
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(const SnackBar(
+                                                    duration: Duration(seconds: 1),
                                                       behavior: SnackBarBehavior
                                                           .floating,
                                                       margin:

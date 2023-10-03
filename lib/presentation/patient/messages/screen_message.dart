@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:appoint_medic/application/chat/see_messages/bloc/see_messages_bloc.dart';
 import 'package:appoint_medic/application/chat/view_chats/bloc/view_all_chats_bloc.dart';
@@ -175,7 +174,7 @@ class ScreenMesgsPatient extends StatelessWidget {
                                           color: appBackGround.withOpacity(0.5),
                                           child: MessageTile(
                                             senderName:
-                                                "Dr.${state.chatsList[index].participants![0].doctor!.fullName!}",
+                                                "Dr.${state.chatsList[index].participants![0].doctor!.fullName}",
                                             message: state.chatsList[index]
                                                     .latestMessage?.content ??
                                                 'Send Hi',

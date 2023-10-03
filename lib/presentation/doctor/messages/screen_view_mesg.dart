@@ -1,17 +1,12 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:appoint_medic/application/chat/create_chat_doct/bloc/create_chat_doc_bloc.dart';
 import 'package:appoint_medic/application/chat/see_messages/bloc/see_messages_bloc.dart';
-import 'package:appoint_medic/core/api_endPoints/api_endpoints.dart';
-import 'package:appoint_medic/domain/response_models/new_message/new_chat_response/new_chat_response.dart';
-import 'package:appoint_medic/domain/token_storage/secure_storage.dart';
-import 'package:appoint_medic/main.dart';
-import 'package:dio/dio.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
+
+import '../../../core/api_endPoints/base/base_url.dart';
 
 class ScreenViewMesgDoctor extends StatefulWidget {
   ScreenViewMesgDoctor(
@@ -66,7 +61,6 @@ class _ScreenViewMesgDoctorState extends State<ScreenViewMesgDoctor> {
 
   void setUpSocketListener() {
     socket.on('new messages', (data) {
-     
       // Update your UI or trigger a chat refresh
 
       if (mounted) {
@@ -78,14 +72,11 @@ class _ScreenViewMesgDoctorState extends State<ScreenViewMesgDoctor> {
 
     socket.on('message received', (data) {
       // Handle incoming messages
-     
-      
     });
   }
 
   @override
   Widget build(BuildContext context) {
-   
     final size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -204,7 +195,9 @@ class _ScreenViewMesgDoctorState extends State<ScreenViewMesgDoctor> {
 
                                       String formattedTime =
                                           DateFormat('h.mm a')
-                                              .format(messages[index].updatedAt.toLocal())
+                                              .format(messages[index]
+                                                  .updatedAt
+                                                  .toLocal())
                                               .toLowerCase();
 
                                       return Column(
@@ -257,8 +250,7 @@ class _ScreenViewMesgDoctorState extends State<ScreenViewMesgDoctor> {
                                                               top: 10,
                                                               bottom: 10),
                                                       child: Text(
-                                                        
-                                                            messages[index].content,
+                                                        messages[index].content,
                                                         style: const TextStyle(
                                                             fontSize: 18,
                                                             color:
@@ -348,7 +340,6 @@ class _ScreenViewMesgDoctorState extends State<ScreenViewMesgDoctor> {
                             borderRadius: BorderRadius.circular(10)),
                         child: IconButton(
                             onPressed: () async {
-                           
                               //------------------------------------send message function
                               if (msgController.text.isNotEmpty) {
                                 context.read<SeeMessagesBloc>().add(

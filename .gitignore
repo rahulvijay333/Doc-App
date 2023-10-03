@@ -48,3 +48,4 @@ app.*.map.json
 /lib/infrastructure/key_razor
 
 /android/app/key
+lib/core/api_endPoints/base

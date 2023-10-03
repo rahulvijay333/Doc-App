@@ -1,8 +1,4 @@
-const baseUrl = 'https://angelvision.cloud/api';
-// const baseUrl = 'http://192.168.89.117:4000/api';
-
-const socketUrlOnline = 'https://angelvision.cloud';
-// const socketUrlOnline = 'http:192.168.89.117:4000';
+import 'base/base_url.dart';
 
 class ApiEndPoints {
   //-----------------patient - login Auth
@@ -13,7 +9,7 @@ class ApiEndPoints {
 
   //reset password
   static const patientResetPassToken = '$baseUrl/auth/patient/password/reset';
-  static const patientResetPassword ='$baseUrl/auth/patient/password/new';
+  static const patientResetPassword = '$baseUrl/auth/patient/password/new';
 
   static const patientGetAllDoctors = '$baseUrl/patient/doctors/all';
   static const getAllSpecialities = '$baseUrl/doctor/specialities';
@@ -46,8 +42,8 @@ class ApiEndPoints {
   static const doctorNewUser = '$baseUrl/auth/doctor/register';
   static const doctorOtpVerify = '$baseUrl/auth/doctor/verify';
   //reset password
-    static const doctorResetPassToken = '$baseUrl/auth/doctor/password/reset';
-  static const doctorResetPassword ='$baseUrl/auth/doctor/password/new';
+  static const doctorResetPassToken = '$baseUrl/auth/doctor/password/reset';
+  static const doctorResetPassword = '$baseUrl/auth/doctor/password/new';
 
   //profile
   static const getDoctorProfileDetails = '$baseUrl/doctor/profile';
