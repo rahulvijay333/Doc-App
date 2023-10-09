@@ -127,14 +127,14 @@ class _ScreenHomeState extends State<ScreenHome> {
                                           state.userProfile.user!.name!,
                                       maxLines: 1,
                                       style: TextStyle(
-                                          fontSize: size.width * 0.064,
+                                          fontSize: size.width * 0.060,
                                           color: Colors.white,
                                           fontWeight: FontWeight.w500),
                                     )
                                   ],
                                 ),
                               ),
-                              Spacer(),
+                              const Spacer(),
 
                               //------------------------------------------reminder icon
                               InkWell(onTap: () {
@@ -147,7 +147,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                                     pageBuilder: (context, animation,
                                         secondaryAnimation) {
                                       // Build the new route/screen here
-                                      return ScreenNotification();
+                                      return const ScreenNotification();
                                     },
                                     transitionsBuilder: (context, animation,
                                         secondaryAnimation, child) {
@@ -265,7 +265,7 @@ class _ScreenHomeState extends State<ScreenHome> {
               child: Text(
                 'Specialities',
                 style: TextStyle(
-                    fontSize: 18,
+                    fontSize: size.width * 0.044,
                     fontWeight: FontWeight.w500,
                     color: appBackGround),
               ),
@@ -321,7 +321,11 @@ class _ScreenHomeState extends State<ScreenHome> {
                                             .secureUrl!),
                                       ),
                                     ),
-                                    Text(state.specialityList[index].name!)
+                                    Text(
+                                      state.specialityList[index].name!,
+                                      style: TextStyle(
+                                          fontSize: size.width * 0.035),
+                                    )
                                   ],
                                 );
                               },
@@ -373,7 +377,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                     Text(
                       'Today Appointments',
                       style: TextStyle(
-                          fontSize: 18,
+                          fontSize: size.width * 0.044,
                           fontWeight: FontWeight.w500,
                           color: appBackGround),
                     ),
@@ -452,7 +456,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                               ],
                             );
                           } else {
-                            return Center(
+                            return const Center(
                               child: Text('Nothings to display'),
                             );
                           }

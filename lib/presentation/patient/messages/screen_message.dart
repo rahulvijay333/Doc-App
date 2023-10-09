@@ -180,7 +180,7 @@ class ScreenMesgsPatient extends StatelessWidget {
                                                 'Send Hi',
                                             time: state
                                                 .chatsList[index].updatedAt!,
-                                            Image: state
+                                            imagee: state
                                                 .chatsList[index]
                                                 .participants![0]
                                                 .doctor!

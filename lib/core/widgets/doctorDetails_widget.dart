@@ -68,55 +68,58 @@ class DoctorTileWidget extends StatelessWidget {
                 }),
               ),
             ),
-            const SizedBox(
-              width: 25,
+             SizedBox(
+              width: size.width*0.03,
             ),
             //--------------------------------------
-            Container(
-              //  color: Colors.amber,
-              height: size.height * 0.14,
-              width: 175,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Dr.$doctorName',
-                    style: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.w500),
-                  ),
-                  Text(
-                    specialityName,
-                  ),
-                  SizedBox(
-                    height: size.height * 0.01,
-                  ),
-                  Row(
-                    children: [
-                      const Text(
-                        'Date :',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      Text(
-                        formatDate(date),
-                        style: const TextStyle(color: Colors.blue),
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      const Text(
-                        'Time :',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      Text(
-                        '${starttime} - ${endTime}',
-                        maxLines: 1,
-                        style: const TextStyle(color: Colors.blue),
-                      )
-                    ],
-                  ),
-                ],
+            Expanded(
+              child: Container(
+                //  color: Colors.amber,
+                height: size.height * 0.14,
+              
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Dr.$doctorName',
+                      style:  TextStyle(
+                          fontSize: size.width * 0.05, fontWeight: FontWeight.w500),
+                    ),
+                    Text(
+                      specialityName, style:  TextStyle(
+                          fontSize: size.width * 0.035)
+                    ),
+                    SizedBox(
+                      height: size.height * 0.01,
+                    ),
+                    Row(
+                      children: [
+                         Text(
+                          'Date :',
+                          style: TextStyle(  fontSize: size.width * 0.035,),
+                        ),
+                        Text(
+                          formatDate(date),
+                          style:  TextStyle(color: Colors.blue,fontSize: size.width * 0.035),
+                        )
+                      ],
+                    ),
+                    Row(
+                      children: [
+                         Text(
+                          'Time :',
+                          style: TextStyle(fontSize: size.width * 0.035),
+                        ),
+                        Text(
+                          '${starttime} - ${endTime}',
+                          maxLines: 1,
+                          style:  TextStyle(color: Colors.blue,fontSize: size.width * 0.035),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

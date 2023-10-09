@@ -22,7 +22,7 @@ class ScreenSuccessPayment extends StatelessWidget {
               height: size.height * 0.07,
               width: size.width,
               color: appBackGround,
-              child:  Center(
+              child: Center(
                 child: Text(
                   'Payment Status',
                   style: TextStyle(
@@ -37,11 +37,11 @@ class ScreenSuccessPayment extends StatelessWidget {
                 builder: (context, state) {
                   //----------------------------------------------------------loading
                   if (state is BookingStatusLoading) {
-                    return const Center(
+                    return  const Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('Verifying payment with server , please wait '),
+                          Text('Verifying payment with server , please wait ',),
                           SizedBox(
                             height: 5,
                           ),
@@ -56,18 +56,18 @@ class ScreenSuccessPayment extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset(
-                          
                           'assets/payment_2.gif',
-                          height:size.width * 0.30,
+                          height: size.width * 0.30,
                           width: size.width * 0.30,
                           fit: BoxFit.cover,
-                          
                         ),
-                        TextCustomWidget(
-                          size: size,
-                          title: 'Appointment Booking Successfull',
-                          fontweight: FontWeight.w500,
-                          sizeValue: 0.05,
+                        Center(
+                          child: TextCustomWidget(
+                            size: size,
+                            title: 'Appointment Booking Successfull',
+                            fontweight: FontWeight.w500,
+                            sizeValue: 0.05,
+                          ),
                         ),
                         const SizedBox(
                           height: 15,
@@ -123,7 +123,7 @@ class ScreenSuccessPayment extends StatelessWidget {
                       ],
                     );
                   } else if (state is BookingFailed) {
-                    return Center(
+                    return const Center(
                       child: Text(
                           'Appointment booking unsuccessfull , Please try again lator'),
                     );

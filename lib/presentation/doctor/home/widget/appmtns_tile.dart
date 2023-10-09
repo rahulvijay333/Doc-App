@@ -58,7 +58,7 @@ class ApointTodayTileWidget extends StatelessWidget {
                       //  color: Colors.red,
                       child: imgUrl == null
                           ? Image.asset(
-                              'assets/place_holder_patient.png',
+                              'assets/person_placeholder.png',
                               fit: BoxFit.cover,
                             )
                           : Image.network(

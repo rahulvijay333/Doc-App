@@ -137,12 +137,13 @@ class ScreenDocProfile extends StatelessWidget {
                                       },
                                       leading:  Icon(
                                         Icons.person,
+                                        size:  size.width * 0.05,
                                         color: appBackGround
                                       ),
-                                      title: const Text('Personal Details'),
-                                      trailing: const Icon(
+                                      title:  Text('Personal Details',style: TextStyle(fontSize: size.width*0.037),),
+                                      trailing:  Icon(
                                         Icons.arrow_forward_ios,
-                                        size: 18,
+                                        size: size.width * 0.037,
                                       ),
                                     ),
                                   ),
@@ -173,12 +174,13 @@ class ScreenDocProfile extends StatelessWidget {
                                       },
                                       leading:  Icon(
                                         Icons.password,
+                                        size: size.width * 0.05,
                                       color: appBackGround
                                       ),
-                                      title: const Text('Change Password'),
-                                      trailing: const Icon(
+                                      title:  Text('Change Password',style: TextStyle(fontSize: size.width*0.037)),
+                                      trailing:  Icon(
                                         Icons.arrow_forward_ios,
-                                        size: 18,
+                                    size: size.width * 0.037,
                                       ),
                                     ),
                                   ),
@@ -199,9 +201,10 @@ class ScreenDocProfile extends StatelessWidget {
                                       },
                                       leading:  Icon(
                                         Icons.info,
-                                        color: appBackGround
+                                        color: appBackGround,
+                                       size: size.width * 0.05,
                                       ),
-                                      title: const Text('About'),
+                                      title:  Text('About',style: TextStyle(fontSize: size.width*0.037)),
                                       trailing: const Icon(
                                         Icons.arrow_forward_ios,
                                         size: 18,
@@ -225,12 +228,12 @@ class ScreenDocProfile extends StatelessWidget {
                                       },
                                       leading:  Icon(
                                         Icons.book,
-                                       color: appBackGround
+                                       color: appBackGround,size: size.width * 0.05,
                                       ),
-                                      title: const Text('Terms and Conditions'),
-                                      trailing: const Icon(
+                                      title:  Text('Terms and Conditions',style: TextStyle(fontSize: size.width*0.037)),
+                                      trailing:  Icon(
                                         Icons.arrow_forward_ios,
-                                        size: 18,
+                                          size: size.width * 0.037,
                                       ),
                                     ),
                                   ),
@@ -250,12 +253,12 @@ class ScreenDocProfile extends StatelessWidget {
                                       },
                                       leading:  Icon(
                                         Icons.security,
-                                        color: appBackGround
+                                        color: appBackGround,size: size.width * 0.05,
                                       ),
-                                      title: const Text('Privacy'),
-                                      trailing: const Icon(
+                                      title:  Text('Privacy',style: TextStyle(fontSize: size.width*0.037)),
+                                      trailing:  Icon(
                                         Icons.arrow_forward_ios,
-                                        size: 18,
+                                       size: size.width * 0.037,
                                       ),
                                     ),
                                   ),
@@ -338,9 +341,9 @@ class ScreenDocProfile extends StatelessWidget {
                                           },
                                           leading:  Icon(
                                             Icons.logout,
-                                            color: appBackGround
+                                            color: appBackGround,size: size.width * 0.05,
                                           ),
-                                          title: const Text('Log Out'),
+                                          title:  Text('Log Out',style: TextStyle(fontSize: size.width*0.037)),
                                         ),
                                       ),
                                     );

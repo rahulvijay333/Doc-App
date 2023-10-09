@@ -4,14 +4,13 @@ class NotificationBell extends StatelessWidget {
   final int notificationCount;
 
   NotificationBell({required this.notificationCount});
-  
 
   @override
   Widget build(BuildContext context) {
-    final size =  MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
     return Stack(
       children: [
-         Icon(
+        Icon(
           Icons.notifications,
           size: size.width * 0.07,
           color: Colors.white, // Adjust color as needed

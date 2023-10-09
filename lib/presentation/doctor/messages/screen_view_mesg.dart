@@ -118,10 +118,21 @@ class _ScreenViewMesgDoctorState extends State<ScreenViewMesgDoctor> {
                           color: Colors.white,
                         ),
                       ),
-                      CircleAvatar(
-                        backgroundColor: Colors.blue.withOpacity(0.5),
-                        backgroundImage: NetworkImage(widget.patientImage),
-                        radius: 20,
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: SizedBox(
+                          width: 40,
+                          height: 40,
+                          child: widget.patientImage.isNotEmpty
+                              ? Image.network(
+                                  widget.patientImage,
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.asset(
+                                  'assets/person_placeholder.png',
+                                  fit: BoxFit.cover,
+                                ),
+                        ),
                       ),
                       const SizedBox(
                         width: 10,

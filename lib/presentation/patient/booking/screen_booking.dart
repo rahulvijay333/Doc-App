@@ -261,10 +261,10 @@ class _ScreenBookingState extends State<ScreenBooking> {
                                       itemCount: state
                                           .searchResultSlots[0].slots!.length,
                                       gridDelegate:
-                                          const SliverGridDelegateWithMaxCrossAxisExtent(
-                                              mainAxisExtent: 30,
-                                              mainAxisSpacing: 20,
-                                              crossAxisSpacing: 20,
+                                           SliverGridDelegateWithMaxCrossAxisExtent(
+                                              mainAxisExtent: 40,
+                                              mainAxisSpacing: size.width * 0.03,
+                                              crossAxisSpacing: size.width * 0.02,
                                               maxCrossAxisExtent: 180),
                                       itemBuilder: (context, index) {
                                         final isSlotSelected =
@@ -278,7 +278,8 @@ class _ScreenBookingState extends State<ScreenBooking> {
                                                 true) {
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(const SnackBar(
-                                                    duration: Duration(seconds: 1),
+                                                      duration:
+                                                          Duration(seconds: 1),
                                                       behavior: SnackBarBehavior
                                                           .floating,
                                                       margin:
@@ -438,18 +439,18 @@ class _ScreenBookingState extends State<ScreenBooking> {
                                   child: ElevatedButton(
                                       onPressed: () {
                                         //-----------------------------------------------booking proceed next
-                              
+
                                         context.read<BookingTrackerBloc>().add(
                                             BookingStartApiCallOrderID(
                                                 bookingDetails:
                                                     state.bookingDetails,
                                                 doct: state.doct));
                                       },
-                                      child:   Text(
-                                          'Proceed',
-                                          style: TextStyle(
-                                              fontSize: size.width * 0.40 * 0.08),
-                                        )),
+                                      child: Text(
+                                        'Proceed',
+                                        style: TextStyle(
+                                            fontSize: size.width * 0.40 * 0.08),
+                                      )),
                                 ),
                               );
                             }
@@ -603,10 +604,12 @@ class AppbarCustom extends StatelessWidget {
                 Icons.arrow_back_ios_new,
                 color: Colors.white,
               )),
-           Text(
+          Text(
             'Appointment',
             style: TextStyle(
-             fontSize: size.width *0.04, color: Colors.white,),
+              fontSize: size.width * 0.04,
+              color: Colors.white,
+            ),
           ),
         ],
       ),

@@ -142,18 +142,24 @@ class ScreemDoctMessage extends StatelessWidget {
                                                   //-------------
                                                   return ScreenViewMesgDoctor(
                                                     patientImage: state
-                                                        .chatsList[index]
-                                                        .participants![0]
-                                                        .patient!
-                                                        .profilePicture!
-                                                        .secureUrl!,
+                                                            .chatsList[index]
+                                                            .participants![0]
+                                                            .patient
+                                                            ?.profilePicture
+                                                            ?.secureUrl ??
+                                                        '',
                                                     chatRoomID: state
                                                         .chatsList[index].id!,
                                                     patientName: state
-                                                        .chatsList[index]
-                                                        .participants![0]
-                                                        .patient!
-                                                        .fullName!,
+                                                            .chatsList[index]
+                                                            .participants![0]
+                                                            .patient
+                                                            ?.fullName ??
+                                                        state
+                                                            .chatsList[index]
+                                                            .participants![0]
+                                                            .patient!
+                                                            .name!,
                                                     doctorID: state
                                                         .chatsList[index]
                                                         .participants![0]
@@ -177,10 +183,15 @@ class ScreemDoctMessage extends StatelessWidget {
                                                 // color: Colors.blue[50]?.withOpacity(0.5),
                                                 child: MessageTile(
                                                   senderName: state
-                                                      .chatsList[index]
-                                                      .participants![0]
-                                                      .patient!
-                                                      .fullName!,
+                                                          .chatsList[index]
+                                                          .participants![0]
+                                                          .patient!
+                                                          .fullName ??
+                                                      state
+                                                          .chatsList[index]
+                                                          .participants![0]
+                                                          .patient!
+                                                          .name!,
                                                   message: state
                                                           .chatsList[index]
                                                           .latestMessage
@@ -188,12 +199,13 @@ class ScreemDoctMessage extends StatelessWidget {
                                                       '',
                                                   time: state.chatsList[index]
                                                       .updatedAt!,
-                                                  Image: state
-                                                      .chatsList[index]
-                                                      .participants![0]
-                                                      .patient!
-                                                      .profilePicture!
-                                                      .secureUrl!,
+                                                  imagee: state
+                                                          .chatsList[index]
+                                                          .participants![0]
+                                                          .patient
+                                                          ?.profilePicture
+                                                          ?.secureUrl ??
+                                                      '',
                                                 )),
                                           ),
                                         );

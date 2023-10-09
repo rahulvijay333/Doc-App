@@ -1,4 +1,5 @@
 import 'package:appoint_medic/application/notifications/bloc/view_notifications_bloc.dart';
+import 'package:appoint_medic/application/notifications/notificationStatus_track/bloc/notification_track_bloc.dart';
 import 'package:appoint_medic/core/color_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,6 +15,8 @@ class ScreenNotification extends StatelessWidget {
       child: WillPopScope(
         onWillPop: () async {
           context.read<ViewNotificationsBloc>().add(NotificationMarkRead());
+
+          context.read<NotificationTrackBloc>().add(ClearNotifications());
 
           Navigator.of(context).pop();
 
@@ -35,6 +38,9 @@ class ScreenNotification extends StatelessWidget {
                           context
                               .read<ViewNotificationsBloc>()
                               .add(NotificationMarkRead());
+                          context
+                              .read<NotificationTrackBloc>()
+                              .add(ClearNotifications());
 
                           //---------------------pop function
 

@@ -5,13 +5,13 @@ class MessageTile extends StatelessWidget {
   final String senderName;
   final String message;
   final DateTime time;
-  final String Image;
+  final String imagee;
 
-  MessageTile({
+  const MessageTile({super.key, 
     required this.senderName,
     required this.message,
     required this.time,
-    required this.Image,
+    required this.imagee,
   });
 
   @override
@@ -22,17 +22,26 @@ class MessageTile extends StatelessWidget {
 
     return Container(
       color: Colors.white.withOpacity(0.8),
-      
       padding: const EdgeInsets.all(8),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Center(
-            child: CircleAvatar(
-              radius: 25,
-              // You can customize the avatar image here
-              backgroundImage: NetworkImage(Image),
-              //backgroundColor: Colors.blue, // Customize the avatar's background color
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: SizedBox(
+                child: imagee.isNotEmpty
+                    ? Image.network(
+                        imagee,
+                        fit: BoxFit.cover,
+                      )
+                    : Image.asset(
+                        'assets/person_placeholder.png',
+                        fit: BoxFit.cover,
+                      ),
+                width: 50,
+                height: 50,
+              ),
             ),
           ),
           const SizedBox(
@@ -44,7 +53,8 @@ class MessageTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "$senderName",maxLines: 1,
+                  "$senderName",
+                  maxLines: 1,
                   style: const TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 20,

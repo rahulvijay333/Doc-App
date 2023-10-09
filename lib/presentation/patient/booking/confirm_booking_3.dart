@@ -343,20 +343,21 @@ class _ScreenConfirmBookingState extends State<ScreenConfirmBooking> {
                                                       }
                                                     },
                                                     decoration:
-                                                        const InputDecoration(
+                                                         InputDecoration(
+                                                          hintStyle: TextStyle(fontSize: size.width * 0.038),
                                                             hintText:
-                                                                'Type medical reason here....',
+                                                                'Type reason here..',
                                                             border: InputBorder
                                                                 .none,
                                                             focusedBorder:
                                                                 InputBorder
                                                                     .none),
-                                                    maxLines: 4,
+                                                    maxLines: 5,
                                                   ),
                                                 ),
                                               ),
                                               SizedBox(
-                                                height: size.height * 0.01,
+                                                height: size.height * 0.02,
                                               ),
                                             ],
                                           )),

@@ -67,8 +67,8 @@ class ScreenSearchMesgsDoctor extends StatelessWidget {
                                     ?.content ??
                                 'Send Hi',
                             time: state.searchedMessage[index].updatedAt!,
-                            Image: state.searchedMessage[index].participants![0]
-                                .patient!.profilePicture!.secureUrl!,
+                            imagee: state.searchedMessage[index].participants![0]
+                                .patient?.profilePicture?.secureUrl ?? '',
                           )),
                     ),
                   );

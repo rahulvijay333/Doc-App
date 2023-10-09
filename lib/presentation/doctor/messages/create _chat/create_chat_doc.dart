@@ -20,7 +20,7 @@ class ScreenCreateChatDoc extends StatelessWidget {
             } else if (state is NewChatCreationLoading) {
               return const Center(
                   child: Text(
-                      'starting new conversation with doctor , please wait'));
+                      'starting new chat, please wait'));
             } else if (state is NewChatCreated) {
               context
                   .read<SeeMessagesBloc>()
@@ -50,10 +50,10 @@ class ScreenCreateChatDoc extends StatelessWidget {
                   builder: (context) {
                     return ScreenViewMesgDoctor(
                         patientImage: state.oldChatDetails.participants![0]
-                            .patient!.profilePicture!.secureUrl!,
+                            .patient?.profilePicture?.secureUrl ?? '' ,
                         chatRoomID: state.oldChatDetails.id!,
-                        patientName: state
-                            .oldChatDetails.participants![0].patient!.fullName!,
+                        patientName: state.oldChatDetails.participants![0].patient?.fullName ??  state
+                            .oldChatDetails.participants![0].patient!.name!,
                         patientID:
                             state.oldChatDetails.participants![0].patient!.id!,
                         doctorID:

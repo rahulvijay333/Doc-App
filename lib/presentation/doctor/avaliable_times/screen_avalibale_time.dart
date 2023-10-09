@@ -85,7 +85,7 @@ class _ScreenAvailableTimeState extends State<ScreenAvailableTime> {
             height: size.height * 0.07,
             width: size.width,
             color: appBackGround,
-            child:  Center(
+            child: Center(
               child: Text(
                 'Available Timings',
                 style: TextStyle(
@@ -98,9 +98,10 @@ class _ScreenAvailableTimeState extends State<ScreenAvailableTime> {
           Padding(
             padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
             child: Container(
-              child:  Text(
+              child: Text(
                 'Date',
-                style: TextStyle(fontSize: size.width * 0.04, fontWeight: FontWeight.w500),
+                style: TextStyle(
+                    fontSize: size.width * 0.04, fontWeight: FontWeight.w500),
               ),
             ),
           ),
@@ -126,7 +127,9 @@ class _ScreenAvailableTimeState extends State<ScreenAvailableTime> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Icon(Icons.calendar_month),
-                        SizedBox(width: size.width *0.4*0.02,),
+                        SizedBox(
+                          width: size.width * 0.4 * 0.02,
+                        ),
                         Text(
                           selectedDateFormatted,
                           style: TextStyle(fontSize: size.width * 0.4 * 0.10),
@@ -139,13 +142,14 @@ class _ScreenAvailableTimeState extends State<ScreenAvailableTime> {
           Padding(
             padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
             child: Container(
-              child:  Text(
+              child: Text(
                 'Slots',
-                style: TextStyle(fontSize: size.width * 0.04, fontWeight: FontWeight.w500),
+                style: TextStyle(
+                    fontSize: size.width * 0.04, fontWeight: FontWeight.w500),
               ),
             ),
           ),
-    //------------------------------------------2nd column
+          //------------------------------------------2nd column
           Padding(
             padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
             child: ClipRRect(
@@ -156,7 +160,8 @@ class _ScreenAvailableTimeState extends State<ScreenAvailableTime> {
                   color: Colors.white,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: BlocBuilder<AppointmentSlotBloc, AppointmentSlotState>(
+                    child:
+                        BlocBuilder<AppointmentSlotBloc, AppointmentSlotState>(
                       builder: (context, state) {
                         if (state is SlotLoading) {
                           return const Center(
@@ -168,7 +173,7 @@ class _ScreenAvailableTimeState extends State<ScreenAvailableTime> {
                               child: Center(child: Text('No Slots Added')),
                             );
                           }
-    
+
                           if (state.slotlist.filteredSlots![0].slots!.isEmpty) {
                             return const SizedBox(
                               child: Center(child: Text('No Slots Added')),
@@ -176,16 +181,14 @@ class _ScreenAvailableTimeState extends State<ScreenAvailableTime> {
                           } else {
                             return GridView.builder(
                               shrinkWrap: true,
-                              itemCount:
-                                  state.slotlist.filteredSlots![0].slots!.length,
+                              itemCount: state
+                                  .slotlist.filteredSlots![0].slots!.length,
                               gridDelegate:
-                                   SliverGridDelegateWithMaxCrossAxisExtent(
-                                      mainAxisExtent: 40,
-                                      // mainAxisSpacing: 20,
+                                  SliverGridDelegateWithMaxCrossAxisExtent(
+                                    mainAxisExtent: 50,
+                                      mainAxisSpacing: size.width * 0.03,
                                       crossAxisSpacing: size.width * 0.01,
-                                      maxCrossAxisExtent: size.width*0.46
-                                      
-                                      ),
+                                      maxCrossAxisExtent: size.width * 0.46),
                               itemBuilder: (context, index) {
                                 return ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
@@ -211,7 +214,9 @@ class _ScreenAvailableTimeState extends State<ScreenAvailableTime> {
                                               style: TextStyle(
                                                   fontSize: size.width > 600
                                                       ? 18
-                                                      : size.width * 0.46 * 0.07),
+                                                      : size.width *
+                                                          0.46 *
+                                                          0.07),
                                             ),
                                           ),
                                           Expanded(
@@ -242,11 +247,10 @@ class _ScreenAvailableTimeState extends State<ScreenAvailableTime> {
                                                                   .filteredSlots![
                                                                       0]
                                                                   .id!,
-    
-                                                              date:
-                                                                  '${selectedDate.toLocal()}'
-                                                                      .split(
-                                                                          ' ')[0],
+
+                                                              date: '${selectedDate.toLocal()}'
+                                                                  .split(
+                                                                      ' ')[0],
                                                               // );
                                                             );
                                                           },
@@ -287,7 +291,7 @@ class _ScreenAvailableTimeState extends State<ScreenAvailableTime> {
                             ],
                           );
                         }
-    
+
                         return const SizedBox(
                           child: Center(child: Text('No Slots To Show')),
                         );
@@ -296,19 +300,22 @@ class _ScreenAvailableTimeState extends State<ScreenAvailableTime> {
                   )),
             ),
           ),
-    
+
           SizedBox(
             height: size.height * 0.01,
           ),
           Center(
             child: SizedBox(
-              width: size.width *0.4,
+              width: size.width * 0.4,
               height: 40,
               child: ElevatedButton(
                   onPressed: () {
                     _addSlot(context, selectedDate);
                   },
-                  child:  Text('Add Slot',style: TextStyle(fontSize: size.width * 0.4 *0.08),)),
+                  child: Text(
+                    'Add Slot',
+                    style: TextStyle(fontSize: size.width * 0.4 * 0.08),
+                  )),
             ),
           )
           //--------------------------------------------------------------------date
