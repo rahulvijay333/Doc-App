@@ -102,7 +102,7 @@ class ScreenNotificationDoct extends StatelessWidget {
                                         const Spacer(),
                                         Text(
                                           '${state.notificationList[index].message}',
-                                          style: TextStyle(color: Colors.blue),
+                                          style: const TextStyle(color: Colors.blue),
                                         ),
                                         Row(
                                           children: [
@@ -121,7 +121,7 @@ class ScreenNotificationDoct extends StatelessWidget {
                               );
                             },
                             separatorBuilder: (context, index) {
-                              return SizedBox(
+                              return const SizedBox(
                                 height: 5,
                               );
                             },
@@ -133,7 +133,7 @@ class ScreenNotificationDoct extends StatelessWidget {
                       );
                     }
                     return const Center(
-                      child: Text('No Notifactions'),
+                      child: Text('No Notifications'),
                     );
                   },
                 ),

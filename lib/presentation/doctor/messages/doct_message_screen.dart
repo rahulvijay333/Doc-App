@@ -44,6 +44,7 @@ class ScreemDoctMessage extends StatelessWidget {
                 ),
               ),
             ),
+            
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
@@ -54,7 +55,7 @@ class ScreemDoctMessage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                       child: Container(
                         color: Colors.white,
-                        height: size.height * 0.068,
+                        height: size.height * 0.065,
                         width: size.width,
                         child: Center(
                           child: TextFormField(
@@ -123,6 +124,7 @@ class ScreemDoctMessage extends StatelessWidget {
                                   }
 
                                   return ListView.separated(
+                                    physics: BouncingScrollPhysics(),
                                       itemBuilder: (context, index) {
                                         return InkWell(
                                           //------------------------------view message

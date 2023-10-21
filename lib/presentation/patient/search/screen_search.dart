@@ -47,11 +47,11 @@ class ScreenSearch extends StatelessWidget {
                             Icons.arrow_back_ios_new,
                             color: Colors.white,
                           )),
-                      const Expanded(
+                       Expanded(
                           child: Text(
                         'All Doctors',
                         style: TextStyle(
-                            fontSize: 20,
+                            fontSize: size.width * 0.04,
                             color: Colors.white,
                             fontWeight: FontWeight.bold),
                       )),
@@ -64,32 +64,36 @@ class ScreenSearch extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Container(
-                      color: Colors.grey.withOpacity(0.1),
-                      child: TextFormField(
-                        onChanged: (value) {
-                          if (value.isNotEmpty) {
-                            BlocProvider.of<SearchBloc>(context)
-                                .add(SearchByName(value));
-                            checkSearchField.value = true;
-                          } else {
-                            BlocProvider.of<SearchBloc>(context)
-                                .add(ShowAllDoctorList());
-                            checkSearchField.value = false;
-                          }
-                        },
-                        controller: searchController,
-                        cursorColor: Colors.grey,
-                        decoration: const InputDecoration(
-                            prefixIcon: Icon(
-                              Icons.search,
-                              color: Colors.grey,
-                            ),
-                            hintText: 'Search by name',
-                            border: InputBorder.none,
-                            hintStyle: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 15,
-                            )),
+                       height: size.height * 0.065,
+                      color: Color(0xFF9E9E9E).withOpacity(0.1),
+                      child: Center(
+                        child: TextFormField(
+                          onChanged: (value) {
+                            if (value.isNotEmpty) {
+                              BlocProvider.of<SearchBloc>(context)
+                                  .add(SearchByName(value));
+                              checkSearchField.value = true;
+                            } else {
+                              BlocProvider.of<SearchBloc>(context)
+                                  .add(ShowAllDoctorList());
+                              checkSearchField.value = false;
+                            }
+                          },
+                          controller: searchController,
+                          cursorColor: Colors.grey,
+                          decoration:  InputDecoration(
+                         
+                              prefixIcon: Icon(
+                                Icons.search,
+                                color: Colors.grey,size: size.width * 0.055,
+                              ),
+                              hintText: 'Search by name',
+                              border: InputBorder.none,
+                              hintStyle: TextStyle(
+                                color: Colors.grey,
+                                fontSize: size.width * 0.035,
+                              )),
+                        ),
                       ),
                     ),
                   ),

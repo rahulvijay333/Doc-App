@@ -46,12 +46,14 @@ class ScreenMainPage extends StatelessWidget {
           },
         ),
         bottomNavigationBar: Padding(
-          padding: const EdgeInsets.only(left: 25, right: 25, bottom: 20),
+          padding: EdgeInsets.only(
+              left: size.width * 0.06,
+              right: size.width * 0.06,
+              bottom: size.width * 0.05),
           child: Container(
             decoration: BoxDecoration(
                 color: appBackGround, borderRadius: BorderRadius.circular(10)),
-            height: 50,
-            
+            height: size.height * 0.055,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -60,7 +62,8 @@ class ScreenMainPage extends StatelessWidget {
                       FocusManager.instance.primaryFocus?.unfocus();
                       context.read<NavbarBloc>().add(PageChangeEvent(page: 0));
                     },
-                    icon: const Icon(
+                    icon: Icon(
+                      size: size.width * 0.05,
                       Icons.home,
                       color: Colors.white,
                     )),
@@ -69,7 +72,8 @@ class ScreenMainPage extends StatelessWidget {
                       FocusManager.instance.primaryFocus?.unfocus();
                       context.read<NavbarBloc>().add(PageChangeEvent(page: 1));
                     },
-                    icon: const Icon(
+                    icon: Icon(
+                      size: size.width * 0.05,
                       Icons.edit_calendar_outlined,
                       color: Colors.white,
                     )),
@@ -78,7 +82,8 @@ class ScreenMainPage extends StatelessWidget {
                       FocusManager.instance.primaryFocus?.unfocus();
                       context.read<NavbarBloc>().add(PageChangeEvent(page: 2));
                     },
-                    icon: const Icon(
+                    icon: Icon(
+                      size: size.width * 0.05,
                       Icons.message,
                       color: Colors.white,
                     )),
@@ -87,7 +92,8 @@ class ScreenMainPage extends StatelessWidget {
                       FocusManager.instance.primaryFocus?.unfocus();
                       context.read<NavbarBloc>().add(PageChangeEvent(page: 3));
                     },
-                    icon: const Icon(
+                    icon: Icon(
+                      size: size.width * 0.05,
                       Icons.person_2_rounded,
                       color: Colors.white,
                     ))

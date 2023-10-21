@@ -1,4 +1,3 @@
-
 import 'package:appoint_medic/application/chat/see_messages/bloc/see_messages_bloc.dart';
 import 'package:appoint_medic/application/chat/view_chats/bloc/view_all_chats_bloc.dart';
 import 'package:appoint_medic/application/chat/view_chats/search_chat/bloc/search_messages_bloc.dart';
@@ -47,23 +46,25 @@ class ScreenMesgsPatient extends StatelessWidget {
               ),
 
               SizedBox(
-                height: size.height * 0.05,
+                height: size.height * 0.02,
               ),
               //----------------------------------------------------------search messages
               ClipRRect(
-                // borderRadius: BorderRadius.circular(0),
                 child: Container(
-                  color: Colors.white,
-                  height: size.height * 0.068,
+                  height: size.height * 0.065,
                   width: size.width,
                   child: Padding(
                     padding: const EdgeInsets.only(top: 0.0),
                     child: TextFormField(
                       controller: searchController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
+                          contentPadding: EdgeInsets.zero,
                           focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.grey)),
-                          prefixIcon: Icon(Icons.search),
+                          prefixIcon: Icon(
+                            Icons.search,
+                            size: size.width * 0.055,
+                          ),
                           hintText: 'Search messages...',
                           hintStyle: TextStyle(),
                           border: OutlineInputBorder(
@@ -87,8 +88,8 @@ class ScreenMesgsPatient extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: size.height * 0.01,
               ),
               //-------------------------------list of messages
               // searchnotifier.value.isEmpty ?
@@ -125,6 +126,7 @@ class ScreenMesgsPatient extends StatelessWidget {
                             }
 
                             return ListView.separated(
+                                physics: BouncingScrollPhysics(),
                                 itemBuilder: (context, index) {
                                   return InkWell(
                                     //------------------------------view ----------------------sending to view messages screen
@@ -212,7 +214,9 @@ class ScreenMesgsPatient extends StatelessWidget {
                                         // context
                                         //     .read<ViewAllChatsBloc>()
                                         //     .add(ViewAllChatsEvent());
-                                      BlocProvider.of<ViewAllChatsBloc>(context).add(GetAllChatsCall());
+                                        BlocProvider.of<ViewAllChatsBloc>(
+                                                context)
+                                            .add(GetAllChatsCall());
                                       },
                                       icon: const Icon(Icons.refresh))
                                 ],

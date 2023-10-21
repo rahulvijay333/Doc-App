@@ -226,24 +226,25 @@ class _ScreenHomeState extends State<ScreenHome> {
                         left: size.width * 0.01,
                         right: size.width * 0.01,
                       ),
-                      child: Container(
+                      child: SizedBox(
                         height: size.height * 0.09,
                         child: Padding(
                           padding: const EdgeInsets.all(15.0),
                           child: Container(
                             decoration: BoxDecoration(
                                 color: Colors.white,
-                                borderRadius: BorderRadius.circular(8)),
-                            child: const Row(
+                                borderRadius: BorderRadius.circular(5)),
+                            child:  Row(
+                              
                               children: [
                                 SizedBox(
-                                  width: 5,
+                                  width: size.width * 0.01,
                                 ),
-                                Icon(Icons.search),
+                                Icon(Icons.search,size: size.width * 0.055,color: Colors.black.withOpacity(0.5),),
                                 SizedBox(
-                                  width: 5,
+                                  width:  size.width * 0.01,
                                 ),
-                                Text('Search doctors ..')
+                                Text('Search doctors..',style: TextStyle(fontSize: size.width * 0.035,color: Colors.black.withOpacity(0.6)),)
                               ],
                             ),
                           ),
@@ -259,8 +260,8 @@ class _ScreenHomeState extends State<ScreenHome> {
             ),
             Padding(
               padding: EdgeInsets.only(
-                left: size.width * 0.05,
-                right: size.width * 0.05,
+                left: size.width * 0.04,
+                right: size.width * 0.04,
               ),
               child: Text(
                 'Specialities',
@@ -273,7 +274,7 @@ class _ScreenHomeState extends State<ScreenHome> {
             //---------------------------------------------------------------specility
             Padding(
               padding: EdgeInsets.only(
-                  left: size.width * 0.05, right: size.width * 0.05, top: 10),
+                  left: size.width * 0.04, right: size.width * 0.04, top: 10),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Container(
@@ -313,12 +314,12 @@ class _ScreenHomeState extends State<ScreenHome> {
                                         ));
                                       },
                                       child: CircleAvatar(
-                                        radius: 25,
+                                        radius: size.height * 0.13 * 0.25,
                                         backgroundColor: Colors.white,
                                         child: Image.network(state
                                             .specialityList[index]
                                             .specialityImg!
-                                            .secureUrl!),
+                                            .secureUrl!,width:size.height * 0.13 * 0.35,height: size.height * 0.13 * 0.35 ,),
                                       ),
                                     ),
                                     Text(
@@ -368,8 +369,8 @@ class _ScreenHomeState extends State<ScreenHome> {
               // height: size.height * 0.45,
               child: Padding(
                 padding: EdgeInsets.only(
-                    left: size.width * 0.05,
-                    right: size.width * 0.05,
+                    left: size.width * 0.04,
+                    right: size.width * 0.04,
                     top: size.height * 0.65 * 0.01),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -431,8 +432,8 @@ class _ScreenHomeState extends State<ScreenHome> {
                                   );
                                 },
                                 separatorBuilder: (context, index) {
-                                  return const SizedBox(
-                                    height: 10,
+                                  return  SizedBox(
+                                    height: size.width * 0.02,
                                   );
                                 },
                                 itemCount: state.appointmentList.length);
@@ -457,7 +458,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                             );
                           } else {
                             return const Center(
-                              child: Text('Nothings to display'),
+                              child: Text('No Appointments'),
                             );
                           }
                         },

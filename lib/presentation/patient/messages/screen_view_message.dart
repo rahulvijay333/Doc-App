@@ -65,7 +65,7 @@ class _ScreenViewMesgPatientState extends State<ScreenViewMesgPatient> {
 
   void setUpSocketListener() {
     socket.on('new messages', (data) {
-      log('----------------____>>>>New messages received:  when listening to "new messages event');
+      // log('New messages receive');
       // Update your UI or trigger a chat refresh
       context
           .read<SeeMessagesBloc>()
@@ -318,11 +318,13 @@ class _ScreenViewMesgPatientState extends State<ScreenViewMesgPatient> {
                                 child: Container(
                               decoration: BoxDecoration(
                                   //color: Colors.blue,
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(8),
                                   border: Border.all(color: appBackGround)),
                               child: Padding(
                                 padding: const EdgeInsets.only(left: 8.0),
                                 child: TextFormField(
+                              
+                                  maxLines: null,
                                   controller: msgController,
                                   showCursor: true,
                                   enabled: true,

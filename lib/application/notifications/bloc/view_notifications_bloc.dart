@@ -28,7 +28,7 @@ class ViewNotificationsBloc
           emit(NotificationsSuccess(notificationList: response.notification!));
         }
       } else {
-        emit(NotificationsFailed('Error happened While Checking Notification'));
+        emit(NotificationsFailed(error));
       }
     });
 

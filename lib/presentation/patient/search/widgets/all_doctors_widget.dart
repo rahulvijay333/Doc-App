@@ -40,7 +40,7 @@ class AllDoctorWidget extends StatelessWidget {
                       },
                       child: Container(
                         width: double.maxFinite,
-                        // height: 120,
+                        height: 120,
                         color: const Color.fromARGB(50, 217, 217, 217),
                         child: Row(
                           children: [
@@ -50,8 +50,8 @@ class AllDoctorWidget extends StatelessWidget {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(10),
                               child: Container(
-                                  width: size.width * 0.25,
-                                  height: 110,
+                                  width: size.width * 0.24,
+                                  height: 100,
                                   child: state.doctorList[index]
                                               .profilePicture !=
                                           null
@@ -103,9 +103,9 @@ class AllDoctorWidget extends StatelessWidget {
                               width: size.width * 0.02,
                             ),
                             Container(
-                              // height: 135,
+                              height: 100,
                               width: size.width * 0.5,
-                              //  color: Colors.amber,
+                              // color: Colors.amber,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -114,11 +114,11 @@ class AllDoctorWidget extends StatelessWidget {
                                     'Dr. ${state.doctorList[index].fullName}',
                                     maxLines: 1,
                                     style: TextStyle(
-                                        fontSize: size.width * 0.5 * 0.11,
+                                        fontSize: size.width * 0.5 * 0.10,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  const SizedBox(
-                                    height: 5,
+                                  SizedBox(
+                                    height: size.width * 0.01,
                                   ),
                                   Row(
                                     children: [
@@ -127,12 +127,19 @@ class AllDoctorWidget extends StatelessWidget {
                                         Icons.medical_information,
                                         size: 15,
                                       ),
-                                      Text(state
-                                          .doctorList[index].speciality!.name!)
+                                      SizedBox(
+                                        height: size.width * 0.01,
+                                      ),
+                                      Text(
+                                        state.doctorList[index].speciality!
+                                            .name!,
+                                        style: TextStyle(
+                                            fontSize: size.width * 0.028),
+                                      )
                                     ],
                                   ),
-                                  const SizedBox(
-                                    height: 5,
+                                  SizedBox(
+                                    height: size.width * 0.01,
                                   ),
                                   Row(
                                     mainAxisAlignment:
@@ -142,19 +149,28 @@ class AllDoctorWidget extends StatelessWidget {
                                         children: [
                                           const Icon(
                                             Icons.location_on,
-                                            size: 15,color: Colors.green,
+                                            size: 15,
+                                            color: Colors.green,
+                                          ),
+                                          SizedBox(
+                                            height: size.width * 0.01,
                                           ),
                                           Text(
                                             '${state.doctorList[index].address?.city ?? 'Trivandrum'},${state.doctorList[index].address?.state ?? 'Kerala'}',
                                             maxLines: 1,
                                             style: TextStyle(
-                                                fontSize: size.width * 0.030),
+                                                fontSize: size.width * 0.028),
                                           )
                                         ],
                                       ),
                                     ],
                                   ),
-                                  ElevatedButton(
+                                  SizedBox(height: size.width * 0.01,),
+                                  Container(
+                                    height: 25,
+                                    width: 80,
+                                    // color: Colors.red,
+                                    child:    ElevatedButton(
                                     onPressed: () {
                                       //-----------------------------------------booking
                                       Navigator.of(context)
@@ -164,13 +180,20 @@ class AllDoctorWidget extends StatelessWidget {
                                         ),
                                       ));
                                     },
-                                    child: const Text('Book'),
+                                    child: Text(
+                                      'Book',
+                                      style: TextStyle(
+                                          fontSize: size.width * 0.03),
+                                    ),
                                     style: ButtonStyle(
                                         minimumSize:
                                             MaterialStateProperty.all<Size>(
                                       const Size(25, 25),
                                     )),
+                                  ),
+                                  
                                   )
+
                                 ],
                               ),
                             ),

@@ -29,10 +29,10 @@ class ScreenDocProfile extends StatelessWidget {
         child: Column(
           children: [
             Container(
-             color: appBackGround,
+              color: appBackGround,
               width: size.width,
               height: size.height * 0.07,
-              child:  Center(
+              child: Center(
                 child: Text(
                   'Profile',
                   style: TextStyle(
@@ -57,55 +57,50 @@ class ScreenDocProfile extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20),
                             child: Container(
                                 width: size.width * 0.8,
-                                //  color: Colors.yellow,
+                                // color: Colors.yellow,
                                 height: size.height * 0.25,
                                 //-------------------------------------------------------------profile bloc
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Container(
-                                      width: size.width * 0.8 * 0.45,
-                                      // color: Colors.red,
-                                      height: size.height * 0.18,
-                                      child: Center(
-                                          child: CircleAvatar(
-                                        backgroundColor: Colors.white,
-                                        radius: 80,
-                                        child: ClipOval(
-                                          child: Image.network(
-                                            state.doctDetails.profilePicture!
-                                                .secureUrl!,
-                                            fit: BoxFit.cover,
-                                            width: size.width * 0.8 * 0.50,
-                                            height: size.height * 0.20,
-                                            errorBuilder:
-                                                (context, error, stackTrace) {
-                                              return Image.asset(
-                                                  'assets/patient.png');
-                                            },
-                                            loadingBuilder: (context, child,
-                                                loadingProgress) {
-                                              if (loadingProgress == null) {
-                                                return child;
-                                              }
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(15),
+                                      child: Container(
+                                        width: size.width * 0.8 * 0.40,
+                                        // color: Colors.red,
+                                        height: size.height * 0.15,
+                                        child: Image.network(
+                                          state.doctDetails.profilePicture!
+                                              .secureUrl!,
+                                          fit: BoxFit.cover,
+                                          errorBuilder:
+                                              (context, error, stackTrace) {
+                                            return Image.asset(
+                                                'assets/patient.png');
+                                          },
+                                          loadingBuilder: (context, child,
+                                              loadingProgress) {
+                                            if (loadingProgress == null) {
+                                              return child;
+                                            }
 
-                                              return const Center(
-                                                child:
-                                                    CircularProgressIndicator(
-                                                  strokeWidth: 1,
-                                                ),
-                                              );
-                                            },
-                                          ),
+                                            return const Center(
+                                              child: CircularProgressIndicator(
+                                                strokeWidth: 1,
+                                              ),
+                                            );
+                                          },
                                         ),
-                                      )),
+                                      ),
                                     ),
-                                    const SizedBox(
-                                      height: 10,
+                                    SizedBox(
+                                      height: size.height * 0.01,
                                     ),
                                     Text(
-                                      state.doctDetails.fullName!,maxLines: 1,
-                                      style:  TextStyle(
+                                      'Dr. ${state.doctDetails.fullName!}',
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
                                           fontSize: size.width * 0.045,
                                           fontWeight: FontWeight.bold),
                                     )
@@ -135,13 +130,15 @@ class ScreenDocProfile extends StatelessWidget {
                                           },
                                         ));
                                       },
-                                      leading:  Icon(
-                                        Icons.person,
-                                        size:  size.width * 0.05,
-                                        color: appBackGround
+                                      leading: Icon(Icons.person,
+                                          size: size.width * 0.05,
+                                          color: appBackGround),
+                                      title: Text(
+                                        'Personal Details',
+                                        style: TextStyle(
+                                            fontSize: size.width * 0.037),
                                       ),
-                                      title:  Text('Personal Details',style: TextStyle(fontSize: size.width*0.037),),
-                                      trailing:  Icon(
+                                      trailing: Icon(
                                         Icons.arrow_forward_ios,
                                         size: size.width * 0.037,
                                       ),
@@ -172,15 +169,15 @@ class ScreenDocProfile extends StatelessWidget {
                                           },
                                         ));
                                       },
-                                      leading:  Icon(
-                                        Icons.password,
-                                        size: size.width * 0.05,
-                                      color: appBackGround
-                                      ),
-                                      title:  Text('Change Password',style: TextStyle(fontSize: size.width*0.037)),
-                                      trailing:  Icon(
+                                      leading: Icon(Icons.password,
+                                          size: size.width * 0.05,
+                                          color: appBackGround),
+                                      title: Text('Change Password',
+                                          style: TextStyle(
+                                              fontSize: size.width * 0.037)),
+                                      trailing: Icon(
                                         Icons.arrow_forward_ios,
-                                    size: size.width * 0.037,
+                                        size: size.width * 0.037,
                                       ),
                                     ),
                                   ),
@@ -199,12 +196,14 @@ class ScreenDocProfile extends StatelessWidget {
                                           },
                                         ));
                                       },
-                                      leading:  Icon(
+                                      leading: Icon(
                                         Icons.info,
                                         color: appBackGround,
-                                       size: size.width * 0.05,
+                                        size: size.width * 0.05,
                                       ),
-                                      title:  Text('About',style: TextStyle(fontSize: size.width*0.037)),
+                                      title: Text('About',
+                                          style: TextStyle(
+                                              fontSize: size.width * 0.037)),
                                       trailing: const Icon(
                                         Icons.arrow_forward_ios,
                                         size: 18,
@@ -226,14 +225,17 @@ class ScreenDocProfile extends StatelessWidget {
                                           },
                                         ));
                                       },
-                                      leading:  Icon(
+                                      leading: Icon(
                                         Icons.book,
-                                       color: appBackGround,size: size.width * 0.05,
+                                        color: appBackGround,
+                                        size: size.width * 0.05,
                                       ),
-                                      title:  Text('Terms and Conditions',style: TextStyle(fontSize: size.width*0.037)),
-                                      trailing:  Icon(
+                                      title: Text('Terms and Conditions',
+                                          style: TextStyle(
+                                              fontSize: size.width * 0.037)),
+                                      trailing: Icon(
                                         Icons.arrow_forward_ios,
-                                          size: size.width * 0.037,
+                                        size: size.width * 0.037,
                                       ),
                                     ),
                                   ),
@@ -251,14 +253,17 @@ class ScreenDocProfile extends StatelessWidget {
                                           },
                                         ));
                                       },
-                                      leading:  Icon(
+                                      leading: Icon(
                                         Icons.security,
-                                        color: appBackGround,size: size.width * 0.05,
+                                        color: appBackGround,
+                                        size: size.width * 0.05,
                                       ),
-                                      title:  Text('Privacy',style: TextStyle(fontSize: size.width*0.037)),
-                                      trailing:  Icon(
+                                      title: Text('Privacy',
+                                          style: TextStyle(
+                                              fontSize: size.width * 0.037)),
+                                      trailing: Icon(
                                         Icons.arrow_forward_ios,
-                                       size: size.width * 0.037,
+                                        size: size.width * 0.037,
                                       ),
                                     ),
                                   ),
@@ -284,11 +289,12 @@ class ScreenDocProfile extends StatelessWidget {
                                           .addPostFrameCallback((timeStamp) {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(const SnackBar(
-                                              duration: Duration(seconds: 2),
-                                              margin: EdgeInsets.all(15),
-                                              behavior: SnackBarBehavior.floating,
-                                                content: Text(
-                                                    'Log out failed..')));
+                                                duration: Duration(seconds: 2),
+                                                margin: EdgeInsets.all(15),
+                                                behavior:
+                                                    SnackBarBehavior.floating,
+                                                content:
+                                                    Text('Log out failed..')));
                                       });
                                     }
 
@@ -339,11 +345,15 @@ class ScreenDocProfile extends StatelessWidget {
                                             );
                                             //--------------------------------------------------------logout function
                                           },
-                                          leading:  Icon(
+                                          leading: Icon(
                                             Icons.logout,
-                                            color: appBackGround,size: size.width * 0.05,
+                                            color: appBackGround,
+                                            size: size.width * 0.05,
                                           ),
-                                          title:  Text('Log Out',style: TextStyle(fontSize: size.width*0.037)),
+                                          title: Text('Log Out',
+                                              style: TextStyle(
+                                                  fontSize:
+                                                      size.width * 0.037)),
                                         ),
                                       ),
                                     );
@@ -361,6 +371,9 @@ class ScreenDocProfile extends StatelessWidget {
                       TextButton.icon(
                           onPressed: () {
                             //---------------------------------------refresh
+                            context
+                                .read<DoctorProfileBloc>()
+                                .add(GetDoctorProfileCall());
                           },
                           icon: const Icon(Icons.refresh),
                           label: const Text('Refresh'))

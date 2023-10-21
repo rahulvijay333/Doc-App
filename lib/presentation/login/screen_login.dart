@@ -246,8 +246,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                             return AlertDialog(
                                               actionsAlignment:
                                                   MainAxisAlignment.center,
-                                              content:
-                                                  const Text('Who are you ?.'),
+                                              
                                               actions: [
                                                 ElevatedButton(
                                                     onPressed: () {

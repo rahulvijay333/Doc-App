@@ -50,7 +50,7 @@ class SearchByNameWidget extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                               child: Container(
                                   width: size.width * 0.25,
-                                  height: 110,
+                                  height: 100,
                                   //  color: Colors.grey.withOpacity(0.3),
                                   child: state.searchNameResults[index]
                                               .profilePicture !=
@@ -86,82 +86,89 @@ class SearchByNameWidget extends StatelessWidget {
                                   //---------------------------------------------
                                   ),
                             ),
-                            const SizedBox(
-                              width: 25,
+                            SizedBox(
+                              width: size.width * 0.02,
                             ),
-                            Expanded(
-                              child: Container(
-                                height: 135,
+                            Container(
+                              height: 100,
+                              width: size.width * 0.5,
+                              //  color: Colors.amber,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  SizedBox(
+                                    height: size.height * 0.001,
+                                  ),
+                                  Text(
+                                    'Dr.${state.searchNameResults[index].fullName}',
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        fontSize: size.width * 0.5 * 0.10,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  SizedBox(
+                                    height: size.width * 0.01,
+                                  ),
+                                  Row(
+                                    children: [
+                                      //Image(image: NetworkImage(''))
+                                      const Icon(
+                                        Icons.medical_information,
+                                        size: 15,
+                                      ),
+                                      Text(
+                                          state.searchNameResults[index]
+                                              .speciality!.name!,
+                                          style: TextStyle(
+                                              fontSize: size.width * 0.028))
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: size.height * 0.001,
+                                  ),
 
-                                //  color: Colors.amber,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    SizedBox(
-                                      height: size.height * 0.001,
-                                    ),
-                                    Text(
-                                      'Dr.${state.searchNameResults[index].fullName}',
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                      style:  TextStyle(
-                                          fontSize: size.width *0.045,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    Row(
-                                      children: [
-                                        //Image(image: NetworkImage(''))
-                                        const Icon(
-                                          Icons.medical_information,
-                                          size: 15,
-                                        ),
-                                        Text(state.searchNameResults[index]
-                                            .speciality!.name!)
-                                      ],
-                                    ),
-                                     SizedBox(
-                                      height: size.height*0.001,
-                                    ),
-
-                                    // const SizedBox(
-                                    //   height: 0,
-                                    // ),
-                                    //-------------------------------------------location & rating
-                                     Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Icon(
-                                              Icons.location_on,
-                                              size: 15,
-                                            ),
-                                            Text(
+                                  // const SizedBox(
+                                  //   height: 0,
+                                  // ),
+                                  //-------------------------------------------location & rating
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.location_on,
+                                            size: 15,
+                                            color: Colors.green,
+                                          ),
+                                          Text(
                                             '${state.searchNameResults[index].address?.city ?? 'Trivandrum'},${state.searchNameResults[index].address?.state ?? 'Kerala'}',
-                                              maxLines: 1,
-                                              style: TextStyle(fontSize: 12),
-                                            )
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-
-                                    ElevatedButton(
+                                            maxLines: 1,
+                                            style: TextStyle(
+                                                fontSize: size.width * 0.028),
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  Container(
+                                    height: 25,
+                                    width: 80,
+                                    child: ElevatedButton(
                                       onPressed: () {
                                         //-----------------------------------------booking
 
-                                          Navigator.of(context)
-                                          .push(MaterialPageRoute(
-                                        builder: (ctx) => ScreenBooking(
-                                          doctor: state.searchNameResults[index],
-                                        ),
-                                      ));
+                                        Navigator.of(context)
+                                            .push(MaterialPageRoute(
+                                          builder: (ctx) => ScreenBooking(
+                                            doctor:
+                                                state.searchNameResults[index],
+                                          ),
+                                        ));
                                       },
                                       child: const Text('Book'),
                                       style: ButtonStyle(
@@ -169,9 +176,28 @@ class SearchByNameWidget extends StatelessWidget {
                                               MaterialStateProperty.all<Size>(
                                         const Size(25, 25),
                                       )),
-                                    )
-                                  ],
-                                ),
+                                    ),
+                                  )
+
+                                  // ElevatedButton(
+                                  //   onPressed: () {
+                                  //     //-----------------------------------------booking
+
+                                  //       Navigator.of(context)
+                                  //       .push(MaterialPageRoute(
+                                  //     builder: (ctx) => ScreenBooking(
+                                  //       doctor: state.searchNameResults[index],
+                                  //     ),
+                                  //   ));
+                                  //   },
+                                  //   child: const Text('Book'),
+                                  //   style: ButtonStyle(
+                                  //       minimumSize:
+                                  //           MaterialStateProperty.all<Size>(
+                                  //     const Size(25, 25),
+                                  //   )),
+                                  // )
+                                ],
                               ),
                             ),
                           ],

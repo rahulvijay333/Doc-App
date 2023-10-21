@@ -292,19 +292,10 @@ class _ScreenConfirmBookingState extends State<ScreenConfirmBooking> {
                                                             'assets/patient.png'),
                                                   ),
                                                 ),
-
-                                                // leading: CircleAvatar(
-                                                //   radius: size.width * 0.060,
-                                                //   backgroundImage: NetworkImage(
-                                                //       state
-                                                //           .userProfile
-                                                //           .user!
-                                                //           .profilePicture!
-                                                //           .secureUrl!),
-                                                // ),
                                                 title: Text(state.userProfile
-                                                    .user!.fullName ?? state.userProfile
-                                                    .user!.name! ),
+                                                        .user!.fullName ??
+                                                    state.userProfile.user!
+                                                        .name!),
                                                 subtitle: Text(state
                                                     .userProfile.user!.email!),
                                               ),
@@ -330,7 +321,7 @@ class _ScreenConfirmBookingState extends State<ScreenConfirmBooking> {
                                                   child: TextFormField(
                                                     style: TextStyle(
                                                         fontSize:
-                                                            size.width * 0.040),
+                                                            size.width * 0.034),
                                                     controller:
                                                         reasonController,
                                                     maxLength: 180,
@@ -342,16 +333,17 @@ class _ScreenConfirmBookingState extends State<ScreenConfirmBooking> {
                                                         return "";
                                                       }
                                                     },
-                                                    decoration:
-                                                         InputDecoration(
-                                                          hintStyle: TextStyle(fontSize: size.width * 0.038),
-                                                            hintText:
-                                                                'Type reason here..',
-                                                            border: InputBorder
-                                                                .none,
-                                                            focusedBorder:
-                                                                InputBorder
-                                                                    .none),
+                                                    decoration: InputDecoration(
+                                                        hintStyle: TextStyle(
+                                                            fontSize:
+                                                                size.width *
+                                                                    0.035),
+                                                        hintText:
+                                                            'Type reason here..',
+                                                        border:
+                                                            InputBorder.none,
+                                                        focusedBorder:
+                                                            InputBorder.none),
                                                     maxLines: 5,
                                                   ),
                                                 ),

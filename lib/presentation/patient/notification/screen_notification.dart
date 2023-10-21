@@ -50,9 +50,9 @@ class ScreenNotification extends StatelessWidget {
                           Icons.arrow_back_ios_new,
                           color: Colors.white,
                         )),
-                    const Text(
+                     Text(
                       'Notifications',
-                      style: TextStyle(fontSize: 20, color: Colors.white),
+                      style: TextStyle(fontSize: size.width * 0.04, color: Colors.white),
                     )
                   ],
                 ),
