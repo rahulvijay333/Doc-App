@@ -11,6 +11,10 @@ final backgroundDecoration = BoxDecoration(
 
 final textfieldInputDecorationPassword = InputDecoration(
     hintText: 'Enter Your Password',
+    counterText: "",
+     hintStyle: const TextStyle(
+      color: Colors.grey
+    ),
     border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
@@ -27,6 +31,9 @@ final textfieldInputDecorationPassword = InputDecoration(
 
 final textfieldInputDecorationEmail = InputDecoration(
     hintText: 'Enter Your Email',
+    hintStyle: TextStyle(
+      color: Colors.grey
+    ),
     border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),

@@ -60,28 +60,28 @@ class ScreenAllAppointments extends StatelessWidget {
                               iconMargin: EdgeInsets.only(),
                               child: Text(
                                 'Approved',
-                                style: TextStyle(fontSize: size.width * 0.028),
+                                style: TextStyle(fontSize: size.width * 0.024),
                               ),
                             ),
                             Tab(
                               //text: 'today',
                               child: Text(
                                 'Pending',
-                                style: TextStyle(fontSize: size.width * 0.028),
+                                style: TextStyle(fontSize: size.width * 0.024),
                               ),
                             ),
                             Tab(
                               //text: 'today',
                               child: Text(
                                 'Cancelled ',
-                                style: TextStyle(fontSize: size.width * 0.028),
+                                style: TextStyle(fontSize: size.width * 0.024),
                               ),
                             ),
                             Tab(
                               //text: 'today',
                               child: Text(
                                 'All ',
-                                style: TextStyle(fontSize: size.width * 0.028),
+                                style: TextStyle(fontSize: size.width * 0.024),
                               ),
                             ),
                           ]),

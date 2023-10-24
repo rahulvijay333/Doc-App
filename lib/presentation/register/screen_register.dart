@@ -200,12 +200,17 @@ class _ScreenRegisterState extends State<ScreenRegister> {
                               setState(() {
                                 passwordError = 'Password required';
                               });
+                            } else if (value.length < 16) {
+                              setState(() {
+                                passwordError = 'Password length should be 16';
+                              });
                             } else {
                               setState(() {
                                 passwordError = '';
                               });
                             }
                           },
+                          maxLength: 16,
                           controller: _passwordController,
                           decoration: InputDecoration(
                               hintText: 'Enter Your Password',
@@ -229,7 +234,7 @@ class _ScreenRegisterState extends State<ScreenRegister> {
                                       color: Colors.transparent))),
                         ),
                         SizedBox(
-                          height: 18,
+                          height: 15,
                           child: Text(
                             passwordError,
                             style: TextStyle(
@@ -345,9 +350,9 @@ class _ScreenRegisterState extends State<ScreenRegister> {
                                       .addPostFrameCallback((timeStamp) {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
-                                          duration: Duration(seconds: 2),
-                                          behavior: SnackBarBehavior.floating,
-                                          margin: EdgeInsets.all(15),
+                                            duration: Duration(seconds: 2),
+                                            behavior: SnackBarBehavior.floating,
+                                            margin: EdgeInsets.all(15),
                                             content: Text(state.errorMessage)));
                                   });
                                   BlocProvider.of<CreateUserBloc>(context1)

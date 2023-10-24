@@ -85,7 +85,7 @@ class EnterEmailWidget extends StatelessWidget {
 
                             BlocProvider.of<ForgotPasswordBloc>(context).add(
                                 EnterPasswordCall(
-                                    email: emailAddressController.text,
+                                    email: emailAddressController.text.trim(),
                                     userType: typeUser));
                           }
 

@@ -311,13 +311,13 @@ class _ScreenConfirmBookingState extends State<ScreenConfirmBooking> {
                                               ),
                                               Container(
                                                 width: size.width,
-                                                height: size.height * 0.12,
+                                                height: size.height * 0.13,
                                                 color: Colors.white
                                                     .withOpacity(0.5),
                                                 child: Padding(
                                                   padding:
                                                       const EdgeInsets.only(
-                                                          left: 8.0, right: 8),
+                                                          left: 8.0, right: 8,bottom: 8),
                                                   child: TextFormField(
                                                     style: TextStyle(
                                                         fontSize:

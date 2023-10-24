@@ -74,7 +74,7 @@ class ScreenMainPage extends StatelessWidget {
                     },
                     icon: Icon(
                       size: size.width * 0.05,
-                      Icons.edit_calendar_outlined,
+                      Icons.calendar_month,
                       color: Colors.white,
                     )),
                 IconButton(

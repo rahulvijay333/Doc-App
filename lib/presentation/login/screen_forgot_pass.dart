@@ -119,7 +119,7 @@ class ScreenForgotPassword extends StatelessWidget {
                             Text(
                               'Account password changed',
                               style: TextStyle(
-                                  fontSize: size.width * 0.06,
+                                  fontSize: size.width * 0.04,
                                   fontWeight: FontWeight.w500),
                             ),
                             SizedBox(

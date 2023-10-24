@@ -9,7 +9,9 @@ class EnterNewPasswordWidget extends StatelessWidget {
       required this.passkey,
       required this.typeUser,
       required this.token,
-      required this.email, required this.newPasswordController, required this.confirmPasswordController});
+      required this.email,
+      required this.newPasswordController,
+      required this.confirmPasswordController});
 
   final Size size;
   final GlobalKey<FormState> passkey;
@@ -18,9 +20,8 @@ class EnterNewPasswordWidget extends StatelessWidget {
   final typeUser;
   final _formkeyPassword = GlobalKey<FormState>();
 
-  final TextEditingController newPasswordController ;
-  final TextEditingController confirmPasswordController ;
-    
+  final TextEditingController newPasswordController;
+  final TextEditingController confirmPasswordController;
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +51,13 @@ class EnterNewPasswordWidget extends StatelessWidget {
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Password required';
+                  } else if (value.length < 16) {
+                    return 'password length should be 16';
                   } else {
                     return null;
                   }
                 },
+                maxLength: 16,
                 controller: newPasswordController,
                 decoration: const InputDecoration(
                   hintText: 'Enter your password',
@@ -67,11 +71,14 @@ class EnterNewPasswordWidget extends StatelessWidget {
               TextFormField(
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'confirm password  required';
+                    return 'confirm password required';
+                  } else if (value.length < 16) {
+                    return 'password length should be 16';
                   } else {
                     return null;
                   }
                 },
+                maxLength: 16,
                 controller: confirmPasswordController,
                 decoration: const InputDecoration(
                   hintText: 'confirm password',
@@ -93,13 +100,13 @@ class EnterNewPasswordWidget extends StatelessWidget {
                         //--------------------------------------------------------
 
                         if (passkey.currentState!.validate()) {
-                          if (confirmPasswordController.text ==
-                              newPasswordController.text) {
+                          if (confirmPasswordController.text.trim() ==
+                              newPasswordController.text.trim()) {
                             BlocProvider.of<ForgotPasswordBloc>(context).add(
                                 NewPasswordResetCall(
-                                    password: newPasswordController.text,
+                                    password: newPasswordController.text.trim(),
                                     confirmedPassword:
-                                        confirmPasswordController.text,
+                                        confirmPasswordController.text.trim(),
                                     email: email,
                                     token: token,
                                     userType: typeUser));
@@ -107,6 +114,7 @@ class EnterNewPasswordWidget extends StatelessWidget {
                             FocusScope.of(context).unfocus();
                             ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
+                                  duration: Duration(seconds: 2),
                                     behavior: SnackBarBehavior.floating,
                                     margin: EdgeInsets.only(
                                         left: 45, right: 45, bottom: 80),
@@ -116,7 +124,7 @@ class EnterNewPasswordWidget extends StatelessWidget {
                           }
                         }
                       },
-                      child: Text('Next')),
+                      child: const Text('Next')),
                 ),
               )
             ],

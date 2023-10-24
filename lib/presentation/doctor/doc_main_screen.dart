@@ -60,7 +60,7 @@ class DoctorScreenMain extends StatelessWidget {
                     },
                     icon: Icon(
                       size: size.width * 0.05,
-                      Icons.home,
+                      Icons.home_outlined,
                       color: Colors.white,
                     )),
                 IconButton(
@@ -70,7 +70,7 @@ class DoctorScreenMain extends StatelessWidget {
                     },
                     icon: Icon(
                       size: size.width * 0.05,
-                      Icons.edit_calendar_outlined,
+                      Icons.calendar_month_outlined,
                       color: Colors.white,
                     )),
                 IconButton(
@@ -90,7 +90,7 @@ class DoctorScreenMain extends StatelessWidget {
                     },
                     icon: Icon(
                       size: size.width * 0.05,
-                      Icons.message,
+                      Icons.message_outlined,
                       color: Colors.white,
                     )),
                 IconButton(
@@ -100,7 +100,7 @@ class DoctorScreenMain extends StatelessWidget {
                     },
                     icon: Icon(
                       size: size.width * 0.05,
-                      Icons.person_2_rounded,
+                      Icons.person_outlined,
                       color: Colors.white,
                     ))
               ],

@@ -214,6 +214,8 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                       });
                                     }
                                   },
+                                  
+                                  maxLength: 16,
                                   obscureText: true,
                                   controller: passwordController,
                                   decoration:

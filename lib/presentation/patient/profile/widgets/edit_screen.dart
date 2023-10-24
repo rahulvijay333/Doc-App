@@ -25,6 +25,8 @@ class _ScreenPatientEditState extends State<ScreenPatientEdit> {
   final TextEditingController _stateController = TextEditingController();
   final TextEditingController _serviceController = TextEditingController();
   final TextEditingController _gender = TextEditingController();
+   final TextEditingController _phone = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
   File? imageFile;
 
@@ -35,6 +37,7 @@ class _ScreenPatientEditState extends State<ScreenPatientEdit> {
     _stateController.text = widget.userDetails.address?.state ?? '';
     _username.text = widget.userDetails.fullName ?? '';
     _gender.text = widget.userDetails.gender ?? '';
+    _phone.text = widget.userDetails.phone ?? '';
 
     super.initState();
   }
@@ -216,6 +219,7 @@ class _ScreenPatientEditState extends State<ScreenPatientEdit> {
                           height: size.height * 0.03,
                         ),
 
+
                         //-------------------------------------
 
                         TextFormField(
@@ -235,12 +239,36 @@ class _ScreenPatientEditState extends State<ScreenPatientEdit> {
                         SizedBox(
                           height: size.height * 0.03,
                         ),
+                         TextFormField(
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Phone';
+                            } 
+                            else if(value.length >10 || value.length<10){
+                              return 'Enter valid phone number';
+
+                            }
+                            else {
+                              return null;
+                            }
+                          },
+                          controller: _phone,
+                          keyboardType: TextInputType.number,
+                          decoration: const InputDecoration(
+                            labelText: 'Phone',
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                         SizedBox(
+                          height: size.height * 0.03,
+                        )
                       ],
                     ),
                   ),
                 ),
               ),
             ),
+
             SizedBox(
               height: 40,
               width: 130,
@@ -254,6 +282,7 @@ class _ScreenPatientEditState extends State<ScreenPatientEdit> {
                     'city': _cityController.text,
                     'state': _stateController.text,
                     'services': _serviceController.text,
+                    'phone': _phone.text,
                     'profilePic': imageFile == null
                         ? null
                         : MultipartFile.fromFileSync(imageFile!.path),
@@ -316,7 +345,10 @@ class _ScreenPatientEditState extends State<ScreenPatientEdit> {
                   return const Text('Update');
                 },
               )),
-            )
+            ),
+             SizedBox(
+                          height: size.height * 0.03,
+                        )
           ],
         ),
       ),

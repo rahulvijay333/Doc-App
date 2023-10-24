@@ -366,7 +366,7 @@ class _ScreenBookingState extends State<ScreenBooking> {
                                                         style: TextStyle(
                                                             fontSize:
                                                                 size.width *
-                                                                    0.030),
+                                                                    0.028),
                                                       ),
                                                       state
                                                                   .searchResultSlots[

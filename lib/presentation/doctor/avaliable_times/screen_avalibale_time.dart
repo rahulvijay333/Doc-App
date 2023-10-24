@@ -185,7 +185,7 @@ class _ScreenAvailableTimeState extends State<ScreenAvailableTime> {
                                   .slotlist.filteredSlots![0].slots!.length,
                               gridDelegate:
                                   SliverGridDelegateWithMaxCrossAxisExtent(
-                                    mainAxisExtent: 50,
+                                      mainAxisExtent: 50,
                                       mainAxisSpacing: size.width * 0.03,
                                       crossAxisSpacing: size.width * 0.01,
                                       maxCrossAxisExtent: size.width * 0.46),
@@ -216,7 +216,7 @@ class _ScreenAvailableTimeState extends State<ScreenAvailableTime> {
                                                       ? 18
                                                       : size.width *
                                                           0.46 *
-                                                          0.07),
+                                                          0.06),
                                             ),
                                           ),
                                           Expanded(
