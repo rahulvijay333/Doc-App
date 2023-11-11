@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:appoint_medic/domain/models/chat_list/create_chat_by_patient_response/create_chat_by_patient_response.dart';
 import 'package:appoint_medic/domain/models/chat_list/get_chat_list_resp_model/get_chat_list_resp_model.dart';
 import 'package:appoint_medic/infrastructure/chats/chat_service.dart';
@@ -14,7 +12,7 @@ class CreateChatDocBloc extends Bloc<CreateChatDocEvent, CreateChatDocState> {
   CreateChatDocBloc(this.chatService) : super(CreateChatDocInitial()) {
     on<StartChat>((event, emit) async {
       //------------------------------------loading state
-     
+
       emit(CheckingChatsLoading());
 
       //---------------------------searching state
@@ -22,8 +20,6 @@ class CreateChatDocBloc extends Bloc<CreateChatDocEvent, CreateChatDocState> {
       final (error, response) = await chatService.getAllChats();
 
       if (error.isEmpty) {
-      
-
         GetChatListRespModel? found;
 
         if (response != null) {
@@ -48,11 +44,8 @@ class CreateChatDocBloc extends Bloc<CreateChatDocEvent, CreateChatDocState> {
           } else {
             emit(CreateChatFailure());
           }
-
-         
         } else {
           emit(CheckingHistoryLoading());
-     
 
           emit(OldChatCreated(oldChatDetails: found));
         }

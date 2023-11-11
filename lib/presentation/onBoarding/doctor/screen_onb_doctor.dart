@@ -532,25 +532,35 @@ class _ScreenOnBoardingDoctorState extends State<ScreenOnBoardingDoctor> {
                           //------------------------------------------------------------qualify values needs to modyfy
 
                           if (_formkey.currentState!.validate()) {
-                            final doctor = DoctorProfileFormData(
-                                username: _fullNameController.text,
-                                gender: _genderController.text,
-                                speciality: _categorycode.text,
-                                phone: _phoneController.text,
-                                houseName: _houseNameController.text,
-                                city: _cityController.text,
-                                state: _stateController.text,
-                                services: _serviceController.text,
-                                qualification: _qualificationController.text,
-                                certificate: File(_selectedFilePath),
-                                profilePic: imageFile);
-                            log('VAlue are present');
-                            // log(_addServices(_serviceController.text).toString());
-                            log(doctor.toString());
+                            if (imageFile == null ||_selectedFilePath.isEmpty ) {
 
-                            context.read<OnBoardingBloc>().add(
-                                OnBoardDoctorEvent(
-                                    token: widget.token, doctorform: doctor));
+                               ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        duration: Duration(seconds: 2),
+                                        margin: EdgeInsets.all(15),
+                                        behavior: SnackBarBehavior.floating,
+                                        content: Text('please fill all details')));
+                            } else {
+                              final doctor = DoctorProfileFormData(
+                                  username: _fullNameController.text,
+                                  gender: _genderController.text,
+                                  speciality: _categorycode.text,
+                                  phone: _phoneController.text,
+                                  houseName: _houseNameController.text,
+                                  city: _cityController.text,
+                                  state: _stateController.text,
+                                  services: _serviceController.text,
+                                  qualification: _qualificationController.text,
+                                  certificate: File(_selectedFilePath),
+                                  profilePic: imageFile);
+                              log('VAlue are present');
+                              // log(_addServices(_serviceController.text).toString());
+                              log(doctor.toString());
+
+                              context.read<OnBoardingBloc>().add(
+                                  OnBoardDoctorEvent(
+                                      token: widget.token, doctorform: doctor));
+                            }
                           }
                         },
                         child: BlocBuilder<OnBoardingBloc, OnBoardingState>(

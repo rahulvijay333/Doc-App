@@ -33,9 +33,13 @@ class ScreenAdminNotVerified extends StatelessWidget {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        'Admin has not verified your account yet',
-                        style: TextStyle(fontSize: size.width * 0.035,color: Colors.red),
+                      Container(
+                        width: size.width * 0.80,
+                        child: Text(
+                          'Your verification is under process and will complete  within 24hrs',
+                          style: TextStyle(
+                              fontSize: size.width * 0.035, color: Colors.red),
+                        ),
                       ),
                       const SizedBox(
                         height: 15,

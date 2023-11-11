@@ -243,7 +243,7 @@ class _ScreenBookingState extends State<ScreenBooking> {
                                   if (state.searchResultSlots.isEmpty) {
                                     return Container(
                                       child: const Center(
-                                          child: Text('No Slots Available')),
+                                          child: Text('Doctor not available')),
                                     );
                                   } else if (state
                                       .searchResultSlots[0].slots!.isEmpty) {

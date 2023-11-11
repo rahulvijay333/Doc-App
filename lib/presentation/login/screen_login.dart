@@ -27,6 +27,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
   final TextEditingController emailController = TextEditingController();
 
   final TextEditingController passwordController = TextEditingController();
+   bool showPassword = true;
 
   final ValueNotifier<String> selectedUserType =
       ValueNotifier<String>('patient');
@@ -92,7 +93,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                     color: Colors.white),
                               ),
                             )),
-        
+
                         //---------------------------------------image + text
                         Container(
                           color: appBackGround,
@@ -101,7 +102,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
                               SizedBox(
                                 height: size.height * 0.04,
                               ),
-        
+
                               //---------------------------------------app text
                               Text(
                                 'Your Health, Our Priority',
@@ -110,16 +111,14 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                     fontSize: size.width * 0.040,
                                     fontWeight: FontWeight.bold),
                               ),
-                               Text(
+                              Text(
                                 'Book with Confidence!',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: size.width * 0.038,
                                     fontWeight: FontWeight.bold),
                               ),
-        
-        
-        
+
                               SizedBox(
                                 height: size.width * 0.045,
                               ),
@@ -135,7 +134,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
                           ),
                         ),
                         //----------------------------------------------------------------------
-        
+
                         //--------------------------------------email field
                       ],
                     ),
@@ -152,7 +151,6 @@ class _ScreenLoginState extends State<ScreenLogin> {
                       child: Form(
                         key: _formkey,
                         child: Container(
-                       
                           color: Colors.white,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -160,8 +158,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
                               const Text(
                                 'Email',
                                 style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500),
+                                    fontSize: 16, fontWeight: FontWeight.w500),
                               ),
                               const SizedBox(
                                 height: 5,
@@ -196,8 +193,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
                               const Text(
                                 'Password',
                                 style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500),
+                                    fontSize: 16, fontWeight: FontWeight.w500),
                               ),
                               const SizedBox(
                                 height: 5,
@@ -214,12 +210,46 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                       });
                                     }
                                   },
-                                  
                                   maxLength: 16,
-                                  obscureText: true,
+                                  obscureText: showPassword,
                                   controller: passwordController,
-                                  decoration:
-                                      textfieldInputDecorationPassword),
+                                  decoration: InputDecoration(
+                                      suffixIcon: IconButton(
+                                          onPressed: () {
+                                            setState(() {
+                                              if(showPassword){
+                                                showPassword = false;
+                                              } else {
+                                                showPassword = true;
+                                              }
+                                            });
+                                          },
+                                          icon:  Icon( showPassword ?
+                                            Icons.visibility_off_outlined : Icons.visibility_outlined,
+                                            size: 20,
+                                          )),
+                                      hintText: 'Enter Your Password',
+                                      counterText: "",
+                                      hintStyle:
+                                          const TextStyle(color: Colors.grey),
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: const BorderSide(
+                                          color: Colors
+                                              .blue, // Set the focused border color
+                                        ),
+                                      ),
+                                      filled: true,
+                                      fillColor: Colors.grey.withOpacity(0.1),
+                                      enabled: true,
+                                      enabledBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          borderSide: const BorderSide(
+                                              color: Colors.transparent)))),
                               const SizedBox(
                                 height: 5,
                               ),
@@ -247,27 +277,21 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                           return AlertDialog(
                                             actionsAlignment:
                                                 MainAxisAlignment.center,
-                                            
                                             actions: [
                                               ElevatedButton(
                                                   onPressed: () {
-                                                    Navigator.of(context)
-                                                        .pop();
+                                                    Navigator.of(context).pop();
                                                     //--------------
                                                     context
                                                         .read<
                                                             ForgotPasswordBloc>()
-                                                        .add(
-                                                            ForgotPasswordCall(
-                                                                message:
-                                                                    'message',
-                                                                userType:
-                                                                    ''));
+                                                        .add(ForgotPasswordCall(
+                                                            message: 'message',
+                                                            userType: ''));
                                                     //-------------
-        
+
                                                     Navigator.of(context)
-                                                        .push(
-                                                            MaterialPageRoute(
+                                                        .push(MaterialPageRoute(
                                                       builder: (context) {
                                                         return ScreenForgotPassword(
                                                           userType: 'doctor',
@@ -277,27 +301,21 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                                       },
                                                     ));
                                                   },
-                                                  child:
-                                                      const Text('Doctor')),
+                                                  child: const Text('Doctor')),
                                               //----------------------------------
                                               ElevatedButton(
                                                   onPressed: () {
-                                                    Navigator.of(context)
-                                                        .pop();
-        
+                                                    Navigator.of(context).pop();
+
                                                     context
                                                         .read<
                                                             ForgotPasswordBloc>()
-                                                        .add(
-                                                            ForgotPasswordCall(
-                                                                message:
-                                                                    'message',
-                                                                userType:
-                                                                    ''));
-        
+                                                        .add(ForgotPasswordCall(
+                                                            message: 'message',
+                                                            userType: ''));
+
                                                     Navigator.of(context)
-                                                        .push(
-                                                            MaterialPageRoute(
+                                                        .push(MaterialPageRoute(
                                                       builder: (context) {
                                                         return ScreenForgotPassword(
                                                           userType: 'patient',
@@ -307,17 +325,17 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                                       },
                                                     ));
                                                   },
-                                                  child:
-                                                      const Text('Patient'))
+                                                  child: const Text('Patient'))
                                             ],
                                           );
                                         },
                                       );
                                     },
-                                    child:  Text(
+                                    child: Text(
                                       'Did you forget password ?',
                                       style: TextStyle(
-                                          color: Colors.blue, fontSize: size.width * 0.03),
+                                          color: Colors.blue,
+                                          fontSize: size.width * 0.03),
                                     ),
                                   ),
                                 ],
@@ -337,7 +355,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                 height: 20,
                               ),
                               //-----------------------------------------------------login button
-        
+
                               BlocBuilder<LoginBloc, LoginState>(
                                 builder: (context, state) {
                                   //-------------loading
@@ -399,8 +417,8 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                       WidgetsBinding.instance
                                           .addPostFrameCallback((_) {
                                         unfocus();
-                                        Navigator.of(context).pushReplacement(
-                                            MaterialPageRoute(
+                                        Navigator.of(context)
+                                            .pushReplacement(MaterialPageRoute(
                                           builder: (context) {
                                             return ScreenMainPage(
                                               userName: state.name!,
@@ -409,7 +427,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                           },
                                         ));
                                       });
-        
+
                                       ScaffoldMessenger.of(context)
                                           .hideCurrentSnackBar();
                                     } else if (state.role == 'doctor') {
@@ -421,8 +439,8 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                         context
                                             .read<NavbarBloc>()
                                             .add(PageChangeEvent(page: 0));
-                                        Navigator.of(context).pushReplacement(
-                                            MaterialPageRoute(
+                                        Navigator.of(context)
+                                            .pushReplacement(MaterialPageRoute(
                                           builder: (context) {
                                             return DoctorScreenMain();
                                           },
@@ -442,11 +460,11 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                                   const Duration(seconds: 1),
                                               content: Text(state.error)));
                                     });
-        
+
                                     ScaffoldMessenger.of(context)
                                         .hideCurrentSnackBar();
                                   }
-        
+
                                   return ClipRRect(
                                     borderRadius: BorderRadius.circular(8),
                                     child: SizedBox(
@@ -463,8 +481,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                                     .add(LoginButtonClicked(
                                                         emailController.text
                                                             .trim(),
-                                                        passwordController
-                                                            .text
+                                                        passwordController.text
                                                             .trim(),
                                                         selectedUserTypeValue));
                                               }
@@ -499,7 +516,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
                       builder: (ctx) {
-                        return ScreenRegister();
+                        return const ScreenRegister();
                       },
                     ));
                   },

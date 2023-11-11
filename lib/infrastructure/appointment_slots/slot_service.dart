@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:appoint_medic/core/api_endPoints/api_endpoints.dart';
@@ -11,7 +12,6 @@ class AppointmentSlotService {
   final SecureStorageService getToken = getIt<SecureStorageService>();
   Future<(String, AvailableSlotResponse?)> getslotsByDate(
       {required String date}) async {
- 
     final String? token = await getToken.retrieveToken();
     try {
       final Response response = await Dio().get(ApiEndPoints.getDoctorSlots,
@@ -39,21 +39,20 @@ class AppointmentSlotService {
     }
   }
 
-  Future<String> addSlot(
-      {required String date,
-      required String startTime,
-      required String endTime,
-      }) async {
+  Future<String> addSlot({
+    required String date,
+    required String startTime,
+    required String endTime,
+  }) async {
     try {
       final SecureStorageService getToken = getIt<SecureStorageService>();
       final String? token = await getToken.retrieveToken();
-      String formattedStartTime = startTime.replaceAll('\u202f', ' ');
-      String formattedEndTime = endTime.replaceAll('\u202f', ' ');
+
       final Response response = await Dio().post(ApiEndPoints.addDoctorSlots,
           data: jsonEncode({
             "date": date,
             "slots": [
-              {"startTime": formattedStartTime, "endTime": formattedEndTime}
+              {"startTime": startTime, "endTime": endTime}
             ]
           }),
           options: Options(
@@ -83,10 +82,10 @@ class AppointmentSlotService {
     }
   }
 
-  Future<String> deleteSlot(
-      {required String mainSlotID,
-      required String slodID,
-      }) async {
+  Future<String> deleteSlot({
+    required String mainSlotID,
+    required String slodID,
+  }) async {
     final String? token = await getToken.retrieveToken();
     try {
       final Response response = await Dio()

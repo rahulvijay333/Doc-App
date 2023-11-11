@@ -5,11 +5,14 @@ final backgroundDecoration = BoxDecoration(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
         colors: [
-      Color.fromRGBO(0, 150, 255, 20),
+      const Color.fromRGBO(0, 150, 255, 20),
       Colors.white.withOpacity(0.2)
     ]));
 
 final textfieldInputDecorationPassword = InputDecoration(
+  suffixIcon: IconButton(onPressed: () {
+    
+  }, icon: Icon(Icons.visibility,size: 15,)),
     hintText: 'Enter Your Password',
     counterText: "",
      hintStyle: const TextStyle(
@@ -31,7 +34,7 @@ final textfieldInputDecorationPassword = InputDecoration(
 
 final textfieldInputDecorationEmail = InputDecoration(
     hintText: 'Enter Your Email',
-    hintStyle: TextStyle(
+    hintStyle: const TextStyle(
       color: Colors.grey
     ),
     border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
@@ -89,16 +92,16 @@ InputDecoration commonInputDecoration({
     enabled: true,
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
-      borderSide: BorderSide(color: Colors.transparent),
+      borderSide: const BorderSide(color: Colors.transparent),
     ),
-    labelStyle: TextStyle(
+    labelStyle: const TextStyle(
       color: Colors.black, // Set the label text color
     ),
   );
 }
 
 InputDecoration customOtpBoxdecoration() {
-  return InputDecoration(
+  return const InputDecoration(
     focusColor: Colors.red,
     border: OutlineInputBorder(),
     focusedBorder: OutlineInputBorder(),
@@ -106,4 +109,4 @@ InputDecoration customOtpBoxdecoration() {
   );
 }
 
-var appBackGround = Color.fromRGBO(0, 116, 217, 1);
+var appBackGround = const Color.fromRGBO(0, 116, 217, 1);

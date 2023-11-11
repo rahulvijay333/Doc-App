@@ -19,21 +19,24 @@ class ScreenCreateChatDoc extends StatelessWidget {
               return const Center(child: Text('Checking Chat status...'));
             } else if (state is NewChatCreationLoading) {
               return const Center(
-                  child: Text(
-                      'starting new chat, please wait'));
+                  child: Text('starting new chat, please wait'));
             } else if (state is NewChatCreated) {
               context
                   .read<SeeMessagesBloc>()
                   .add(SeeChatsEvent(chatRoomID: state.createdchatDetails.id!));
+
               WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
                   builder: (context) {
                     return ScreenViewMesgDoctor(
                         patientImage: state.createdchatDetails.participants![0]
-                            .patient!.profilePicture!.secureUrl!,
+                                .patient!.profilePicture?.secureUrl ??
+                            '',
                         chatRoomID: state.createdchatDetails.id!,
                         patientName: state.createdchatDetails.participants![0]
-                            .patient!.fullName!,
+                                .patient!.fullName ??
+                            state.createdchatDetails.participants![0].patient!
+                                .name!,
                         patientID: state
                             .createdchatDetails.participants![0].patient!.id!,
                         doctorID: state
@@ -50,10 +53,13 @@ class ScreenCreateChatDoc extends StatelessWidget {
                   builder: (context) {
                     return ScreenViewMesgDoctor(
                         patientImage: state.oldChatDetails.participants![0]
-                            .patient?.profilePicture?.secureUrl ?? '' ,
+                                .patient?.profilePicture?.secureUrl ??
+                            '',
                         chatRoomID: state.oldChatDetails.id!,
-                        patientName: state.oldChatDetails.participants![0].patient?.fullName ??  state
-                            .oldChatDetails.participants![0].patient!.name!,
+                        patientName: state.oldChatDetails.participants![0]
+                                .patient?.fullName ??
+                            state
+                                .oldChatDetails.participants![0].patient!.name!,
                         patientID:
                             state.oldChatDetails.participants![0].patient!.id!,
                         doctorID:

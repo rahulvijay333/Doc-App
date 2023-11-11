@@ -118,7 +118,11 @@ class _ScreenConfirmBookingState extends State<ScreenConfirmBooking> {
                       child: const Text('No')),
                   TextButton(
                       onPressed: () {
+                //-------------------clear booking status
                         Navigator.of(context).pop();
+                        context
+                            .read<BookingTrackerBloc>()
+                            .add(BookingTrackClear());
 
                         Navigator.of(context).pop();
                         //no
@@ -317,7 +321,9 @@ class _ScreenConfirmBookingState extends State<ScreenConfirmBooking> {
                                                 child: Padding(
                                                   padding:
                                                       const EdgeInsets.only(
-                                                          left: 8.0, right: 8,bottom: 8),
+                                                          left: 8.0,
+                                                          right: 8,
+                                                          bottom: 8),
                                                   child: TextFormField(
                                                     style: TextStyle(
                                                         fontSize:
