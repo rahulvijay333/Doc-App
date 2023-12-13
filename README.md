@@ -1,6 +1,9 @@
 # appoint_medic
 
-A new Flutter based Doctor Booking App.
+Doctor Booking App.
 
-## Getting Started
+A seamless solution connecting doctors and patients
 
+Patient App UI
+
+![Alt text](lib/presentation/screen_shots/P_HomePage.jpg = 300px)
