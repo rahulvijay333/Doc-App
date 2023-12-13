@@ -10,10 +10,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ScreenMainPage extends StatelessWidget {
   ScreenMainPage({
     super.key,
-    required this.userName,
+  
     required this.id,
   });
-  final String userName;
+  
   final String id;
   final ValueNotifier<String> searchnotifier = ValueNotifier('');
 
@@ -23,7 +23,7 @@ class ScreenMainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final pages = [
       ScreenHome(
-        name: userName,
+        
         id: id,
       ),
       const ScreenAppointments(),

@@ -19,11 +19,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ScreenHome extends StatefulWidget {
   const ScreenHome({
     super.key,
-    required this.name,
     required this.id,
   });
 
-  final String name;
   final String id;
 
   @override
@@ -234,17 +232,25 @@ class _ScreenHomeState extends State<ScreenHome> {
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(5)),
-                            child:  Row(
-                              
+                            child: Row(
                               children: [
                                 SizedBox(
                                   width: size.width * 0.01,
                                 ),
-                                Icon(Icons.search,size: size.width * 0.055,color: Colors.black.withOpacity(0.5),),
-                                SizedBox(
-                                  width:  size.width * 0.01,
+                                Icon(
+                                  Icons.search,
+                                  size: size.width * 0.055,
+                                  color: Colors.black.withOpacity(0.5),
                                 ),
-                                Text('Search doctors..',style: TextStyle(fontSize: size.width * 0.035,color: Colors.black.withOpacity(0.6)),)
+                                SizedBox(
+                                  width: size.width * 0.01,
+                                ),
+                                Text(
+                                  'Search doctors..',
+                                  style: TextStyle(
+                                      fontSize: size.width * 0.035,
+                                      color: Colors.black.withOpacity(0.6)),
+                                )
                               ],
                             ),
                           ),
@@ -316,10 +322,12 @@ class _ScreenHomeState extends State<ScreenHome> {
                                       child: CircleAvatar(
                                         radius: size.height * 0.13 * 0.25,
                                         backgroundColor: Colors.white,
-                                        child: Image.network(state
-                                            .specialityList[index]
-                                            .specialityImg!
-                                            .secureUrl!,width:size.height * 0.13 * 0.35,height: size.height * 0.13 * 0.35 ,),
+                                        child: Image.network(
+                                          state.specialityList[index]
+                                              .specialityImg!.secureUrl!,
+                                          width: size.height * 0.13 * 0.35,
+                                          height: size.height * 0.13 * 0.35,
+                                        ),
                                       ),
                                     ),
                                     Text(
@@ -432,7 +440,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                                   );
                                 },
                                 separatorBuilder: (context, index) {
-                                  return  SizedBox(
+                                  return SizedBox(
                                     height: size.width * 0.02,
                                   );
                                 },

@@ -49,3 +49,5 @@ app.*.map.json
 
 /android/app/key
 lib/core/api_endPoints/base
+
+android/app/google-services.json

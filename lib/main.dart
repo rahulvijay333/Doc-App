@@ -30,7 +30,6 @@ import 'package:appoint_medic/application/speciality/speciality_bloc.dart';
 import 'package:appoint_medic/application/view_appointments_doctor/bloc/view_appointments_doct_side_bloc.dart';
 import 'package:appoint_medic/application/view_appointments_screen/bloc/view_appointments_patient_side_bloc.dart';
 import 'package:appoint_medic/core/color_constants.dart';
-import 'package:appoint_medic/domain/db/db_functions.dart';
 import 'package:appoint_medic/domain/token_storage/secure_storage.dart';
 import 'package:appoint_medic/infrastructure/appointment_slots/slot_service.dart';
 import 'package:appoint_medic/infrastructure/auth/auth_service_impl.dart';
@@ -49,27 +48,31 @@ import 'package:appoint_medic/infrastructure/view_appointments_doctor_service/ap
 import 'package:appoint_medic/infrastructure/view_appointments_patient_side/view_appointments_pat_service.dart';
 
 import 'package:appoint_medic/presentation/splash/ScreenSplash.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+
 import 'package:intl/date_symbol_data_local.dart';
 
 final getIt = GetIt.instance;
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   // Initialize the locale data for 'en_IN' (English, India)
   await initializeDateFormatting('en_IN', null);
-  debugPaintSizeEnabled = false;
-  await Hive.initFlutter();
-  // if (!Hive.isAdapterRegistered(UserDbAdapter().typeId)) {
-  //   Hive.registerAdapter(UserDbAdapter());
-  // }
+  FlutterError.onError = (errorDetails) {
+    FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+  };
+  // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
 
-//--------------------------------------------------open hive logged in storage box
-  final dbFunction = DbFunctionClass();
-  await dbFunction.openDbBox();
   getIt.registerSingleton<SecureStorageService>(SecureStorageService());
   getIt.registerSingleton<PaymentService>(PaymentService());
 
@@ -85,11 +88,10 @@ class MyApp extends StatelessWidget {
     final ProfileService profileService = ProfileService();
 
     final ProfileDetailsBloc profileBloc = ProfileDetailsBloc(profileService);
-    final DbFunctionClass db = DbFunctionClass();
+
     final LoginServiceImpl loginservice = LoginServiceImpl();
     final SharedPrefsAuthServiceImpl sharedpref = SharedPrefsAuthServiceImpl();
-    final AuthenticationBloc auth =
-        AuthenticationBloc(sharedpref, db, profileBloc);
+    final AuthenticationBloc auth = AuthenticationBloc(sharedpref, profileBloc);
     final SearchService searchService = SearchService();
     final SpecialityService specialityService = SpecialityService();
     final CreateServiceImpl onboarding = CreateServiceImpl();
@@ -109,12 +111,11 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) => LoginBloc(loginservice, auth, sharedpref, db,
-                getIt<SecureStorageService>()),
+            create: (context) => LoginBloc(
+                loginservice, auth, sharedpref, getIt<SecureStorageService>()),
           ),
           BlocProvider(
-            create: (context) =>
-                AuthenticationBloc(sharedpref, db, profileBloc),
+            create: (context) => AuthenticationBloc(sharedpref, profileBloc),
           ),
           BlocProvider(
             create: (context) => SearchBloc(searchService),

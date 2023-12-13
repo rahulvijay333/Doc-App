@@ -421,7 +421,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                             .pushReplacement(MaterialPageRoute(
                                           builder: (context) {
                                             return ScreenMainPage(
-                                              userName: state.name!,
+                                             
                                               id: state.id!,
                                             );
                                           },

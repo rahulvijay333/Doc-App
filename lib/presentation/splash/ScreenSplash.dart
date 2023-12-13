@@ -76,7 +76,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
               context,
               MaterialPageRoute(
                   builder: (context) => ScreenMainPage(
-                        userName: state.name,
+                     
                         id: state.id,
                       )),
             );

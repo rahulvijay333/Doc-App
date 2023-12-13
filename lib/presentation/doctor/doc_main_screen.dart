@@ -1,5 +1,4 @@
 import 'package:appoint_medic/application/navbar/navbar_bloc.dart';
-import 'package:appoint_medic/domain/db/db_model.dart';
 import 'package:appoint_medic/presentation/doctor/all_appointments/all_appointments.dart';
 import 'package:appoint_medic/presentation/doctor/avaliable_times/screen_avalibale_time.dart';
 import 'package:appoint_medic/presentation/doctor/home/screen_doct_Home.dart';

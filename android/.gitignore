@@ -13,3 +13,5 @@ key.properties
 **/*.jks
 
 android/app/key
+
+android/app/google-services.json

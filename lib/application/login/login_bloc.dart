@@ -1,8 +1,5 @@
 import 'dart:developer';
-
 import 'package:appoint_medic/application/Auth/authentication_bloc.dart';
-import 'package:appoint_medic/domain/db/db_functions.dart';
-import 'package:appoint_medic/domain/db/db_model.dart';
 import 'package:appoint_medic/domain/response_models/admin/admin_response/admin_response.dart';
 import 'package:appoint_medic/domain/response_models/doctor_response/doctor_response.dart';
 import 'package:appoint_medic/domain/response_models/patient/patient_response/patient_response.dart';
@@ -22,14 +19,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final LoginServiceImpl loginService;
   final AuthenticationBloc auth;
   final SharedPrefsAuthServiceImpl prefs;
-  final DbFunctionClass dbFunction;
+
   final SecureStorageService secureStorageService;
 
   LoginBloc(
     this.loginService,
     this.auth,
     this.prefs,
-    this.dbFunction,
     this.secureStorageService,
   ) : super(LoginIntial()) {
     on<LoginButtonClicked>((event, emit) async {
@@ -45,7 +41,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           String? role = response?.user!.role;
           String? token = response?.user!.token;
           String? id = response?.user!.id;
-        
 
           String? userName = '';
 
@@ -53,12 +48,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             //-------------------------------------------------------directing to onborading doctor
             if (response.user!.fullName == null ||
                 response.user!.fullName!.isEmpty) {
-            
               emit(LoginOnBordingDoctor(token: response.user!.token!));
             } else if (response.user!.isAdminVerified == false) {
               emit(LoginAdminVerificationSate());
             } else {
-           
               userName = response.user!.fullName;
               prefs.saveRole(role!);
               prefs.saveLoggedInState(true);
@@ -71,7 +64,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
                   role: role, name: userName, id: id, token: token));
             }
           } else if (response is PatientResponse) {
-         
             prefs.saveRole(role!);
             prefs.saveLoggedInState(true);
             prefs.saveToken(token!);
@@ -101,13 +93,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           await loginService.logoutButton(role: event.role);
 
       if (error.isEmpty) {
-      
         await prefs.saveLoggedInState(false);
         await prefs.saveRole('');
         await prefs.saveToken('');
         await prefs.saveId('');
 
-        await dbFunction.clearDb();
         await secureStorageService.deleteToken();
 
         emit(LogoutSucess());
