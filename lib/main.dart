@@ -216,10 +216,6 @@ class MyApp extends StatelessWidget {
                     style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(appBackGround),
             ))),
-            home: ScreenSplash()
-
-            //
-
-            ));
+            home: const ScreenSplash()));
   }
 }

@@ -83,8 +83,6 @@ class LoginServiceImpl implements LoginService {
   Future<(String, LogoutResponse?)> logoutButton({required String role}) async {
     String apiEndPoint = '';
 
-    log('loggedout service api call reached');
-
     try {
       if (role == 'patient') {
         apiEndPoint = ApiEndPoints.patientLogOut;
@@ -103,37 +101,15 @@ class LoginServiceImpl implements LoginService {
         // Successful logout
         final responseData = LogoutResponse.fromJson(response.data);
 
-        log('sucess service api call reached');
-
         return ("", responseData);
       } else {
         return ("Error occured ", null);
       }
     } catch (error) {
       // Handle any exceptions or network errors
-      print('Error: $error');
+
       return ("Error occured ", null);
     }
   }
 }
 
-// @LazySingleton(as: DownloadService)
-// class DownloadServiceImpl implements DownloadService {
-//   @override
-//   Future<Either<MainFailure, DownloadModel>> getDownloadsImages() async {
-//     try {
-//       final Response response =
-//           await Dio(BaseOptions()).get(ApiEndPoints.downloads);
-//       if (response.statusCode == 200 || response.statusCode == 201) {
-//         final result = DownloadModel.fromJson(response.data);
-
-//         return Right(result);
-//       } else {
-//         return left(const MainFailure.serverFailure());
-//       }
-//     } catch (e) {
-//       log(e.toString());
-//       return left(const MainFailure.clientFailure());
-//     }
-//   }
-// }

@@ -94,7 +94,7 @@ class ScreenPersonalDetails extends StatelessWidget {
                                   height: size.width * 0.02,
                                 ),
                                 Text(
-                                    'Address : ${state.userProfile.user!.address?.houseName ?? "Not Set"} ,${state.userProfile.user!.address?.city ?? ""} ,${state.userProfile.user!.address?.state ?? ""}'),
+                                    'Address : ${state.userProfile.user!.address?.houseName ?? "Not Set"} ${state.userProfile.user!.address?.city ?? ""} ${state.userProfile.user!.address?.state ?? ""}'),
                               ],
                             ),
                           ),
