@@ -21,9 +21,9 @@ class ScreenBooking extends StatefulWidget {
 class _ScreenBookingState extends State<ScreenBooking> {
   final TextEditingController reasonCntroller = TextEditingController();
   DateTime selectedDate = DateTime.now();
-  // final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  
   int selectedSlotIndex =
-      -1; // Initialize to -1 to indicate no slot is selected initially
+      -1; 
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -59,7 +59,7 @@ class _ScreenBookingState extends State<ScreenBooking> {
     final size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        // key: _scaffoldKey,
+      
         body: WillPopScope(
           onWillPop: () async {
             //

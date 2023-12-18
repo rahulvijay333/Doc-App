@@ -125,15 +125,15 @@ class ScreenViewDoctorProfileBook extends StatelessWidget {
                       child: TabBarView(children: [
                         Center(
                           child: Text(
-                            // aboutSection,
-                            'About Section',
-
+                            'About',
                             style:
                                 TextStyle(color: Colors.black.withOpacity(0.6)),
                           ),
                         ),
-                        const Center(
-                          child: Text('Reviews(comming soon)'),
+                        Center(
+                          child: Text('Review',
+                              style: TextStyle(
+                                  color: Colors.black.withOpacity(0.6))),
                         ),
                       ]),
                     ),

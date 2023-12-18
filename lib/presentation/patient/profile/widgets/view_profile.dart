@@ -1,4 +1,5 @@
 import 'package:appoint_medic/application/profile/profile_details_bloc.dart';
+import 'package:appoint_medic/core/color_constants.dart';
 import 'package:appoint_medic/domain/response_models/profile_model/user.dart';
 import 'package:appoint_medic/presentation/patient/profile/widgets/edit_screen.dart';
 import 'package:flutter/material.dart';
@@ -78,9 +79,9 @@ class ScreenPersonalDetails extends StatelessWidget {
                               children: [
                                 Text(
                                   '${state.userProfile.user!.fullName ?? state.userProfile.user!.name}',
-                                  style: const TextStyle(
+                                  style:  TextStyle(
                                       fontSize: 22,
-                                      color: Colors.blue,
+                                      color: appBackGround,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
@@ -163,7 +164,7 @@ class ProfileAppBar extends StatelessWidget {
     return Container(
       height: size.height * 0.07,
       width: size.width,
-      color: Colors.blue,
+      color: appBackGround,
       child: Row(
         children: [
           IconButton(

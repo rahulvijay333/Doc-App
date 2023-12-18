@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:appoint_medic/application/profile/edit_profile/bloc/patient_edit_profile_bloc.dart';
 import 'package:appoint_medic/application/profile/profile_details_bloc.dart';
+import 'package:appoint_medic/core/color_constants.dart';
 import 'package:appoint_medic/domain/response_models/profile_model/user.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +54,7 @@ class _ScreenPatientEditState extends State<ScreenPatientEdit> {
             Container(
               height: size.height * 0.07,
               width: size.width,
-              color: Colors.blue,
+              color: appBackGround,
               child: Row(
                 children: [
                   IconButton(

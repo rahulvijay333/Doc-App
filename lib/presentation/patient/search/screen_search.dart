@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:appoint_medic/application/Search/search_bloc.dart';
+import 'package:appoint_medic/core/color_constants.dart';
 import 'package:appoint_medic/presentation/patient/search/widgets/all_doctors_widget.dart';
 import 'package:appoint_medic/presentation/patient/search/widgets/searchByName.dart';
 
@@ -33,7 +34,7 @@ class ScreenSearch extends StatelessWidget {
               children: [
                 Container(
                   height: size.height * 0.07,
-                  color: Colors.blue,
+                  color: appBackGround,
                   child: Row(
                     children: [
                       IconButton(
