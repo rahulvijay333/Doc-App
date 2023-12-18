@@ -4,6 +4,8 @@ Doctor Booking App.
 
 A seamless solution connecting doctors and patients
 
+[![Video](https://img.youtube.com/vi/YdvgAVzbLRE/0.jpg)](https://www.youtube.com/watch?v=YdvgAVzbLRE)
+
 ## Patient App UI
 <img src="lib/presentation/screen_shots/P_HomePage.jpg" alt="Alt text" width="300"/>
 <img src="lib/presentation/screen_shots/P_ViewAllAppointments.jpg" alt="Alt text" width="300"/>
