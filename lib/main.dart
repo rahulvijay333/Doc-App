@@ -48,11 +48,8 @@ import 'package:appoint_medic/infrastructure/view_appointments_doctor_service/ap
 import 'package:appoint_medic/infrastructure/view_appointments_patient_side/view_appointments_pat_service.dart';
 
 import 'package:appoint_medic/presentation/splash/ScreenSplash.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -61,17 +58,9 @@ import 'package:intl/date_symbol_data_local.dart';
 final getIt = GetIt.instance;
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+
   // Initialize the locale data for 'en_IN' (English, India)
   await initializeDateFormatting('en_IN', null);
-  FlutterError.onError = (errorDetails) {
-    FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
-  };
-  // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
-  PlatformDispatcher.instance.onError = (error, stack) {
-    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
-    return true;
-  };
 
   getIt.registerSingleton<SecureStorageService>(SecureStorageService());
   getIt.registerSingleton<PaymentService>(PaymentService());
